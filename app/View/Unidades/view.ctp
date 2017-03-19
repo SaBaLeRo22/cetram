@@ -53,10 +53,10 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
 
             <div class="list-group">
-                                		<?= $this->Html->link(__('Editar Unidade'), array('action' => 'edit', $unidade['Unidade']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Unidade'), array('action' => 'delete', $unidade['Unidade']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $unidade['Unidade']['id'])); ?> 
-		<?= $this->Html->link(__('Listado de Unidades'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Unidade'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
+                                		<?= $this->Html->link(__('Editar Unidad'), array('action' => 'edit', $unidade['Unidade']['id']), array('class' => 'list-group-item')); ?>
+		<?= $this->Form->postLink(__('Eliminar Unidad'), array('action' => 'delete', $unidade['Unidade']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $unidade['Unidade']['id'])); ?>
+		<?= $this->Html->link(__('Listado de Unidade'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+		<?= $this->Html->link(__('Agregar Unidad'), array('action' => 'add'), array('class' => 'list-group-item')); ?>
             </div>
         </div>
     </div>

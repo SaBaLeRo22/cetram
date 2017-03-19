@@ -75,7 +75,7 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                <?= $this->Html->link(__('Agregar Unidade'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
+                <?= $this->Html->link(__('Agregar Unidad'), array('action' => 'add'), array('class' => 'list-group-item')); ?>
                  
             </div>
             <h4 class="text-muted">Estado</h4>
