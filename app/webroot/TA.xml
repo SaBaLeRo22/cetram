@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginTicketResponse version="1">
+    <header>
+        <source>CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>
+        <destination>C=ar, O=cpsf, SERIALNUMBER=CUIT 20603359608, CN=casinostafe.com.ar</destination>
+        <uniqueId>1660128319</uniqueId>
+        <generationTime>2014-11-03T15:19:51.655-03:00</generationTime>
+        <expirationTime>2014-11-04T03:19:51.655-03:00</expirationTime>
+    </header>
+    <credentials>
+        <token>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgdW5pcXVlX2lkPSIxMDMyOTEyMjMxIiBzcmM9IkNOPXdzYWFob21vLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBnZW5fdGltZT0iMTQxNTAzODczMSIgZXhwX3RpbWU9IjE0MTUwODE5OTEiLz4KICAgIDxvcGVyYXRpb24gdmFsdWU9ImdyYW50ZWQiIHR5cGU9ImxvZ2luIj4KICAgICAgICA8bG9naW4gdWlkPSJDPWFyLCBPPWNwc2YsIFNFUklBTE5VTUJFUj1DVUlUIDIwNjAzMzU5NjA4LCBDTj1jYXNpbm9zdGFmZS5jb20uYXIiIHNlcnZpY2U9IndzamF6YSIgcmVnbWV0aG9kPSIyMiIgZW50aXR5PSIzMzY5MzQ1MDIzOSIgYXV0aG1ldGhvZD0iY21zIj4KICAgICAgICAgICAgPHJlbGF0aW9ucz4KICAgICAgICAgICAgICAgIDxyZWxhdGlvbiByZWx0eXBlPSI0IiBrZXk9IjIwNjAzMzU5NjA4Ii8+CiAgICAgICAgICAgIDwvcmVsYXRpb25zPgogICAgICAgIDwvbG9naW4+CiAgICA8L29wZXJhdGlvbj4KPC9zc28+Cgo=</token>
+        <sign>mtHVKVvZhnUFZvv5lpvoPn6P0nciwer9PK0dDA2ukvg79QGJ3l6GVLdBaG/by80Np90uPUcsWqbQMRey/j23eLXjYZNzWXEXfcJe6aHCQY2v3srah0/sEdhYOoFrmGFF4abDDWy5V0+eRo/XL0o46ySCSbQzmUM+EnhLFw4a5A4=</sign>
+    </credentials>
+</loginTicketResponse>
+

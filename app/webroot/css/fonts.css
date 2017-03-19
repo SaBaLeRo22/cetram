@@ -1,0 +1,43 @@
+/**
+ * Created by PhpStorm.
+ * User: javier
+ * Date: 14/05/14
+ * Time: 16:47
+ * To change this template use File | Settings | File Templates.
+ */
+@font-face {
+    font-family : 'Open Sans';
+    font-style  : normal;
+    font-weight : 300;
+    src         : url(http://themes.googleusercontent.com/static/fonts/opensans/v7/DXI1ORHCpsQm3Vp6mXoaTXhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+    font-family : 'Open Sans';
+    font-style  : normal;
+    font-weight : 400;
+    src         : url(http://themes.googleusercontent.com/static/fonts/opensans/v7/cJZKeOuBrn4kERxqtaUH3T8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+    font-family : 'Open Sans';
+    font-style  : normal;
+    font-weight : 700;
+    src         : url(http://themes.googleusercontent.com/static/fonts/opensans/v7/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+@font-face {
+    font-family : 'Roboto';
+    font-style  : normal;
+    font-weight : 300;
+    src         : url(http://themes.googleusercontent.com/static/fonts/roboto/v10/Hgo13k-tfSpn0qi1SFdUfT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+    font-family : 'Roboto';
+    font-style  : normal;
+    font-weight : 400;
+    src         : url(http://themes.googleusercontent.com/static/fonts/roboto/v10/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+@font-face {
+    font-family : 'Roboto';
+    font-style  : normal;
+    font-weight : 700;
+    src         : url(http://themes.googleusercontent.com/static/fonts/roboto/v10/d-6IYplOFocCacKzxwXSOD8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
