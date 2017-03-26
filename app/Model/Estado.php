@@ -4,13 +4,19 @@ App::uses('AppModel', 'Model');
  * Estado Model
  *
  * @property Ambito $Ambito
+ * @property Categoria $Categoria
+ * @property Convenio $Convenio
+ * @property Dieta $Dieta
  * @property Item $Item
  * @property Localidade $Localidade
  * @property Parametro $Parametro
+ * @property Participacione $Participacione
  * @property Provincia $Provincia
+ * @property Salario $Salario
  * @property Sectore $Sectore
  * @property Tipo $Tipo
  * @property Unidade $Unidade
+ * @property Viatico $Viatico
  */
 class Estado extends AppModel {
 
@@ -49,6 +55,45 @@ class Estado extends AppModel {
 	public $hasMany = array(
 		'Ambito' => array(
 			'className' => 'Ambito',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Categoria' => array(
+			'className' => 'Categoria',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Convenio' => array(
+			'className' => 'Convenio',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Dieta' => array(
+			'className' => 'Dieta',
 			'foreignKey' => 'estado_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -99,8 +144,34 @@ class Estado extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'Participacione' => array(
+			'className' => 'Participacione',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Provincia' => array(
 			'className' => 'Provincia',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Salario' => array(
+			'className' => 'Salario',
 			'foreignKey' => 'estado_id',
 			'dependent' => false,
 			'conditions' => '',
@@ -140,6 +211,19 @@ class Estado extends AppModel {
 		),
 		'Unidade' => array(
 			'className' => 'Unidade',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Viatico' => array(
+			'className' => 'Viatico',
 			'foreignKey' => 'estado_id',
 			'dependent' => false,
 			'conditions' => '',

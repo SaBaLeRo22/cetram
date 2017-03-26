@@ -32,8 +32,8 @@ class EstadoFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'nombre' => 'Lorem ipsum dolor sit a',
-			'created' => '2017-02-04 13:34:32',
-			'modified' => '2017-02-04 13:34:32',
+			'created' => '2017-03-24 14:01:36',
+			'modified' => '2017-03-24 14:01:36',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

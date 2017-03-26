@@ -110,7 +110,6 @@
                     		<th><?= __('Id'); ?></th>
 		<th><?= __('Nombre'); ?></th>
 		<th><?= __('Descripcion'); ?></th>
-		<th><?= __('Tipo Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
@@ -125,7 +124,6 @@
 			<td><?= $item['id']; ?></td>
 			<td><?= $item['nombre']; ?></td>
 			<td><?= $item['descripcion']; ?></td>
-			<td><?= $item['tipo_id']; ?></td>
 			<td><?= $item['estado_id']; ?></td>
 			<td><?= $item['created']; ?></td>
 			<td><?= $item['modified']; ?></td>
@@ -204,7 +202,7 @@
 		<th><?= __('Descripcion'); ?></th>
 		<th><?= __('Valor'); ?></th>
 		<th><?= __('Unidade Id'); ?></th>
-		<th><?= __('Item Id'); ?></th>
+		<th><?= __('Tipo Id'); ?></th>
 		<th><?= __('Ambito Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
@@ -222,7 +220,7 @@
 			<td><?= $parametro['descripcion']; ?></td>
 			<td><?= $parametro['valor']; ?></td>
 			<td><?= $parametro['unidade_id']; ?></td>
-			<td><?= $parametro['item_id']; ?></td>
+			<td><?= $parametro['tipo_id']; ?></td>
 			<td><?= $parametro['ambito_id']; ?></td>
 			<td><?= $parametro['estado_id']; ?></td>
 			<td><?= $parametro['created']; ?></td>

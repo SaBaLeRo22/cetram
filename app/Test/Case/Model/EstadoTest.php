@@ -17,8 +17,9 @@ class EstadoTest extends CakeTestCase {
 		'app.ambito',
 		'app.parametro',
 		'app.unidade',
-		'app.item',
 		'app.tipo',
+		'app.participacione',
+		'app.item',
 		'app.localidade',
 		'app.provincia',
 		'app.sectore'
