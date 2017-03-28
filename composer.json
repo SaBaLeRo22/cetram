@@ -28,6 +28,6 @@
 		"vendor-dir": "app/Vendor"
 	},
 	"bin": [
-		"../lib/Cake/Console/cake"
+		"../Cake/Console/cake"
 	]
 }
