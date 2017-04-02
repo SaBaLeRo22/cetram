@@ -40,17 +40,13 @@ class AclNode extends Model {
 /**
  * Constructor
  *
- * @param bool|int|string|array $id Set this ID for this model on startup,
- *   can also be an array of options, see above.
- * @param string $table Name of database table to use.
- * @param string $ds DataSource connection name.
  */
-	public function __construct($id = false, $table = null, $ds = null) {
+	public function __construct() {
 		$config = Configure::read('Acl.database');
 		if (isset($config)) {
 			$this->useDbConfig = $config;
 		}
-		parent::__construct($id, $table, $ds);
+		parent::__construct();
 	}
 
 /**
@@ -120,7 +116,8 @@ class AclNode extends Model {
 			$result = $db->read($this, $queryData, -1);
 			$path = array_values($path);
 
-			if (!isset($result[0][$type]) ||
+			if (
+				!isset($result[0][$type]) ||
 				(!empty($path) && $result[0][$type]['alias'] != $path[count($path) - 1]) ||
 				(empty($path) && $result[0][$type]['alias'] != $start)
 			) {

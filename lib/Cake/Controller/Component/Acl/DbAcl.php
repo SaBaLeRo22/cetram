@@ -29,18 +29,19 @@ App::uses('ClassRegistry', 'Utility');
  *
  * Would point to a tree structure like
  *
- * ```
+ * {{{
  *	controllers
  *		Users
  *			edit
- * ```
+ * }}}
  *
  * @package       Cake.Controller.Component.Acl
  */
-class DbAcl extends CakeObject implements AclInterface {
+class DbAcl extends Object implements AclInterface {
 
 /**
  * Constructor
+ *
  */
 	public function __construct() {
 		parent::__construct();

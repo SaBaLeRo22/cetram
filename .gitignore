@@ -14,9 +14,6 @@
 #################################
 /nbproject
 .idea
-/.project
-/.buildpath
-/.settings/
 
 # OS generated files #
 ######################
@@ -28,4 +25,3 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-app/Vendor/*
