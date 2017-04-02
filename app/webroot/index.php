@@ -106,5 +106,3 @@ $Dispatcher->dispatch(
 	new CakeRequest(),
 	new CakeResponse()
 );
-
-define('CAKE_CORE_INCLUDE_PATH', ROOT . DS . APP_DIR . "/Vendor/cakephp/cakephp/lib");
