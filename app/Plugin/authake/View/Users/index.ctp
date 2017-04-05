@@ -66,43 +66,34 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span12">
-                            <ul class="nav nav-pills" style="margin-top:4px;margin-bottom:0">
-                                <li class="active">
-
+                            <table class="table table-outer-bordered">
+                                <thead style="text-align: center">
+                                <tr>
+                                    <th>
+                                        <?php echo $this->Paginator->sort('id', 'View');?>
+                                    </th>
+                                    <th>
                                         <?php echo $this->Paginator->sort('id');?>
-
-                                </li>
-                                <li class="">
-
+                                    </th>
+                                    <th>
                                         <?php echo $this->Paginator->sort('login');?>
-
-                                </li>
-                                <li class="">
-
+                                    </th>
+                                    <th>
                                         <?php echo $this->Paginator->sort('email');?>
-
-                                </li>
-                                <li class="">
-
+                                    </th>
+                                    <th>
                                         <a href="#"><?php echo 'Group';?></a>
-
-                                </li>
-                                <li class="">
-
+                                    </th>
+                                    <th>
                                         <?php echo $this->Paginator->sort('created');?>
-                    
-                                </li>
-                                <li class="">
+                                    </th>
+                                    <th>
 
-                                        <?php echo $this->Paginator->sort(__('Disabled'), 'disable');?>
-                                    
-                                </li>
-                            </ul>
-                        </div>
-                        
-					</div>
-				</div>
-				<table class="table table-outer-bordered">
+                                        <?php echo $this->Paginator->sort(__('Disabled'), 'Status');?>
+                                    </th>
+                                </tr>
+                                </thead>
+
 					<tbody>
 						<?php
 						$i = 0;
@@ -189,6 +180,10 @@
 					<?php endforeach; ?>
 				</tbody>
 			</table>
+                        </div>
+
+                    </div>
+                </div>
 			<div class="form-actions">
 				<a href="<?php echo $this->Html->url(array('controller'=>'users','action'=>'add')); ?>" class="btn btn-primary">
 					New User

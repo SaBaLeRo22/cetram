@@ -9,7 +9,7 @@ $config = array (
       'controller' => 'consultas',
       'action' => 'index',
     ),
-    'service' => 'Authake',
+    'service' => 'CETRAM',
     'loginAction' => 
     array (
       'plugin' => 'authake',
