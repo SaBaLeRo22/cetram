@@ -65,7 +65,8 @@ class EmailConfig {
 		'port' => 465,
 		'username' => 'cetram.utn.frsf@gmail.com',
 		'password' => 'UTN.frsf.Grup0.c3tr4m',
-		'transport' => 'Smtp'
+		'transport' => 'Smtp',
+		'tls' => true
 	);
 
 	public $fast = array(
