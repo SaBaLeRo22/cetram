@@ -6,10 +6,10 @@ $config = array (
     'baseUrl' => 
     array (
       'plugin' => NULL,
-      'controller' => 'externos',
+      'controller' => 'consultas',
       'action' => 'index',
     ),
-    'service' => 'CETRAM',
+    'service' => 'Authake',
     'loginAction' => 
     array (
       'plugin' => 'authake',

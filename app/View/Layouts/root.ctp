@@ -19,6 +19,12 @@ $this->extend('default');
             <?= __('Inicio'); ?>
         </a>
     </li>
+    <li>
+        <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'externos', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
+            <i class="fa fa-wrench fa-2x fa-fw"></i> <br/>
+            <?= __('Tools'); ?>
+        </a>
+    </li>
 
 
     <?php if ($this->Authake->isLogged()): ?>

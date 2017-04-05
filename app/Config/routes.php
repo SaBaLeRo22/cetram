@@ -28,7 +28,7 @@
 //	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 //Router::connect('/', array('plugin' => null, 'controller' => 'informes', 'action' => 'resumen'));
 //Router::connect('/', array('plugin' => 'authake', 'controller' => 'user', 'action' => 'login'));
-Router::connect('/', array('plugin' => null, 'controller' => 'externos', 'action' => 'index'));
+Router::connect('/', array('plugin' => 'authake', 'controller' => 'user', 'action' => 'login'));
 
 
 
