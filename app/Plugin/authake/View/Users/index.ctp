@@ -4,7 +4,7 @@
 		<div class="section">
 			<div class="section-header">
 				<h3>
-					Users
+					Usuarios
 					<small>
 						<?php
 						echo $this->Paginator->counter(array(
