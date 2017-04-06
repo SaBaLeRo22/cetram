@@ -70,6 +70,12 @@
                         <?= __('Inicio'); ?>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'externos', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
+                        <i class="fa fa-wrench fa-2x fa-fw"></i> <br/>
+                        <?= __('Tools'); ?>
+                    </a>
+                </li>
                 <li class="divider-left dropdown">
                     <a href="<?= $this->Html->url(array('plugin' => 'authake', 'controller' => 'user', 'action' => 'login')) ?>" class="text-center">
                         <i class="fa fa-sign-in fa-2x fa-fw"></i> <br/>
