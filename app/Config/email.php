@@ -62,7 +62,8 @@ class EmailConfig {
 
 	public $gmail = array(
 		'host' => 'ssl://smtp.gmail.com',
-		'port' => 465,
+//		'port' => 465,
+		'port' => 587,
 		'username' => 'cetram.utn.frsf@gmail.com',
 		'password' => 'UTN.frsf.Grup0.c3tr4m',
 		'transport' => 'Smtp',
