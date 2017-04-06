@@ -46,7 +46,7 @@ $config = array (
     'systemReplyTo' => 'cetram.utn.frsf@gmail.com',
     'passwordVerify' => '1',
     'registration' => '1',
-    'defaultGroup' => '3',
+    'defaultGroup' => '4',
     'useEmailAsUsername' => '1',
   ),
 );

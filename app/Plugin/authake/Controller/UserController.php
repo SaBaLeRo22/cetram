@@ -215,6 +215,7 @@ class UserController extends AuthakeAppController {
 
             // password is invalid...
             $this->request->data['User']['password'] = $pwd;
+            $this->request->data['User']['login'] = $this->request->data['User']['email'];
             $this->request->data['User']['emailcheckcode'] = md5(time() * rand());
             $this->User->create(); //add default group if there is such thing
 
@@ -229,7 +230,7 @@ class UserController extends AuthakeAppController {
             //
 
             if ($this->User->save($this->request->data)) {// send a mail to finish the registration
-                $email = new CakeEmail();
+                $email = new CakeEmail(array('log' => true));
                 //$email->config('smtp');
                 $email->config('gmail');
                 $email->to($this->request->data['User']['email']);
