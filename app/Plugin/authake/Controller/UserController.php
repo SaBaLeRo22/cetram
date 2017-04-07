@@ -51,7 +51,7 @@ class UserController extends AuthakeAppController {
         $this->User->recursive = 1;
         $user = $this->User->read(null, $this->Authake->getUserId());
 
-        debug($this->Authake->getUserId());
+//        debug($this->Authake->getUserId());
 
         if (!empty($this->request->data)) {
             if ($this->request->data['User']['password1'] != '') {// password changed
