@@ -42,6 +42,8 @@ class UserController extends AuthakeAppController {
 
 //        $this->layout = 'root';
         $this->layout = 'authake';
+//        $this->layout = 'noregistrado';
+//        $this->layout = 'perfil';
 
         if (!$this->Authake->getUserId()) {
             $this->Session->setFlash(__('Invalid User'), 'error', array('plugin' => 'Authake'));
@@ -151,6 +153,9 @@ class UserController extends AuthakeAppController {
      * Confirm the email change if needed
      */
     function verify($code = null) {
+
+        $this->layout = 'noregistrado';
+
         if (Configure::read('Authake.registration') == false) {
             $this->redirect('/');
         }

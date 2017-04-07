@@ -1,0 +1,448 @@
+/**
+ * Created by JetBrains PhpStorm.
+ * User: javier
+ * Date: 26/06/13
+ * Time: 17:11
+ * To change this template use File | Settings | File Templates.
+ */
+body {
+  margin: 0px;
+  font-size: 13px;
+  font-family: "Open Sans", Helvetica, Arial, Verdana, sans-serif;
+  padding-top: 75px;
+  padding-bottom: 40px;
+}
+footer {
+  margin-top: 50px;
+}
+.nowrap {
+  white-space: nowrap;
+}
+.navbar-brand {
+  padding: 6px 15px;
+}
+.navbar-brand h3 {
+  margin: -5px 0 0;
+}
+.navbar-brand img {
+  opacity: .65;
+}
+.navbar-brand:hover img {
+  opacity: 1;
+}
+.title {
+  /*text-align: center;*/
+  font-size: 25px;
+  font-weight: 600;
+  padding: 0;
+  line-height: 1.5;
+}
+.title i {
+  font-size: 0.7em;
+  vertical-align: middle;
+  margin-top: -5px;
+  display: inline-block;
+}
+h2 a {
+  color: #6a6a6a;
+}
+h2 a:hover {
+  color: #005db3;
+  text-decoration: none;
+}
+.modal-login {
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  z-index: 1;
+  display: block;
+  overflow-y: auto;
+}
+.view .dl-horizontal dd {
+  margin-bottom: 5px;
+}
+.form-horizontal .form-group select[name*="[day]"],
+.form .form-group select[name*="[day]"],
+.form-horizontal .form-group select[name*="[year]"],
+.form .form-group select[name*="[year]"],
+.form-horizontal .form-group select[name*="[month]"],
+.form .form-group select[name*="[month]"],
+.form-horizontal .form-group select[name*="[hour]"],
+.form .form-group select[name*="[hour]"],
+.form-horizontal .form-group select[name*="[min]"],
+.form .form-group select[name*="[min]"],
+.form-horizontal .form-group select[name*="[meridian]"],
+.form .form-group select[name*="[meridian]"] {
+  display: inline-block;
+  margin-right: 2%;
+}
+.form-horizontal .form-group select[name*="[day]"]:last-child,
+.form .form-group select[name*="[day]"]:last-child,
+.form-horizontal .form-group select[name*="[year]"]:last-child,
+.form .form-group select[name*="[year]"]:last-child,
+.form-horizontal .form-group select[name*="[month]"]:last-child,
+.form .form-group select[name*="[month]"]:last-child,
+.form-horizontal .form-group select[name*="[hour]"]:last-child,
+.form .form-group select[name*="[hour]"]:last-child,
+.form-horizontal .form-group select[name*="[min]"]:last-child,
+.form .form-group select[name*="[min]"]:last-child,
+.form-horizontal .form-group select[name*="[meridian]"]:last-child,
+.form .form-group select[name*="[meridian]"]:last-child {
+  margin-right: 0;
+}
+.form-horizontal .form-group select[name*="[day]"],
+.form .form-group select[name*="[day]"] {
+  width: 18%;
+}
+.form-horizontal .form-group select[name*="[month]"],
+.form .form-group select[name*="[month]"] {
+  width: 48%;
+}
+.form-horizontal .form-group select[name*="[year]"],
+.form .form-group select[name*="[year]"] {
+  width: 30%;
+}
+.form-horizontal .form-full-date select[name*="[day]"],
+.form .form-full-date select[name*="[day]"],
+.form-horizontal .form-full-date select[name*="[year]"],
+.form .form-full-date select[name*="[year]"],
+.form-horizontal .form-full-date select[name*="[month]"],
+.form .form-full-date select[name*="[month]"],
+.form-horizontal .form-full-date select[name*="[hour]"],
+.form .form-full-date select[name*="[hour]"],
+.form-horizontal .form-full-date select[name*="[min]"],
+.form .form-full-date select[name*="[min]"],
+.form-horizontal .form-full-date select[name*="[meridian]"],
+.form .form-full-date select[name*="[meridian]"] {
+  margin-right: 1%;
+}
+.form-horizontal .form-full-date select[name*="[day]"],
+.form .form-full-date select[name*="[day]"] {
+  width: 13%;
+}
+.form-horizontal .form-full-date select[name*="[month]"],
+.form .form-full-date select[name*="[month]"] {
+  width: 23%;
+}
+.form-horizontal .form-full-date select[name*="[year]"],
+.form .form-full-date select[name*="[year]"] {
+  width: 16%;
+}
+.form-horizontal .form-full-date select[name*="[hour]"],
+.form .form-full-date select[name*="[hour]"] {
+  width: 13%;
+}
+.form-horizontal .form-full-date select[name*="[min]"],
+.form .form-full-date select[name*="[min]"] {
+  width: 13%;
+  margin-left: 1%;
+}
+.form-horizontal .form-full-date select[name*="[meridian]"],
+.form .form-full-date select[name*="[meridian]"] {
+  width: 14%;
+}
+.form-section-title {
+  color: #999;
+  font-weight: 600;
+  font-family: "Open Sans", "Segoe UI", "arial", sans-serif;
+  text-transform: uppercase;
+  font-size: 10px;
+  border-bottom: 1px solid #E9E9E9;
+  line-height: 2;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
+  text-align: center;
+}
+.form-section-title:first-child {
+  margin-top: 0;
+}
+.date select {
+  display: inline-block;
+}
+.panel-heading .pagination,
+.panel-footer .pagination {
+  margin: 0;
+  display: block;
+}
+.paging-text {
+  line-height: 32px;
+}
+.panel-heading h3:first-child {
+  margin-top: 0;
+}
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Form fixes
+ */
+input[type=checkbox],
+input[type=radio] {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  margin-top: 10px;
+}
+.form-group h5 {
+  text-transform: uppercase;
+}
+.form-group hr {
+  margin: 0;
+}
+.form-options .form-option-single {
+  padding-top: 6px;
+  font-weight: normal;
+  cursor: pointer;
+  margin-right: 2em;
+}
+.form-options .form-option-single input {
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 0 10px 0 0;
+  box-shadow: none;
+  background: initial;
+  border: initial;
+}
+.form-options .form-option-single input:focus {
+  box-shadow: none;
+}
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Fix para los headers de las tablas que tienen ordenamiento con paginator de cake
+ */
+.table-sorted th a {
+  color: #444;
+  display: block;
+  padding: 8px 24px 8px 8px;
+  margin: -8px;
+}
+.table-sorted th a:hover {
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.table-sorted th {
+  position: relative;
+}
+.table-sorted th a:after {
+  content: "\f0dc";
+  font-family: 'FontAwesome', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  text-decoration: inherit;
+  text-align: center;
+  font-size: 14px;
+  line-height: 14px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+  display: none;
+}
+.table-sorted th a:hover:after {
+  display: inline-block;
+}
+.table-sorted th a.desc:after {
+  display: inline-block;
+  content: "\f0dd";
+  top: 7px;
+}
+.table-sorted th a.asc:after {
+  display: inline-block;
+  top: 13px;
+  content: "\f0de";
+}
+.table tr td.actions {
+  white-space: nowrap;
+}
+.list-group .list-group-item-text {
+  display: none;
+}
+.list-group .list-group-item-heading {
+  font-weight: bold;
+}
+.list-group .active .list-group-item-text {
+  display: block;
+}
+.panel-body .form-section-title {
+  margin: 0 -15px 10px;
+  background: #F8F8F8;
+  border-top: 1px solid #E9E9E9;
+  border-bottom: 0 none;
+  box-shadow: 0 3px 3px -3px rgba(0, 0, 0, 0.05);
+}
+.dropdown-header {
+  font-weight: 400;
+}
+.selected-day {
+  margin-top: -6px;
+}
+#cargaDiariaEstadoForm {
+  margin-top: 22px;
+}
+tr td .acciones a {
+  opacity: 0;
+  margin-left: 5px;
+  font-size: 0.95em;
+}
+tr td .acciones a:hover {
+  text-decoration: none;
+}
+tr:hover td .acciones a {
+  opacity: 1;
+}
+.pagination {
+  margin: 0;
+}
+.table-responsive {
+  width: 100%;
+  margin-bottom: 15px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  /*border: 1px solid #ddd;*/
+}
+.table-responsive td,
+.table-responsive th {
+  white-space: nowrap;
+}
+.related {
+  margin-bottom: 40px;
+}
+.related div.actions {
+  float: right;
+}
+.home-block {
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+.home-block h3 {
+  margin-top: 5px;
+  margin-left: 70px;
+}
+.home-block ul {
+  margin-left: 70px;
+}
+.home-block ul li:first-child {
+  padding-left: 0;
+}
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Section
+ */
+.section {
+  float: right;
+  margin: 0 6px 0 0;
+  width: 759px;
+  overflow: hidden;
+  margin-bottom: -1px;
+}
+.permissions .section {
+  margin-bottom: 0;
+}
+.section table tr td {
+  border: 0 none;
+}
+.section table tr td.first {
+  border-right: 1px dashed #AAAAAA;
+  font-weight: bold;
+}
+.section table tr td.td_separator {
+  border-bottom: 1px solid;
+  color: #999;
+  font-weight: bold;
+  padding-top: 20px;
+}
+.section table tbody.controlador td.check {
+  padding: 20px 10px 7px;
+  width: 1%;
+}
+.section table tbody.metodos td.check {
+  padding: 7px 0 0 20px;
+  width: 1%;
+}
+.section table tbody td.metodo {
+  padding-left: 30px;
+}
+tbody.controlador td.check input.check,
+tbody.metodos td.check input.check {
+  margin: 0 5px;
+}
+.navbar-nav .divider-right {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 0px 0 rgba(255, 255, 255, 0.64);
+}
+.navbar-nav .divider-left {
+  border-left: 1px solid rgba(255, 255, 255, 0.64);
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+.navbar-default .navbar-nav > li > a {
+  font-size: 11px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+tr .display-column > a {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 4px;
+  display: block;
+}
+tr .display-column > a:hover {
+  text-decoration: none;
+}
+tr .display-column p {
+  font-size: 11px;
+  white-space: initial;
+}
+tr .display-column img {
+  margin-right: 10px;
+}
+tr .display-column .nowrap {
+  opacity: 0;
+}
+tr:hover .display-column .nowrap {
+  opacity: 1;
+}
+.table tr th a {
+  position: relative;
+  display: block;
+}
+.table tr th a:hover {
+  text-decoration: none;
+}
+.table tr th a:after {
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  content: "\f0dc";
+  margin: 0 5px;
+}
+.table tr th a.asc:after {
+  content: "\f0de";
+}
+.table tr th a.desc:after {
+  content: "\f0dd";
+}
+.error-message {
+  padding: 5px 10px;
+  border-radius: 2px;
+  margin: 5px 0;
+  background-color: #f2dede;
+  border: 1px solid #C2A5A5;
+  color: #900000;
+  font-size: 11px;
+}
+.form-group h4 {
+  margin: 0;
+  padding-top: 5px;
+}
+/**
+ * ---------------------------------------------------------------------------------------------------------------------
+ * Custom styles
+ */
+#VehiculoDominio {
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 1.2em;
+}
