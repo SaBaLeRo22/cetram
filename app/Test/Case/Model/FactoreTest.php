@@ -1,11 +1,11 @@
 <?php
-App::uses('Estado', 'Model');
+App::uses('Factore', 'Model');
 
 /**
- * Estado Test Case
+ * Factore Test Case
  *
  */
-class EstadoTest extends CakeTestCase {
+class FactoreTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class EstadoTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.factore',
 		'app.estado',
 		'app.ambito',
 		'app.parametro',
@@ -37,7 +38,7 @@ class EstadoTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Estado = ClassRegistry::init('Estado');
+		$this->Factore = ClassRegistry::init('Factore');
 	}
 
 /**
@@ -46,7 +47,7 @@ class EstadoTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Estado);
+		unset($this->Factore);
 
 		parent::tearDown();
 	}

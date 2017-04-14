@@ -7,6 +7,7 @@ App::uses('AppModel', 'Model');
  * @property Categoria $Categoria
  * @property Convenio $Convenio
  * @property Dieta $Dieta
+ * @property Factore $Factore
  * @property Item $Item
  * @property Localidade $Localidade
  * @property Parametro $Parametro
@@ -94,6 +95,19 @@ class Estado extends AppModel {
 		),
 		'Dieta' => array(
 			'className' => 'Dieta',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Factore' => array(
+			'className' => 'Factore',
 			'foreignKey' => 'estado_id',
 			'dependent' => false,
 			'conditions' => '',

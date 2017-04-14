@@ -99,6 +99,152 @@
         <hr/>
                 <div class="related">
             <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Categoria', ['controller' => 'categorias', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Categorias'); ?></h3>
+            <?php if (!empty($estado['Categoria'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Nombre'); ?></th>
+		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Cantidad'); ?></th>
+		<th><?= __('Antiguedad'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Categoria'] as $categoria): ?>
+		<tr>
+			<td><?= $categoria['id']; ?></td>
+			<td><?= $categoria['nombre']; ?></td>
+			<td><?= $categoria['descripcion']; ?></td>
+			<td><?= $categoria['cantidad']; ?></td>
+			<td><?= $categoria['antiguedad']; ?></td>
+			<td><?= $categoria['estado_id']; ?></td>
+			<td><?= $categoria['created']; ?></td>
+			<td><?= $categoria['modified']; ?></td>
+			<td><?= $categoria['user_created']; ?></td>
+			<td><?= $categoria['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'categorias', 'action' => 'view', $categoria['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'categorias', 'action' => 'edit', $categoria['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'categorias', 'action' => 'delete', $categoria['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $categoria['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Convenio', ['controller' => 'convenios', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Convenios'); ?></h3>
+            <?php if (!empty($estado['Convenio'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Anio'); ?></th>
+		<th><?= __('Inio'); ?></th>
+		<th><?= __('Fin'); ?></th>
+		<th><?= __('Observaciones'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Convenio'] as $convenio): ?>
+		<tr>
+			<td><?= $convenio['id']; ?></td>
+			<td><?= $convenio['anio']; ?></td>
+			<td><?= $convenio['inio']; ?></td>
+			<td><?= $convenio['fin']; ?></td>
+			<td><?= $convenio['observaciones']; ?></td>
+			<td><?= $convenio['estado_id']; ?></td>
+			<td><?= $convenio['created']; ?></td>
+			<td><?= $convenio['modified']; ?></td>
+			<td><?= $convenio['user_created']; ?></td>
+			<td><?= $convenio['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'convenios', 'action' => 'view', $convenio['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'convenios', 'action' => 'edit', $convenio['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'convenios', 'action' => 'delete', $convenio['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $convenio['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Dieta', ['controller' => 'dietas', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Dietas'); ?></h3>
+            <?php if (!empty($estado['Dieta'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Nombre'); ?></th>
+		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Dieta'] as $dieta): ?>
+		<tr>
+			<td><?= $dieta['id']; ?></td>
+			<td><?= $dieta['nombre']; ?></td>
+			<td><?= $dieta['descripcion']; ?></td>
+			<td><?= $dieta['estado_id']; ?></td>
+			<td><?= $dieta['created']; ?></td>
+			<td><?= $dieta['modified']; ?></td>
+			<td><?= $dieta['user_created']; ?></td>
+			<td><?= $dieta['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'dietas', 'action' => 'view', $dieta['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'dietas', 'action' => 'edit', $dieta['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'dietas', 'action' => 'delete', $dieta['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $dieta['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
                 <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Item', ['controller' => 'items', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
             </div>
             <h3><?= __('Items'); ?></h3>
@@ -243,6 +389,52 @@
         <hr/>
                 <div class="related">
             <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Participacione', ['controller' => 'participaciones', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Participaciones'); ?></h3>
+            <?php if (!empty($estado['Participacione'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Parametro Id'); ?></th>
+		<th><?= __('Item Id'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Participacione'] as $participacione): ?>
+		<tr>
+			<td><?= $participacione['id']; ?></td>
+			<td><?= $participacione['parametro_id']; ?></td>
+			<td><?= $participacione['item_id']; ?></td>
+			<td><?= $participacione['estado_id']; ?></td>
+			<td><?= $participacione['created']; ?></td>
+			<td><?= $participacione['modified']; ?></td>
+			<td><?= $participacione['user_created']; ?></td>
+			<td><?= $participacione['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'participaciones', 'action' => 'view', $participacione['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'participaciones', 'action' => 'edit', $participacione['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'participaciones', 'action' => 'delete', $participacione['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $participacione['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
                 <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Provincia', ['controller' => 'provincias', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
             </div>
             <h3><?= __('Provincias'); ?></h3>
@@ -273,6 +465,62 @@
 				<?= $this->Html->link(__('Ver'), array('controller' => 'provincias', 'action' => 'view', $provincia['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'provincias', 'action' => 'edit', $provincia['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'provincias', 'action' => 'delete', $provincia['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $provincia['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Salario', ['controller' => 'salarios', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Salarios'); ?></h3>
+            <?php if (!empty($estado['Salario'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Convenio Id'); ?></th>
+		<th><?= __('Categoria Id'); ?></th>
+		<th><?= __('Sueldo'); ?></th>
+		<th><?= __('Bonificacion Anual'); ?></th>
+		<th><?= __('Sac'); ?></th>
+		<th><?= __('Vacaciones'); ?></th>
+		<th><?= __('Contribuciones'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Salario'] as $salario): ?>
+		<tr>
+			<td><?= $salario['id']; ?></td>
+			<td><?= $salario['convenio_id']; ?></td>
+			<td><?= $salario['categoria_id']; ?></td>
+			<td><?= $salario['sueldo']; ?></td>
+			<td><?= $salario['bonificacion_anual']; ?></td>
+			<td><?= $salario['sac']; ?></td>
+			<td><?= $salario['vacaciones']; ?></td>
+			<td><?= $salario['contribuciones']; ?></td>
+			<td><?= $salario['estado_id']; ?></td>
+			<td><?= $salario['created']; ?></td>
+			<td><?= $salario['modified']; ?></td>
+			<td><?= $salario['user_created']; ?></td>
+			<td><?= $salario['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'salarios', 'action' => 'view', $salario['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'salarios', 'action' => 'edit', $salario['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'salarios', 'action' => 'delete', $salario['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $salario['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -405,6 +653,54 @@
 				<?= $this->Html->link(__('Ver'), array('controller' => 'unidades', 'action' => 'view', $unidade['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'unidades', 'action' => 'edit', $unidade['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'unidades', 'action' => 'delete', $unidade['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $unidade['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Viatico', ['controller' => 'viaticos', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Viaticos'); ?></h3>
+            <?php if (!empty($estado['Viatico'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Convenio Id'); ?></th>
+		<th><?= __('Dieta Id'); ?></th>
+		<th><?= __('Costo'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Viatico'] as $viatico): ?>
+		<tr>
+			<td><?= $viatico['id']; ?></td>
+			<td><?= $viatico['convenio_id']; ?></td>
+			<td><?= $viatico['dieta_id']; ?></td>
+			<td><?= $viatico['costo']; ?></td>
+			<td><?= $viatico['estado_id']; ?></td>
+			<td><?= $viatico['created']; ?></td>
+			<td><?= $viatico['modified']; ?></td>
+			<td><?= $viatico['user_created']; ?></td>
+			<td><?= $viatico['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'viaticos', 'action' => 'view', $viatico['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'viaticos', 'action' => 'edit', $viatico['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'viaticos', 'action' => 'delete', $viatico['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $viatico['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

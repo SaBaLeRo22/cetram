@@ -38,6 +38,21 @@
                 		<?= $this->Html->link(__('Listado de  Ambitos'), array('controller' => 'ambitos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
+            <h4 class="text-muted">Categoria</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Categorias'), array('controller' => 'categorias', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Categoria'), array('controller' => 'categorias', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Convenio</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Convenios'), array('controller' => 'convenios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Convenio'), array('controller' => 'convenios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Dieta</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Dietas'), array('controller' => 'dietas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Dieta'), array('controller' => 'dietas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Item</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Items'), array('controller' => 'items', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
@@ -53,10 +68,20 @@
                 		<?= $this->Html->link(__('Listado de  Parametros'), array('controller' => 'parametros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Parametro'), array('controller' => 'parametros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
+            <h4 class="text-muted">Participacione</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Participaciones'), array('controller' => 'participaciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Participacione'), array('controller' => 'participaciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Provincia</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Provincias'), array('controller' => 'provincias', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Provincia'), array('controller' => 'provincias', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Salario</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Salarios'), array('controller' => 'salarios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Salario'), array('controller' => 'salarios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
             <h4 class="text-muted">Sectore</h4>
             <div class="list-group">
@@ -72,6 +97,11 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Viatico</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Viaticos'), array('controller' => 'viaticos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Viatico'), array('controller' => 'viaticos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>
