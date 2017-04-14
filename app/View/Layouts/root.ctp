@@ -62,6 +62,18 @@ $this->extend('default');
             </li>
             <li role="presentation" class="divider"></li>
             <li>
+                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'convenios', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
+                    <i class="fa fa-wrench"></i> Convenios
+                </a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
+                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'factores', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
+                    <i class="fa fa-wrench"></i> Factores
+                </a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
                 <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'sectores', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
                     <i class="fa fa-wrench"></i> Sectores
                 </a>
