@@ -18,6 +18,10 @@
             <?= $this->Form->input('descripcion'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('tipo_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tipo_id'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
@@ -41,6 +45,11 @@
             <div class="list-group">
                                                 <?= $this->Html->link(__('Listado de Items'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
+            <h4 class="text-muted">Tipo</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Tipos'), array('controller' => 'tipos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Tipo'), array('controller' => 'tipos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Estado</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 

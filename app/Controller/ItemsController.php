@@ -56,8 +56,9 @@ class ItemsController extends AppController {
 				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
 			}
 		}
+		$tipos = $this->Item->Tipo->find('list');
 		$estados = $this->Item->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('tipos', 'estados'));
 	}
 
 /**
@@ -82,8 +83,9 @@ class ItemsController extends AppController {
 			$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
 			$this->request->data = $this->Item->find('first', $options);
 		}
+		$tipos = $this->Item->Tipo->find('list');
 		$estados = $this->Item->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('tipos', 'estados'));
 	}
 
 /**

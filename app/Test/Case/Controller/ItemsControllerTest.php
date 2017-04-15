@@ -14,12 +14,18 @@ class ItemsControllerTest extends ControllerTestCase {
  */
 	public $fixtures = array(
 		'app.item',
+		'app.tipo',
 		'app.estado',
 		'app.ambito',
 		'app.parametro',
 		'app.unidade',
-		'app.tipo',
 		'app.participacione',
+		'app.categoria',
+		'app.salario',
+		'app.convenio',
+		'app.viatico',
+		'app.dieta',
+		'app.factore',
 		'app.localidade',
 		'app.provincia',
 		'app.sectore'

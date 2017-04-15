@@ -3,6 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Item Model
  *
+ * @property Tipo $Tipo
  * @property Estado $Estado
  * @property Participacione $Participacione
  */
@@ -34,6 +35,16 @@ class Item extends AppModel {
 		'descripcion' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'tipo_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -81,6 +92,13 @@ class Item extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Tipo' => array(
+			'className' => 'Tipo',
+			'foreignKey' => 'tipo_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Estado' => array(
 			'className' => 'Estado',
 			'foreignKey' => 'estado_id',

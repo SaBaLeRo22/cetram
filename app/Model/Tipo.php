@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * Tipo Model
  *
  * @property Estado $Estado
+ * @property Item $Item
  * @property Parametro $Parametro
  */
 class Tipo extends AppModel {
@@ -96,6 +97,19 @@ class Tipo extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'Item' => array(
+			'className' => 'Item',
+			'foreignKey' => 'tipo_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Parametro' => array(
 			'className' => 'Parametro',
 			'foreignKey' => 'tipo_id',

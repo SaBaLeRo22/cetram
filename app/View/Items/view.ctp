@@ -25,6 +25,11 @@
 			<?= h($item['Item']['descripcion']); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Tipo'); ?></dt>
+		<dd>
+			<?= $this->Html->link($item['Tipo']['nombre'], array('controller' => 'tipos', 'action' => 'view', $item['Tipo']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($item['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $item['Estado']['id'])); ?>

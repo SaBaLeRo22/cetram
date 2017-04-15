@@ -17,12 +17,18 @@ class ItemTest extends CakeTestCase {
 		'app.estado',
 		'app.ambito',
 		'app.parametro',
+		'app.unidade',
+		'app.tipo',
+		'app.participacione',
+		'app.categoria',
+		'app.salario',
+		'app.convenio',
+		'app.viatico',
+		'app.dieta',
+		'app.factore',
 		'app.localidade',
 		'app.provincia',
-		'app.sectore',
-		'app.tipo',
-		'app.unidade',
-		'app.participacione'
+		'app.sectore'
 	);
 
 /**

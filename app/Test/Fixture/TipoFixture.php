@@ -36,8 +36,8 @@ class TipoFixture extends CakeTestFixture {
 			'nombre' => 'Lorem ipsum dolor sit amet',
 			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'estado_id' => 1,
-			'created' => '2017-02-27 21:07:35',
-			'modified' => '2017-02-27 21:07:35',
+			'created' => '2017-04-14 20:51:04',
+			'modified' => '2017-04-14 20:51:04',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

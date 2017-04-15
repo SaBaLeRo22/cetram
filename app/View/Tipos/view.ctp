@@ -63,6 +63,54 @@
     <div class="col-md-8">
                 <div class="related">
             <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Item', ['controller' => 'items', 'action' => 'add', 'tipo_id' => $tipo['Tipo']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Items'); ?></h3>
+            <?php if (!empty($tipo['Item'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Nombre'); ?></th>
+		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Tipo Id'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($tipo['Item'] as $item): ?>
+		<tr>
+			<td><?= $item['id']; ?></td>
+			<td><?= $item['nombre']; ?></td>
+			<td><?= $item['descripcion']; ?></td>
+			<td><?= $item['tipo_id']; ?></td>
+			<td><?= $item['estado_id']; ?></td>
+			<td><?= $item['created']; ?></td>
+			<td><?= $item['modified']; ?></td>
+			<td><?= $item['user_created']; ?></td>
+			<td><?= $item['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'items', 'action' => 'view', $item['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'items', 'action' => 'edit', $item['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'items', 'action' => 'delete', $item['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $item['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
                 <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Parametro', ['controller' => 'parametros', 'action' => 'add', 'tipo_id' => $tipo['Tipo']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
             </div>
             <h3><?= __('Parametros'); ?></h3>
@@ -77,7 +125,6 @@
 		<th><?= __('Valor'); ?></th>
 		<th><?= __('Unidade Id'); ?></th>
 		<th><?= __('Tipo Id'); ?></th>
-		<th><?= __('Item Id'); ?></th>
 		<th><?= __('Ambito Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
@@ -96,7 +143,6 @@
 			<td><?= $parametro['valor']; ?></td>
 			<td><?= $parametro['unidade_id']; ?></td>
 			<td><?= $parametro['tipo_id']; ?></td>
-			<td><?= $parametro['item_id']; ?></td>
 			<td><?= $parametro['ambito_id']; ?></td>
 			<td><?= $parametro['estado_id']; ?></td>
 			<td><?= $parametro['created']; ?></td>
