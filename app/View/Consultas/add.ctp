@@ -22,6 +22,10 @@
             <?= $this->Form->input('subsidio'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('observaciones', array('type' => 'textarea')); ?>
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>

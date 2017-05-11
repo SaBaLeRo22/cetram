@@ -30,6 +30,11 @@
 			<?= h($consulta['Consulta']['subsidio']); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Observaciones'); ?></dt>
+		<dd>
+			<?= h($consulta['Consulta']['observaciones']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($consulta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $consulta['Estado']['id'])); ?>

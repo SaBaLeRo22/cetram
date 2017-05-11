@@ -56,7 +56,7 @@ class RespuestaCoeficientesController extends AppController {
 				$this->Session->setFlash(__('The respuesta coeficiente could not be saved. Please, try again.'));
 			}
 		}
-		$consultas = $this->RespuestaCoeficiente->Consultum->find('list');
+		$consultas = $this->RespuestaCoeficiente->Consulta->find('list');
 		$coeficientes = $this->RespuestaCoeficiente->Coeficiente->find('list');
 		$unidades = $this->RespuestaCoeficiente->Unidade->find('list');
 		$estados = $this->RespuestaCoeficiente->Estado->find('list');
