@@ -1,11 +1,11 @@
 <?php
-App::uses('Pregunta', 'Model');
+App::uses('Opcione', 'Model');
 
 /**
- * Pregunta Test Case
+ * Opcione Test Case
  *
  */
-class PreguntaTest extends CakeTestCase {
+class OpcioneTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class PreguntaTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.opcione',
 		'app.pregunta',
 		'app.multiplicadore',
 		'app.estado',
@@ -34,8 +35,7 @@ class PreguntaTest extends CakeTestCase {
 		'app.matrix',
 		'app.coeficiente',
 		'app.intervencione',
-		'app.agrupamiento',
-		'app.opcione'
+		'app.agrupamiento'
 	);
 
 /**
@@ -45,7 +45,7 @@ class PreguntaTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Pregunta = ClassRegistry::init('Pregunta');
+		$this->Opcione = ClassRegistry::init('Opcione');
 	}
 
 /**
@@ -54,7 +54,7 @@ class PreguntaTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Pregunta);
+		unset($this->Opcione);
 
 		parent::tearDown();
 	}

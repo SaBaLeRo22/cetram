@@ -106,4 +106,23 @@ class ConsultasController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	/**
+	 * realizar method
+	 *
+	 * @return void
+	 */
+	public function realizar() {
+		if ($this->request->is('post')) {
+			$this->Consulta->create();
+			if ($this->Consulta->save($this->request->data)) {
+				$this->Session->setFlash(__('The consulta has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+			}
+		}
+		$estados = $this->Consulta->Estado->find('list');
+		$this->set(compact('estados'));
+	}
 }

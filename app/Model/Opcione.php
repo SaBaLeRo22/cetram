@@ -1,22 +1,20 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Pregunta Model
+ * Opcione Model
  *
- * @property Multiplicadore $Multiplicadore
- * @property Agrupamiento $Agrupamiento
+ * @property Pregunta $Pregunta
  * @property Unidade $Unidade
  * @property Estado $Estado
- * @property Opcione $Opcione
  */
-class Pregunta extends AppModel {
+class Opcione extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'pregunta';
+	public $displayField = 'opcion';
 
 /**
  * Validation rules
@@ -24,7 +22,17 @@ class Pregunta extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'pregunta' => array(
+		'pregunta_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'opcion' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
@@ -34,49 +42,9 @@ class Pregunta extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'descripcion' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'orden' => array(
+		'funcion' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'multiplicadore_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'agrupamiento_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'opciones' => array(
-			'boolean' => array(
-				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -134,16 +102,9 @@ class Pregunta extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Multiplicadore' => array(
-			'className' => 'Multiplicadore',
-			'foreignKey' => 'multiplicadore_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Agrupamiento' => array(
-			'className' => 'Agrupamiento',
-			'foreignKey' => 'agrupamiento_id',
+		'Pregunta' => array(
+			'className' => 'Pregunta',
+			'foreignKey' => 'pregunta_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -163,26 +124,4 @@ class Pregunta extends AppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'Opcione' => array(
-			'className' => 'Opcione',
-			'foreignKey' => 'pregunta_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-
 }

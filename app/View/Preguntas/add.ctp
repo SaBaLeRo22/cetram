@@ -38,6 +38,10 @@
             <?= $this->Form->input('agrupamiento_id'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('opciones', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('opciones'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
@@ -84,6 +88,11 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Opcione</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Opciones'), array('controller' => 'opciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Opcione'), array('controller' => 'opciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>

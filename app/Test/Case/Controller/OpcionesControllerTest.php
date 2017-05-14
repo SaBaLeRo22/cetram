@@ -1,11 +1,11 @@
 <?php
-App::uses('PreguntasController', 'Controller');
+App::uses('OpcionesController', 'Controller');
 
 /**
- * PreguntasController Test Case
+ * OpcionesController Test Case
  *
  */
-class PreguntasControllerTest extends ControllerTestCase {
+class OpcionesControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class PreguntasControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.opcione',
 		'app.pregunta',
 		'app.multiplicadore',
 		'app.estado',
@@ -34,8 +35,7 @@ class PreguntasControllerTest extends ControllerTestCase {
 		'app.matrix',
 		'app.coeficiente',
 		'app.intervencione',
-		'app.agrupamiento',
-		'app.opcione'
+		'app.agrupamiento'
 	);
 
 /**

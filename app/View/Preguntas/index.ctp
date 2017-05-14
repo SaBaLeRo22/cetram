@@ -18,6 +18,7 @@
                     <th><?= $this->Paginator->sort('maximo'); ?></th>
                     <th><?= $this->Paginator->sort('multiplicadore_id'); ?></th>
                     <th><?= $this->Paginator->sort('agrupamiento_id'); ?></th>
+                    <th><?= $this->Paginator->sort('opciones'); ?></th>
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
@@ -45,7 +46,8 @@
                     <td><?= h($pregunta['Pregunta']['orden']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['minimo']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['maximo']); ?>&nbsp;</td>
-                    <td><?= $pregunta['Multiplicadore']['nombre']; ?></td><td><?= $pregunta['Agrupamiento']['nombre']; ?></td><td><?= $pregunta['Unidade']['nombre']; ?></td><td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
+                    <td><?= $pregunta['Multiplicadore']['nombre']; ?></td><td><?= $pregunta['Agrupamiento']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['opciones']); ?>&nbsp;</td>
+                    <td><?= $pregunta['Unidade']['nombre']; ?></td><td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['modified']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_modified']); ?>&nbsp;</td>
@@ -109,6 +111,12 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+ 
+            </div>
+            <h4 class="text-muted">Opcione</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de Opciones'), array('controller' => 'opciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Opcione'), array('controller' => 'opciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>
