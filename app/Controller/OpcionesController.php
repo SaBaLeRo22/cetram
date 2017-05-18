@@ -56,7 +56,7 @@ class OpcionesController extends AppController {
 				$this->Session->setFlash(__('The opcione could not be saved. Please, try again.'));
 			}
 		}
-		$preguntas = $this->Opcione->Pregunta->find('list');
+		$preguntas = $this->Opcione->Preguntum->find('list');
 		$unidades = $this->Opcione->Unidade->find('list');
 		$estados = $this->Opcione->Estado->find('list');
 		$this->set(compact('preguntas', 'unidades', 'estados'));

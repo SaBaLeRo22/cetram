@@ -32,6 +32,7 @@ class RespuestaCoeficienteTest extends CakeTestCase {
 		'app.provincia',
 		'app.sectore',
 		'app.respuesta_indicadore',
+		'app.indicadore',
 		'app.respuesta_item',
 		'app.respuesta_multiplicadore',
 		'app.multiplicadore',
@@ -40,8 +41,9 @@ class RespuestaCoeficienteTest extends CakeTestCase {
 		'app.intervencione',
 		'app.pregunta',
 		'app.agrupamiento',
-		'app.respuesta_parametro',
+		'app.opcione',
 		'app.respuesta_pregunta',
+		'app.respuesta_parametro',
 		'app.respuesta_tipo'
 	);
 

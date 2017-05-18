@@ -6,6 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Consulta $Consulta
  * @property Pregunta $Pregunta
  * @property Unidade $Unidade
+ * @property Opcione $Opcione
  * @property Estado $Estado
  */
 class RespuestaPregunta extends AppModel {
@@ -36,66 +37,6 @@ class RespuestaPregunta extends AppModel {
 		'pregunta_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'pregunta' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'valor' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'minimo' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'maximo' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'unidade_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'unidad' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -160,6 +101,13 @@ class RespuestaPregunta extends AppModel {
 		'Unidade' => array(
 			'className' => 'Unidade',
 			'foreignKey' => 'unidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Opcione' => array(
+			'className' => 'Opcione',
+			'foreignKey' => 'opcione_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

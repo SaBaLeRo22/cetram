@@ -40,8 +40,8 @@ class OpcioneFixture extends CakeTestFixture {
 			'funcion' => 1,
 			'unidade_id' => 1,
 			'estado_id' => 1,
-			'created' => '2017-05-14 19:56:18',
-			'modified' => '2017-05-14 19:56:18',
+			'created' => '2017-05-18 16:07:49',
+			'modified' => '2017-05-18 16:07:49',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

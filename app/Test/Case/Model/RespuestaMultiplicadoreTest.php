@@ -15,7 +15,6 @@ class RespuestaMultiplicadoreTest extends CakeTestCase {
 	public $fixtures = array(
 		'app.respuesta_multiplicadore',
 		'app.consulta',
-		'app.multiplicadore',
 		'app.estado',
 		'app.ambito',
 		'app.parametro',
@@ -32,11 +31,20 @@ class RespuestaMultiplicadoreTest extends CakeTestCase {
 		'app.localidade',
 		'app.provincia',
 		'app.sectore',
-		'app.matrix',
+		'app.respuesta_coeficiente',
 		'app.coeficiente',
 		'app.intervencione',
+		'app.matrix',
+		'app.multiplicadore',
 		'app.pregunta',
-		'app.agrupamiento'
+		'app.agrupamiento',
+		'app.opcione',
+		'app.respuesta_pregunta',
+		'app.respuesta_indicadore',
+		'app.indicadore',
+		'app.respuesta_item',
+		'app.respuesta_parametro',
+		'app.respuesta_tipo'
 	);
 
 /**

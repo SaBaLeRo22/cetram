@@ -38,6 +38,7 @@ class RespuestaPreguntasControllerTest extends ControllerTestCase {
 		'app.multiplicadore',
 		'app.pregunta',
 		'app.agrupamiento',
+		'app.opcione',
 		'app.respuesta_indicadore',
 		'app.indicadore',
 		'app.respuesta_item',

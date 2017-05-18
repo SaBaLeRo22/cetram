@@ -6,6 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Pregunta $Pregunta
  * @property Unidade $Unidade
  * @property Estado $Estado
+ * @property RespuestaPregunta $RespuestaPregunta
  */
 class Opcione extends AppModel {
 
@@ -128,4 +129,26 @@ class Opcione extends AppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'RespuestaPregunta' => array(
+			'className' => 'RespuestaPregunta',
+			'foreignKey' => 'opcione_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }

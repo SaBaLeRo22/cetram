@@ -19,6 +19,9 @@
                     <th><?= $this->Paginator->sort('maximo'); ?></th>
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('unidad'); ?></th>
+                    <th><?= $this->Paginator->sort('respuesta'); ?></th>
+                    <th><?= $this->Paginator->sort('opcione_id'); ?></th>
+                    <th><?= $this->Paginator->sort('funcion'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -45,6 +48,9 @@
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['minimo']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['maximo']); ?>&nbsp;</td>
                     <td><?= $respuestaPregunta['Unidade']['nombre']; ?></td><td><?= h($respuestaPregunta['RespuestaPregunta']['unidad']); ?>&nbsp;</td>
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['respuesta']); ?>&nbsp;</td>
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['opcione_id']); ?>&nbsp;</td>
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['funcion']); ?>&nbsp;</td>
                     <td><?= $respuestaPregunta['Estado']['nombre']; ?></td><td><?= h($respuestaPregunta['RespuestaPregunta']['created']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['modified']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['user_created']); ?>&nbsp;</td>

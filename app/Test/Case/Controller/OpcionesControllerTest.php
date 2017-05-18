@@ -35,7 +35,16 @@ class OpcionesControllerTest extends ControllerTestCase {
 		'app.matrix',
 		'app.coeficiente',
 		'app.intervencione',
-		'app.agrupamiento'
+		'app.agrupamiento',
+		'app.respuesta_pregunta',
+		'app.consulta',
+		'app.respuesta_coeficiente',
+		'app.respuesta_indicadore',
+		'app.indicadore',
+		'app.respuesta_item',
+		'app.respuesta_multiplicadore',
+		'app.respuesta_parametro',
+		'app.respuesta_tipo'
 	);
 
 /**

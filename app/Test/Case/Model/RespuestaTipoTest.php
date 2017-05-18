@@ -38,11 +38,13 @@ class RespuestaTipoTest extends CakeTestCase {
 		'app.multiplicadore',
 		'app.pregunta',
 		'app.agrupamiento',
+		'app.opcione',
+		'app.respuesta_pregunta',
 		'app.respuesta_indicadore',
+		'app.indicadore',
 		'app.respuesta_item',
 		'app.respuesta_multiplicadore',
-		'app.respuesta_parametro',
-		'app.respuesta_pregunta'
+		'app.respuesta_parametro'
 	);
 
 /**

@@ -18,10 +18,10 @@
         </div>
         <?php endforeach ?>
 
-<!--        <div class="form-group">
+        <div class="form-group">
             <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('observaciones', array('type' => 'textarea')); ?>
-        </div>-->
+        </div>
 
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-hand-o-right fa-fw"></i> Siguiente', array('class' => 'btn btn-success')); ?>

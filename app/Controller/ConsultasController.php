@@ -120,15 +120,24 @@ class ConsultasController extends AppController {
 		$this->loadModel('Opcione');
 		$this->Opcione->recursive = -1;
 
+		$this->loadModel('RespuestaPregunta');
+		$this->RespuestaPregunta->recursive = -1;
+
 
 		if ($this->request->is('post')) {
-/*			$this->Consulta->create();
-			if ($this->Consulta->save($this->request->data)) {
-				$this->Session->setFlash(__('The consulta has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
+			$this->Consulta->create();
+
+			$consulta['Consulta']['costo'] = 0;
+			$consulta['Consulta']['tarifa'] = 0;
+			$consulta['Consulta']['subsidio'] = 0;
+			$consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
+			$consulta['Consulta']['estado_id'] = 1;
+			$consulta['Consulta']['user_created'] = $this->Authake->getUserId();
+			$consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
+
+			if (!$this->Consulta->save($consulta)) {
 				$this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-			}*/
+			}
 
 //			debug($this->request->data);
 
@@ -136,21 +145,54 @@ class ConsultasController extends AppController {
 //				debug($key);
 //				debug($respuesta);
 
-				$respuesta_pregunta = $this->Pregunta->find('first', array(
+/*				$respuesta_pregunta = $this->Pregunta->find('first', array(
 					'conditions' => array('Pregunta.id' => $key),
 					'recursive' => -1
-				));
+				));*/
 
 				$respuesta_opcion = $this->Opcione->find('first', array(
 					'conditions' => array('Opcione.id' => $respuesta),
-					'recursive' => 0
+					'recursive' => 0,
+					'fields' => array('Pregunta.*, Opcione.*, Unidade.*')
 				));
 
-				debug($respuesta_pregunta);
-				debug($respuesta_opcion);
+				if(!empty($respuesta_opcion)){
+					$this->RespuestaPregunta->create();
+
+//					debug($respuesta_opcion);
+
+					$respuestaPregunta['RespuestaPregunta']['consulta_id'] = $this->Consulta->id;
+					$respuestaPregunta['RespuestaPregunta']['pregunta_id'] = $respuesta_opcion['Pregunta']['id'];
+					$respuestaPregunta['RespuestaPregunta']['pregunta'] = $respuesta_opcion['Pregunta']['pregunta'];
+					$respuestaPregunta['RespuestaPregunta']['valor'] = $respuesta_opcion['Opcione']['funcion'];
+					$respuestaPregunta['RespuestaPregunta']['minimo'] = $respuesta_opcion['Pregunta']['minimo'];
+					$respuestaPregunta['RespuestaPregunta']['maximo'] = $respuesta_opcion['Pregunta']['maximo'];
+					$respuestaPregunta['RespuestaPregunta']['unidade_id'] = $respuesta_opcion['Pregunta']['unidade_id'];
+					$respuestaPregunta['RespuestaPregunta']['unidad'] = $respuesta_opcion['Unidade']['nombre'];
+					$respuestaPregunta['RespuestaPregunta']['respuesta'] = $respuesta_opcion['Opcione']['opcion'];
+					$respuestaPregunta['RespuestaPregunta']['opcione_id'] = $respuesta_opcion['Opcione']['id'];
+					$respuestaPregunta['RespuestaPregunta']['funcion'] = $respuesta_opcion['Opcione']['funcion'];
+					$respuestaPregunta['RespuestaPregunta']['estado_id'] = 1;
+					$respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
+					$respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
+
+					if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
+						$this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
+					}else{
+						$this->Session->setFlash(__('Bien.'));
+					}
+
+
+//					debug($consulta);
+//					debug($respuestaPregunta);
+
+				}
+
+
 
 			}
-
+			$this->Session->setFlash(__('The consulta has been saved.'));
+			return $this->redirect(array('action' => 'index'));
 		}
 
 

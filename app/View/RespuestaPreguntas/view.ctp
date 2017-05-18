@@ -55,6 +55,21 @@
 			<?= h($respuestaPregunta['RespuestaPregunta']['unidad']); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Respuesta'); ?></dt>
+		<dd>
+			<?= h($respuestaPregunta['RespuestaPregunta']['respuesta']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Opcione Id'); ?></dt>
+		<dd>
+			<?= h($respuestaPregunta['RespuestaPregunta']['opcione_id']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Funcion'); ?></dt>
+		<dd>
+			<?= h($respuestaPregunta['RespuestaPregunta']['funcion']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($respuestaPregunta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $respuestaPregunta['Estado']['id'])); ?>

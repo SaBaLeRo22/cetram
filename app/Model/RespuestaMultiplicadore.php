@@ -14,7 +14,7 @@ class RespuestaMultiplicadore extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'id';
+	public $displayField = 'ponderador';
 
 /**
  * Validation rules
@@ -33,26 +33,6 @@ class RespuestaMultiplicadore extends AppModel {
 			),
 		),
 		'multiplicadore_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'multiplicador' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'ponderador' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',

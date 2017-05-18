@@ -32,16 +32,18 @@ class RespuestaParametroTest extends CakeTestCase {
 		'app.provincia',
 		'app.sectore',
 		'app.respuesta_coeficiente',
-		'app.respuesta_indicadore',
-		'app.respuesta_item',
-		'app.respuesta_multiplicadore',
-		'app.multiplicadore',
-		'app.matrix',
 		'app.coeficiente',
 		'app.intervencione',
+		'app.matrix',
+		'app.multiplicadore',
 		'app.pregunta',
 		'app.agrupamiento',
+		'app.opcione',
 		'app.respuesta_pregunta',
+		'app.respuesta_indicadore',
+		'app.indicadore',
+		'app.respuesta_item',
+		'app.respuesta_multiplicadore',
 		'app.respuesta_tipo'
 	);
 

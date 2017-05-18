@@ -44,6 +44,18 @@
             <?= $this->Form->input('unidad'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('respuesta', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('respuesta'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('opcione_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('opcione_id'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('funcion', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('funcion'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
