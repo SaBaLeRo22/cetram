@@ -14,15 +14,21 @@ $this->extend('default');
 <?php $this->start('menu'); ?>
 <ul class="nav navbar-nav navbar-right">
     <li>
-        <a href="<?= $this->Html->url('/') ?>" class="text-center">
+        <a class="text-center" href="<?= $this->Html->url('/') ?>">
             <i class="fa fa-home fa-2x fa-fw"></i> <br/>
             <?= __('Inicio'); ?>
         </a>
     </li>
     <li>
-        <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'externos', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
+        <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'externos', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
             <i class="fa fa-wrench fa-2x fa-fw"></i> <br/>
             <?= __('Tools'); ?>
+        </a>
+    </li>
+    <li>
+        <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'realizar', 'prefix' => false, $this->request->prefix => false)) ?>">
+            <i class="fa fa-bus fa-2x fa-fw"></i> <br/>
+            <?= __('Consulta'); ?>
         </a>
     </li>
 

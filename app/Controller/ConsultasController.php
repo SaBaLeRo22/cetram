@@ -113,16 +113,69 @@ class ConsultasController extends AppController {
 	 * @return void
 	 */
 	public function realizar() {
+
+		$this->loadModel('Pregunta');
+		$this->Pregunta->recursive = -1;
+
+		$this->loadModel('Opcione');
+		$this->Opcione->recursive = -1;
+
+
 		if ($this->request->is('post')) {
-			$this->Consulta->create();
+/*			$this->Consulta->create();
 			if ($this->Consulta->save($this->request->data)) {
 				$this->Session->setFlash(__('The consulta has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+			}*/
+
+//			debug($this->request->data);
+
+			foreach ($this->request->data['Consulta'] as $key => $respuesta) {
+//				debug($key);
+//				debug($respuesta);
+
+				$respuesta_pregunta = $this->Pregunta->find('first', array(
+					'conditions' => array('Pregunta.id' => $key),
+					'recursive' => -1
+				));
+
+				$respuesta_opcion = $this->Opcione->find('first', array(
+					'conditions' => array('Opcione.id' => $respuesta),
+					'recursive' => 0
+				));
+
+				debug($respuesta_pregunta);
+				debug($respuesta_opcion);
+
 			}
+
 		}
+
+
+
+		$preguntas = $this->Pregunta->find('all', array(
+			'conditions' => array('Pregunta.estado_id <>' => '2'),
+			'recursive' => -1,
+			'fields' => array('Pregunta.id, Pregunta.pregunta')
+		));
+
+
+
+		foreach ($preguntas as $key => $pregunta) {
+			$opciones = $this->Opcione->find('list', array(
+				'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
+				'recursive' => 0,
+				'fields' => array('Opcione.id', 'Opcione.nombre')
+			));
+			$preguntas[$key]['Pregunta']['opciones'] = $opciones;
+		}
+
+//		debug($preguntas);
+
+
 		$estados = $this->Consulta->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('estados','preguntas'));
 	}
 }
