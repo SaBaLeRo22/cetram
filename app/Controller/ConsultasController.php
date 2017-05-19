@@ -139,16 +139,18 @@ class ConsultasController extends AppController {
 				$this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
 			}
 
+			$consulta['Consulta']['id'] = $this->Consulta->id;
+
 //			debug($this->request->data);
 
 			foreach ($this->request->data['Consulta'] as $key => $respuesta) {
 //				debug($key);
 //				debug($respuesta);
 
-/*				$respuesta_pregunta = $this->Pregunta->find('first', array(
-					'conditions' => array('Pregunta.id' => $key),
-					'recursive' => -1
-				));*/
+				/*				$respuesta_pregunta = $this->Pregunta->find('first', array(
+                                    'conditions' => array('Pregunta.id' => $key),
+                                    'recursive' => -1
+                                ));*/
 
 				$respuesta_opcion = $this->Opcione->find('first', array(
 					'conditions' => array('Opcione.id' => $respuesta),
@@ -156,12 +158,12 @@ class ConsultasController extends AppController {
 					'fields' => array('Pregunta.*, Opcione.*, Unidade.*')
 				));
 
-				if(!empty($respuesta_opcion)){
+				if (!empty($respuesta_opcion)) {
 					$this->RespuestaPregunta->create();
 
 //					debug($respuesta_opcion);
 
-					$respuestaPregunta['RespuestaPregunta']['consulta_id'] = $this->Consulta->id;
+					$respuestaPregunta['RespuestaPregunta']['consulta_id'] = $consulta['Consulta']['id'];
 					$respuestaPregunta['RespuestaPregunta']['pregunta_id'] = $respuesta_opcion['Pregunta']['id'];
 					$respuestaPregunta['RespuestaPregunta']['pregunta'] = $respuesta_opcion['Pregunta']['pregunta'];
 					$respuestaPregunta['RespuestaPregunta']['valor'] = $respuesta_opcion['Opcione']['funcion'];
@@ -178,8 +180,8 @@ class ConsultasController extends AppController {
 
 					if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
 						$this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-					}else{
-						$this->Session->setFlash(__('Bien.'));
+					} else {
+						$this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
 					}
 
 
@@ -189,8 +191,84 @@ class ConsultasController extends AppController {
 				}
 
 
-
 			}
+
+			/*
+				Registrar los Parametros actuales en Respuesta Parametros
+			*/
+			$this->loadModel('Parametro');
+			$this->Parametro->recursive = -1;
+			$parametros = $this->Parametro->find('all', array(
+				'conditions' => array('Parametro.estado_id <>' => '2'),
+				'recursive' => 0
+			));
+			foreach ($parametros as $key => $parametro) {
+				$this->Parametro->create();
+				$respuestaParametro['RespuestaParametro']['consulta_id'] = $consulta['Consulta']['id'];
+				$respuestaParametro['RespuestaParametro']['parametro_id'] = $parametro['Parametro']['id'];
+				$respuestaParametro['RespuestaParametro']['parametro'] = $parametro['Parametro']['nombre'];
+				$respuestaParametro['RespuestaParametro']['valor'] = $parametro['Parametro']['valor'];
+				$respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
+				$respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
+				$respuestaParametro['RespuestaParametro']['estado_id'] = 1;
+				$respuestaParametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
+				$respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
+				if (!$this->Parametro->save($respuestaParametro)) {
+					$this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
+				} else {
+					$this->Session->setFlash(__('The RespuestaParametro has been saved.'));
+				}
+			}
+
+			/*
+				Registrar los Coeficientes actuales en Respuesta Coeficientes
+			*/
+			$this->loadModel('Coeficiente');
+			$this->Coeficiente->recursive = -1;
+			$coeficientes = $this->Coeficiente->find('all', array(
+				'conditions' => array('Coeficiente.estado_id <>' => '2'),
+				'recursive' => 0
+			));
+			foreach ($coeficientes as $key => $coeficiente) {
+				$this->Coeficiente->create();
+				$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['parametro_id'] = $coeficiente['Coeficiente']['id'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = $coeficiente['Coeficiente']['valor'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['unidade_id'] = $coeficiente['Unidade']['id'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['unidad'] = $coeficiente['Unidade']['nombre'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
+				$respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+				$respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+				if (!$this->Coeficiente->save($respuestaCoeficiente)) {
+					$this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
+				} else {
+					$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
+				}
+			}
+
+
+			/*
+				Calcular Respuesta Multiplicadores, Ítems, Tipos y Consulta.
+				Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realizar actualmente.
+			*/
+
+				/* 1) DETERMINACIÓN DEL COSTO DE COMBUSTIBLE: */
+
+
+
+
+
+
+			/*
+				Registrar los Indicadores actuales en Respuesta Indicadores
+			*/
+
+//			Hacer!
+
+
 			$this->Session->setFlash(__('The consulta has been saved.'));
 			return $this->redirect(array('action' => 'index'));
 		}
