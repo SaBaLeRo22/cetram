@@ -141,7 +141,7 @@ class ConsultasController extends AppController {
 
 			$consulta['Consulta']['id'] = $this->Consulta->id;
 
-//			debug($this->request->data);
+//			debug($this->request->data);exit();
 
 			foreach ($this->request->data['Consulta'] as $key => $respuesta) {
 //				debug($key);
@@ -236,7 +236,7 @@ class ConsultasController extends AppController {
 			foreach ($coeficientes as $key => $coeficiente) {
 				$this->RespuestaCoeficiente->create();
 				$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
-				$respuestaCoeficiente['RespuestaCoeficiente']['parametro_id'] = $coeficiente['Coeficiente']['id'];
+				$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente_id'] = $coeficiente['Coeficiente']['id'];
 				$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
 				$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = 0;
 				$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
@@ -259,6 +259,7 @@ class ConsultasController extends AppController {
 				Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
 			*/
 
+				/************************ MULTIPLICADOR N°2 ************************/
 				/* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE: */
 			//Parametro: PRECIO DE UN LITRO DE GASOIL LIBRE
 			$parametro1 = $this->Parametro->find('first', array(
@@ -282,8 +283,9 @@ class ConsultasController extends AppController {
 				'conditions' => array('Opcione.id' => $this->request->data['Consulta']['1']),
 				'recursive' => 0
 			));
+
 			foreach ($matrices as $key => $matrix) {
-				$coeficiente1['Coeficiente']['parcial_total'] + ($respuesta_opcion1['Opcione']['funcion'] * ($coeficiente1['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100));
+				$coeficiente1['Coeficiente']['parcial_total'] = ($respuesta_opcion1['Opcione']['funcion'] * ($coeficiente1['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100));
 			}
 			$coeficiente1['Coeficiente']['total'] = $coeficiente1['Coeficiente']['maximo'] - $coeficiente1['Coeficiente']['parcial_total'];
 
@@ -298,6 +300,7 @@ class ConsultasController extends AppController {
 			));
 			$respuestaItem1['RespuestaItem']['consulta_id'] = $consulta['Consulta']['id'];
 			$respuestaItem1['RespuestaItem']['item_id'] = $item1['Item']['id'];
+			$respuestaItem1['RespuestaItem']['item'] = $item1['Item']['nombre'];
 			$respuestaItem1['RespuestaItem']['valor'] = $parametro1['Parametro']['valor'] * $coeficiente1['Coeficiente']['total'];
 			$respuestaItem1['RespuestaItem']['incidencia_valor'] = 0;
 			$respuestaItem1['RespuestaItem']['minimo'] = $parametro1['Parametro']['valor'] * $coeficiente1['Coeficiente']['minimo'];
