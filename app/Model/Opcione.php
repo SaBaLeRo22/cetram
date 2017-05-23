@@ -17,9 +17,9 @@ class Opcione extends AppModel {
  */
 	public $displayField = 'opcion';
 
-	var $virtualFields = array(
+/*	var $virtualFields = array(
 		'nombre' => "CONCAT(Opcione.opcion, Unidade.nombre)"
-	);
+	);*/
 
 /**
  * Validation rules

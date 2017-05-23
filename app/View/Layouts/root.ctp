@@ -25,6 +25,9 @@ $this->extend('default');
             <?= __('Tools'); ?>
         </a>
     </li>
+
+    <?php if ($this->Authake->isLogged()): ?>
+
     <li>
         <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'realizar', 'prefix' => false, $this->request->prefix => false)) ?>">
             <i class="fa fa-bus fa-2x fa-fw"></i> <br/>
@@ -32,8 +35,6 @@ $this->extend('default');
         </a>
     </li>
 
-
-    <?php if ($this->Authake->isLogged()): ?>
     <?php if ($this->Session->read('Grupo.Admin') || $this->Session->read('Grupo.Sistemas')): ?>
     <li class="divider-left dropdown">
         <a href="#" class="dropdown-toggle text-center" data-toggle="dropdown" >

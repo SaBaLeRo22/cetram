@@ -359,12 +359,17 @@ class ConsultasController extends AppController {
 
 
 		foreach ($preguntas as $key => $pregunta) {
-			$opciones = $this->Opcione->find('list', array(
+			$opciones = $this->Opcione->find('all', array(
 				'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
 				'recursive' => 0,
-				'fields' => array('Opcione.id', 'Opcione.nombre')
+				'fields' => array('Opcione.id', 'Opcione.opcion', 'Unidade.nombre')
 			));
-			$preguntas[$key]['Pregunta']['opciones'] = $opciones;
+			$ops = NULL;
+			foreach ($opciones as $keyo => $opcion) {
+				$ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'].' '.$opcion['Unidade']['nombre'];
+			}
+//			debug($ops);
+			$preguntas[$key]['Pregunta']['opciones'] = $ops;
 		}
 
 //		debug($preguntas);
