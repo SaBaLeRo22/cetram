@@ -124,7 +124,6 @@ class ConsultasController extends AppController {
 		$this->RespuestaPregunta->recursive = -1;
 
 		if ($this->request->is('post')) {
-
 //			debug($this->request->data);
 //			exit;
 
@@ -256,12 +255,14 @@ class ConsultasController extends AppController {
 				}
 			}
 
-
+/**************************************************************************************************************************************************/
+/**************************************************************************************************************************************************/
 			/*
 				Calcular Respuesta Multiplicadores, Ítems, Tipos y Consulta.
 				Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
 			*/
 
+			/*********************************************************************************************************/
 
 				/* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE: */
 			//Parametro: PRECIO DE UN LITRO DE GASOIL LIBRE
@@ -274,21 +275,36 @@ class ConsultasController extends AppController {
 				'conditions' => array('Coeficiente.id' => '1'),
 				'recursive' => -1
 			));
+
+			$coeficiente['Coeficiente']['diferencia'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['minimo'];
+			$coeficiente['Coeficiente']['parcial_total'] = 0;
+
 			$this->loadModel('Matrix');
 			$this->Matrix->recursive = -1;
 			$matrices = $this->Matrix->find('all', array(
 				'conditions' => array('Matrix.estado_id <>' => '2', 'Matrix.coeficiente_id' => $coeficiente['Coeficiente']['id']),
 				'recursive' => -1
 			));
-			$coeficiente['Coeficiente']['diferencia'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['minimo'];
-			$coeficiente['Coeficiente']['parcial_total'] = 0;
-			$respuesta_opcion = $this->Opcione->find('first', array(
-				'conditions' => array('Opcione.id' => $this->request->data['Consulta']['1']),
-				'recursive' => 0
-			));
 
 			foreach ($matrices as $key => $matrix) {
-				$coeficiente['Coeficiente']['parcial_total'] = ($respuesta_opcion['Opcione']['funcion'] * ($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100));
+				$preguntas = $this->Pregunta->find('list', array(
+					'conditions' => array('Pregunta.multiplicadore_id' => $matrix['Matrix']['multiplicadore_id']),
+					'recursive' => -1,
+					'fields' => array('Pregunta.id','Pregunta.id')
+				));
+				$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
+				foreach ($preguntas as $preg => $pregunta) {
+					if ($preg == '5') {
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076*pow($this->request->data['Consulta'][$preg]+1,2)+0.0223*($this->request->data['Consulta'][$preg]+1)+0.9859);
+					} else {
+						$respuesta_opcion = $this->Opcione->find('first', array(
+							'conditions' => array('Opcione.id' => $this->request->data['Consulta'][$preg]),
+							'recursive' => 0
+						));
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
+					}
+				}
+				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
 			}
 			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
 
@@ -322,9 +338,7 @@ class ConsultasController extends AppController {
 				$this->Session->setFlash(__('The RespuestaItem has been saved.'));
 			}
 
-
-
-
+			/*********************************************************************************************************/
 
 			/* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES: */
 			//Parametro: PRECIO DEL ACEITE
@@ -340,40 +354,36 @@ class ConsultasController extends AppController {
 			$coeficiente['Coeficiente']['diferencia'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['minimo'];
 			$coeficiente['Coeficiente']['parcial_total'] = 0;
 
-
-
 			$matrices = $this->Matrix->find('all', array(
 				'conditions' => array('Matrix.estado_id <>' => '2', 'Matrix.coeficiente_id' => $coeficiente['Coeficiente']['id']),
 				'recursive' => -1
 			));
 
 			foreach ($matrices as $key => $matrix) {
-
 				$preguntas = $this->Pregunta->find('list', array(
 					'conditions' => array('Pregunta.multiplicadore_id' => $matrix['Matrix']['multiplicadore_id']),
 					'recursive' => -1,
 					'fields' => array('Pregunta.id','Pregunta.id')
 				));
-
-				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100;
-
+				$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
 				foreach ($preguntas as $preg => $pregunta) {
-					$respuesta_opcion = $this->Opcione->find('first', array(
-						'conditions' => array('Opcione.id' => $this->request->data['Consulta'][$preg]),
-						'recursive' => 0
-					));
-					$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] * $respuesta_opcion['Opcione']['funcion'];
+					if ($preg == '5') {
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076*pow($this->request->data['Consulta'][$preg]+1,2)+0.0223*($this->request->data['Consulta'][$preg]+1)+0.9859);
+					} else {
+						$respuesta_opcion = $this->Opcione->find('first', array(
+							'conditions' => array('Opcione.id' => $this->request->data['Consulta'][$preg]),
+							'recursive' => 0
+						));
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
+					}
 				}
-
-
-
-
+				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
 			}
 			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
 
 			//Ítem: FILTROS Y LUBRICANTES
 			$item = $this->Item->find('first', array(
-				'conditions' => array('Item.id' => '1'),
+				'conditions' => array('Item.id' => '2'),
 				'recursive' => -1
 			));
 			$this->RespuestaItem->create();
