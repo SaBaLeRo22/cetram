@@ -25,6 +25,11 @@
 			<?= h($tipo['Tipo']['descripcion']); ?>
 			&nbsp;
 		</dd>
+				<dt><?= __('Unidade'); ?></dt>
+				<dd>
+					<?= $this->Html->link($tipo['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $tipo['Unidade']['id'])); ?>
+					&nbsp;
+				</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($tipo['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $tipo['Estado']['id'])); ?>

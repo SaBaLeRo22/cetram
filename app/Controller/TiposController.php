@@ -56,8 +56,9 @@ class TiposController extends AppController {
 				$this->Session->setFlash(__('The tipo could not be saved. Please, try again.'));
 			}
 		}
+		$unidades = $this->Tipo->Unidade->find('list');
 		$estados = $this->Tipo->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('unidades','estados'));
 	}
 
 /**
@@ -82,8 +83,9 @@ class TiposController extends AppController {
 			$options = array('conditions' => array('Tipo.' . $this->Tipo->primaryKey => $id));
 			$this->request->data = $this->Tipo->find('first', $options);
 		}
+		$unidades = $this->Tipo->Unidade->find('list');
 		$estados = $this->Tipo->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('unidades','estados'));
 	}
 
 /**

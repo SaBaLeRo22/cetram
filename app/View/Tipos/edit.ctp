@@ -19,6 +19,11 @@
             <?= $this->Form->label('descripcion', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('descripcion'); ?> 
         </div>
+
+        <div class="form-group">
+            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('unidade_id'); ?>
+        </div>
                                                     <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 

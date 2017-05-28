@@ -97,6 +97,13 @@ class Consulta extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Unidade' => array(
+			'className' => 'Unidade',
+			'foreignKey' => 'unidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Estado' => array(
 			'className' => 'Estado',
 			'foreignKey' => 'estado_id',

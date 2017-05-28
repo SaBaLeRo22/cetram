@@ -36,8 +36,8 @@ class UnidadeFixture extends CakeTestFixture {
 			'nombre' => 'Lorem ipsum dolor sit amet',
 			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'estado_id' => 1,
-			'created' => '2017-02-04 13:35:44',
-			'modified' => '2017-02-04 13:35:44',
+			'created' => '2017-05-28 19:48:15',
+			'modified' => '2017-05-28 19:48:15',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

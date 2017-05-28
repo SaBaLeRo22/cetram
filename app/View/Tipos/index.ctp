@@ -13,6 +13,7 @@
                     <th><?= $this->Paginator->sort('id'); ?></th>
                     <th><?= $this->Paginator->sort('nombre'); ?></th>
                     <th><?= $this->Paginator->sort('descripcion'); ?></th>
+                    <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -36,6 +37,7 @@
                         </div>
                     </td> 
                     <td><?= h($tipo['Tipo']['descripcion']); ?>&nbsp;</td>
+                    <td><?= $tipo['Unidade']['nombre']; ?></td>
                     <td><?= $tipo['Estado']['nombre']; ?></td><td><?= h($tipo['Tipo']['created']); ?>&nbsp;</td>
                     <td><?= h($tipo['Tipo']['modified']); ?>&nbsp;</td>
                     <td><?= h($tipo['Tipo']['user_created']); ?>&nbsp;</td>

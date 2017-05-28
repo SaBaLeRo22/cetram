@@ -4,7 +4,19 @@ App::uses('AppModel', 'Model');
  * Unidade Model
  *
  * @property Estado $Estado
+ * @property Consulta $Consulta
+ * @property Indicadore $Indicadore
+ * @property Item $Item
+ * @property Opcione $Opcione
  * @property Parametro $Parametro
+ * @property Pregunta $Pregunta
+ * @property RespuestaCoeficiente $RespuestaCoeficiente
+ * @property RespuestaIndicadore $RespuestaIndicadore
+ * @property RespuestaItem $RespuestaItem
+ * @property RespuestaParametro $RespuestaParametro
+ * @property RespuestaPregunta $RespuestaPregunta
+ * @property RespuestaTipo $RespuestaTipo
+ * @property Tipo $Tipo
  */
 class Unidade extends AppModel {
 
@@ -76,8 +88,164 @@ class Unidade extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'Consulta' => array(
+			'className' => 'Consulta',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Indicadore' => array(
+			'className' => 'Indicadore',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Item' => array(
+			'className' => 'Item',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Opcione' => array(
+			'className' => 'Opcione',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Parametro' => array(
 			'className' => 'Parametro',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Pregunta' => array(
+			'className' => 'Pregunta',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaCoeficiente' => array(
+			'className' => 'RespuestaCoeficiente',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaIndicadore' => array(
+			'className' => 'RespuestaIndicadore',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaItem' => array(
+			'className' => 'RespuestaItem',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaParametro' => array(
+			'className' => 'RespuestaParametro',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaPregunta' => array(
+			'className' => 'RespuestaPregunta',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaTipo' => array(
+			'className' => 'RespuestaTipo',
+			'foreignKey' => 'unidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Tipo' => array(
+			'className' => 'Tipo',
 			'foreignKey' => 'unidade_id',
 			'dependent' => false,
 			'conditions' => '',

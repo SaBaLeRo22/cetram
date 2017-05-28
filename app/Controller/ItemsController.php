@@ -57,8 +57,9 @@ class ItemsController extends AppController {
 			}
 		}
 		$tipos = $this->Item->Tipo->find('list');
+		$unidades = $this->Item->Unidade->find('list');
 		$estados = $this->Item->Estado->find('list');
-		$this->set(compact('tipos', 'estados'));
+		$this->set(compact('unidades','tipos', 'estados'));
 	}
 
 /**
@@ -84,8 +85,9 @@ class ItemsController extends AppController {
 			$this->request->data = $this->Item->find('first', $options);
 		}
 		$tipos = $this->Item->Tipo->find('list');
+		$unidades = $this->Item->Unidade->find('list');
 		$estados = $this->Item->Estado->find('list');
-		$this->set(compact('tipos', 'estados'));
+		$this->set(compact('unidades','tipos', 'estados'));
 	}
 
 /**

@@ -14,6 +14,7 @@
                     <th><?= $this->Paginator->sort('nombre'); ?></th>
                     <th><?= $this->Paginator->sort('descripcion'); ?></th>
                     <th><?= $this->Paginator->sort('tipo_id'); ?></th>
+                    <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -37,7 +38,9 @@
                         </div>
                     </td> 
                     <td><?= h($item['Item']['descripcion']); ?>&nbsp;</td>
-                    <td><?= $item['Tipo']['nombre']; ?></td><td><?= $item['Estado']['nombre']; ?></td><td><?= h($item['Item']['created']); ?>&nbsp;</td>
+                    <td><?= $item['Tipo']['nombre']; ?></td>
+                    <td><?= $item['Unidade']['nombre']; ?></td>
+                    <td><?= $item['Estado']['nombre']; ?></td><td><?= h($item['Item']['created']); ?>&nbsp;</td>
                     <td><?= h($item['Item']['modified']); ?>&nbsp;</td>
                     <td><?= h($item['Item']['user_created']); ?>&nbsp;</td>
                     <td><?= h($item['Item']['user_modified']); ?>&nbsp;</td>

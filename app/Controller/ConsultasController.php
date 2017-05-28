@@ -56,8 +56,9 @@ class ConsultasController extends AppController {
 				$this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
 			}
 		}
+		$unidades = $this->Consulta->Unidade->find('list');
 		$estados = $this->Consulta->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('unidades','estados'));
 	}
 
 /**
@@ -82,8 +83,9 @@ class ConsultasController extends AppController {
 			$options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
 			$this->request->data = $this->Consulta->find('first', $options);
 		}
+		$unidades = $this->Consulta->Unidade->find('list');
 		$estados = $this->Consulta->Estado->find('list');
-		$this->set(compact('estados'));
+		$this->set(compact('unidades','estados'));
 	}
 
 /**
@@ -132,8 +134,9 @@ class ConsultasController extends AppController {
 			$consulta['Consulta']['costo'] = 0;
 			$consulta['Consulta']['tarifa'] = 0;
 			$consulta['Consulta']['subsidio'] = 0;
+			$consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
 			$consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
-			$consulta['Consulta']['estado_id'] = 1;
+			$consulta['Consulta']['estado_id'] = 1; // Activo
 			$consulta['Consulta']['user_created'] = $this->Authake->getUserId();
 			$consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
 
@@ -315,7 +318,7 @@ class ConsultasController extends AppController {
 			//Ítem: Combustible
 			$item = $this->Item->find('first', array(
 				'conditions' => array('Item.id' => '1'),
-				'recursive' => -1
+				'recursive' => 0
 			));
 			$this->RespuestaItem->create();
 			$respuestaItem['RespuestaItem']['consulta_id'] = $consulta['Consulta']['id'];
@@ -327,8 +330,8 @@ class ConsultasController extends AppController {
 			$respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
 			$respuestaItem['RespuestaItem']['maximo'] = $parametro['Parametro']['valor'] * $coeficiente['Coeficiente']['maximo'];
 			$respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
-			$respuestaItem['RespuestaItem']['unidade_id'] = $parametro['Unidade']['id'];
-			$respuestaItem['RespuestaItem']['unidad'] = $parametro['Unidade']['nombre'];
+			$respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+			$respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
 			$respuestaItem['RespuestaItem']['estado_id'] = 1;
 			$respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
 			$respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
@@ -384,7 +387,7 @@ class ConsultasController extends AppController {
 			//Ítem: FILTROS Y LUBRICANTES
 			$item = $this->Item->find('first', array(
 				'conditions' => array('Item.id' => '2'),
-				'recursive' => -1
+				'recursive' => 0
 			));
 			$this->RespuestaItem->create();
 			$respuestaItem['RespuestaItem']['consulta_id'] = $consulta['Consulta']['id'];
@@ -396,8 +399,8 @@ class ConsultasController extends AppController {
 			$respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
 			$respuestaItem['RespuestaItem']['maximo'] = $parametro['Parametro']['valor'] * $coeficiente['Coeficiente']['maximo'];
 			$respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
-			$respuestaItem['RespuestaItem']['unidade_id'] = $parametro['Unidade']['id'];
-			$respuestaItem['RespuestaItem']['unidad'] = $parametro['Unidade']['nombre'];
+			$respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+			$respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
 			$respuestaItem['RespuestaItem']['estado_id'] = 1;
 			$respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
 			$respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
@@ -407,6 +410,87 @@ class ConsultasController extends AppController {
 				$this->Session->setFlash(__('The RespuestaItem has been saved.'));
 			}
 
+			/*********************************************************************************************************/
+
+			/* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO: */
+			//Parametro1: PRECIO DE UN NEUMÁTICO COMPLETO NUEVO
+			$parametro1 = $this->Parametro->find('first', array(
+				'conditions' => array('Parametro.id' => '3'),
+				'recursive' => 0
+			));
+			//Parametro2: NEUMÁTICOS POR OMNIBUS (0 km)
+			$parametro2 = $this->Parametro->find('first', array(
+				'conditions' => array('Parametro.id' => '4'),
+				'recursive' => 0
+			));
+			// En eeste ítem se utilizan dos parámetros para calcular el "Costo por coche" y luego utilizarlo con el coeficiente
+			$parametro['Parametro']['valor'] = $parametro1['Parametro']['valor'] * $parametro2['Parametro']['valor'];
+			$parametro['Unidade']['id'] = $parametro1['Unidade']['id'];
+			$parametro['Unidade']['nombre'] = $parametro1['Unidade']['nombre'];
+
+			//Coeficiente: Vida Útil de Neumático
+			$coeficiente = $this->Coeficiente->find('first', array(
+				'conditions' => array('Coeficiente.id' => '5'),
+				'recursive' => -1
+			));
+			$coeficiente['Coeficiente']['diferencia'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['minimo'];
+			$coeficiente['Coeficiente']['parcial_total'] = 0;
+
+			$matrices = $this->Matrix->find('all', array(
+				'conditions' => array('Matrix.estado_id <>' => '2', 'Matrix.coeficiente_id' => $coeficiente['Coeficiente']['id']),
+				'recursive' => -1
+			));
+
+			foreach ($matrices as $key => $matrix) {
+				$preguntas = $this->Pregunta->find('list', array(
+					'conditions' => array('Pregunta.multiplicadore_id' => $matrix['Matrix']['multiplicadore_id']),
+					'recursive' => -1,
+					'fields' => array('Pregunta.id','Pregunta.id')
+				));
+				$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
+				foreach ($preguntas as $preg => $pregunta) {
+					if ($preg == '5') {
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076*pow($this->request->data['Consulta'][$preg]+1,2)+0.0223*($this->request->data['Consulta'][$preg]+1)+0.9859);
+					} else {
+						$respuesta_opcion = $this->Opcione->find('first', array(
+							'conditions' => array('Opcione.id' => $this->request->data['Consulta'][$preg]),
+							'recursive' => 0
+						));
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
+					}
+				}
+				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
+			}
+			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
+
+			//Ítem: Neumáticos
+			$item = $this->Item->find('first', array(
+				'conditions' => array('Item.id' => '3'),
+				'recursive' => 0
+			));
+
+			//Para automatizar la operación, si el valor mínimo es menor que el máximo, múltiplico, caso contrario divido.
+
+			$this->RespuestaItem->create();
+			$respuestaItem['RespuestaItem']['consulta_id'] = $consulta['Consulta']['id'];
+			$respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+			$respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+			$respuestaItem['RespuestaItem']['valor'] = $parametro['Parametro']['valor'] / $coeficiente['Coeficiente']['total'];
+			$respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
+			$respuestaItem['RespuestaItem']['minimo'] = $parametro['Parametro']['valor'] / $coeficiente['Coeficiente']['minimo'];
+			$respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
+			$respuestaItem['RespuestaItem']['maximo'] = $parametro['Parametro']['valor'] / $coeficiente['Coeficiente']['maximo'];
+			$respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
+			$respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+			$respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+			$respuestaItem['RespuestaItem']['estado_id'] = 1;
+			$respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+			$respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+			if (!$this->RespuestaItem->save($respuestaItem)) {
+				$this->Session->setFlash(__('The RespuestaItem could not be saved. Please, try again.'));
+			} else {
+				$this->Session->setFlash(__('The RespuestaItem has been saved.'));
+			}
 
 
 //Hacer sumar por tipo (cada item tiene tipo)

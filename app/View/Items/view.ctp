@@ -30,6 +30,11 @@
 			<?= $this->Html->link($item['Tipo']['nombre'], array('controller' => 'tipos', 'action' => 'view', $item['Tipo']['id'])); ?>
 			&nbsp;
 		</dd>
+				<dt><?= __('Unidade'); ?></dt>
+				<dd>
+					<?= $this->Html->link($item['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $item['Unidade']['id'])); ?>
+					&nbsp;
+				</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($item['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $item['Estado']['id'])); ?>
