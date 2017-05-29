@@ -1,11 +1,11 @@
 <?php
-App::uses('EstadosController', 'Controller');
+App::uses('Modo', 'Model');
 
 /**
- * EstadosController Test Case
+ * Modo Test Case
  *
  */
-class EstadosControllerTest extends ControllerTestCase {
+class ModoTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class EstadosControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.modo',
 		'app.estado',
 		'app.ambito',
 		'app.parametro',
@@ -48,48 +49,24 @@ class EstadosControllerTest extends ControllerTestCase {
 	);
 
 /**
- * testIndex method
+ * setUp method
  *
  * @return void
  */
-	public function testIndex() {
-		$this->markTestIncomplete('testIndex not implemented.');
+	public function setUp() {
+		parent::setUp();
+		$this->Modo = ClassRegistry::init('Modo');
 	}
 
 /**
- * testView method
+ * tearDown method
  *
  * @return void
  */
-	public function testView() {
-		$this->markTestIncomplete('testView not implemented.');
-	}
+	public function tearDown() {
+		unset($this->Modo);
 
-/**
- * testAdd method
- *
- * @return void
- */
-	public function testAdd() {
-		$this->markTestIncomplete('testAdd not implemented.');
-	}
-
-/**
- * testEdit method
- *
- * @return void
- */
-	public function testEdit() {
-		$this->markTestIncomplete('testEdit not implemented.');
-	}
-
-/**
- * testDelete method
- *
- * @return void
- */
-	public function testDelete() {
-		$this->markTestIncomplete('testDelete not implemented.');
+		parent::tearDown();
 	}
 
 }

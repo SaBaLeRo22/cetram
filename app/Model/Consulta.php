@@ -3,6 +3,8 @@ App::uses('AppModel', 'Model');
 /**
  * Consulta Model
  *
+ * @property Unidade $Unidade
+ * @property Modo $Modo
  * @property Estado $Estado
  * @property RespuestaCoeficiente $RespuestaCoeficiente
  * @property RespuestaIndicadore $RespuestaIndicadore
@@ -19,7 +21,7 @@ class Consulta extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'tarifa';
+	public $displayField = 'costo';
 
 /**
  * Validation rules
@@ -48,6 +50,26 @@ class Consulta extends AppModel {
 			),
 		),
 		'subsidio' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'unidade_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'modo_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -100,6 +122,13 @@ class Consulta extends AppModel {
 		'Unidade' => array(
 			'className' => 'Unidade',
 			'foreignKey' => 'unidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Modo' => array(
+			'className' => 'Modo',
+			'foreignKey' => 'modo_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

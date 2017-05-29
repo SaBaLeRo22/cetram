@@ -245,6 +245,58 @@
         <hr/>
                 <div class="related">
             <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Factore', ['controller' => 'factores', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Factores'); ?></h3>
+            <?php if (!empty($estado['Factore'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Nombre'); ?></th>
+		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Antiguedad Maxima'); ?></th>
+		<th><?= __('Valor Residual'); ?></th>
+		<th><?= __('Porcentaje Amortizar'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($estado['Factore'] as $factore): ?>
+		<tr>
+			<td><?= $factore['id']; ?></td>
+			<td><?= $factore['nombre']; ?></td>
+			<td><?= $factore['descripcion']; ?></td>
+			<td><?= $factore['antiguedad_maxima']; ?></td>
+			<td><?= $factore['valor_residual']; ?></td>
+			<td><?= $factore['porcentaje_amortizar']; ?></td>
+			<td><?= $factore['estado_id']; ?></td>
+			<td><?= $factore['created']; ?></td>
+			<td><?= $factore['modified']; ?></td>
+			<td><?= $factore['user_created']; ?></td>
+			<td><?= $factore['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'factores', 'action' => 'view', $factore['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'factores', 'action' => 'edit', $factore['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'factores', 'action' => 'delete', $factore['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $factore['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
                 <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Item', ['controller' => 'items', 'action' => 'add', 'estado_id' => $estado['Estado']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
             </div>
             <h3><?= __('Items'); ?></h3>
@@ -256,6 +308,8 @@
                     		<th><?= __('Id'); ?></th>
 		<th><?= __('Nombre'); ?></th>
 		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Tipo Id'); ?></th>
+		<th><?= __('Unidade Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
@@ -270,6 +324,8 @@
 			<td><?= $item['id']; ?></td>
 			<td><?= $item['nombre']; ?></td>
 			<td><?= $item['descripcion']; ?></td>
+			<td><?= $item['tipo_id']; ?></td>
+			<td><?= $item['unidade_id']; ?></td>
 			<td><?= $item['estado_id']; ?></td>
 			<td><?= $item['created']; ?></td>
 			<td><?= $item['modified']; ?></td>
@@ -584,6 +640,7 @@
                     		<th><?= __('Id'); ?></th>
 		<th><?= __('Nombre'); ?></th>
 		<th><?= __('Descripcion'); ?></th>
+		<th><?= __('Unidade Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
@@ -598,6 +655,7 @@
 			<td><?= $tipo['id']; ?></td>
 			<td><?= $tipo['nombre']; ?></td>
 			<td><?= $tipo['descripcion']; ?></td>
+			<td><?= $tipo['unidade_id']; ?></td>
 			<td><?= $tipo['estado_id']; ?></td>
 			<td><?= $tipo['created']; ?></td>
 			<td><?= $tipo['modified']; ?></td>

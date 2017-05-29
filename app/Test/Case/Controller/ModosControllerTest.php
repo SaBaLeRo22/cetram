@@ -1,11 +1,11 @@
 <?php
-App::uses('EstadosController', 'Controller');
+App::uses('ModosController', 'Controller');
 
 /**
- * EstadosController Test Case
+ * ModosController Test Case
  *
  */
-class EstadosControllerTest extends ControllerTestCase {
+class ModosControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class EstadosControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.modo',
 		'app.estado',
 		'app.ambito',
 		'app.parametro',

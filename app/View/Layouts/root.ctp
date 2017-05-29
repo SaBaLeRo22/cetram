@@ -29,7 +29,7 @@ $this->extend('default');
     <?php if ($this->Authake->isLogged()): ?>
 
     <li>
-        <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'realizar', 'prefix' => false, $this->request->prefix => false)) ?>">
+        <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'uno', 'prefix' => false, $this->request->prefix => false)) ?>">
             <i class="fa fa-bus fa-2x fa-fw"></i> <br/>
             <?= __('Consulta'); ?>
         </a>

@@ -21,14 +21,17 @@
             <?= $this->Form->label('subsidio', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('subsidio'); ?> 
         </div>
-
-        <div class="form-group">
-            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('unidade_id'); ?>
+                                                    <div class="form-group">
+            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('unidade_id'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('observaciones', array('type' => 'textarea')); ?>
+            <?= $this->Form->input('observaciones'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('modo_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('modo_id'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -54,6 +57,11 @@
             <div class="list-group">
                                                 <?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
+            <h4 class="text-muted">Unidade</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Estado</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 

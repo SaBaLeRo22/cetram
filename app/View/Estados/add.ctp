@@ -53,6 +53,11 @@
                 		<?= $this->Html->link(__('Listado de  Dietas'), array('controller' => 'dietas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Dieta'), array('controller' => 'dietas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
+            <h4 class="text-muted">Factore</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Factores'), array('controller' => 'factores', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Factore'), array('controller' => 'factores', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Item</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Items'), array('controller' => 'items', 'action' => 'index'), array('class' => 'list-group-item')); ?> 

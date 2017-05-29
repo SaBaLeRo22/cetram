@@ -57,8 +57,9 @@ class ConsultasController extends AppController {
 			}
 		}
 		$unidades = $this->Consulta->Unidade->find('list');
+		$modos = $this->Consulta->Modo->find('list');
 		$estados = $this->Consulta->Estado->find('list');
-		$this->set(compact('unidades','estados'));
+		$this->set(compact('unidades', 'modos','estados'));
 	}
 
 /**
@@ -84,8 +85,9 @@ class ConsultasController extends AppController {
 			$this->request->data = $this->Consulta->find('first', $options);
 		}
 		$unidades = $this->Consulta->Unidade->find('list');
+		$modos = $this->Consulta->Modo->find('list');
 		$estados = $this->Consulta->Estado->find('list');
-		$this->set(compact('unidades','estados'));
+		$this->set(compact('unidades', 'modos','estados'));
 	}
 
 /**
@@ -114,7 +116,7 @@ class ConsultasController extends AppController {
 	 *
 	 * @return void
 	 */
-	public function realizar() {
+	public function uno() {
 
 		$this->loadModel('Pregunta');
 		$this->Pregunta->recursive = -1;
@@ -136,6 +138,7 @@ class ConsultasController extends AppController {
 			$consulta['Consulta']['subsidio'] = 0;
 			$consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
 			$consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
+			$consulta['Consulta']['modo_id'] = 1; // Completa
 			$consulta['Consulta']['estado_id'] = 1; // Activo
 			$consulta['Consulta']['user_created'] = $this->Authake->getUserId();
 			$consulta['Consulta']['user_modified'] = $this->Authake->getUserId();

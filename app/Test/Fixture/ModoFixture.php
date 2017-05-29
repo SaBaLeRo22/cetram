@@ -1,9 +1,9 @@
 <?php
 /**
- * EstadoFixture
+ * ModoFixture
  *
  */
-class EstadoFixture extends CakeTestFixture {
+class ModoFixture extends CakeTestFixture {
 
 /**
  * Fields
@@ -12,7 +12,9 @@ class EstadoFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'nombre' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 25, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
+		'nombre' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 25, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
+		'descripcion' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 50, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
+		'estado_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'modified' => array('type' => 'datetime', 'null' => false, 'default' => null),
 		'user_created' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
@@ -32,8 +34,10 @@ class EstadoFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'nombre' => 'Lorem ipsum dolor sit a',
-			'created' => '2017-05-29 20:08:47',
-			'modified' => '2017-05-29 20:08:47',
+			'descripcion' => 'Lorem ipsum dolor sit amet',
+			'estado_id' => 1,
+			'created' => '2017-05-29 20:18:34',
+			'modified' => '2017-05-29 20:18:34',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

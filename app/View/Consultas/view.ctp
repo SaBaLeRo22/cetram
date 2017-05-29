@@ -30,14 +30,19 @@
 			<?= h($consulta['Consulta']['subsidio']); ?>
 			&nbsp;
 		</dd>
-				<dt><?= __('Unidade'); ?></dt>
-				<dd>
-					<?= $this->Html->link($consulta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $consulta['Unidade']['id'])); ?>
-					&nbsp;
-				</dd>
+		<dt><?= __('Unidade'); ?></dt>
+		<dd>
+			<?= $this->Html->link($consulta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $consulta['Unidade']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Observaciones'); ?></dt>
 		<dd>
 			<?= h($consulta['Consulta']['observaciones']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Modo Id'); ?></dt>
+		<dd>
+			<?= h($consulta['Consulta']['modo_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Estado'); ?></dt>
@@ -381,6 +386,9 @@
 		<th><?= __('Maximo'); ?></th>
 		<th><?= __('Unidade Id'); ?></th>
 		<th><?= __('Unidad'); ?></th>
+		<th><?= __('Respuesta'); ?></th>
+		<th><?= __('Opcione Id'); ?></th>
+		<th><?= __('Funcion'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
@@ -401,6 +409,9 @@
 			<td><?= $respuestaPregunta['maximo']; ?></td>
 			<td><?= $respuestaPregunta['unidade_id']; ?></td>
 			<td><?= $respuestaPregunta['unidad']; ?></td>
+			<td><?= $respuestaPregunta['respuesta']; ?></td>
+			<td><?= $respuestaPregunta['opcione_id']; ?></td>
+			<td><?= $respuestaPregunta['funcion']; ?></td>
 			<td><?= $respuestaPregunta['estado_id']; ?></td>
 			<td><?= $respuestaPregunta['created']; ?></td>
 			<td><?= $respuestaPregunta['modified']; ?></td>
