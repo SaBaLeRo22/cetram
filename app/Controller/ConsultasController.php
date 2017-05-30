@@ -560,4 +560,28 @@ class ConsultasController extends AppController {
 		$estados = $this->Consulta->Estado->find('list');
 		$this->set(compact('estados','preguntas'));
 	}
+
+	public function dos()
+	{
+		if ($this->request->is('post')) {
+
+			debug($this->request->data);
+
+		}
+		else{
+			$this->request->data['Consulta']['flota'] = 0;
+			$this->request->data['Consulta']['enero'] = 0;
+			$this->request->data['Consulta']['febrero'] = 0;
+			$this->request->data['Consulta']['marzo'] = 0;
+			$this->request->data['Consulta']['abril'] = 0;
+			$this->request->data['Consulta']['mayo'] = 0;
+			$this->request->data['Consulta']['junio'] = 0;
+			$this->request->data['Consulta']['julio'] = 0;
+			$this->request->data['Consulta']['agosto'] = 0;
+			$this->request->data['Consulta']['septiembre'] = 0;
+			$this->request->data['Consulta']['octubre'] = 0;
+			$this->request->data['Consulta']['noviembre'] = 0;
+			$this->request->data['Consulta']['diciembre'] = 0;
+		}
+	}
 }
