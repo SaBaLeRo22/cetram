@@ -251,7 +251,7 @@ class ConsultasController extends AppController {
 			$this->Coeficiente->recursive = 0;
 			$this->loadModel('RespuestaCoeficiente');
 			$this->RespuestaCoeficiente->recursive = -1;
-			$coeficientes = $this->Coeficiente->find('all', array(
+/*			$coeficientes = $this->Coeficiente->find('all', array(
 				'conditions' => array('Coeficiente.estado_id <>' => '2'),
 				'recursive' => 0
 			));
@@ -273,7 +273,7 @@ class ConsultasController extends AppController {
 				} else {
 					$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
 				}
-			}
+			}*/
 
 /**************************************************************************************************************************************************/
 /**************************************************************************************************************************************************/
@@ -327,6 +327,22 @@ class ConsultasController extends AppController {
 				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
 			}
 			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
+
+			$this->RespuestaCoeficiente->create();
+			$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente_id'] = $coeficiente['Coeficiente']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = $coeficiente['Coeficiente']['total'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+			if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
+				$this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
+			} else {
+				$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
+			}
 
 			$this->loadModel('RespuestaItem');
 			$this->RespuestaItem->recursive = -1;
@@ -400,6 +416,22 @@ class ConsultasController extends AppController {
 				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
 			}
 			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
+
+			$this->RespuestaCoeficiente->create();
+			$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente_id'] = $coeficiente['Coeficiente']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = $coeficiente['Coeficiente']['total'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+			if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
+				$this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
+			} else {
+				$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
+			}
 
 			//Ítem: FILTROS Y LUBRICANTES
 			$item = $this->Item->find('first', array(
@@ -480,6 +512,22 @@ class ConsultasController extends AppController {
 			}
 			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
 
+			$this->RespuestaCoeficiente->create();
+			$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente_id'] = $coeficiente['Coeficiente']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = $coeficiente['Coeficiente']['total'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+			if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
+				$this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
+			} else {
+				$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
+			}
+
 			//Ítem: Neumáticos
 			$item = $this->Item->find('first', array(
 				'conditions' => array('Item.id' => '3'),
@@ -507,6 +555,61 @@ class ConsultasController extends AppController {
 				$this->Session->setFlash(__('The RespuestaItem could not be saved. Please, try again.'));
 			} else {
 				$this->Session->setFlash(__('The RespuestaItem has been saved.'));
+			}
+
+			/*********************************************************************************************************/
+
+			/* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS: */
+
+			//Coeficiente: Repuestos y Reparaciones
+			$coeficiente = $this->Coeficiente->find('first', array(
+				'conditions' => array('Coeficiente.id' => '4'),
+				'recursive' => -1
+			));
+			$coeficiente['Coeficiente']['diferencia'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['minimo'];
+			$coeficiente['Coeficiente']['parcial_total'] = 0;
+
+			$matrices = $this->Matrix->find('all', array(
+				'conditions' => array('Matrix.estado_id <>' => '2', 'Matrix.coeficiente_id' => $coeficiente['Coeficiente']['id']),
+				'recursive' => -1
+			));
+
+			foreach ($matrices as $key => $matrix) {
+				$preguntas = $this->Pregunta->find('list', array(
+					'conditions' => array('Pregunta.multiplicadore_id' => $matrix['Matrix']['multiplicadore_id']),
+					'recursive' => -1,
+					'fields' => array('Pregunta.id','Pregunta.id')
+				));
+				$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
+				foreach ($preguntas as $preg => $pregunta) {
+					if ($preg == '5') {
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076*pow($this->request->data['Consulta'][$preg]+1,2)+0.0223*($this->request->data['Consulta'][$preg]+1)+0.9859);
+					} else {
+						$respuesta_opcion = $this->Opcione->find('first', array(
+							'conditions' => array('Opcione.id' => $this->request->data['Consulta'][$preg]),
+							'recursive' => 0
+						));
+						$coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
+					}
+				}
+				$coeficiente['Coeficiente']['parcial_total'] = $coeficiente['Coeficiente']['parcial_total'] + (($coeficiente['Coeficiente']['diferencia']*$matrix['Matrix']['peso']/100) * $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']]);
+			}
+			$coeficiente['Coeficiente']['total'] = $coeficiente['Coeficiente']['maximo'] - $coeficiente['Coeficiente']['parcial_total'];
+
+			$this->RespuestaCoeficiente->create();
+			$respuestaCoeficiente['RespuestaCoeficiente']['consulta_id'] = $consulta['Consulta']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente_id'] = $coeficiente['Coeficiente']['id'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['coeficiente'] = $coeficiente['Coeficiente']['nombre'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['valor'] = $coeficiente['Coeficiente']['total'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
+			$respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+			$respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+			if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
+				$this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
+			} else {
+				$this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
 			}
 
 
