@@ -118,6 +118,20 @@ class ConsultasController extends AppController {
 	 */
 	public function uno() {
 
+		$verificacion = $this->Consulta->find('first', array(
+			'conditions' => array('Consulta.estado_id' => '1', 'Consulta.user_created' => $this->Authake->getUserId()),
+			'recursive' => -1,
+			'order' => array('Consulta.id' => 'desc')
+		));
+
+		if(!empty($verificacion)){
+			if($verificacion['Consulta']['modo_id'] == '2'){
+				return $this->redirect(array('action' => 'dos', $verificacion['Consulta']['id']));
+			}
+		}
+
+
+
 		$this->loadModel('Pregunta');
 		$this->Pregunta->recursive = -1;
 
@@ -138,7 +152,7 @@ class ConsultasController extends AppController {
 			$consulta['Consulta']['subsidio'] = 0;
 			$consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
 			$consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
-			$consulta['Consulta']['modo_id'] = 1; // Completa
+			$consulta['Consulta']['modo_id'] = 2; // Incompleta: Pantalla "Uno" es la última pantalla completa.
 			$consulta['Consulta']['estado_id'] = 1; // Activo
 			$consulta['Consulta']['user_created'] = $this->Authake->getUserId();
 			$consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
@@ -521,7 +535,7 @@ class ConsultasController extends AppController {
 
 
 			$this->Session->setFlash(__('The consulta has been saved.'));
-			return $this->redirect(array('action' => 'index'));
+			return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
 		}
 
 
