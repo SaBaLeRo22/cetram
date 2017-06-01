@@ -59,8 +59,9 @@ class PreguntasController extends AppController {
 		$multiplicadores = $this->Pregunta->Multiplicadore->find('list');
 		$agrupamientos = $this->Pregunta->Agrupamiento->find('list');
 		$unidades = $this->Pregunta->Unidade->find('list');
+		$ambitos = $this->Pregunta->Ambito->find('list');
 		$estados = $this->Pregunta->Estado->find('list');
-		$this->set(compact('multiplicadores', 'agrupamientos', 'unidades', 'estados'));
+		$this->set(compact('multiplicadores', 'agrupamientos', 'unidades','ambitos', 'estados'));
 	}
 
 /**
@@ -88,8 +89,9 @@ class PreguntasController extends AppController {
 		$multiplicadores = $this->Pregunta->Multiplicadore->find('list');
 		$agrupamientos = $this->Pregunta->Agrupamiento->find('list');
 		$unidades = $this->Pregunta->Unidade->find('list');
+		$ambitos = $this->Pregunta->Ambito->find('list');
 		$estados = $this->Pregunta->Estado->find('list');
-		$this->set(compact('multiplicadores', 'agrupamientos', 'unidades', 'estados'));
+		$this->set(compact('multiplicadores', 'agrupamientos', 'unidades','ambitos', 'estados'));
 	}
 
 /**

@@ -4,7 +4,10 @@ App::uses('AppModel', 'Model');
  * Ambito Model
  *
  * @property Estado $Estado
+ * @property Coeficiente $Coeficiente
+ * @property Indicadore $Indicadore
  * @property Parametro $Parametro
+ * @property Pregunta $Pregunta
  */
 class Ambito extends AppModel {
 
@@ -76,8 +79,47 @@ class Ambito extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'Coeficiente' => array(
+			'className' => 'Coeficiente',
+			'foreignKey' => 'ambito_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Indicadore' => array(
+			'className' => 'Indicadore',
+			'foreignKey' => 'ambito_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Parametro' => array(
 			'className' => 'Parametro',
+			'foreignKey' => 'ambito_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Pregunta' => array(
+			'className' => 'Pregunta',
 			'foreignKey' => 'ambito_id',
 			'dependent' => false,
 			'conditions' => '',

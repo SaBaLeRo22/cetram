@@ -36,8 +36,8 @@ class AmbitoFixture extends CakeTestFixture {
 			'nombre' => 'Lorem ipsum dolor sit a',
 			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'estado_id' => 1,
-			'created' => '2017-02-04 13:34:06',
-			'modified' => '2017-02-04 13:34:06',
+			'created' => '2017-06-01 16:44:44',
+			'modified' => '2017-06-01 16:44:44',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

@@ -6,6 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Multiplicadore $Multiplicadore
  * @property Agrupamiento $Agrupamiento
  * @property Unidade $Unidade
+ * @property Ambito $Ambito
  * @property Estado $Estado
  * @property Opcione $Opcione
  */
@@ -94,6 +95,16 @@ class Pregunta extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'ambito_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'estado_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -151,6 +162,13 @@ class Pregunta extends AppModel {
 		'Unidade' => array(
 			'className' => 'Unidade',
 			'foreignKey' => 'unidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Ambito' => array(
+			'className' => 'Ambito',
+			'foreignKey' => 'ambito_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
