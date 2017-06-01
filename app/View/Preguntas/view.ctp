@@ -60,6 +60,21 @@
 			<?= $this->Html->link($pregunta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $pregunta['Unidade']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Titulo'); ?></dt>
+		<dd>
+			<?= h($pregunta['Pregunta']['titulo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Ayuda'); ?></dt>
+		<dd>
+			<?= h($pregunta['Pregunta']['ayuda']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Tipo'); ?></dt>
+		<dd>
+			<?= h($pregunta['Pregunta']['tipo']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($pregunta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $pregunta['Estado']['id'])); ?>

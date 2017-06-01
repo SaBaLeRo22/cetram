@@ -46,6 +46,18 @@
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('titulo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('titulo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('ayuda', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('ayuda'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('tipo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tipo'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>

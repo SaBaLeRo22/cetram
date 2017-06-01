@@ -644,9 +644,10 @@ class ConsultasController extends AppController {
 
 
 		$preguntas = $this->Pregunta->find('all', array(
-			'conditions' => array('Pregunta.estado_id <>' => '2'),
+			'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id <>' => '1'),
 			'recursive' => -1,
-			'fields' => array('Pregunta.id, Pregunta.pregunta')
+//			'fields' => array('Pregunta.id, Pregunta.pregunta'),
+			'order' => array('Pregunta.orden' => 'asc')
 		));
 
 

@@ -20,6 +20,9 @@
                     <th><?= $this->Paginator->sort('agrupamiento_id'); ?></th>
                     <th><?= $this->Paginator->sort('opciones'); ?></th>
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
+                    <th><?= $this->Paginator->sort('titulo'); ?></th>
+                    <th><?= $this->Paginator->sort('ayuda'); ?></th>
+                    <th><?= $this->Paginator->sort('tipo'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -47,7 +50,10 @@
                     <td><?= h($pregunta['Pregunta']['minimo']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['maximo']); ?>&nbsp;</td>
                     <td><?= $pregunta['Multiplicadore']['nombre']; ?></td><td><?= $pregunta['Agrupamiento']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['opciones']); ?>&nbsp;</td>
-                    <td><?= $pregunta['Unidade']['nombre']; ?></td><td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
+                    <td><?= $pregunta['Unidade']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['titulo']); ?>&nbsp;</td>
+                    <td><?= h($pregunta['Pregunta']['ayuda']); ?>&nbsp;</td>
+                    <td><?= h($pregunta['Pregunta']['tipo']); ?>&nbsp;</td>
+                    <td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['modified']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_modified']); ?>&nbsp;</td>

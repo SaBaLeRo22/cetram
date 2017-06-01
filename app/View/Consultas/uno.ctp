@@ -4,18 +4,35 @@
  */
 ?><div class="row consultas form">
     <div class="col-md-12">
-                <h2><?= __('Realizar Consulta - Paso 1 de 3') ?></h2>
-                <hr/>
+                <h1>Realizar Consulta <small>Paso 1 de 3</small></h1>
+
 
         <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
  
         <?php foreach ($preguntas as $pregunta): ?>
+
+        <?php if ($pregunta['Pregunta']['titulo'] != NULL): ?>
+            <hr/>
+            <h2><small><?= h($pregunta['Pregunta']['titulo']); ?></small></h2>
+        <?php endif; ?>
+
         <div class="form-group">
             <?= $this->Form->label($pregunta['Pregunta']['id'], $pregunta['Pregunta']['pregunta'], array('class' => 'control-label col-xs-10')); ?>
             <div class="col-xs-2">
-                <?= $this->Form->input($pregunta['Pregunta']['id'], array('div'=>false, 'options' => $pregunta['Pregunta']['opciones'])); ?>
+                <?= $this->Form->input($pregunta['Pregunta']['id'], array('div'=>false, 'type' => $pregunta['Pregunta']['tipo'],'options' => $pregunta['Pregunta']['opciones'])); ?>
             </div>
         </div>
+
+        <?php if ($pregunta['Pregunta']['ayuda'] != NULL): ?>
+            <div class="alert alert-info alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                <strong>Ayuda: </strong> <?= h($pregunta['Pregunta']['ayuda']); ?>
+            </div>
+        <?php endif; ?>
+
         <?php endforeach ?>
 
         <div class="form-group">

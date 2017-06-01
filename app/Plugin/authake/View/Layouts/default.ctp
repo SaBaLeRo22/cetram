@@ -41,7 +41,7 @@
     <?= $this->Html->css( [
         'bootstrap.min', 
         'fonts', 
-        '/plugins/font-awesome-4.2.0/css/font-awesome.min', 
+        '/plugins/font-awesome-4.7.0/css/font-awesome.min',
         'app-styles',
         'custom-styles',
         '/plugins/selectize.js/dist/css/selectize.bootstrap3',
