@@ -154,7 +154,7 @@ class ConsultasController extends AppController
             $consulta['Consulta']['tarifa'] = 0;
             $consulta['Consulta']['subsidio'] = 0;
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
-            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
+//            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             $consulta['Consulta']['modo_id'] = 2; // Incompleta: Pantalla "Uno" es la última pantalla completa.
             $consulta['Consulta']['estado_id'] = 1; // Activo
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
@@ -313,7 +313,7 @@ class ConsultasController extends AppController
             }
 
             $this->Session->setFlash(__('Se completó correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
-            return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
+            $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
         }
 
         /*
@@ -346,7 +346,12 @@ class ConsultasController extends AppController
         $this->set(compact('preguntas'));
     }
 
-    public function dos(){
+    public function dos($id = null){
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
 
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
@@ -356,6 +361,7 @@ class ConsultasController extends AppController
         if ($this->request->is('post')) {
 
             debug($this->request->data);
+            $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
 
         } else {
 
@@ -389,5 +395,26 @@ class ConsultasController extends AppController
         }
 
         $this->set(compact('preguntas'));
+    }
+
+    public function cinco($id = null){
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+
+
+        if ($this->request->is('post')) {
+
+            debug($this->request->data);
+            $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+
+        } else {
+
+        }
+
+        $this->set(compact('consulta'));
     }
 }
