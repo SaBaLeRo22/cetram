@@ -35,7 +35,9 @@
         <?php endforeach ?>
 
         <div class="well well-sm text-right">
-            <?= $this->Form->button('<i class="fa fa-hand-o-right fa-fw"></i> Siguiente', array('class' => 'btn btn-success')); ?>
+            <?= $this->Html->link(__('<i class="fa fa-hand-o-left"></i> Anterior'), array('controller' => 'consultas', 'action' => 'uno', $consulta['Consulta']['id']), array('class' => 'btn btn-info','style' => 'float:left')); ?>
+            <?= $this->Form->button('<i class="fa fa-hand-o-right fa-fw"></i> Siguiente', array('class' => 'btn btn-success','style' => 'float:right')); ?>
+            <div style="clear: both;"></div>
         </div>
         <?= $this->Form->end(); ?>
     </div>

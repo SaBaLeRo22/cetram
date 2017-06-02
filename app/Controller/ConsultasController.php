@@ -123,30 +123,14 @@ class ConsultasController extends AppController
      *
      *
      */
-    public function uno()
+    public function uno($id = null)
     {
-
-        $verificacion = $this->Consulta->find('first', array(
-            'conditions' => array('Consulta.estado_id' => '1', 'Consulta.user_created' => $this->Authake->getUserId()),
-            'recursive' => -1,
-            'order' => array('Consulta.id' => 'desc')
-        ));
-
-        if (!empty($verificacion)) {
-            if ($verificacion['Consulta']['modo_id'] == '2') {
-                return $this->redirect(array('action' => 'dos', $verificacion['Consulta']['id']));
-            }
-        }
-
-        $this->loadModel('Pregunta');
-        $this->Pregunta->recursive = -1;
-        $this->loadModel('Opcione');
-        $this->Opcione->recursive = -1;
-
         if ($this->request->is('post')) {
 
-//			debug($this->request->data);
-//			exit;
+            $this->loadModel('Pregunta');
+            $this->Pregunta->recursive = -1;
+            $this->loadModel('Opcione');
+            $this->Opcione->recursive = -1;
 
             $this->Consulta->create();
 
@@ -312,41 +296,70 @@ class ConsultasController extends AppController
                 }
             }
 
-            $this->Session->setFlash(__('Se completó correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
-            $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
-        }
+            $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
+            return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
 
-        /*
-        PREGUNTAS
-        */
-        $preguntas = $this->Pregunta->find('all', array(
-            'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id <>' => '1'),
-            'recursive' => -1,
-            'order' => array('Pregunta.orden' => 'asc')
-        ));
-
-        foreach ($preguntas as $key => $pregunta) {
-            $opciones = $this->Opcione->find('all', array(
-                'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
-                'recursive' => 0,
-                'fields' => array('Opcione.id', 'Opcione.opcion', 'Unidade.id', 'Unidade.nombre')
+        } else {
+            $consulta = $this->Consulta->find('first', array(
+                'conditions' => array('Consulta.id' => $id, 'Consulta.estado_id <>' => '2', 'Consulta.modo_id <>' => '1', 'Consulta.user_created' => $this->Authake->getUserId()),
+                'recursive' => -1,
             ));
-            $ops = NULL;
-            foreach ($opciones as $keyo => $opcion) {
 
-                if ($opcion['Unidade']['id'] <> '17') { // Con Unidades
-                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'] . ' ' . $opcion['Unidade']['nombre'];
-                } else { // Sin Unidades
-                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'];
+            if (empty($consulta)) {
+                $verificacion = $this->Consulta->find('first', array(
+                    'conditions' => array('Consulta.estado_id <>' => '2', 'Consulta.user_created' => $this->Authake->getUserId()),
+                    'recursive' => -1,
+                    'order' => array('Consulta.id' => 'desc')
+                ));
+
+                if (!empty($verificacion)) {
+                    if ($verificacion['Consulta']['modo_id'] == '2') {
+                        return $this->redirect(array('action' => 'dos', $verificacion['Consulta']['id']));
+                    }
                 }
+            } else {
+                // Tengo que completar las preguntas con los datos de la consulta.
             }
-            $preguntas[$key]['Pregunta']['opciones'] = $ops;
-        }
 
-        $this->set(compact('preguntas'));
+            $this->loadModel('Pregunta');
+            $this->Pregunta->recursive = -1;
+            $this->loadModel('Opcione');
+            $this->Opcione->recursive = -1;
+
+            /*
+            PREGUNTAS
+            */
+            $preguntas = $this->Pregunta->find('all', array(
+                'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id' => '2'),
+                'recursive' => -1,
+                'order' => array('Pregunta.orden' => 'asc')
+            ));
+
+            foreach ($preguntas as $key => $pregunta) {
+                $opciones = $this->Opcione->find('all', array(
+                    'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
+                    'recursive' => 0,
+                    'fields' => array('Opcione.id', 'Opcione.opcion', 'Unidade.id', 'Unidade.nombre')
+                ));
+                $ops = NULL;
+                foreach ($opciones as $keyo => $opcion) {
+
+                    if ($opcion['Unidade']['id'] <> '17') { // Con Unidades
+                        $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'] . ' ' . $opcion['Unidade']['nombre'];
+                    } else { // Sin Unidades
+                        $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'];
+                    }
+                }
+                $preguntas[$key]['Pregunta']['opciones'] = $ops;
+            }
+
+            $this->set(compact('preguntas'));
+
+        }
     }
 
-    public function dos($id = null){
+    public function dos($id = null)
+    {
         if (!$this->Consulta->exists($id)) {
             throw new NotFoundException(__('Invalid consulta'));
         }
@@ -360,8 +373,8 @@ class ConsultasController extends AppController
 
         if ($this->request->is('post')) {
 
-            debug($this->request->data);
-            $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
+//            debug($this->request->data);
+            return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
 
         } else {
 
@@ -371,7 +384,7 @@ class ConsultasController extends AppController
         PREGUNTAS
         */
         $preguntas = $this->Pregunta->find('all', array(
-            'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id <>' => '2'),
+            'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id' => '3'),
             'recursive' => -1,
             'order' => array('Pregunta.orden' => 'asc')
         ));
@@ -394,22 +407,23 @@ class ConsultasController extends AppController
             $preguntas[$key]['Pregunta']['opciones'] = $ops;
         }
 
-        $this->set(compact('preguntas'));
+        $this->set(compact('consulta', 'preguntas'));
     }
 
-    public function cinco($id = null){
+    public function cinco($id = null)
+    {
         if (!$this->Consulta->exists($id)) {
             throw new NotFoundException(__('Invalid consulta'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
 
-
+//        debug($consulta);
 
         if ($this->request->is('post')) {
 
-            debug($this->request->data);
-            $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+//            debug($this->request->data);
+            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
 
         } else {
 
