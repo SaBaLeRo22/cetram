@@ -20,7 +20,7 @@
         </div>
 
         <div class="well well-sm text-right">
-            <?= $this->Html->link(__('<i class="fa fa-hand-o-left"></i> Anterior'), array('controller' => 'consultas', 'action' => 'dos', $consulta['Consulta']['id']), array('class' => 'btn btn-info','style' => 'float:left')); ?>
+            <?= $this->Html->link(__('<i class="fa fa-hand-o-left"></i> Anterior'), array('controller' => 'consultas', 'action' => 'editardos', $consulta['Consulta']['id']), array('class' => 'btn btn-info','style' => 'float:left')); ?>
             <?= $this->Form->button('<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Finalizar', array('class' => 'btn btn-primary','style' => 'float:right')); ?>
             <div style="clear: both;"></div>
         </div>
