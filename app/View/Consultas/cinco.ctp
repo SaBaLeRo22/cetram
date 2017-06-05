@@ -10,7 +10,7 @@
         </h1>
 
         <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
-
+        <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
         <h2>
             <small>Comentarios y Observaciones</small>
         </h2>
