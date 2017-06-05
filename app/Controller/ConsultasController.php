@@ -847,24 +847,83 @@ class ConsultasController extends AppController
     public function cinco($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            $this->Session->setFlash(__('No existe consulta asociada.'));
+            return $this->redirect(array('action' => 'index'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
 
-//        debug($consulta);
+        $this->loadModel('Pregunta');
+        $this->Pregunta->recursive = -1;
+        $this->loadModel('Opcione');
+        $this->Opcione->recursive = -1;
 
         if ($this->request->is('post')) {
 
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
-//            debug($this->request->data);
-            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+            debug($this->request->data);
+//            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
 
         } else {
 
         }
+
+        $this->loadModel('Provincia');
+        $this->Provincia->recursive = -1;
+        $provincias = $this->Provincia->find('list', array(
+            'fields' => array('Provincia.id','Provincia.nombre'),
+            'conditions' => array('Provincia.nombre <>' => '', 'Provincia.estado_id' => '1'),
+            'order' => array('Provincia.nombre' => 'asc')
+        ));
+
+        /*
+PREGUNTAS
+*/
+        $preguntas = $this->Pregunta->find('all', array(
+            'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id' => '6'),
+            'recursive' => -1,
+            'order' => array('Pregunta.orden' => 'asc')
+        ));
+
+        foreach ($preguntas as $key => $pregunta) {
+            $opciones = $this->Opcione->find('all', array(
+                'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
+                'recursive' => 0,
+                'fields' => array('Opcione.id', 'Opcione.opcion', 'Unidade.id', 'Unidade.nombre')
+            ));
+            $ops = NULL;
+            foreach ($opciones as $keyo => $opcion) {
+
+                if ($opcion['Unidade']['id'] <> '17') { // Con Unidades
+                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'] . ' ' . $opcion['Unidade']['nombre'];
+                } else { // Sin Unidades
+                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'];
+                }
+            }
+            $preguntas[$key]['Pregunta']['opciones'] = $ops;
+        }
+
         $this->request->data['Consulta']['consulta_id'] = $id;
-        $this->set(compact('consulta'));
+        $this->set(compact('consulta', 'provincias', 'preguntas'));
+    }
+
+    function obtener_localidades($id = null) {
+        Configure::write('debug', '0');
+        $this->layout = 'ajax';
+        $this->loadModel('Localidade');
+        $this->Localidade->recursive = -1;
+        $locs = $this->Localidade->find('all', array(
+            'recursive' => -1,
+            'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+            'conditions' => array('Localidade.provincia_id' => $id,'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
+            'order' => array('Localidade.nombre' => 'asc')));
+
+        $localidades = array();
+        foreach ($locs as $key => $localidad) {
+            $localidades[$localidad['Localidade']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
+        }
+
+        $this->set('localidades', $localidades);
     }
 }

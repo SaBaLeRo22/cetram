@@ -14,7 +14,7 @@ class Viatico extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'costo';
+	public $displayField = 'id';
 
 /**
  * Validation rules

@@ -33,8 +33,8 @@ class Convenio extends AppModel {
 			),
 		),
 		'inio' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'date' => array(
+				'rule' => array('date'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -43,8 +43,8 @@ class Convenio extends AppModel {
 			),
 		),
 		'fin' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'date' => array(
+				'rule' => array('date'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

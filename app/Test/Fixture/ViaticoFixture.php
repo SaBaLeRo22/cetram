@@ -38,8 +38,8 @@ class ViaticoFixture extends CakeTestFixture {
 			'dieta_id' => 1,
 			'costo' => 1,
 			'estado_id' => 1,
-			'created' => '2017-03-24 13:45:39',
-			'modified' => '2017-03-24 13:45:39',
+			'created' => '2017-06-05 15:43:43',
+			'modified' => '2017-06-05 15:43:43',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

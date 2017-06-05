@@ -14,7 +14,7 @@ class Salario extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'sueldo';
+	public $displayField = 'id';
 
 /**
  * Validation rules

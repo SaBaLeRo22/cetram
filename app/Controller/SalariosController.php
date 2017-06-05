@@ -57,7 +57,7 @@ class SalariosController extends AppController {
 			}
 		}
 		$convenios = $this->Salario->Convenio->find('list');
-		$categorias = $this->Salario->Categorium->find('list');
+		$categorias = $this->Salario->Categoria->find('list');
 		$estados = $this->Salario->Estado->find('list');
 		$this->set(compact('convenios', 'categorias', 'estados'));
 	}
@@ -85,7 +85,7 @@ class SalariosController extends AppController {
 			$this->request->data = $this->Salario->find('first', $options);
 		}
 		$convenios = $this->Salario->Convenio->find('list');
-		$categorias = $this->Salario->Categorium->find('list');
+		$categorias = $this->Salario->Categoria->find('list');
 		$estados = $this->Salario->Estado->find('list');
 		$this->set(compact('convenios', 'categorias', 'estados'));
 	}

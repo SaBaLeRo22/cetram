@@ -46,8 +46,8 @@ class SalarioFixture extends CakeTestFixture {
 			'vacaciones' => 1,
 			'contribuciones' => 1,
 			'estado_id' => 1,
-			'created' => '2017-03-24 13:33:59',
-			'modified' => '2017-03-24 13:33:59',
+			'created' => '2017-06-05 15:44:11',
+			'modified' => '2017-06-05 15:44:11',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

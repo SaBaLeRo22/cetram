@@ -57,7 +57,7 @@ class ViaticosController extends AppController {
 			}
 		}
 		$convenios = $this->Viatico->Convenio->find('list');
-		$dietas = $this->Viatico->Dietum->find('list');
+		$dietas = $this->Viatico->Dieta->find('list');
 		$estados = $this->Viatico->Estado->find('list');
 		$this->set(compact('convenios', 'dietas', 'estados'));
 	}
@@ -85,7 +85,7 @@ class ViaticosController extends AppController {
 			$this->request->data = $this->Viatico->find('first', $options);
 		}
 		$convenios = $this->Viatico->Convenio->find('list');
-		$dietas = $this->Viatico->Dietum->find('list');
+		$dietas = $this->Viatico->Dieta->find('list');
 		$estados = $this->Viatico->Estado->find('list');
 		$this->set(compact('convenios', 'dietas', 'estados'));
 	}

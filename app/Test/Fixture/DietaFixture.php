@@ -36,8 +36,8 @@ class DietaFixture extends CakeTestFixture {
 			'nombre' => 'Lorem ipsum dolor sit amet',
 			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'estado_id' => 1,
-			'created' => '2017-03-24 13:42:19',
-			'modified' => '2017-03-24 13:42:19',
+			'created' => '2017-06-05 15:42:47',
+			'modified' => '2017-06-05 15:42:47',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

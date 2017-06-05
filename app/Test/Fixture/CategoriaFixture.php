@@ -12,8 +12,8 @@ class CategoriaFixture extends CakeTestFixture {
  */
 	public $fields = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'nombre' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 50, 'unsigned' => false),
-		'descripcion' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 100, 'unsigned' => false),
+		'nombre' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 50, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
+		'descripcion' => array('type' => 'string', 'null' => false, 'default' => null, 'length' => 100, 'collate' => 'utf8_spanish_ci', 'charset' => 'utf8'),
 		'cantidad' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'antiguedad' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'estado_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
@@ -35,13 +35,13 @@ class CategoriaFixture extends CakeTestFixture {
 	public $records = array(
 		array(
 			'id' => 1,
-			'nombre' => 1,
-			'descripcion' => 1,
+			'nombre' => 'Lorem ipsum dolor sit amet',
+			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'cantidad' => 1,
 			'antiguedad' => 1,
 			'estado_id' => 1,
-			'created' => '2017-03-24 13:31:24',
-			'modified' => '2017-03-24 13:31:24',
+			'created' => '2017-06-05 15:42:19',
+			'modified' => '2017-06-05 15:42:19',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

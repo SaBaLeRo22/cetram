@@ -22,8 +22,8 @@ class Categoria extends AppModel {
  */
 	public $validate = array(
 		'nombre' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -32,8 +32,8 @@ class Categoria extends AppModel {
 			),
 		),
 		'descripcion' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
