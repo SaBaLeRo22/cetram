@@ -43,7 +43,7 @@
                     </td> 
                     <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
                     <td><?= $consulta['Unidade']['nombre']; ?></td>
-                    <td><?= $consulta['Lcoalidade']['nombre']; ?></td>
+                    <td><?= $consulta['Localidade']['nombre']; ?></td>
                     <td><?= h($consulta['Consulta']['observaciones']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modo_id']); ?>&nbsp;</td>
                     <td><?= $consulta['Estado']['nombre']; ?></td><td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>

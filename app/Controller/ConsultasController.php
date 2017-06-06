@@ -153,10 +153,6 @@ class ConsultasController extends AppController
 
             $consulta['Consulta']['id'] = $this->Consulta->id;
 
-            $this->loadModel('Parametro');
-            $this->Parametro->recursive = 0;
-            $this->loadModel('RespuestaParametro');
-            $this->RespuestaParametro->recursive = -1;
             $this->loadModel('Coeficiente');
             $this->Coeficiente->recursive = 0;
             $this->loadModel('RespuestaCoeficiente');
@@ -165,31 +161,6 @@ class ConsultasController extends AppController
             $this->Matrix->recursive = -1;
             $this->loadModel('RespuestaPregunta');
             $this->RespuestaPregunta->recursive = -1;
-
-            /*
-            PARAMETROS
-            */
-            $parametros = $this->Parametro->find('all', array(
-                'conditions' => array('Parametro.estado_id <>' => '2'),
-                'recursive' => 0
-            ));
-            foreach ($parametros as $key => $parametro) {
-                $this->RespuestaParametro->create();
-                $respuestaParametro['RespuestaParametro']['consulta_id'] = $consulta['Consulta']['id'];
-                $respuestaParametro['RespuestaParametro']['parametro_id'] = $parametro['Parametro']['id'];
-                $respuestaParametro['RespuestaParametro']['parametro'] = $parametro['Parametro']['nombre'];
-                $respuestaParametro['RespuestaParametro']['valor'] = $parametro['Parametro']['valor'];
-                $respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
-                $respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
-                $respuestaParametro['RespuestaParametro']['estado_id'] = 1;
-                $respuestaParametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
-                $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaParametro->save($respuestaParametro)) {
-                    $this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
-                }
-            }
 
             /*
             COEFICIENTES / PREGUNTAS
@@ -864,6 +835,36 @@ class ConsultasController extends AppController
         if ($this->request->is('post')) {
 
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
+
+            $this->loadModel('Parametro');
+            $this->Parametro->recursive = 0;
+            $this->loadModel('RespuestaParametro');
+            $this->RespuestaParametro->recursive = -1;
+
+            /*
+            PARAMETROS
+            */
+            $parametros = $this->Parametro->find('all', array(
+                'conditions' => array('Parametro.estado_id <>' => '2'),
+                'recursive' => 0
+            ));
+            foreach ($parametros as $key => $parametro) {
+                $this->RespuestaParametro->create();
+                $respuestaParametro['RespuestaParametro']['consulta_id'] = $consulta['Consulta']['id'];
+                $respuestaParametro['RespuestaParametro']['parametro_id'] = $parametro['Parametro']['id'];
+                $respuestaParametro['RespuestaParametro']['parametro'] = $parametro['Parametro']['nombre'];
+                $respuestaParametro['RespuestaParametro']['valor'] = $parametro['Parametro']['valor'];
+                $respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
+                $respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
+                $respuestaParametro['RespuestaParametro']['estado_id'] = 1;
+                $respuestaParametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
+                $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaParametro->save($respuestaParametro)) {
+                    $this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
+                }
+            }
 
             debug($this->request->data);
 //            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
