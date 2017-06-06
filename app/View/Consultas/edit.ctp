@@ -27,6 +27,11 @@
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
+
+        <div class="form-group">
+            <?= $this->Form->label('localidade_id', null, array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('localidade_id'); ?>
+        </div>
                                                     <div class="form-group">
             <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('observaciones'); ?> 

@@ -9,37 +9,39 @@
             <small>Paso 5 de 5</small>
         </h1>
 
+        <h2>
+            <small>Resumen:</small>
+        </h2>
+
+
+        <ul>
+            <li>
+                <p class="text-success"><strong>Paso 1:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
+            </li>
+            <li>
+                <p class="text-success"><strong>Paso 2:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
+            </li>
+            <li>
+                <p class="text-success"><strong>Paso 3:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
+            </li>
+            <li>
+                <p class="text-success"><strong>Paso 4:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
+            </li>
+            <li>
+                <p class="text-info">Por favor, complete los siguientes datos del <span class="label label-info">Paso 5</span> y finalice la consulta.</p>
+            </li>
+        </ul>
+        <hr>
         <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
         <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
-
-        <?php foreach ($preguntas as $pregunta): ?>
-
-        <?php if ($pregunta['Pregunta']['titulo'] != NULL): ?>
-        <hr/>
-        <h2><small><?= h($pregunta['Pregunta']['titulo']); ?></small></h2>
-        <?php endif; ?>
-
-        <div class="form-group">
-            <?php if ($pregunta['Pregunta']['tipo'] != 'hidden'): ?>
-                <?= $this->Form->label($pregunta['Pregunta']['id'], $pregunta['Pregunta']['pregunta'], array('class' => 'control-label col-xs-10')); ?>
-            <?php endif; ?>
-            <div class="col-xs-2">
-                <?= $this->Form->input($pregunta['Pregunta']['id'], array('div'=>false, 'type' => $pregunta['Pregunta']['tipo'],'options' => $pregunta['Pregunta']['opciones'])); ?>
-            </div>
-        </div>
-
-        <?php if ($pregunta['Pregunta']['ayuda'] != NULL): ?>
+        <h2><small>Ciudad para la que se realiza la consulta</small></h2>
         <div class="alert alert-info alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Ayuda: </strong> <?= h($pregunta['Pregunta']['ayuda']); ?>
+            <strong>Ayuda: </strong> Si no se completa se utilizar&aacute; su localidad: "<?= h(str_replace('?', 'ñ', $localidad['Localidade']['nombre']).' ('.$localidad['Localidade']['codigopostal'].') - '.$localidad['Provincia']['nombre']); ?>".
         </div>
-        <?php endif; ?>
-
-        <?php endforeach ?>
-
         <div class="form-group">
             <?= $this->Form->label('provincia', 'Provincia', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('provincia_id', array('type' => 'select', 'empty' => 'Seleccionar...')); ?>

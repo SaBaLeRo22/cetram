@@ -35,6 +35,11 @@
 			<?= $this->Html->link($consulta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $consulta['Unidade']['id'])); ?>
 			&nbsp;
 		</dd>
+				<dt><?= __('Localidade'); ?></dt>
+				<dd>
+					<?= $this->Html->link($consulta['Localidade']['nombre'], array('controller' => 'localidades', 'action' => 'view', $consulta['Localidade']['id'])); ?>
+					&nbsp;
+				</dd>
 		<dt><?= __('Observaciones'); ?></dt>
 		<dd>
 			<?= h($consulta['Consulta']['observaciones']); ?>

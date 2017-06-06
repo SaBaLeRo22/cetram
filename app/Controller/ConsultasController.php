@@ -64,7 +64,8 @@ class ConsultasController extends AppController
         $unidades = $this->Consulta->Unidade->find('list');
         $modos = $this->Consulta->Modo->find('list');
         $estados = $this->Consulta->Estado->find('list');
-        $this->set(compact('unidades', 'modos', 'estados'));
+        $localidades = $this->Consulta->Localidade->find('list');
+        $this->set(compact('unidades', 'modos', 'estados','localidades'));
     }
 
     /**
@@ -93,7 +94,8 @@ class ConsultasController extends AppController
         $unidades = $this->Consulta->Unidade->find('list');
         $modos = $this->Consulta->Modo->find('list');
         $estados = $this->Consulta->Estado->find('list');
-        $this->set(compact('unidades', 'modos', 'estados'));
+        $localidades = $this->Consulta->Localidade->find('list');
+        $this->set(compact('unidades', 'modos', 'estados', 'localidades'));
     }
 
     /**
@@ -138,6 +140,7 @@ class ConsultasController extends AppController
             $consulta['Consulta']['tarifa'] = 0;
             $consulta['Consulta']['subsidio'] = 0;
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
+            $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
 //            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             $consulta['Consulta']['modo_id'] = 2; // Incompleta: Pantalla "Uno" es la última pantalla completa.
             $consulta['Consulta']['estado_id'] = 1; // Activo
@@ -877,35 +880,15 @@ class ConsultasController extends AppController
             'order' => array('Provincia.nombre' => 'asc')
         ));
 
-        /*
-PREGUNTAS
-*/
-        $preguntas = $this->Pregunta->find('all', array(
-            'conditions' => array('Pregunta.estado_id <>' => '2', 'Pregunta.agrupamiento_id' => '6'),
-            'recursive' => -1,
-            'order' => array('Pregunta.orden' => 'asc')
+        $this->loadModel('Localidade');
+        $this->Localidade->recursive = 0;
+        $localidad = $this->Localidade->find('first', array(
+            'conditions' => array('Localidade.id' => $this->Authake->getLocalidadId()),
+            'recursive' => 0,
         ));
 
-        foreach ($preguntas as $key => $pregunta) {
-            $opciones = $this->Opcione->find('all', array(
-                'conditions' => array('Opcione.estado_id <>' => '2', 'Opcione.pregunta_id' => $pregunta['Pregunta']['id']),
-                'recursive' => 0,
-                'fields' => array('Opcione.id', 'Opcione.opcion', 'Unidade.id', 'Unidade.nombre')
-            ));
-            $ops = NULL;
-            foreach ($opciones as $keyo => $opcion) {
-
-                if ($opcion['Unidade']['id'] <> '17') { // Con Unidades
-                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'] . ' ' . $opcion['Unidade']['nombre'];
-                } else { // Sin Unidades
-                    $ops[$opcion['Opcione']['id']] = $opcion['Opcione']['opcion'];
-                }
-            }
-            $preguntas[$key]['Pregunta']['opciones'] = $ops;
-        }
-
         $this->request->data['Consulta']['consulta_id'] = $id;
-        $this->set(compact('consulta', 'provincias', 'preguntas'));
+        $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad'));
     }
 
     function obtener_localidades($id = null) {

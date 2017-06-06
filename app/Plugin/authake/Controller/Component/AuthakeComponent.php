@@ -206,6 +206,10 @@ class AuthakeComponent extends Component {
         return $this->Session->read('Authake.id');
     }
 
+    function getLocalidadId() {
+        return $this->Session->read('Authake.localidad_id');
+    }
+
     function getUserEmail() {
         return $this->Session->read('Authake.email');
     }

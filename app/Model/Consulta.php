@@ -69,6 +69,16 @@ class Consulta extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'localidade_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'modo_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -122,6 +132,13 @@ class Consulta extends AppModel {
 		'Unidade' => array(
 			'className' => 'Unidade',
 			'foreignKey' => 'unidade_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Localidade' => array(
+			'className' => 'Localidade',
+			'foreignKey' => 'localidade_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

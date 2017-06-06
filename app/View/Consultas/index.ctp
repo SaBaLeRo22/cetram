@@ -15,6 +15,7 @@
                     <th><?= $this->Paginator->sort('tarifa'); ?></th>
                     <th><?= $this->Paginator->sort('subsidio'); ?></th>
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
+                    <th><?= $this->Paginator->sort('localidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('observaciones'); ?></th>
                     <th><?= $this->Paginator->sort('modo_id'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
@@ -41,7 +42,9 @@
                         </div>
                     </td> 
                     <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
-                    <td><?= $consulta['Unidade']['nombre']; ?></td><td><?= h($consulta['Consulta']['observaciones']); ?>&nbsp;</td>
+                    <td><?= $consulta['Unidade']['nombre']; ?></td>
+                    <td><?= $consulta['Lcoalidade']['nombre']; ?></td>
+                    <td><?= h($consulta['Consulta']['observaciones']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modo_id']); ?>&nbsp;</td>
                     <td><?= $consulta['Estado']['nombre']; ?></td><td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>

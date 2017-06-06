@@ -86,4 +86,25 @@ class Localidade extends AppModel {
 			'order' => ''
 		)
 	);
+
+	/**
+	 * hasMany associations
+	 *
+	 * @var array
+	 */
+	public $hasMany = array(
+		'Consulta' => array(
+			'className' => 'Consulta',
+			'foreignKey' => 'localidade_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
 }
