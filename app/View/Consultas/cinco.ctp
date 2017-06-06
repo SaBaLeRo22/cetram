@@ -28,7 +28,7 @@
                 <p class="text-success"><strong>Paso 4:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
             </li>
             <li>
-                <p class="text-info">Por favor, complete los siguientes datos del <span class="label label-info">Paso 5</span> y finalice la consulta.</p>
+                <p class="text-info">Por favor, complete los siguientes datos del <span class="label label-info">Paso 5</span> y finalice la consulta. Gracias.</p>
             </li>
         </ul>
         <hr>
