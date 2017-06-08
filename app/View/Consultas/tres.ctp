@@ -18,8 +18,8 @@
             <table class="table table-hover table-bordered table-condensed table-striped" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>01</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>02</th>
                 </tr>
@@ -28,7 +28,7 @@
                 <?php foreach ($consultas as $consulta): ?>
                 <tr>
                     <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
-                        <?= h("Centro"); ?>&nbsp;
+                        <?= h("Plana"); ?>&nbsp;
                         <div class="nowrap">
                             &nbsp;
                             <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
@@ -59,8 +59,8 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>01</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>02</th>
                 </tr>
@@ -71,8 +71,8 @@
             <table class="table table-hover table-bordered table-condensed table-striped" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>01</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>02</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>03</th>
@@ -91,7 +91,7 @@
                 <?php foreach ($consultas as $consulta): ?>
                 <tr>
                     <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
-                        <?= h("Centro"); ?>&nbsp;
+                        <?= h("Plana"); ?>&nbsp;
                         <div class="nowrap">
                             &nbsp;
                             <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
@@ -142,8 +142,8 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>01</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>02</th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>03</th>
@@ -162,15 +162,15 @@
         </div>
 
         <h4>
-            Agregar Franquicia: <small>NO POSEE SUBE</small>
+            Agregar Tarifa: <small>NO POSEE SUBE</small>
         </h4>
         <div class="form-group">
-            <?= $this->Form->label('franquicia', 'Fanquicia', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('franquicia', array('type' => 'text')); ?>
+            <?= $this->Form->label('tarifa', 'Tarifa', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->label('tarifa', 'Tarifa ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('tarifa', array('type' => 'number')); ?>
+            <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('semestre1', 'Semestre 1', array('class' => 'control-label col-xs-3')); ?>
@@ -183,15 +183,15 @@
 
 
         <h4>
-            Agregar Franquicia: <small>POSEE SUBE</small>
+            Agregar Tarifa: <small>SI POSEE SUBE</small>
         </h4>
             <div class="form-group">
-            <?= $this->Form->label('franquicia', 'Fanquicia', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('franquicia', array('type' => 'text')); ?>
+            <?= $this->Form->label('tarifa', 'Tarifa', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
         </div>
         <div class="form-group">
-            <?= $this->Form->label('tarifa', 'Tarifa ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('tarifa', array('type' => 'number')); ?>
+            <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes01', 'Mes 01', array('class' => 'control-label col-xs-3')); ?>
@@ -243,7 +243,7 @@
         </div>
 
         <div class="well well-sm text-center">
-            <?= $this->Form->button('<i class="fa fa-plus-circle fa-fw"></i> Agregar Franquicia', array('name'=>'accion', 'value'=>'2', 'class' => 'btn btn-danger','style' => 'float:center')); ?>
+            <?= $this->Form->button('<i class="fa fa-plus-circle fa-fw"></i> Agregar Tarifa', array('name'=>'accion', 'value'=>'2', 'class' => 'btn btn-danger','style' => 'float:center')); ?>
             <div style="clear: both;"></div>
         </div>
 
