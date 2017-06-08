@@ -15,79 +15,151 @@
 
         <div class="table-responsive">
 
-            <table class="table table-hover" cellpadding="0" cellspacing="0">
+            <table class="table table-hover table-bordered table-condensed table-striped" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <th><?= $this->Paginator->sort('id'); ?></th>
-                    <th><?= $this->Paginator->sort('costo'); ?></th>
-                    <th><?= $this->Paginator->sort('tarifa'); ?></th>
-                    <th><?= $this->Paginator->sort('subsidio'); ?></th>
-                    <th><?= $this->Paginator->sort('unidade_id'); ?></th>
-                    <th><?= $this->Paginator->sort('localidade_id'); ?></th>
-                    <th><?= $this->Paginator->sort('observaciones'); ?></th>
-                    <th><?= $this->Paginator->sort('modo_id'); ?></th>
-                    <th><?= $this->Paginator->sort('estado_id'); ?></th>
-                    <th><?= $this->Paginator->sort('created'); ?></th>
-                    <th><?= $this->Paginator->sort('modified'); ?></th>
-                    <th><?= $this->Paginator->sort('user_created'); ?></th>
-                    <th><?= $this->Paginator->sort('user_modified'); ?></th>
-
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>01</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>02</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($consultas as $consulta): ?>
                 <tr>
-                    <td><?= h($consulta['Consulta']['id']); ?>&nbsp;</td>
-                    <td><?= h($consulta['Consulta']['costo']); ?>&nbsp;</td>
-                    <td class="display-column">
-                        <?= $this->Html->link( h( $consulta['Consulta']['tarifa'] ),
-                        array( 'action' => 'view', $consulta['Consulta']['id'] ) ); ?>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
+                        <?= h("Centro"); ?>&nbsp;
                         <div class="nowrap">
                             &nbsp;
                             <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
                         </div>
+                    </h4>
                     </td>
-                    <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
-                    <td><?= $consulta['Unidade']['nombre']; ?></td>
-                    <td><?= $consulta['Localidade']['nombre']; ?></td>
-                    <td><?= h($consulta['Consulta']['observaciones']); ?>&nbsp;</td>
-                    <td><?= h($consulta['Consulta']['modo_id']); ?>&nbsp;</td>
-                    <td><?= $consulta['Estado']['nombre']; ?></td><td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
-                    <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>
-                    <td><?= h($consulta['Consulta']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($consulta['Consulta']['user_modified']); ?>&nbsp;</td>
-
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><strong><?= h("10"); ?></strong>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0011"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0022"); ?>&nbsp;</td>
                 </tr>
+
+                <tr>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
+                        <?= h("Centro"); ?>&nbsp;
+                        <div class="nowrap">
+                            &nbsp;
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
+                        </div>
+                    </h4>
+                    </td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><strong><?= h("10"); ?></strong>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0011"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0022"); ?>&nbsp;</td>
+                </tr>
+
+
                 <?php endforeach ?>
                 </tbody>
+                <tfoot>
+                <tr>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>01</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">SEMESTRE<br>02</th>
+                </tr>
+                </tfoot>
+            </table>
+
+
+            <table class="table table-hover table-bordered table-condensed table-striped" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>01</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>02</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>03</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>04</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>05</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>06</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>07</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>08</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>09</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>10</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>11</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>12</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($consultas as $consulta): ?>
+                <tr>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
+                        <?= h("Centro"); ?>&nbsp;
+                        <div class="nowrap">
+                            &nbsp;
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
+                        </div>
+                    </h4>
+                    </td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><strong><?= h("10"); ?></strong>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0011"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0022"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0033"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0044"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0055"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0066"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0077"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0088"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0099"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1010"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1111"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1212"); ?>&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold">
+                        <?= h("Centro"); ?>&nbsp;
+                        <div class="nowrap">
+                            &nbsp;
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['tarifa'])); ?>
+                        </div>
+                    </h4>
+                    </td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><strong><?= h("10"); ?></strong>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0011"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0022"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0033"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0044"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0055"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0066"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0077"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0088"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0099"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1010"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1111"); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1212"); ?>&nbsp;</td>
+                </tr>
+
+
+                <?php endforeach ?>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">FRANQUICIA</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">TARIFA<br>($)</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>01</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>02</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>03</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>04</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>05</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>06</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>07</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>08</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>09</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>10</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>11</th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">MES<br>12</th>
+                </tr>
+                </tfoot>
             </table>
         </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <small class="paging-text text-muted">
-                    <?= $this->Paginator->counter('P&aacute;gina {:page} de {:pages}, {:count} registros en total.'); ?>
-                </small>
-            </div>
-            <div class="col-md-8 text-right">
-                <ul class="pagination">
-                    <?= $this->Paginator->prev( '<i class="fa fa-angle-left"></i>',
-                    array( 'tag' => 'li', 'escape' => false ), null,
-                    array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                    <?= $this->Paginator->numbers( array(
-                    'separator'    => '',
-                    'currentTag'   => 'a',
-                    'currentClass' => 'active',
-                    'tag'          => 'li',
-                    'first'        => 1,
-                    'last'         => 1,
-                    'ellipsis'     => '<li class="disabled"><a>...</a></li>'
-                    ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
-                    array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
-                    array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-
-
 
         <h4>
             Agregar Franquicia: <small>NO POSEE SUBE</small>
