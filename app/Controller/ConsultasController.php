@@ -818,6 +818,59 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'preguntas'));
     }
 
+    public function tres($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            $this->Session->setFlash(__('No existe consulta asociada.'));
+            return $this->redirect(array('action' => 'index'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        if ($this->request->is('post')) {
+            debug($this->request->data);
+        }
+        $this->request->data['Consulta']['consulta_id'] = $id;
+
+
+        $this->Consulta->recursive = 0;
+        $consultas = $this->Paginator->paginate();
+
+        $this->set(compact('consulta', 'consultas'));
+    }
+
+    public function cuatro($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            $this->Session->setFlash(__('No existe consulta asociada.'));
+            return $this->redirect(array('action' => 'index'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        if ($this->request->is('post')) {
+            debug($this->request->data);
+        }
+
+        $this->loadModel('Convenio');
+        $this->Convenio->recursive =-1;
+        $convenio = $this->Convenio->find('first', array(
+            'order' => array('Convenio.fin' => 'desc'),
+            'recursive' => -1
+        ));
+        $this->loadModel('Salario');
+        $this->Salario->recursive = 0;
+        $salarios = $this->Salario->find('all', array(
+            'conditions' => array('Salario.convenio_id' => $convenio['Convenio']['id'], 'Salario.estado_id <>' => '2'),
+            'order' => array('Categoria.nombre' => 'asc'),
+            'recursive' => 0
+        ));
+
+        $this->request->data['Consulta']['consulta_id'] = $id;
+
+        $this->set(compact('consulta','salarios','convenio'));
+    }
+
     public function cinco($id = null)
     {
         if (!$this->Consulta->exists($id)) {

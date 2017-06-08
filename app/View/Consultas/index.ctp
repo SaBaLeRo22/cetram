@@ -5,6 +5,7 @@
 ?><div class="row consultas index">
     <div class="col-md-9">
         <h2><?= __('Consultas'); ?></h2>
+
         <div class="table-responsive">
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -56,6 +57,7 @@
                 </tbody>
             </table>
         </div>
+
         <div class="row">
             <div class="col-md-4">
                 <small class="paging-text text-muted">
