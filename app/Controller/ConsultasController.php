@@ -827,16 +827,81 @@ class ConsultasController extends AppController
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
 
+        $this->loadModel('RespuestaPasajero');
+        $this->RespuestaPasajero->recursive = -1;
+
         if ($this->request->is('post')) {
-            debug($this->request->data);
+//            debug($this->request->data);
+
+            if($this->request->data['accion'] == '1'){
+                /*************************************
+                SIGUIENTE PASO
+                *************************************/
+
+
+            }elseif($this->request->data['accion'] == '2'){
+                /******************************************
+                AGREGAR TARIFA
+                ******************************************/
+
+                $RespuestaPasajero['RespuestaPasajero']['consulta_id'] = $this->request->data['Consulta']['consulta_id'];
+                $RespuestaPasajero['RespuestaPasajero']['sube'] = $this->request->data['Consulta']['sube'];
+                $RespuestaPasajero['RespuestaPasajero']['tarifa'] = $this->request->data['Consulta']['tarifa'];
+                $RespuestaPasajero['RespuestaPasajero']['base'] = $this->request->data['Consulta']['base'];
+                $RespuestaPasajero['RespuestaPasajero']['costo'] = $this->request->data['Consulta']['costo'];
+                $RespuestaPasajero['RespuestaPasajero']['estado_id'] = '1';
+                $RespuestaPasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
+                $RespuestaPasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
+
+                if($this->request->data['Consulta']['sube'] == '1'){ // SI tiene SUBE
+
+                }elseif($this->request->data['Consulta']['sube'] == '0'){ // NO tiene SUBE
+                    $RespuestaPasajero['RespuestaPasajero']['semestre1'] = $this->request->data['Consulta']['semestre1'];
+                    $RespuestaPasajero['RespuestaPasajero']['semestre2'] = $this->request->data['Consulta']['semestre2'];
+                }
+                $this->RespuestaPasajero->create();
+                if ($this->RespuestaPasajero->save($RespuestaPasajero)) {
+                    $this->Session->setFlash(__('Tarifa agreada correctamente.'));
+                    return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                } else {
+                    $this->Session->setFlash(__('Tarifa no se pudo agregar. Por favor, intente nuevamente.'));
+                }
+
+            }
+
+
+
+
         }
         $this->request->data['Consulta']['consulta_id'] = $id;
 
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+        $sube = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.pregunta_id' => '23'),
+            'recursive' => -1
+        ));
+        //opcione_id = 24 --> SI; opcione_id = 25 --> NO
+        if($sube['RespuestaPregunta']['opcione_id'] == '24'){
+            $tiene = '1';
+            $this->request->data['Consulta']['sube'] = '1';
+        }else{
+            $tiene = '0';
+            $this->request->data['Consulta']['sube'] = '0';
+        }
 
-        $this->Consulta->recursive = 0;
-        $consultas = $this->Paginator->paginate();
+        $pasajeros = $this->RespuestaPasajero->find('all', array(
+            'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $tiene, 'RespuestaPasajero.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $readonly = null;
+        if(empty($pasajeros)){
+            $this->request->data['Consulta']['base'] = '1';
+            $readonly = 'readonly';
+        }
 
-        $this->set(compact('consulta', 'consultas'));
+
+        $this->set(compact('consulta', 'pasajeros', 'tiene', 'readonly'));
     }
 
     public function cuatro($id = null)

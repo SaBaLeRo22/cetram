@@ -1,11 +1,11 @@
 <?php
-App::uses('EstadosController', 'Controller');
+App::uses('RespuestaSalariosController', 'Controller');
 
 /**
- * EstadosController Test Case
+ * RespuestaSalariosController Test Case
  *
  */
-class EstadosControllerTest extends ControllerTestCase {
+class RespuestaSalariosControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,9 @@ class EstadosControllerTest extends ControllerTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.respuesta_salario',
+		'app.consulta',
+		'app.unidade',
 		'app.estado',
 		'app.agrupamiento',
 		'app.pregunta',
@@ -21,30 +24,28 @@ class EstadosControllerTest extends ControllerTestCase {
 		'app.coeficiente',
 		'app.ambito',
 		'app.indicadore',
-		'app.unidade',
-		'app.consulta',
-		'app.localidade',
-		'app.provincia',
-		'app.modo',
-		'app.respuesta_coeficiente',
-		'app.respuesta_indicadore',
-		'app.respuesta_item',
-		'app.item',
-		'app.tipo',
 		'app.parametro',
+		'app.tipo',
+		'app.item',
 		'app.participacione',
-		'app.respuesta_multiplicadore',
-		'app.respuesta_parametro',
-		'app.respuesta_pregunta',
-		'app.opcione',
-		'app.respuesta_tipo',
 		'app.intervencione',
+		'app.opcione',
+		'app.respuesta_pregunta',
 		'app.categoria',
 		'app.salario',
 		'app.convenio',
 		'app.viatico',
 		'app.dieta',
 		'app.factore',
+		'app.localidade',
+		'app.provincia',
+		'app.modo',
+		'app.respuesta_coeficiente',
+		'app.respuesta_indicadore',
+		'app.respuesta_item',
+		'app.respuesta_multiplicadore',
+		'app.respuesta_parametro',
+		'app.respuesta_tipo',
 		'app.sectore'
 	);
 

@@ -36,12 +36,12 @@ class ConvenioFixture extends CakeTestFixture {
 		array(
 			'id' => 1,
 			'anio' => 1,
-			'inio' => '2017-06-05',
-			'fin' => '2017-06-05',
+			'inio' => '2017-06-09',
+			'fin' => '2017-06-09',
 			'observaciones' => 'Lorem ipsum dolor sit amet',
 			'estado_id' => 1,
-			'created' => '2017-06-05 15:41:37',
-			'modified' => '2017-06-05 15:41:37',
+			'created' => '2017-06-09 16:06:28',
+			'modified' => '2017-06-09 16:06:28',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

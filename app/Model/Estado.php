@@ -28,7 +28,9 @@ App::uses('AppModel', 'Model');
  * @property RespuestaItem $RespuestaItem
  * @property RespuestaMultiplicadore $RespuestaMultiplicadore
  * @property RespuestaParametro $RespuestaParametro
+ * @property RespuestaPasajero $RespuestaPasajero
  * @property RespuestaPregunta $RespuestaPregunta
+ * @property RespuestaSalario $RespuestaSalario
  * @property RespuestaTipo $RespuestaTipo
  * @property Salario $Salario
  * @property Sectore $Sectore
@@ -396,8 +398,34 @@ class Estado extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'RespuestaPasajero' => array(
+			'className' => 'RespuestaPasajero',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'RespuestaPregunta' => array(
 			'className' => 'RespuestaPregunta',
+			'foreignKey' => 'estado_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaSalario' => array(
+			'className' => 'RespuestaSalario',
 			'foreignKey' => 'estado_id',
 			'dependent' => false,
 			'conditions' => '',

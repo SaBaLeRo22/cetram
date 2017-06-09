@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * Convenio Model
  *
  * @property Estado $Estado
+ * @property RespuestaSalario $RespuestaSalario
  * @property Salario $Salario
  * @property Viatico $Viatico
  */
@@ -117,6 +118,19 @@ class Convenio extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'RespuestaSalario' => array(
+			'className' => 'RespuestaSalario',
+			'foreignKey' => 'convenio_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'Salario' => array(
 			'className' => 'Salario',
 			'foreignKey' => 'convenio_id',

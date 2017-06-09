@@ -24,6 +24,8 @@ class ConveniosControllerTest extends ControllerTestCase {
 		'app.indicadore',
 		'app.unidade',
 		'app.consulta',
+		'app.localidade',
+		'app.provincia',
 		'app.modo',
 		'app.respuesta_coeficiente',
 		'app.respuesta_indicadore',
@@ -43,8 +45,6 @@ class ConveniosControllerTest extends ControllerTestCase {
 		'app.dieta',
 		'app.viatico',
 		'app.factore',
-		'app.localidade',
-		'app.provincia',
 		'app.sectore'
 	);
 

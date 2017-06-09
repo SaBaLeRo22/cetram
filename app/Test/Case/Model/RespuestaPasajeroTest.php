@@ -1,11 +1,11 @@
 <?php
-App::uses('Convenio', 'Model');
+App::uses('RespuestaPasajero', 'Model');
 
 /**
- * Convenio Test Case
+ * RespuestaPasajero Test Case
  *
  */
-class ConvenioTest extends CakeTestCase {
+class RespuestaPasajeroTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,7 +13,9 @@ class ConvenioTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.convenio',
+		'app.respuesta_pasajero',
+		'app.consulta',
+		'app.unidade',
 		'app.estado',
 		'app.agrupamiento',
 		'app.pregunta',
@@ -22,29 +24,28 @@ class ConvenioTest extends CakeTestCase {
 		'app.coeficiente',
 		'app.ambito',
 		'app.indicadore',
-		'app.unidade',
-		'app.consulta',
+		'app.parametro',
+		'app.tipo',
+		'app.item',
+		'app.participacione',
+		'app.intervencione',
+		'app.opcione',
+		'app.respuesta_pregunta',
+		'app.categoria',
+		'app.salario',
+		'app.convenio',
+		'app.viatico',
+		'app.dieta',
+		'app.factore',
 		'app.localidade',
 		'app.provincia',
 		'app.modo',
 		'app.respuesta_coeficiente',
 		'app.respuesta_indicadore',
 		'app.respuesta_item',
-		'app.item',
-		'app.tipo',
-		'app.parametro',
-		'app.participacione',
 		'app.respuesta_multiplicadore',
 		'app.respuesta_parametro',
-		'app.respuesta_pregunta',
-		'app.opcione',
 		'app.respuesta_tipo',
-		'app.intervencione',
-		'app.categoria',
-		'app.salario',
-		'app.dieta',
-		'app.viatico',
-		'app.factore',
 		'app.sectore'
 	);
 
@@ -55,7 +56,7 @@ class ConvenioTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Convenio = ClassRegistry::init('Convenio');
+		$this->RespuestaPasajero = ClassRegistry::init('RespuestaPasajero');
 	}
 
 /**
@@ -64,7 +65,7 @@ class ConvenioTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Convenio);
+		unset($this->RespuestaPasajero);
 
 		parent::tearDown();
 	}

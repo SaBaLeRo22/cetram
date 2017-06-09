@@ -13,6 +13,8 @@ App::uses('AppModel', 'Model');
  * @property RespuestaParametro $RespuestaParametro
  * @property RespuestaPregunta $RespuestaPregunta
  * @property RespuestaTipo $RespuestaTipo
+ * @property RespuestaPasajero RespuestaPasajero
+ * @property RespuestaSalario RespuestaSalario
  */
 class Consulta extends AppModel {
 
@@ -245,6 +247,32 @@ class Consulta extends AppModel {
 		),
 		'RespuestaTipo' => array(
 			'className' => 'RespuestaTipo',
+			'foreignKey' => 'consulta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaPasajero' => array(
+			'className' => 'RespuestaPasajero',
+			'foreignKey' => 'consulta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaSalario' => array(
+			'className' => 'RespuestaSalario',
 			'foreignKey' => 'consulta_id',
 			'dependent' => false,
 			'conditions' => '',
