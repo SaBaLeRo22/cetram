@@ -837,7 +837,7 @@ class ConsultasController extends AppController
                 /*************************************
                 SIGUIENTE PASO
                 *************************************/
-
+                debug($this->request->data);
 
             }elseif($this->request->data['accion'] == '2'){
                 /******************************************
@@ -894,14 +894,8 @@ class ConsultasController extends AppController
             'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $tiene, 'RespuestaPasajero.estado_id <>' => '2'),
             'recursive' => -1
         ));
-        $readonly = null;
-        if(empty($pasajeros)){
-            $this->request->data['Consulta']['base'] = '1';
-            $readonly = 'readonly';
-        }
 
-
-        $this->set(compact('consulta', 'pasajeros', 'tiene', 'readonly'));
+        $this->set(compact('consulta', 'pasajeros', 'tiene'));
     }
 
     public function cuatro($id = null)

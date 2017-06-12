@@ -11,6 +11,7 @@
 ?>
 <div class="row consultas form">
     <div class="col-md-12">
+        <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
         <h1>Realizar Consulta
             <small>Paso 3 de 5</small>
         </h1>
@@ -57,7 +58,13 @@
                     <td class="text-info" style="text-align:center;vertical-align: middle">
                         <strong><?= h($pasajero['RespuestaPasajero']['costo']); ?></strong>&nbsp;</td>
                     <td class="text-info" style="text-align:center;vertical-align: middle">
-                        <strong><?php if($pasajero['RespuestaPasajero']['base']=="1"){echo("SI");}else{echo("NO");} ?></strong>&nbsp;</td>
+
+                        <?php if ($pasajero['RespuestaPasajero']['base'] == '0'): ?>
+                            <?= $this->Form->input('base', array('type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
+                        <?php else: ?>
+                            <?= $this->Form->input('base', array('value' => $pasajero['RespuestaPasajero']['id'], 'type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
+                        <?php endif; ?>
+
                     <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['semestre1']); ?>&nbsp;</td>
                     <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['semestre2']); ?>&nbsp;</td>
                 </tr>
@@ -225,7 +232,7 @@
         <?php endif; ?>
 
 
-        <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
+        <!--<?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>-->
         <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
         <?= $this->Form->input('sube', array('type' => 'hidden')); ?>
 
@@ -243,7 +250,8 @@
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
-        <div class="form-group">
+
+        <!--<div class="form-group">
             <?= $this->Form->label('base', 'Base (Tarifa Plana)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('base', array('type' => 'checkbox', 'readonly' => $readonly)); ?>
         </div>
@@ -264,7 +272,7 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
             <strong>Importante: </strong> No se permitir&aacute; avanzar al siguiente paso si no se selecciona
             una &uacute;nica tarifa como base o plana.
-        </div>
+        </div>-->
 
         <div class="form-group">
             <?= $this->Form->label('semestre1', 'Semestre 1', array('class' => 'control-label col-xs-3')); ?>
@@ -290,11 +298,11 @@
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
-        <div class="form-group">
+
+        <!--<div class="form-group">
             <?= $this->Form->label('base', 'Base (Tarifa Plana)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('base', array('type' => 'checkbox', 'readonly' => $readonly)); ?>
         </div>
-
         <div class="alert alert-warning alert-dismissible" role="alert"
              style="margin-bottom: 3px;margin-top: -10px;">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -311,7 +319,7 @@
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
             <strong>Importante: </strong> No se permitir&aacute; avanzar al siguiente paso si no se selecciona
             una &uacute;nica tarifa como base o plana.
-        </div>
+        </div>-->
 
         <div class="form-group">
             <?= $this->Form->label('mes01', 'Mes 01', array('class' => 'control-label col-xs-3')); ?>
