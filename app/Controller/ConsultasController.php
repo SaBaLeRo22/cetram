@@ -847,11 +847,19 @@ class ConsultasController extends AppController
                 $RespuestaPasajero['RespuestaPasajero']['consulta_id'] = $this->request->data['Consulta']['consulta_id'];
                 $RespuestaPasajero['RespuestaPasajero']['sube'] = $this->request->data['Consulta']['sube'];
                 $RespuestaPasajero['RespuestaPasajero']['tarifa'] = $this->request->data['Consulta']['tarifa'];
-                $RespuestaPasajero['RespuestaPasajero']['base'] = $this->request->data['Consulta']['base'];
+                if($this->request->data['Consulta']['primero']){
+                    $RespuestaPasajero['RespuestaPasajero']['base'] = '1';
+                }else{
+                    $RespuestaPasajero['RespuestaPasajero']['base'] = '0';
+                }
+
                 $RespuestaPasajero['RespuestaPasajero']['costo'] = $this->request->data['Consulta']['costo'];
                 $RespuestaPasajero['RespuestaPasajero']['estado_id'] = '1';
                 $RespuestaPasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
                 $RespuestaPasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
+
+
+
 
                 if($this->request->data['Consulta']['sube'] == '1'){ // SI tiene SUBE
 
@@ -861,6 +869,33 @@ class ConsultasController extends AppController
                 }
                 $this->RespuestaPasajero->create();
                 if ($this->RespuestaPasajero->save($RespuestaPasajero)) {
+
+                    /***ACTUALIZO LA BASE***/
+                    $base = $this->RespuestaPasajero->find('first', array(
+                        'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $this->request->data['Consulta']['tiene'], 'RespuestaPasajero.base <>' => '0', 'RespuestaPasajero.estado_id <>' => '2'),
+                        'recursive' => -1
+                    ));
+
+                    if(!empty($base)){
+                        if($this->request->data['base'] != NULL){
+                            if($base['RespuestaPasajero']['id'] != $this->request->data['base']){
+                                $pasajero = $this->RespuestaPasajero->find('first', array(
+                                    'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
+                                    'recursive' => -1
+                                ));
+                                $pasajero['RespuestaPasajero']['base'] = '1';
+                                if ($this->RespuestaPasajero->save($pasajero)) {
+                                    $base['RespuestaPasajero']['base'] = '0';
+                                    if (!$this->RespuestaPasajero->save($pasajero)) {
+                                        $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                                    }
+                                } else {
+                                    $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                                }
+                            }
+                        }
+                    }
+                    /*****/
                     $this->Session->setFlash(__('Tarifa agreada correctamente.'));
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                 } else {
@@ -889,13 +924,18 @@ class ConsultasController extends AppController
             $tiene = '0';
             $this->request->data['Consulta']['sube'] = '0';
         }
+        $this->request->data['Consulta']['tiene'] = $tiene;
 
         $pasajeros = $this->RespuestaPasajero->find('all', array(
             'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $tiene, 'RespuestaPasajero.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
-        $this->set(compact('consulta', 'pasajeros', 'tiene'));
+        if(empty($pasajeros)){
+            $primero = true;
+        }
+
+        $this->set(compact('consulta', 'pasajeros', 'tiene','primero'));
     }
 
     public function cuatro($id = null)

@@ -40,20 +40,16 @@
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
                         SEMESTRE<br>02
                     </th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
+                        ELIMINAR
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($pasajeros as $pasajero): ?>
                 <tr>
-                    <td class="display-column text-info"
-                        style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0">
-                        <h4 style="font-weight: bold">
-                            <?= h($pasajero['RespuestaPasajero']['tarifa']); ?>&nbsp;
-                        </h4>
-                            <div class="nowrap">
-                                &nbsp;
-                                <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $pasajero['RespuestaPasajero']['tarifa'])); ?>
-                            </div>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0">
+                        <strong><?= h($pasajero['RespuestaPasajero']['tarifa']); ?></strong>&nbsp;
                     </td>
                     <td class="text-info" style="text-align:center;vertical-align: middle">
                         <strong><?= h($pasajero['RespuestaPasajero']['costo']); ?></strong>&nbsp;</td>
@@ -67,6 +63,18 @@
 
                     <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['semestre1']); ?>&nbsp;</td>
                     <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['semestre2']); ?>&nbsp;</td>
+
+                    <td class="text-info" style="text-align:center;vertical-align: middle">
+                        <!--<?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-danger btn-xs'), __('Seguro de eliminar la tarifa %s?',$pasajero['RespuestaPasajero']['tarifa']));?>-->
+
+                        <?php echo $this->Html->link(
+                        '<i class="fa fa-trash"></i>',
+                        array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']),
+                        array('class' => 'btn btn-danger btn-xs', 'confirm' => 'Seguro de eliminar la tarifa?')
+                        );?>
+
+                    </td>
+
                 </tr>
                 <?php endforeach ?>
                 </tbody>
@@ -85,6 +93,9 @@
                     </th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
                         SEMESTRE<br>02
+                    </th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
+                        ELIMINAR
                     </th>
                 </tr>
                 </tfoot>
@@ -235,6 +246,8 @@
         <!--<?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>-->
         <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
         <?= $this->Form->input('sube', array('type' => 'hidden')); ?>
+        <?= $this->Form->input('tiene', array('type' => 'hidden')); ?>
+        <?= $this->Form->input('primero', array('type' => 'hidden')); ?>
 
         <?php if ($tiene == '0'): ?>
         <h4>
