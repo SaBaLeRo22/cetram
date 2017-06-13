@@ -1,11 +1,11 @@
 <?php
-App::uses('Consulta', 'Model');
+App::uses('Paso', 'Model');
 
 /**
- * Consulta Test Case
+ * Paso Test Case
  *
  */
-class ConsultaTest extends CakeTestCase {
+class PasoTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class ConsultaTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.paso',
 		'app.consulta',
 		'app.unidade',
 		'app.estado',
@@ -57,7 +58,7 @@ class ConsultaTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->Consulta = ClassRegistry::init('Consulta');
+		$this->Paso = ClassRegistry::init('Paso');
 	}
 
 /**
@@ -66,7 +67,7 @@ class ConsultaTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->Consulta);
+		unset($this->Paso);
 
 		parent::tearDown();
 	}

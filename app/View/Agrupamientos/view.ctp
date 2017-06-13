@@ -84,7 +84,12 @@
 		<th><?= __('Maximo'); ?></th>
 		<th><?= __('Multiplicadore Id'); ?></th>
 		<th><?= __('Agrupamiento Id'); ?></th>
+		<th><?= __('Opciones'); ?></th>
 		<th><?= __('Unidade Id'); ?></th>
+		<th><?= __('Titulo'); ?></th>
+		<th><?= __('Ayuda'); ?></th>
+		<th><?= __('Tipo'); ?></th>
+		<th><?= __('Ambito Id'); ?></th>
 		<th><?= __('Estado Id'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
@@ -104,7 +109,12 @@
 			<td><?= $pregunta['maximo']; ?></td>
 			<td><?= $pregunta['multiplicadore_id']; ?></td>
 			<td><?= $pregunta['agrupamiento_id']; ?></td>
+			<td><?= $pregunta['opciones']; ?></td>
 			<td><?= $pregunta['unidade_id']; ?></td>
+			<td><?= $pregunta['titulo']; ?></td>
+			<td><?= $pregunta['ayuda']; ?></td>
+			<td><?= $pregunta['tipo']; ?></td>
+			<td><?= $pregunta['ambito_id']; ?></td>
 			<td><?= $pregunta['estado_id']; ?></td>
 			<td><?= $pregunta['created']; ?></td>
 			<td><?= $pregunta['modified']; ?></td>

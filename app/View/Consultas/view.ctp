@@ -4,7 +4,7 @@
  */
 ?><div class="row consultas view">
     <div class="col-md-12">
-        <h2><?= $consulta['Consulta']['tarifa'] ?></h2>
+        <h2><?= $consulta['Consulta']['costo'] ?></h2>
         <hr/>
     </div>
     <div class="col-md-4">
@@ -35,19 +35,19 @@
 			<?= $this->Html->link($consulta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $consulta['Unidade']['id'])); ?>
 			&nbsp;
 		</dd>
-				<dt><?= __('Localidade'); ?></dt>
-				<dd>
-					<?= $this->Html->link($consulta['Localidade']['nombre'], array('controller' => 'localidades', 'action' => 'view', $consulta['Localidade']['id'])); ?>
-					&nbsp;
-				</dd>
+		<dt><?= __('Localidade'); ?></dt>
+		<dd>
+			<?= $this->Html->link($consulta['Localidade']['nombre'], array('controller' => 'localidades', 'action' => 'view', $consulta['Localidade']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Observaciones'); ?></dt>
 		<dd>
 			<?= h($consulta['Consulta']['observaciones']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Modo Id'); ?></dt>
+		<dt><?= __('Modo'); ?></dt>
 		<dd>
-			<?= h($consulta['Consulta']['modo_id']); ?>
+			<?= $this->Html->link($consulta['Modo']['nombre'], array('controller' => 'modos', 'action' => 'view', $consulta['Modo']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Estado'); ?></dt>
@@ -490,6 +490,146 @@
 				<?= $this->Html->link(__('Ver'), array('controller' => 'respuesta_tipos', 'action' => 'view', $respuestaTipo['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'respuesta_tipos', 'action' => 'edit', $respuestaTipo['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'respuesta_tipos', 'action' => 'delete', $respuestaTipo['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $respuestaTipo['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Pasajero', ['controller' => 'respuesta_pasajeros', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Respuesta Pasajeros'); ?></h3>
+            <?php if (!empty($consulta['RespuestaPasajero'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Consulta Id'); ?></th>
+		<th><?= __('Tarifa'); ?></th>
+		<th><?= __('Sube'); ?></th>
+		<th><?= __('Base'); ?></th>
+		<th><?= __('Costo'); ?></th>
+		<th><?= __('Semestre1'); ?></th>
+		<th><?= __('Semestre2'); ?></th>
+		<th><?= __('Mes01'); ?></th>
+		<th><?= __('Mes02'); ?></th>
+		<th><?= __('Mes03'); ?></th>
+		<th><?= __('Mes04'); ?></th>
+		<th><?= __('Mes05'); ?></th>
+		<th><?= __('Mes06'); ?></th>
+		<th><?= __('Mes07'); ?></th>
+		<th><?= __('Mes08'); ?></th>
+		<th><?= __('Mes09'); ?></th>
+		<th><?= __('Mes10'); ?></th>
+		<th><?= __('Mes11'); ?></th>
+		<th><?= __('Mes12'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($consulta['RespuestaPasajero'] as $respuestaPasajero): ?>
+		<tr>
+			<td><?= $respuestaPasajero['id']; ?></td>
+			<td><?= $respuestaPasajero['consulta_id']; ?></td>
+			<td><?= $respuestaPasajero['tarifa']; ?></td>
+			<td><?= $respuestaPasajero['sube']; ?></td>
+			<td><?= $respuestaPasajero['base']; ?></td>
+			<td><?= $respuestaPasajero['costo']; ?></td>
+			<td><?= $respuestaPasajero['semestre1']; ?></td>
+			<td><?= $respuestaPasajero['semestre2']; ?></td>
+			<td><?= $respuestaPasajero['mes01']; ?></td>
+			<td><?= $respuestaPasajero['mes02']; ?></td>
+			<td><?= $respuestaPasajero['mes03']; ?></td>
+			<td><?= $respuestaPasajero['mes04']; ?></td>
+			<td><?= $respuestaPasajero['mes05']; ?></td>
+			<td><?= $respuestaPasajero['mes06']; ?></td>
+			<td><?= $respuestaPasajero['mes07']; ?></td>
+			<td><?= $respuestaPasajero['mes08']; ?></td>
+			<td><?= $respuestaPasajero['mes09']; ?></td>
+			<td><?= $respuestaPasajero['mes10']; ?></td>
+			<td><?= $respuestaPasajero['mes11']; ?></td>
+			<td><?= $respuestaPasajero['mes12']; ?></td>
+			<td><?= $respuestaPasajero['estado_id']; ?></td>
+			<td><?= $respuestaPasajero['created']; ?></td>
+			<td><?= $respuestaPasajero['modified']; ?></td>
+			<td><?= $respuestaPasajero['user_created']; ?></td>
+			<td><?= $respuestaPasajero['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'respuesta_pasajeros', 'action' => 'view', $respuestaPasajero['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'respuesta_pasajeros', 'action' => 'edit', $respuestaPasajero['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'respuesta_pasajeros', 'action' => 'delete', $respuestaPasajero['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $respuestaPasajero['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Salario', ['controller' => 'respuesta_salarios', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Respuesta Salarios'); ?></h3>
+            <?php if (!empty($consulta['RespuestaSalario'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Consulta Id'); ?></th>
+		<th><?= __('Convenio Id'); ?></th>
+		<th><?= __('Anio'); ?></th>
+		<th><?= __('Inicio'); ?></th>
+		<th><?= __('Fin'); ?></th>
+		<th><?= __('Categoria Id'); ?></th>
+		<th><?= __('Categoria'); ?></th>
+		<th><?= __('Salario'); ?></th>
+		<th><?= __('Cantidad'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($consulta['RespuestaSalario'] as $respuestaSalario): ?>
+		<tr>
+			<td><?= $respuestaSalario['id']; ?></td>
+			<td><?= $respuestaSalario['consulta_id']; ?></td>
+			<td><?= $respuestaSalario['convenio_id']; ?></td>
+			<td><?= $respuestaSalario['anio']; ?></td>
+			<td><?= $respuestaSalario['inicio']; ?></td>
+			<td><?= $respuestaSalario['fin']; ?></td>
+			<td><?= $respuestaSalario['categoria_id']; ?></td>
+			<td><?= $respuestaSalario['categoria']; ?></td>
+			<td><?= $respuestaSalario['salario']; ?></td>
+			<td><?= $respuestaSalario['cantidad']; ?></td>
+			<td><?= $respuestaSalario['estado_id']; ?></td>
+			<td><?= $respuestaSalario['created']; ?></td>
+			<td><?= $respuestaSalario['modified']; ?></td>
+			<td><?= $respuestaSalario['user_created']; ?></td>
+			<td><?= $respuestaSalario['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'respuesta_salarios', 'action' => 'view', $respuestaSalario['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'respuesta_salarios', 'action' => 'edit', $respuestaSalario['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'respuesta_salarios', 'action' => 'delete', $respuestaSalario['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $respuestaSalario['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

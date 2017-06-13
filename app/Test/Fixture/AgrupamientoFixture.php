@@ -38,8 +38,8 @@ class AgrupamientoFixture extends CakeTestFixture {
 			'descripcion' => 'Lorem ipsum dolor sit amet',
 			'orden' => 1,
 			'estado_id' => 1,
-			'created' => '2017-05-09 19:51:27',
-			'modified' => '2017-05-09 19:51:27',
+			'created' => '2017-06-13 16:37:30',
+			'modified' => '2017-06-13 16:37:30',
 			'user_created' => 1,
 			'user_modified' => 1
 		),

@@ -4,17 +4,19 @@ App::uses('AppModel', 'Model');
  * Consulta Model
  *
  * @property Unidade $Unidade
+ * @property Localidade $Localidade
  * @property Modo $Modo
  * @property Estado $Estado
+ * @property Paso $Paso
  * @property RespuestaCoeficiente $RespuestaCoeficiente
  * @property RespuestaIndicadore $RespuestaIndicadore
  * @property RespuestaItem $RespuestaItem
  * @property RespuestaMultiplicadore $RespuestaMultiplicadore
  * @property RespuestaParametro $RespuestaParametro
+ * @property RespuestaPasajero $RespuestaPasajero
  * @property RespuestaPregunta $RespuestaPregunta
+ * @property RespuestaSalario $RespuestaSalario
  * @property RespuestaTipo $RespuestaTipo
- * @property RespuestaPasajero RespuestaPasajero
- * @property RespuestaSalario RespuestaSalario
  */
 class Consulta extends AppModel {
 
@@ -23,7 +25,7 @@ class Consulta extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'costo';
+	public $displayField = 'tarifa';
 
 /**
  * Validation rules
@@ -167,6 +169,19 @@ class Consulta extends AppModel {
  * @var array
  */
 	public $hasMany = array(
+		'Paso' => array(
+			'className' => 'Paso',
+			'foreignKey' => 'consulta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'RespuestaCoeficiente' => array(
 			'className' => 'RespuestaCoeficiente',
 			'foreignKey' => 'consulta_id',
@@ -232,32 +247,6 @@ class Consulta extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'RespuestaPregunta' => array(
-			'className' => 'RespuestaPregunta',
-			'foreignKey' => 'consulta_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'RespuestaTipo' => array(
-			'className' => 'RespuestaTipo',
-			'foreignKey' => 'consulta_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'RespuestaPasajero' => array(
 			'className' => 'RespuestaPasajero',
 			'foreignKey' => 'consulta_id',
@@ -271,8 +260,34 @@ class Consulta extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+		'RespuestaPregunta' => array(
+			'className' => 'RespuestaPregunta',
+			'foreignKey' => 'consulta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
 		'RespuestaSalario' => array(
 			'className' => 'RespuestaSalario',
+			'foreignKey' => 'consulta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'RespuestaTipo' => array(
+			'className' => 'RespuestaTipo',
 			'foreignKey' => 'consulta_id',
 			'dependent' => false,
 			'conditions' => '',

@@ -153,6 +153,29 @@ class ConsultasController extends AppController
 
             $consulta['Consulta']['id'] = $this->Consulta->id;
 
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamientos = $this->Agrupamiento->find('all', array(
+                'conditions' => array('Agrupamiento.orden <>' => '0', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1,
+                'order' => array('Agrupamiento.orden' => 'asc')
+            ));
+            foreach ($agrupamientos as $agrupamiento) {
+                $paso['Paso']['consulta_id'] = $consulta['Consulta']['id'];
+                $paso['Paso']['agrupamiento_id'] = $agrupamiento['Agrupamiento']['id'];
+                $paso['Paso']['completo'] = 0; // Incompleto
+                $paso['Paso']['estado_id'] = 1; // Activo
+                $paso['Paso']['user_created'] = $this->Authake->getUserId();
+                $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->Paso->save($paso)) {
+                    $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+                } else {
+                    $this->Session->setFlash(__('The Paso has been saved.'));
+                }
+            }
+
             $this->loadModel('Coeficiente');
             $this->Coeficiente->recursive = 0;
             $this->loadModel('RespuestaCoeficiente');
@@ -268,6 +291,26 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
                 }
+            }
+
+//            $this->loadModel('Agrupamiento');
+//            $this->Agrupamiento->recursive = -1;
+//            $this->loadModel('Paso');
+//            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '1', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
@@ -491,6 +534,26 @@ class ConsultasController extends AppController
                 }
             }
 
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '1', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
             return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
 
@@ -651,7 +714,28 @@ class ConsultasController extends AppController
                 }
             }
 
-            return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '2', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 3".'));
+            return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
 
         /*
@@ -774,7 +858,28 @@ class ConsultasController extends AppController
                 }
             }
 
-            return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '2', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 2".'));
+            return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
 
         /*
@@ -831,11 +936,9 @@ class ConsultasController extends AppController
         $this->RespuestaPasajero->recursive = -1;
 
         if ($this->request->is('post')) {
-//            debug($this->request->data);
 
             if ($this->request->data['accion'] == '1') {
-//                debug($this->request->data);
-//                exit;
+
                 /*************************************
                  * SIGUIENTE PASO
                  *************************************/
@@ -871,28 +974,46 @@ class ConsultasController extends AppController
                         return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                     }
                 } else {
-                    $this->Session->setFlash(__('Por favor, primero seleccione una tarifa como base.'));
+                    $this->Session->setFlash(__('Por favor, primero seleccione una tarifa como base.'), 'default', array('type' => 'danger'));
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                 }
 
+                $this->loadModel('Agrupamiento');
+                $this->Agrupamiento->recursive = -1;
+                $this->loadModel('Paso');
+                $this->Paso->recursive = -1;
+                $agrupamiento = $this->Agrupamiento->find('first', array(
+                    'conditions' => array('Agrupamiento.orden' => '3', 'Agrupamiento.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+                $paso = $this->Paso->find('first', array(
+                    'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+                $paso['Paso']['completo'] = 1;
+                $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->Paso->save($paso)) {
+                    $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+                } else {
+                    $this->Session->setFlash(__('The Paso has been saved.'));
+                }
+
+                $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
                 return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
 
             } elseif ($this->request->data['accion'] == '2') {
+
                 /******************************************
                  * AGREGAR TARIFA
                  ******************************************/
-
                 $RespuestaPasajero['RespuestaPasajero']['consulta_id'] = $this->request->data['Consulta']['consulta_id'];
                 $RespuestaPasajero['RespuestaPasajero']['sube'] = $this->request->data['Consulta']['sube'];
                 $RespuestaPasajero['RespuestaPasajero']['tarifa'] = $this->request->data['Consulta']['tarifa'];
-
 
                 $primero = $this->RespuestaPasajero->find('all', array(
                     'conditions' => array('RespuestaPasajero.consulta_id' => $this->request->data['Consulta']['consulta_id'], 'RespuestaPasajero.sube' => $this->request->data['Consulta']['sube'], 'RespuestaPasajero.estado_id <>' => '2'),
                     'recursive' => -1
                 ));
-
-
                 if (empty($primero)) {
                     $RespuestaPasajero['RespuestaPasajero']['base'] = '1';
                 } else {
@@ -1002,7 +1123,33 @@ class ConsultasController extends AppController
         $consulta = $this->Consulta->find('first', $options);
 
         if ($this->request->is('post')) {
-            debug($this->request->data);
+
+//            debug($this->request->data);
+//            exit;
+
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '4', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 5".'));
+            return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
+
         }
 
         $this->loadModel('Convenio');
@@ -1040,6 +1187,9 @@ class ConsultasController extends AppController
 
         if ($this->request->is('post')) {
 
+//            debug($this->request->data);
+//            exit;
+
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
             $this->loadModel('Parametro');
@@ -1072,8 +1222,30 @@ class ConsultasController extends AppController
                 }
             }
 
-            debug($this->request->data);
-//            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+
+
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '5', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'],'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso['Paso']['completo'] = 1;
+            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+            if (!$this->Paso->save($paso)) {
+                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+            } else {
+                $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5".'));
+            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
 
         } else {
 
@@ -1095,7 +1267,16 @@ class ConsultasController extends AppController
         ));
 
         $this->request->data['Consulta']['consulta_id'] = $id;
-        $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad'));
+
+
+        $this->loadModel('Paso');
+        $this->Paso->recursive = 0;
+        $pasos = $this->Paso->find('all', array(
+            'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad', 'pasos'));
     }
 
     function obtener_localidades($id = null)

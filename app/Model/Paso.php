@@ -1,20 +1,20 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Agrupamiento Model
+ * Paso Model
  *
+ * @property Consulta $Consulta
+ * @property Agrupamiento $Agrupamiento
  * @property Estado $Estado
- * @property Paso $Paso
- * @property Pregunta $Pregunta
  */
-class Agrupamiento extends AppModel {
+class Paso extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'nombre';
+	public $displayField = 'completo';
 
 /**
  * Validation rules
@@ -22,29 +22,29 @@ class Agrupamiento extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'nombre' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'descripcion' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'orden' => array(
+		'consulta_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'agrupamiento_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'completo' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -92,6 +92,20 @@ class Agrupamiento extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
+		'Consulta' => array(
+			'className' => 'Consulta',
+			'foreignKey' => 'consulta_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Agrupamiento' => array(
+			'className' => 'Agrupamiento',
+			'foreignKey' => 'agrupamiento_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'Estado' => array(
 			'className' => 'Estado',
 			'foreignKey' => 'estado_id',
@@ -100,39 +114,4 @@ class Agrupamiento extends AppModel {
 			'order' => ''
 		)
 	);
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'Paso' => array(
-			'className' => 'Paso',
-			'foreignKey' => 'agrupamiento_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Pregunta' => array(
-			'className' => 'Pregunta',
-			'foreignKey' => 'agrupamiento_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-
 }

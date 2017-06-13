@@ -1,11 +1,11 @@
 <?php
-App::uses('Consulta', 'Model');
+App::uses('PasosController', 'Controller');
 
 /**
- * Consulta Test Case
+ * PasosController Test Case
  *
  */
-class ConsultaTest extends CakeTestCase {
+class PasosControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class ConsultaTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.paso',
 		'app.consulta',
 		'app.unidade',
 		'app.estado',
@@ -51,24 +52,48 @@ class ConsultaTest extends CakeTestCase {
 	);
 
 /**
- * setUp method
+ * testIndex method
  *
  * @return void
  */
-	public function setUp() {
-		parent::setUp();
-		$this->Consulta = ClassRegistry::init('Consulta');
+	public function testIndex() {
+		$this->markTestIncomplete('testIndex not implemented.');
 	}
 
 /**
- * tearDown method
+ * testView method
  *
  * @return void
  */
-	public function tearDown() {
-		unset($this->Consulta);
+	public function testView() {
+		$this->markTestIncomplete('testView not implemented.');
+	}
 
-		parent::tearDown();
+/**
+ * testAdd method
+ *
+ * @return void
+ */
+	public function testAdd() {
+		$this->markTestIncomplete('testAdd not implemented.');
+	}
+
+/**
+ * testEdit method
+ *
+ * @return void
+ */
+	public function testEdit() {
+		$this->markTestIncomplete('testEdit not implemented.');
+	}
+
+/**
+ * testDelete method
+ *
+ * @return void
+ */
+	public function testDelete() {
+		$this->markTestIncomplete('testDelete not implemented.');
 	}
 
 }

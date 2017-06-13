@@ -25,10 +25,9 @@
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
-
-        <div class="form-group">
-            <?= $this->Form->label('localidade_id', null, array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('localidade_id'); ?>
+                                                    <div class="form-group">
+            <?= $this->Form->label('localidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('localidade_id'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -66,6 +65,16 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Localidade</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Localidades'), array('controller' => 'localidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Localidade'), array('controller' => 'localidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Modo</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Modos'), array('controller' => 'modos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Modo'), array('controller' => 'modos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
             <h4 class="text-muted">Estado</h4>
             <div class="list-group">
@@ -106,6 +115,16 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Respuesta Tipos'), array('controller' => 'respuesta_tipos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Respuesta Tipo'), array('controller' => 'respuesta_tipos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Respuesta Pasajero</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Respuesta Pasajeros'), array('controller' => 'respuesta_pasajeros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Respuesta Pasajero'), array('controller' => 'respuesta_pasajeros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Respuesta Salario</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Respuesta Salarios'), array('controller' => 'respuesta_salarios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Respuesta Salario'), array('controller' => 'respuesta_salarios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>
