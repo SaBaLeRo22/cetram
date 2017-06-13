@@ -133,7 +133,7 @@ class RespuestaPasajerosController extends AppController
         $options = array('conditions' => array('RespuestaPasajero.' . $this->RespuestaPasajero->primaryKey => $id));
         $respuestaPasajero = $this->RespuestaPasajero->find('first', $options);
 
-        $this->request->allowMethod('post', 'delete');
+//        $this->request->allowMethod('post', 'delete');
         if ($this->RespuestaPasajero->delete()) {
 
             /***ACTUALIZO LA BASE***/
@@ -143,12 +143,15 @@ class RespuestaPasajerosController extends AppController
             ));
             if (empty($base)) {
                 $pasajero = $this->RespuestaPasajero->find('first', array(
+                    'conditions' => array('RespuestaPasajero.consulta_id' => $respuestaPasajero['RespuestaPasajero']['consulta_id'], 'RespuestaPasajero.sube' => $respuestaPasajero['RespuestaPasajero']['sube'], 'RespuestaPasajero.estado_id <>' => '2'),
                     'order' => array('RespuestaPasajero.id' => 'asc'),
                     'recursive' => -1
                 ));
-                $pasajero['RespuestaPasajero']['base'] = '1';
-                if (!$this->RespuestaPasajero->save($pasajero)) {
-                    $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                if (!empty($pasajero)) {
+                    $pasajero['RespuestaPasajero']['base'] = '1';
+                    if (!$this->RespuestaPasajero->save($pasajero)) {
+                        $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                    }
                 }
             }
             /*****/

@@ -65,7 +65,7 @@ class ConsultasController extends AppController
         $modos = $this->Consulta->Modo->find('list');
         $estados = $this->Consulta->Estado->find('list');
         $localidades = $this->Consulta->Localidade->find('list');
-        $this->set(compact('unidades', 'modos', 'estados','localidades'));
+        $this->set(compact('unidades', 'modos', 'estados', 'localidades'));
     }
 
     /**
@@ -833,52 +833,79 @@ class ConsultasController extends AppController
         if ($this->request->is('post')) {
 //            debug($this->request->data);
 
-            if($this->request->data['accion'] == '1'){
+            if ($this->request->data['accion'] == '1') {
+//                debug($this->request->data);
+//                exit;
                 /*************************************
-                SIGUIENTE PASO
-                *************************************/
-                debug($this->request->data);
+                 * SIGUIENTE PASO
+                 *************************************/
+                $base = $this->RespuestaPasajero->find('first', array(
+                    'conditions' => array('RespuestaPasajero.consulta_id' => $this->request->data['Consulta']['consulta_id'], 'RespuestaPasajero.sube' => $this->request->data['Consulta']['tiene'], 'RespuestaPasajero.base <>' => '0', 'RespuestaPasajero.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+                /***ACTUALIZO LA BASE***/
+                if (!empty($base)) {
+                    if ($base['RespuestaPasajero']['id'] != $this->request->data['base']) {
+                        $pasajero = $this->RespuestaPasajero->find('first', array(
+                            'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
+                            'recursive' => -1
+                        ));
+                        $pasajero['RespuestaPasajero']['base'] = '1';
+                        if ($this->RespuestaPasajero->save($pasajero)) {
+                            $base['RespuestaPasajero']['base'] = '0';
+                            if (!$this->RespuestaPasajero->save($pasajero)) {
+                                $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                            }
+                        } else {
+                            $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                        }
+                    }
+                } elseif ($this->request->data['base'] != NULL) {
+                    $pasajero = $this->RespuestaPasajero->find('first', array(
+                        'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
+                        'recursive' => -1
+                    ));
+                    $pasajero['RespuestaPasajero']['base'] = '1';
+                    if (!$this->RespuestaPasajero->save($pasajero)) {
+                        $this->Session->setFlash(__('Problemas al actualizar la Base.'));
+                        return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                    }
+                } else {
+                    $this->Session->setFlash(__('Por favor, primero seleccione una tarifa como base.'));
+                    return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                }
 
-            }elseif($this->request->data['accion'] == '2'){
+                return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
+
+            } elseif ($this->request->data['accion'] == '2') {
                 /******************************************
-                AGREGAR TARIFA
-                ******************************************/
+                 * AGREGAR TARIFA
+                 ******************************************/
 
                 $RespuestaPasajero['RespuestaPasajero']['consulta_id'] = $this->request->data['Consulta']['consulta_id'];
                 $RespuestaPasajero['RespuestaPasajero']['sube'] = $this->request->data['Consulta']['sube'];
                 $RespuestaPasajero['RespuestaPasajero']['tarifa'] = $this->request->data['Consulta']['tarifa'];
-                if($this->request->data['Consulta']['primero']){
+
+
+                $primero = $this->RespuestaPasajero->find('all', array(
+                    'conditions' => array('RespuestaPasajero.consulta_id' => $this->request->data['Consulta']['consulta_id'], 'RespuestaPasajero.sube' => $this->request->data['Consulta']['sube'], 'RespuestaPasajero.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+
+
+                if (empty($primero)) {
                     $RespuestaPasajero['RespuestaPasajero']['base'] = '1';
-                }else{
+                } else {
                     $RespuestaPasajero['RespuestaPasajero']['base'] = '0';
-                }
-
-                $RespuestaPasajero['RespuestaPasajero']['costo'] = $this->request->data['Consulta']['costo'];
-                $RespuestaPasajero['RespuestaPasajero']['estado_id'] = '1';
-                $RespuestaPasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
-                $RespuestaPasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
-
-
-
-
-                if($this->request->data['Consulta']['sube'] == '1'){ // SI tiene SUBE
-
-                }elseif($this->request->data['Consulta']['sube'] == '0'){ // NO tiene SUBE
-                    $RespuestaPasajero['RespuestaPasajero']['semestre1'] = $this->request->data['Consulta']['semestre1'];
-                    $RespuestaPasajero['RespuestaPasajero']['semestre2'] = $this->request->data['Consulta']['semestre2'];
-                }
-                $this->RespuestaPasajero->create();
-                if ($this->RespuestaPasajero->save($RespuestaPasajero)) {
 
                     /***ACTUALIZO LA BASE***/
-                    $base = $this->RespuestaPasajero->find('first', array(
-                        'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $this->request->data['Consulta']['tiene'], 'RespuestaPasajero.base <>' => '0', 'RespuestaPasajero.estado_id <>' => '2'),
-                        'recursive' => -1
-                    ));
-
-                    if(!empty($base)){
-                        if($this->request->data['base'] != NULL){
-                            if($base['RespuestaPasajero']['id'] != $this->request->data['base']){
+                    if ($this->request->data['base'] != NULL) {
+                        $base = $this->RespuestaPasajero->find('first', array(
+                            'conditions' => array('RespuestaPasajero.consulta_id' => $this->request->data['Consulta']['consulta_id'], 'RespuestaPasajero.sube' => $this->request->data['Consulta']['tiene'], 'RespuestaPasajero.base <>' => '0', 'RespuestaPasajero.estado_id <>' => '2'),
+                            'recursive' => -1
+                        ));
+                        if (!empty($base)) {
+                            if ($base['RespuestaPasajero']['id'] != $this->request->data['base']) {
                                 $pasajero = $this->RespuestaPasajero->find('first', array(
                                     'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
                                     'recursive' => -1
@@ -896,18 +923,40 @@ class ConsultasController extends AppController
                         }
                     }
                     /*****/
+                }
+
+                $RespuestaPasajero['RespuestaPasajero']['costo'] = $this->request->data['Consulta']['costo'];
+                $RespuestaPasajero['RespuestaPasajero']['estado_id'] = '1';
+                $RespuestaPasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
+                $RespuestaPasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
+
+                if ($this->request->data['Consulta']['sube'] == '1') { // SI tiene SUBE
+                    $RespuestaPasajero['RespuestaPasajero']['mes01'] = $this->request->data['Consulta']['mes01'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes02'] = $this->request->data['Consulta']['mes02'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes03'] = $this->request->data['Consulta']['mes03'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes04'] = $this->request->data['Consulta']['mes04'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes05'] = $this->request->data['Consulta']['mes05'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes06'] = $this->request->data['Consulta']['mes06'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes07'] = $this->request->data['Consulta']['mes07'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes08'] = $this->request->data['Consulta']['mes08'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes09'] = $this->request->data['Consulta']['mes09'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes10'] = $this->request->data['Consulta']['mes10'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes11'] = $this->request->data['Consulta']['mes11'];
+                    $RespuestaPasajero['RespuestaPasajero']['mes12'] = $this->request->data['Consulta']['mes12'];
+                } elseif ($this->request->data['Consulta']['sube'] == '0') { // NO tiene SUBE
+                    $RespuestaPasajero['RespuestaPasajero']['semestre1'] = $this->request->data['Consulta']['semestre1'];
+                    $RespuestaPasajero['RespuestaPasajero']['semestre2'] = $this->request->data['Consulta']['semestre2'];
+                }
+                $this->RespuestaPasajero->create();
+                if ($this->RespuestaPasajero->save($RespuestaPasajero)) {
                     $this->Session->setFlash(__('Tarifa agreada correctamente.'));
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                 } else {
                     $this->Session->setFlash(__('Tarifa no se pudo agregar. Por favor, intente nuevamente.'));
                 }
-
             }
-
-
-
-
         }
+
         $this->request->data['Consulta']['consulta_id'] = $id;
 
         $this->loadModel('RespuestaPregunta');
@@ -917,10 +966,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         //opcione_id = 24 --> SI; opcione_id = 25 --> NO
-        if($sube['RespuestaPregunta']['opcione_id'] == '24'){
+        if ($sube['RespuestaPregunta']['opcione_id'] == '24') {
             $tiene = '1';
             $this->request->data['Consulta']['sube'] = '1';
-        }else{
+        } else {
             $tiene = '0';
             $this->request->data['Consulta']['sube'] = '0';
         }
@@ -928,14 +977,19 @@ class ConsultasController extends AppController
 
         $pasajeros = $this->RespuestaPasajero->find('all', array(
             'conditions' => array('RespuestaPasajero.consulta_id' => $id, 'RespuestaPasajero.sube' => $tiene, 'RespuestaPasajero.estado_id <>' => '2'),
+            'order' => array('RespuestaPasajero.tarifa' => 'asc'),
             'recursive' => -1
         ));
 
-        if(empty($pasajeros)){
-            $primero = true;
+        if (!empty($pasajeros)) {
+            foreach ($pasajeros as $pasajero) {
+                if ($pasajero['RespuestaPasajero']['base'] != '0') {
+                    $this->request->data['base'] = $pasajero['RespuestaPasajero']['id'];
+                }
+            }
         }
 
-        $this->set(compact('consulta', 'pasajeros', 'tiene','primero'));
+        $this->set(compact('consulta', 'pasajeros', 'tiene'));
     }
 
     public function cuatro($id = null)
@@ -952,7 +1006,7 @@ class ConsultasController extends AppController
         }
 
         $this->loadModel('Convenio');
-        $this->Convenio->recursive =-1;
+        $this->Convenio->recursive = -1;
         $convenio = $this->Convenio->find('first', array(
             'order' => array('Convenio.fin' => 'desc'),
             'recursive' => -1
@@ -967,7 +1021,7 @@ class ConsultasController extends AppController
 
         $this->request->data['Consulta']['consulta_id'] = $id;
 
-        $this->set(compact('consulta','salarios','convenio'));
+        $this->set(compact('consulta', 'salarios', 'convenio'));
     }
 
     public function cinco($id = null)
@@ -1028,7 +1082,7 @@ class ConsultasController extends AppController
         $this->loadModel('Provincia');
         $this->Provincia->recursive = -1;
         $provincias = $this->Provincia->find('list', array(
-            'fields' => array('Provincia.id','Provincia.nombre'),
+            'fields' => array('Provincia.id', 'Provincia.nombre'),
             'conditions' => array('Provincia.nombre <>' => '', 'Provincia.estado_id' => '1'),
             'order' => array('Provincia.nombre' => 'asc')
         ));
@@ -1044,7 +1098,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad'));
     }
 
-    function obtener_localidades($id = null) {
+    function obtener_localidades($id = null)
+    {
         Configure::write('debug', '0');
         $this->layout = 'ajax';
         $this->loadModel('Localidade');
@@ -1052,7 +1107,7 @@ class ConsultasController extends AppController
         $locs = $this->Localidade->find('all', array(
             'recursive' => -1,
             'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-            'conditions' => array('Localidade.provincia_id' => $id,'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
+            'conditions' => array('Localidade.provincia_id' => $id, 'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
             'order' => array('Localidade.nombre' => 'asc')));
 
         $localidades = array();

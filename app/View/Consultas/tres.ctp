@@ -11,7 +11,12 @@
 ?>
 <div class="row consultas form">
     <div class="col-md-12">
-        <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
+        <?= $this->Form->create('Consulta', array('class' => 'form-horizontal', 'novalidate' => true)); ?>
+        <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
+        <?= $this->Form->input('sube', array('type' => 'hidden')); ?>
+        <?= $this->Form->input('tiene', array('type' => 'hidden')); ?>
+        <?= $this->Form->input('base', array('type' => 'hidden', 'name' => 'base')); ?>
+
         <h1>Realizar Consulta
             <small>Paso 3 de 5</small>
         </h1>
@@ -56,7 +61,7 @@
                     <td class="text-info" style="text-align:center;vertical-align: middle">
 
                         <?php if ($pasajero['RespuestaPasajero']['base'] == '0'): ?>
-                            <?= $this->Form->input('base', array('type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
+                            <?= $this->Form->input('base', array('value' => false, 'type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
                         <?php else: ?>
                             <?= $this->Form->input('base', array('value' => $pasajero['RespuestaPasajero']['id'], 'type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
                         <?php endif; ?>
@@ -65,14 +70,11 @@
                     <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['semestre2']); ?>&nbsp;</td>
 
                     <td class="text-info" style="text-align:center;vertical-align: middle">
-                        <!--<?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-danger btn-xs'), __('Seguro de eliminar la tarifa %s?',$pasajero['RespuestaPasajero']['tarifa']));?>-->
-
                         <?php echo $this->Html->link(
                         '<i class="fa fa-trash"></i>',
                         array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']),
                         array('class' => 'btn btn-danger btn-xs', 'confirm' => 'Seguro de eliminar la tarifa?')
                         );?>
-
                     </td>
 
                 </tr>
@@ -155,37 +157,48 @@
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
                         MES<br>12
                     </th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
+                        ELIMINAR
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($pasajeros as $pasajero): ?>
                 <tr>
-                    <td class="display-column text-info"
-                        style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0">
-                        <h4 style="font-weight: bold">
-                            <?= h("Plana"); ?>&nbsp;
-                        </h4>
-                        <div class="nowrap">
-                            &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $pasajero['RespuestaPasajero']['tarifa'])); ?>
-                        </div>
+                    <td class="display-column text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0">
+                        <strong><?= h($pasajero['RespuestaPasajero']['tarifa']); ?></strong>&nbsp;
                     </td>
                     <td class="text-info" style="text-align:center;vertical-align: middle">
-                        <strong><?= h("10"); ?></strong>&nbsp;</td>
+                        <strong><?= h($pasajero['RespuestaPasajero']['costo']); ?></strong>&nbsp;</td>
                     <td class="text-info" style="text-align:center;vertical-align: middle">
-                        <strong><?= h("SI"); ?></strong>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0011"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0022"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0033"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0044"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0055"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0066"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0077"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0088"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("0099"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1010"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1111"); ?>&nbsp;</td>
-                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h("1212"); ?>&nbsp;</td>
+
+                        <?php if ($pasajero['RespuestaPasajero']['base'] == '0'): ?>
+                        <?= $this->Form->input('base', array('value' => false, 'type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
+                        <?php else: ?>
+                        <?= $this->Form->input('base', array('value' => $pasajero['RespuestaPasajero']['id'], 'type' => 'radio', 'name' => 'base', 'options'=>array($pasajero['RespuestaPasajero']['id'] => false), 'legend'=>false, 'div' => false, 'label'=>false)); ?>
+                        <?php endif; ?>
+
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes01']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes02']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes03']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes04']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes05']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes06']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes07']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes08']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes09']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes10']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes11']); ?>&nbsp;</td>
+                    <td class="text-info" style="text-align:center;vertical-align: middle"><?= h($pasajero['RespuestaPasajero']['mes12']); ?>&nbsp;</td>
+
+                    <td class="text-info" style="text-align:center;vertical-align: middle">
+                        <?php echo $this->Html->link(
+                        '<i class="fa fa-trash"></i>',
+                        array('controller' => 'respuesta_pasajeros', 'action' => 'eliminar', $pasajero['RespuestaPasajero']['id']),
+                        array('class' => 'btn btn-danger btn-xs', 'confirm' => 'Seguro de eliminar la tarifa?')
+                        );?>
+                    </td>
+
                 </tr>
                 <?php endforeach ?>
                 </tbody>
@@ -235,6 +248,9 @@
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
                         MES<br>12
                     </th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
+                        ELIMINAR
+                    </th>
                 </tr>
                 </tfoot>
             </table>
@@ -242,19 +258,11 @@
         <?php endif; ?>
         <?php endif; ?>
 
-
-        <!--<?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>-->
-        <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
-        <?= $this->Form->input('sube', array('type' => 'hidden')); ?>
-        <?= $this->Form->input('tiene', array('type' => 'hidden')); ?>
-        <?= $this->Form->input('primero', array('type' => 'hidden')); ?>
-
         <?php if ($tiene == '0'): ?>
         <h4>
             Agregar Tarifa:
             <small>NO POSEE SUBE</small>
         </h4>
-
         <div class="form-group">
             <?= $this->Form->label('tarifa', 'Tarifa', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
@@ -263,30 +271,6 @@
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
-
-        <!--<div class="form-group">
-            <?= $this->Form->label('base', 'Base (Tarifa Plana)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('base', array('type' => 'checkbox', 'readonly' => $readonly)); ?>
-        </div>
-
-        <div class="alert alert-warning alert-dismissible" role="alert"
-             style="margin-bottom: 3px;margin-top: -10px;">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Nota: </strong> Se debe seleccionar una &uacute;nica de las tarifas como base o plana, ya que la
-            misma se utilizar&aacute; para los c&aacute;lculos de equivalencia.
-        </div>
-        <div class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom: 25px">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Importante: </strong> No se permitir&aacute; avanzar al siguiente paso si no se selecciona
-            una &uacute;nica tarifa como base o plana.
-        </div>-->
-
         <div class="form-group">
             <?= $this->Form->label('semestre1', 'Semestre 1', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('semestre1', array('type' => 'number')); ?>
@@ -311,29 +295,6 @@
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('costo', array('type' => 'number')); ?>
         </div>
-
-        <!--<div class="form-group">
-            <?= $this->Form->label('base', 'Base (Tarifa Plana)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('base', array('type' => 'checkbox', 'readonly' => $readonly)); ?>
-        </div>
-        <div class="alert alert-warning alert-dismissible" role="alert"
-             style="margin-bottom: 3px;margin-top: -10px;">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Nota: </strong> Se debe seleccionar una &uacute;nica de las tarifas como base o plana, ya que la
-            misma se utilizar&aacute; para los c&aacute;lculos de equivalencia.
-        </div>
-        <div class="alert alert-danger alert-dismissible" role="alert" style="margin-bottom: 25px">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Importante: </strong> No se permitir&aacute; avanzar al siguiente paso si no se selecciona
-            una &uacute;nica tarifa como base o plana.
-        </div>-->
-
         <div class="form-group">
             <?= $this->Form->label('mes01', 'Mes 01', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('mes01', array('type' => 'number')); ?>
@@ -344,7 +305,7 @@
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes03', 'Mes 03', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes04', array('type' => 'number')); ?>
+            <?= $this->Form->input('mes03', array('type' => 'number')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes04', 'Mes 04', array('class' => 'control-label col-xs-3')); ?>
