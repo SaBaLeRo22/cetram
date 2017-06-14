@@ -142,7 +142,7 @@ class ConsultasController extends AppController
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
             $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
 //            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
-            $consulta['Consulta']['modo_id'] = 2; // Incompleta: Pantalla "Uno" es la última pantalla completa.
+            $consulta['Consulta']['modo_id'] = 2; // Nueva Consulta.
             $consulta['Consulta']['estado_id'] = 1; // Activo
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
@@ -311,6 +311,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $consulta['Consulta']['modo_id'] = 3; // Incompleta: Pantalla "Uno" es la última pantalla completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
@@ -554,6 +559,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['modo_id'] = 3; // Incompleta: Pantalla "Uno" es la última pantalla completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            }
+
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
             return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
 
@@ -734,6 +744,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            }
+
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 3".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
@@ -878,6 +893,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            }
+
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 2".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
@@ -996,6 +1016,11 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
                 } else {
                     $this->Session->setFlash(__('The Paso has been saved.'));
+                }
+
+                $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
+                if (!$this->Consulta->save($consulta)) {
+                    $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
                 }
 
                 $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
@@ -1122,10 +1147,24 @@ class ConsultasController extends AppController
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
 
+        $this->loadModel('Convenio');
+        $this->Convenio->recursive = -1;
+        $convenio = $this->Convenio->find('first', array(
+            'order' => array('Convenio.fin' => 'desc'),
+            'recursive' => -1
+        ));
+        $this->loadModel('Salario');
+        $this->Salario->recursive = 0;
+        $salarios = $this->Salario->find('all', array(
+            'conditions' => array('Salario.convenio_id' => $convenio['Convenio']['id'], 'Salario.estado_id <>' => '2'),
+            'order' => array('Categoria.nombre' => 'asc'),
+            'recursive' => 0
+        ));
+
         if ($this->request->is('post')) {
 
-//            debug($this->request->data);
-//            exit;
+            debug($this->request->data);
+            exit;
 
             $this->loadModel('Agrupamiento');
             $this->Agrupamiento->recursive = -1;
@@ -1147,24 +1186,15 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            }
+
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 5".'));
             return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
 
         }
-
-        $this->loadModel('Convenio');
-        $this->Convenio->recursive = -1;
-        $convenio = $this->Convenio->find('first', array(
-            'order' => array('Convenio.fin' => 'desc'),
-            'recursive' => -1
-        ));
-        $this->loadModel('Salario');
-        $this->Salario->recursive = 0;
-        $salarios = $this->Salario->find('all', array(
-            'conditions' => array('Salario.convenio_id' => $convenio['Convenio']['id'], 'Salario.estado_id <>' => '2'),
-            'order' => array('Categoria.nombre' => 'asc'),
-            'recursive' => 0
-        ));
 
         $this->request->data['Consulta']['consulta_id'] = $id;
 
@@ -1242,6 +1272,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
+            }
+
+            $consulta['Consulta']['modo_id'] = 1; // Completa.
+            if (!$this->Consulta->save($consulta)) {
+                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5".'));
