@@ -5,7 +5,7 @@ class Localidad extends AuthakeAppModel {
 
     var $name = 'Localidad';
     var $useTable = 'localidades';
-    var $useDbConfig = 'authake';
+    var $useDbConfig = 'default';
 
     /**
      * Display field

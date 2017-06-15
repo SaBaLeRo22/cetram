@@ -8,6 +8,10 @@ App::uses('AppModel', 'Model');
  */
 class Provincia extends AppModel {
 
+	var $name = 'Provincia';
+	var $useTable = 'provincias';
+	var $useDbConfig = 'default';
+
 /**
  * Display field
  *

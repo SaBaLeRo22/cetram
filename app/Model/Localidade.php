@@ -8,6 +8,10 @@ App::uses('AppModel', 'Model');
  */
 class Localidade extends AppModel {
 
+	var $name = 'Localidade';
+	var $useTable = 'localidades';
+	var $useDbConfig = 'default';
+
 /**
  * Display field
  *
