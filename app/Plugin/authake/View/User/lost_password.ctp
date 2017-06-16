@@ -8,7 +8,7 @@
 
 					<div class="form-group">
 						<?= $this->Form->label('loginoremail', 'Correo o Usuario', array('class' => 'control-label col-xs-3')); ?>
-						<?= $this->Form->input('loginoremail', array('size'=>'40')); ?>
+						<?= $this->Form->input('loginoremail', array('type' => 'text', 'size'=>'40')); ?>
 					</div>
 
 

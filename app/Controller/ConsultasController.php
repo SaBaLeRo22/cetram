@@ -1333,4 +1333,37 @@ class ConsultasController extends AppController
 
         $this->set('localidades', $localidades);
     }
+
+    public function continuar($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            $this->Session->setFlash(__('No existe consulta asociada.'));
+            return $this->redirect(array('action' => 'index'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        if ($consulta['Modo']['id'] == '1') {
+            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+        } elseif ($consulta['Modo']['id'] == '2') {
+            $this->Session->setFlash(__('Por favor, continuar con el "Paso 1".'));
+            return $this->redirect(array('action' => 'uno', $consulta['Consulta']['id']));
+        } elseif ($consulta['Modo']['id'] == '3') {
+            $this->Session->setFlash(__('Por favor, continuar con el "Paso 2".'));
+            return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
+        } elseif ($consulta['Modo']['id'] == '4') {
+            $this->Session->setFlash(__('Por favor, continuar con el "Paso 3".'));
+            return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
+        } elseif ($consulta['Modo']['id'] == '5') {
+            $this->Session->setFlash(__('Por favor, continuar con el "Paso 4".'));
+            return $this->redirect(array('action' => 'cuatro', $consulta['Consulta']['id']));
+        } elseif ($consulta['Modo']['id'] == '6') {
+            $this->Session->setFlash(__('Por favor, continuar con el "Paso 5".'));
+            return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
+        } else{
+            return $this->redirect(array('action' => 'index'));
+        }
+
+        return $this->redirect(array('action' => 'index'));
+    }
 }

@@ -43,7 +43,7 @@
 
 		<div class="form-group">
 			<?= $this->Form->label('provincia_id', 'Provincia', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('provincia_id', array('empty' => 'Seleccionar...')); ?>
+			<?= $this->Form->input('provincia_id', array('type' => 'select', 'empty' => 'Seleccionar...')); ?>
 		</div>
 
 		<div class="form-group">
