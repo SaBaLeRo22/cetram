@@ -26,6 +26,11 @@ class ConsultasController extends AppController
     public function index()
     {
         $this->Consulta->recursive = 0;
+        $this->paginate = array(
+            'conditions' => array('Consulta.user_created' => $this->Authake->getUserId()),
+            'limit' => 10,
+            'order' => array('id' => 'desc')
+        );
         $this->set('consultas', $this->Paginator->paginate());
     }
 
@@ -588,6 +593,10 @@ class ConsultasController extends AppController
             return $this->redirect(array('action' => 'index'));
         }
 
+        if ($consulta['Consulta']['modo_id'] < 3) {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
+
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
         $this->loadModel('Opcione');
@@ -645,6 +654,10 @@ class ConsultasController extends AppController
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
+
+        if ($consulta['Consulta']['modo_id'] != '3') {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
 
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
@@ -791,6 +804,10 @@ class ConsultasController extends AppController
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
+
+        if ($consulta['Consulta']['modo_id'] < 4) {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
 
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
@@ -951,6 +968,10 @@ class ConsultasController extends AppController
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
+
+        if ($consulta['Consulta']['modo_id'] < 4) {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
 
         $this->loadModel('RespuestaPasajero');
         $this->RespuestaPasajero->recursive = -1;
@@ -1147,6 +1168,10 @@ class ConsultasController extends AppController
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
 
+        if ($consulta['Consulta']['modo_id'] != '5') {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
+
         $this->loadModel('Convenio');
         $this->Convenio->recursive = -1;
         $convenio = $this->Convenio->find('first', array(
@@ -1209,6 +1234,10 @@ class ConsultasController extends AppController
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
         $consulta = $this->Consulta->find('first', $options);
+
+        if ($consulta['Consulta']['modo_id'] != '6') {
+            return $this->redirect(array('action' => 'continuar', $consulta['Consulta']['id']));
+        }
 
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
