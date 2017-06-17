@@ -13,7 +13,34 @@
         </h4>
 
 
-            <p class="text-info text-left"><pre class="text-info text-left"><i class="fa fa-life-ring" aria-hidden="true"></i> <strong>Ayuda:</strong> Acceda al siguiente <a href="#"><strong>enlace</strong></a> para obtener los datos correspondientes al salario.</pre></p>
+            <p class="text-info text-left"><pre class="text-info text-left"><i class="fa fa-life-ring" aria-hidden="true"></i> <strong>Ayuda:</strong> Acceda al siguiente <strong><?php echo $this->Html->link( 'enlace', $parametro['Parametro']['descripcion'], array('target' => '_blank'))?></strong> para obtener los datos correspondientes al salario.</pre></p>
+
+
+        <?php foreach ($preguntas as $pregunta): ?>
+
+        <?php if ($pregunta['Pregunta']['titulo'] != NULL): ?>
+        <hr/>
+        <h2><small><?= h($pregunta['Pregunta']['titulo']); ?></small></h2>
+        <?php endif; ?>
+
+        <div class="form-group">
+            <?= $this->Form->label('Consulta.preguntas.'.$pregunta['Pregunta']['id'], $pregunta['Pregunta']['pregunta'], array('class' => 'control-label col-xs-10')); ?>
+            <div class="col-xs-2">
+                <?= $this->Form->input('Consulta.preguntas.'.$pregunta['Pregunta']['id'], array('div'=>false, 'type' => $pregunta['Pregunta']['tipo'],'options' => $pregunta['Pregunta']['opciones'])); ?>
+            </div>
+        </div>
+
+        <?php if ($pregunta['Pregunta']['ayuda'] != NULL): ?>
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+            <strong>Ayuda: </strong> <?= h($pregunta['Pregunta']['ayuda']); ?>
+        </div>
+        <?php endif; ?>
+
+        <?php endforeach ?>
 
 
         <div class="table-responsive">
@@ -27,13 +54,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($salarios as $salario): ?>
+                <?php foreach ($categorias as $categoria): ?>
                 <tr>
-                    <td class="text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold"><?= h($salario['Categoria']['nombre']); ?>&nbsp;</h4></td>
-                    <?= $this->Form->input('Consulta.categorias.'.$salario['Salario']['id'].'.categoria', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'hidden','default' => $salario['Categoria']['nombre'])); ?>
-                    <td style="align-items:center; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$salario['Salario']['id'].'.cantidad', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => '0')); ?>&nbsp;</td>
-                    <td style="align-items:center; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$salario['Salario']['id'].'.antiguedad', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => '0')); ?>&nbsp;</td>
-                    <td style="vertical-align: middle; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$salario['Salario']['id'].'.salario', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => $salario['Salario']['sueldo'])); ?>&nbsp;</td>
+                    <td class="text-info" style="background-color: #e6f4fb;vertical-align: middle; padding-bottom: 0;padding-top: 0;margin-top: 0;margin-bottom: 0"><h4 style="font-weight: bold"><?= h($categoria['Categoria']['nombre']); ?>&nbsp;</h4></td>
+                    <?= $this->Form->input('Consulta.categorias.'.$categoria['Categoria']['id'].'.categoria', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'hidden','default' => $categoria['Categoria']['nombre'])); ?>
+                    <td style="align-items:center; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$categoria['Categoria']['id'].'.cantidad', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => '0')); ?>&nbsp;</td>
+                    <td style="align-items:center; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$categoria['Categoria']['id'].'.antiguedad', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => '0')); ?>&nbsp;</td>
+                    <td style="vertical-align: middle; padding-bottom: 0;padding-top: 0"><?= $this->Form->input('Consulta.categorias.'.$categoria['Categoria']['id'].'.salario', array('style'=>'margin-top: 5%;align-items:center','div'=>false, 'type' => 'number','default' => '0')); ?>&nbsp;</td>
                 </tr>
                 <?php endforeach ?>
                 </tbody>
