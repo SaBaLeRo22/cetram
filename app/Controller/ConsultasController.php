@@ -27,7 +27,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->recursive = 0;
         $this->paginate = array(
-            'conditions' => array('Consulta.user_created' => $this->Authake->getUserId()),
+            'conditions' => array('Consulta.estado_id <>' => '2', 'Consulta.user_created' => $this->Authake->getUserId()),
             'limit' => 10,
             'order' => array('id' => 'desc')
         );
