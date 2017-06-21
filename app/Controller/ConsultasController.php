@@ -343,6 +343,22 @@ class ConsultasController extends AppController
                             }
                             if ($pregunta['Pregunta']['id'] == '5') {
                                 $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076 * pow($this->request->data['Consulta'][$pregunta['Pregunta']['id']] + 1, 2) + 0.0223 * ($this->request->data['Consulta'][$pregunta['Pregunta']['id']] + 1) + 0.9859);
+                            } else if ($pregunta['Pregunta']['id'] == '6' || $pregunta['Pregunta']['id'] == '7') {
+                                if ($pregunta['Pregunta']['id'] == '7' && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] != NULL) {
+                                    $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $respuesta_opcion['Opcione']['funcion'] / $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']];
+
+                                    if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0.8 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] <= 1){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0;
+                                    } else if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0.3 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] < 0.8){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0.5;
+                                    } else if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] < 0.3){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
+                                    } else{
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0;
+                                    }
+                                } else {
+                                    $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $respuesta_opcion['Opcione']['funcion'];
+                                }
                             }
                         }
                     }
@@ -387,6 +403,7 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 3; // Incompleta: Pantalla "Uno" es la última pantalla completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -452,7 +469,8 @@ class ConsultasController extends AppController
      *
      *
      */
-    public function editaruno($id = null)
+    public
+    function editaruno($id = null)
     {
 
         if ($this->request->is('post')) {
@@ -629,6 +647,22 @@ class ConsultasController extends AppController
                             }
                             if ($pregunta['Pregunta']['id'] == '5') {
                                 $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * (-0.0076 * pow($this->request->data['Consulta'][$pregunta['Pregunta']['id']] + 1, 2) + 0.0223 * ($this->request->data['Consulta'][$pregunta['Pregunta']['id']] + 1) + 0.9859);
+                            } else if ($pregunta['Pregunta']['id'] == '6' || $pregunta['Pregunta']['id'] == '7') {
+                                if ($pregunta['Pregunta']['id'] == '7' && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] != NULL) {
+                                    $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $respuesta_opcion['Opcione']['funcion'] / $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']];
+
+                                    if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0.8 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] <= 1){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0;
+                                    } else if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0.3 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] < 0.8){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0.5;
+                                    } else if($coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] >= 0 && $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] < 0.3){
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 1;
+                                    } else{
+                                        $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = 0;
+                                    }
+                                } else {
+                                    $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $respuesta_opcion['Opcione']['funcion'];
+                                }
                             }
                         }
                     }
@@ -734,7 +768,8 @@ class ConsultasController extends AppController
 
     }
 
-    public function dos($id = null)
+    public
+    function dos($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -871,6 +906,7 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -935,7 +971,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'preguntas'));
     }
 
-    public function editardos($id = null)
+    public
+    function editardos($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1080,6 +1117,7 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -1155,7 +1193,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'preguntas'));
     }
 
-    public function tres($id = null)
+    public
+    function tres($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1234,6 +1273,7 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The Paso has been saved.'));
                 }
 
+                $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
                 $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
                 if (!$this->Consulta->save($consulta)) {
                     $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -1354,7 +1394,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'pasajeros', 'tiene'));
     }
 
-    public function cuatro($id = null)
+    public
+    function cuatro($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1495,6 +1536,7 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -1561,7 +1603,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'categorias', 'preguntas', 'parametro'));
     }
 
-    public function editarcuatro($id = null)
+    public
+    function editarcuatro($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1707,6 +1750,7 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -1776,9 +1820,9 @@ class ConsultasController extends AppController
         ));
         $this->loadModel('RespuestaSalario');
         $this->RespuestaSalario->recursive = -1;
-        foreach($categorias as $categ => $categoria){
+        foreach ($categorias as $categ => $categoria) {
             $respuestaSalario = $this->RespuestaSalario->find('first', array(
-                'conditions' => array('RespuestaSalario.consulta_id' => $id, 'RespuestaSalario.categoria_id' => $categoria['Categoria']['id'],'RespuestaSalario.estado_id <>' => '2'),
+                'conditions' => array('RespuestaSalario.consulta_id' => $id, 'RespuestaSalario.categoria_id' => $categoria['Categoria']['id'], 'RespuestaSalario.estado_id <>' => '2'),
                 'recursive' => -1
             ));
             $this->request->data['Consulta']['categorias'][$categoria['Categoria']['id']]['cantidad'] = $respuestaSalario['RespuestaSalario']['cantidad'];
@@ -1796,7 +1840,8 @@ class ConsultasController extends AppController
         $this->set(compact('consulta', 'categorias', 'preguntas', 'parametro'));
     }
 
-    public function cinco($id = null)
+    public
+    function cinco($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1852,6 +1897,31 @@ class ConsultasController extends AppController
             }
 
 
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+            /*
+                Calcular Respuesta Multiplicadores, Ítems, Tipos y Consulta.
+                Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
+            */
+            /*********************************************************************************************************/
+
+            //$this->item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null)
+            /* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE: */
+            $this->item1y2('1', $consulta['Consulta']['id'], '1', '1');
+
+            /* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES: */
+            $this->item1y2('2', $consulta['Consulta']['id'], '30', '3');
+
+            //$this->item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
+            /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
+            $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5');
+
+            /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS: */
+
+
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+
             $this->loadModel('Agrupamiento');
             $this->Agrupamiento->recursive = -1;
             $this->loadModel('Paso');
@@ -1872,6 +1942,11 @@ class ConsultasController extends AppController
                 $this->Session->setFlash(__('The Paso has been saved.'));
             }
 
+            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
+            if ($this->request->data['Consulta']['localidade_id'] != '') {
+                $consulta['Consulta']['localidade_id'] = $this->request->data['Consulta']['localidade_id'];
+            }
+            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 1; // Completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -1932,7 +2007,8 @@ class ConsultasController extends AppController
         $this->set('localidades', $localidades);
     }
 
-    public function continuar($id = null)
+    public
+    function continuar($id = null)
     {
         if (!$this->Consulta->exists($id)) {
             $this->Session->setFlash(__('No existe consulta asociada.'));
@@ -1965,7 +2041,8 @@ class ConsultasController extends AppController
         return $this->redirect(array('action' => 'index'));
     }
 
-    public function eliminar($id = null)
+    public
+    function eliminar($id = null)
     {
         $this->Consulta->id = $id;
         if (!$this->Consulta->exists()) {
@@ -2047,5 +2124,120 @@ class ConsultasController extends AppController
         }
 
         return $this->redirect(array('action' => 'index'));
+    }
+
+    /* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE */
+    /* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES */
+    public
+    function item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = -1;
+        $this->loadModel('RespuestaCoeficiente');
+        $this->RespuestaCoeficiente->recursive = -1;
+
+        $respuestaParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $this->loadModel('Item');
+        $this->Item->recursive = 0;
+
+        $item = $this->Item->find('first', array(
+            'conditions' => array('Item.id' => $item_id),
+            'recursive' => 0
+        ));
+        $this->RespuestaItem->create();
+        $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
+        $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+        $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+        $respuestaItem['RespuestaItem']['valor'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['valor'];
+        $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
+        $respuestaItem['RespuestaItem']['minimo'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['minimo'];
+        $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
+        $respuestaItem['RespuestaItem']['maximo'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['maximo'];
+        $respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
+        $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+        $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+        $respuestaItem['RespuestaItem']['estado_id'] = 1;
+        $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+        $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        return ($this->RespuestaItem->save($respuestaItem));
+    }
+
+
+    /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
+    public
+    function item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = -1;
+        $this->loadModel('RespuestaCoeficiente');
+        $this->RespuestaCoeficiente->recursive = -1;
+
+        $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaParametro2 = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro2_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaParametro['RespuestaParametro']['valor'] = $respuestaParametro1['RespuestaParametro']['valor'] * $respuestaParametro2['RespuestaParametro']['valor'];
+        $respuestaParametro['Unidade']['id'] = $respuestaParametro1['Unidade']['id'];
+        $respuestaParametro['Unidade']['nombre'] = $respuestaParametro1['Unidade']['nombre'];
+
+        $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $this->loadModel('Item');
+        $this->Item->recursive = 0;
+
+        $item = $this->Item->find('first', array(
+            'conditions' => array('Item.id' => $item_id),
+            'recursive' => 0
+        ));
+        $this->RespuestaItem->create();
+        $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
+        $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+        $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+        $respuestaItem['RespuestaItem']['valor'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['total'];
+        $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
+        $respuestaItem['RespuestaItem']['minimo'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['minimo'];
+        $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
+        $respuestaItem['RespuestaItem']['maximo'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['maximo'];
+        $respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
+        $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+        $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+        $respuestaItem['RespuestaItem']['estado_id'] = 1;
+        $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+        $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        return ($this->RespuestaItem->save($respuestaItem));
     }
 }
