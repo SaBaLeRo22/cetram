@@ -1917,8 +1917,25 @@ class ConsultasController extends AppController
             /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
             $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5');
 
+            //$this->item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
             /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS: */
+            $this->item4('4', $consulta['Consulta']['id'], '7', '9', '23', '4');
 
+            /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO: */
+            //Parametro1: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
+            //Pregunta1: "Antigüedad máxima": 22 --> Con esto se que tabla usar y obtener "COEFICIENTE DE DEPRECIACIÓN DE UN OMNIBUS" y "FACTOR DE REMUNERACIÓN DE UN OMNIBUS"
+            //Pregunta2: "¿En qué franja etaria promedio se encuentra la flota (en años)?": 5 --> Con esto entro a la tabla
+            //Parametro2: "TASA DE REMUNERACIÓN DEL CAPITAL (TNA)": 5 --> Con esto obtengo "FACTOR DE REMUNERACIÓN DE MÁQUINAS Y EQUIPOS" (0,04*(x/12)) y "FACTOR DE REMUNERACIÓN DE EDIFICIOS" (0,03*(x/12))
+            //Pregunta3: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
+            //Pregunta4: "Flota total de omnibus": 9
+            //$this->item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null)
+            $this->item5('5', $consulta['Consulta']['id'], '7', '5', '22', '5', '23', '9');
+
+
+            /* 6) ITEM6: COSTO DEL CAPITAL PERSONAL: */
+            /* 7) ITEM7: COSTO DEL CAPITAL SUBE: */
+            /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
+            /* 9) ITEM9: IMPUESTOS Y TASAS: */
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2129,8 +2146,7 @@ class ConsultasController extends AppController
 
     /* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE */
     /* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES */
-    public
-    function item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null)
+    public function item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2180,10 +2196,8 @@ class ConsultasController extends AppController
         return ($this->RespuestaItem->save($respuestaItem));
     }
 
-
     /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
-    public
-    function item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
+    public function item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2241,4 +2255,228 @@ class ConsultasController extends AppController
 
         return ($this->RespuestaItem->save($respuestaItem));
     }
+
+    /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS */
+    public function item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = -1;
+        $this->loadModel('RespuestaCoeficiente');
+        $this->RespuestaCoeficiente->recursive = -1;
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+
+        $respuestaParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta1 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta1_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta2 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta2_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        //opcione_id = 24 --> SI; opcione_id = 25 --> NO
+        $tiene = null;
+        if ($respuestaPregunta2['RespuestaPregunta']['opcione_id'] == '24') {
+            $tiene['10'] = '10';
+            $tiene['11'] = '11';
+            $tiene['12'] = '12';
+            $tiene['13'] = '13';
+            $tiene['14'] = '14';
+            $tiene['15'] = '15';
+            $tiene['16'] = '16';
+            $tiene['17'] = '17';
+            $tiene['18'] = '18';
+            $tiene['19'] = '19';
+            $tiene['20'] = '20';
+            $tiene['21'] = '21';
+        } else {
+            $tiene['27'] = '27';
+            $tiene['28'] = '28';
+        }
+        $kms = $this->RespuestaPregunta->find('all', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $tiene, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $recorridos = 0;
+        foreach ($kms as $key => $km) {
+            $recorridos = $recorridos + $km['RespuestaPregunta']['valor'];
+        }
+        $recorridos = $recorridos / 12 / $respuestaPregunta1['RespuestaPregunta']['valor'];
+
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $this->loadModel('Item');
+        $this->Item->recursive = 0;
+
+        $item = $this->Item->find('first', array(
+            'conditions' => array('Item.id' => $item_id),
+            'recursive' => 0
+        ));
+        $this->RespuestaItem->create();
+        $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
+        $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+        $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+        $respuestaItem['RespuestaItem']['valor'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['valor'] / $recorridos;
+        $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
+        $respuestaItem['RespuestaItem']['minimo'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['minimo'] / $recorridos;
+        $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
+        $respuestaItem['RespuestaItem']['maximo'] = $respuestaParametro['RespuestaParametro']['valor'] * $respuestacoeficiente['RespuestaCoeficiente']['maximo'] / $recorridos;
+        $respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
+        $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+        $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+        $respuestaItem['RespuestaItem']['estado_id'] = 1;
+        $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+        $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        return ($this->RespuestaItem->save($respuestaItem));
+    }
+
+    /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO */
+    public function item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = -1;
+        $this->loadModel('RespuestaCoeficiente');
+        $this->RespuestaCoeficiente->recursive = -1;
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+
+        $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaParametro2 = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro2_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta1 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta1_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta2 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta2_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta3 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta3_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta4 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta4_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        //opcione_id = 24 --> SI; opcione_id = 25 --> NO
+        $tiene = null;
+        if ($respuestaPregunta3['RespuestaPregunta']['opcione_id'] == '24') {
+            $tiene['10'] = '10';
+            $tiene['11'] = '11';
+            $tiene['12'] = '12';
+            $tiene['13'] = '13';
+            $tiene['14'] = '14';
+            $tiene['15'] = '15';
+            $tiene['16'] = '16';
+            $tiene['17'] = '17';
+            $tiene['18'] = '18';
+            $tiene['19'] = '19';
+            $tiene['20'] = '20';
+            $tiene['21'] = '21';
+        } else {
+            $tiene['27'] = '27';
+            $tiene['28'] = '28';
+        }
+        $kms = $this->RespuestaPregunta->find('all', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $tiene, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $recorridos = 0;
+        foreach ($kms as $key => $km) {
+            $recorridos = $recorridos + $km['RespuestaPregunta']['valor'];
+        }
+        $recorridos = $recorridos / 12 / $respuestaPregunta4['RespuestaPregunta']['valor'];
+
+        $this->loadModel('Factore');
+        $this->Factore->recursive = -1;
+        $factore = $this->Factore->find('first', array(
+            'conditions' => array('Factore.antiguedad_maxima' => $respuestaPregunta1['RespuestaPregunta']['valor'], 'Factore.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        if($respuestaPregunta2['RespuestaPregunta']['valor'] < $factore['Factore']['antiguedad_maxima']){
+            $depreciacion = (1 - $factore['Factore']['valor_residual']/100) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor'])/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
+            $deducir = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1)/2 - ($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) + 1 ) / 2  ) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+        } else{
+            $depreciacion = (1 - $factore['Factore']['valor_residual']/100) * ((1)/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
+            $deducir = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ( $factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+        }
+
+        $factor_rem_maq_eq = 0.04*($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
+        $factor_rem_edificios = 0.03*($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
+
+        $dep_mensual_vehiculo = $respuestaParametro1['RespuestaParametro']['valor'] * $depreciacion / 12;
+        $rem_mensual_vehiculo = $respuestaParametro1['RespuestaParametro']['valor'] * ($deducir * $respuestaParametro2['RespuestaParametro']['valor']) / 100 / 12;
+        $rem_mensual_maq_eq = $respuestaParametro1['RespuestaParametro']['valor'] * $factor_rem_maq_eq;
+        $rem_mensual_edificios = $respuestaParametro1['RespuestaParametro']['valor'] * $factor_rem_edificios;
+
+        $costo_dep_km = $dep_mensual_vehiculo / $recorridos;
+        $costo_rem_vehiculo_km = $rem_mensual_vehiculo / $recorridos;
+        $costo_rem_maq_eq_km = $rem_mensual_maq_eq / $recorridos;
+        $costo_rem_edificios_km = $rem_mensual_edificios / $recorridos;
+
+        $costo = $costo_dep_km + $costo_rem_vehiculo_km + $costo_rem_maq_eq_km + $costo_rem_edificios_km;
+
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $this->loadModel('Item');
+        $this->Item->recursive = 0;
+        $item = $this->Item->find('first', array(
+            'conditions' => array('Item.id' => $item_id),
+            'recursive' => 0
+        ));
+        $this->RespuestaItem->create();
+        $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
+        $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+        $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+        $respuestaItem['RespuestaItem']['valor'] = $costo;
+        $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
+        $respuestaItem['RespuestaItem']['minimo'] = $costo;
+        $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
+        $respuestaItem['RespuestaItem']['maximo'] = $costo;
+        $respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
+        $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+        $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+        $respuestaItem['RespuestaItem']['estado_id'] = 1;
+        $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+        $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        return ($this->RespuestaItem->save($respuestaItem));
+    }
+
 }

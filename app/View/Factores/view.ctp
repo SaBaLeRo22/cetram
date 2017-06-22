@@ -87,6 +87,7 @@
 						<th><?= __('Antig&uuml;edad'); ?></th>
 						<th><?= __('Coef. Depreciaci&oacute;n'); ?></th>
 						<th><?= __('% A Deducir &sup1;'); ?></th>
+						<th><?= __('Factor Anual de Remuneraci&oacute;n'); ?></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -96,6 +97,7 @@
 						<td><?= $tabla['antiguedad']; ?></td>
 						<td><?= $tabla['depreciacion']; ?></td>
 						<td><?= $tabla['deducir']; ?></td>
+						<td><?= $tabla['remuneracion']; ?></td>
 					</tr>
 					<?php endforeach; ?>
 					</tbody>

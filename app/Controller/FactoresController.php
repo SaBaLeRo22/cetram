@@ -40,17 +40,28 @@ class FactoresController extends AppController {
 		$options = array('conditions' => array('Factore.' . $this->Factore->primaryKey => $id));
 //		$this->set('factore', $this->Factore->find('first', $options));
 		$factore = $this->Factore->find('first', $options);
+
+		$this->loadModel('Parametro');
+		$this->Parametro->recursive = -1;
+		$parametro = $this->Parametro->find('first', array(
+			'conditions' => array('Parametro.id' => '5', 'Parametro.estado_id <>' => '2'),
+			'recursive' => -1
+		));
+
 		$tablas = null;
 		for( $i = 0 ; $i <= $factore['Factore']['antiguedad_maxima'] ; $i++ ){
 			if($i == $factore['Factore']['antiguedad_maxima']){
 				$tablas[$i]['fase'] = " > " . $i;
 				$tablas[$i]['depreciacion'] = (1 - $factore['Factore']['valor_residual']/100) * ((1)/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
 				$tablas[$i]['deducir'] = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ( $factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+				$tablas[$i]['remuneracion'] = $tablas[$i]['deducir'] * $parametro['Parametro']['valor'] / 100;
+
 			}
 			else{
 				$tablas[$i]['fase'] = $i . ' a ' . ($i + 1);
 				$tablas[$i]['depreciacion'] = (1 - $factore['Factore']['valor_residual']/100) * (($factore['Factore']['antiguedad_maxima'] - $i)/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
 				$tablas[$i]['deducir'] = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1)/2 - ($factore['Factore']['antiguedad_maxima'] - $i) * (($factore['Factore']['antiguedad_maxima'] - $i) + 1 ) / 2  ) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+				$tablas[$i]['remuneracion'] = $tablas[$i]['deducir'] * $parametro['Parametro']['valor'] / 100;
 			}
 			$tablas[$i]['antiguedad'] = $i;
 		}
