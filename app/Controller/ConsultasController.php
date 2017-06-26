@@ -1901,6 +1901,48 @@ class ConsultasController extends AppController
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
             /*
+                Crear los Tipos (ResputaTipo).
+                Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
+            */
+            /*********************************************************************************************************/
+            $this->loadModel('Tipo');
+            $this->Tipo->recursive = 0;
+            $this->loadModel('RespuestaTipo');
+            $this->RespuestaTipo->recursive = -1;
+            $tipo_item['1'] = '1'; // Costos Variables de Estructura
+            $tipo_item['2'] = '2'; // Costos Fijos de Estructura
+            $tipo_item['5'] = '5'; // Impuestos
+            $tipos = $this->Tipo->find('all', array(
+                'conditions' => array('Tipo.id' => $tipo_item, 'Tipo.estado_id <>' => '2'),
+                'recursive' => 0
+            ));
+            foreach ($tipos as $tip => $tipo) {
+                $this->RespuestaTipo->create();
+                $respuestaTipo['RespuestaTipo']['consulta_id'] = $consulta['Consulta']['id'];
+                $respuestaTipo['RespuestaTipo']['tipo_id'] = $tipo['Tipo']['id'];
+                $respuestaTipo['RespuestaTipo']['tipo'] = $tipo['Tipo']['nombre'];
+                $respuestaTipo['RespuestaTipo']['valor'] = 0;
+                $respuestaTipo['RespuestaTipo']['incidencia_valor'] = 0;
+                $respuestaTipo['RespuestaTipo']['minimo'] = 0;
+                $respuestaTipo['RespuestaTipo']['incidencia_minimo'] = 0;
+                $respuestaTipo['RespuestaTipo']['maximo'] = 0;
+                $respuestaTipo['RespuestaTipo']['incidencia_maximo'] = 0;
+                $respuestaTipo['RespuestaTipo']['unidade_id'] = $tipo['Unidade']['id'];
+                $respuestaTipo['RespuestaTipo']['unidad'] = $tipo['Unidade']['nombre'];
+                $respuestaTipo['RespuestaTipo']['estado_id'] = 1;
+                $respuestaTipo['RespuestaTipo']['user_created'] = $this->Authake->getUserId();
+                $respuestaTipo['RespuestaTipo']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaTipo->save($respuestaTipo)) {
+                    $this->Session->setFlash(__('The RespuestaTipo could not be saved. Please, try again.'));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaTipo has been saved.'));
+                }
+            }
+
+
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+            /*
                 Calcular Respuesta Multiplicadores, Ítems, Tipos y Consulta.
                 Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
             */
@@ -1908,20 +1950,25 @@ class ConsultasController extends AppController
 
             //$this->item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null)
             /* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE: */
-            $this->item1y2('1', $consulta['Consulta']['id'], '1', '1');
+            //Tipo: "Costos Variables de Estructura": 1
+            $respuestaItem['1']['RespuestaItem']['id'] = $this->item1y2('1', $consulta['Consulta']['id'], '1', '1');
 
             /* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES: */
-            $this->item1y2('2', $consulta['Consulta']['id'], '30', '3');
+            //Tipo: "Costos Variables de Estructura": 1
+            $respuestaItem['2']['RespuestaItem']['id'] = $this->item1y2('2', $consulta['Consulta']['id'], '30', '3');
 
             //$this->item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
             /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
-            $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5');
+            //Tipo: "Costos Variables de Estructura": 1
+            $respuestaItem['3']['RespuestaItem']['id'] = $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5');
 
             //$this->item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
             /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS: */
-            $this->item4('4', $consulta['Consulta']['id'], '7', '9', '23', '4');
+            //Tipo: "Costos Variables de Estructura": 1
+            $respuestaItem['4']['RespuestaItem']['id'] = $this->item4('4', $consulta['Consulta']['id'], '7', '9', '23', '4');
 
             /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO: */
+            //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
             //Pregunta1: "Antigüedad máxima": 22 --> Con esto se que tabla usar y obtener "COEFICIENTE DE DEPRECIACIÓN DE UN OMNIBUS" y "FACTOR DE REMUNERACIÓN DE UN OMNIBUS"
             //Pregunta2: "¿En qué franja etaria promedio se encuentra la flota (en años)?": 5 --> Con esto entro a la tabla
@@ -1929,10 +1976,10 @@ class ConsultasController extends AppController
             //Pregunta3: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Pregunta4: "Flota total de omnibus": 9
             //$this->item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null)
-            $this->item5('5', $consulta['Consulta']['id'], '7', '5', '22', '5', '23', '9');
-
+            $respuestaItem['5']['RespuestaItem']['id'] = $this->item5('5', $consulta['Consulta']['id'], '7', '5', '22', '5', '23', '9');
 
             /* 6) ITEM6: COSTO DEL CAPITAL PERSONAL: */
+            //Tipo: "Costos Fijos de Estructura": 2
             //Pregunta1: "Bonificación Anual ($)": 24
             //Pregunta2: "Contribuciones Patronales (%)": 25
             //Pregunta3: "Viáticos ($/día)": 26
@@ -1941,27 +1988,49 @@ class ConsultasController extends AppController
             //Parametro1: "SAC": 35
             //Parametro1: "VACACIONES": 36
             //$this->item6($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $pregunta5_id = null)
-            $this->item6('6', $consulta['Consulta']['id'], '7', '35', '36', '24', '25', '26', '9', '23');
+            $respuestaItem['6']['RespuestaItem']['id'] = $this->item6('6', $consulta['Consulta']['id'], '7', '35', '36', '24', '25', '26', '9', '23');
 
             /* 7) ITEM7: COSTO DEL CAPITAL SUBE: */
+            //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "ALICUOTA DE RETENCION SISTEMA S.U.B.E.": 32
             //Pregunta1: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //$this->item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
-            $this->item7('7', $consulta['Consulta']['id'], '32', '23');
+            $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '32', '23');
 
             /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
+            //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "SEGURO OBLIGATORIO PARA UN OMNIBUS": 31
             //Parametro2: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
             //Coeficiente1: "Gastos Generales": 6
             //Pregunta1: "Flota total de omnibus": 9
             //Pregunta2: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //$this->item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
-            $this->item8('8', $consulta['Consulta']['id'], '31', '7', '9', '23', '6');
-
-
-
+            $respuestaItem['8']['RespuestaItem']['id'] = $this->item8('8', $consulta['Consulta']['id'], '31', '7', '9', '23', '6');
 
             /* 9) ITEM9: IMPUESTOS Y TASAS: */
+            //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
+            //Tipo1: "Costos Variables de Estructura": 1
+            //Tipo2: "Costos Fijos de Estructura": 2
+            //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
+            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '33', '1', '2');
+
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+            /*
+                Calcular Incidencias.
+                Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
+            */
+            /*********************************************************************************************************/
+
+
+
+
+
+
+
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2219,7 +2288,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
@@ -2279,7 +2361,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS */
@@ -2371,7 +2466,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO */
@@ -2500,7 +2608,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 6) ITEM6: COSTO DEL CAPITAL PERSONAL */
@@ -2632,7 +2753,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 7) ITEM7: COSTO DEL CAPITAL SUBE */
@@ -2735,7 +2869,20 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
     /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
@@ -2853,9 +3000,88 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
-        return ($this->RespuestaItem->save($respuestaItem));
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
     }
 
 
+    /* 9) ITEM9: IMPUESTOS Y TASAS: */
+    //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
+    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = -1;
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $this->loadModel('Item');
+        $this->Item->recursive = 0;
+
+        $respuestaParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaTipo1= $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $tipo1_id, 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaTipo2 = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $tipo2_id, 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $item = $this->Item->find('first', array(
+            'conditions' => array('Item.id' => $item_id),
+            'recursive' => 0
+        ));
+        $this->RespuestaItem->create();
+        $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
+        $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
+        $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
+        $respuestaItem['RespuestaItem']['valor'] = (($respuestaTipo1['RespuestaTipo']['valor'] + $respuestaTipo2['RespuestaTipo']['valor']) / (1 - ($respuestaParametro['RespuestaParametro']['valor'] / 100))) * $respuestaParametro['RespuestaParametro']['valor'] / 100;
+        $respuestaItem['RespuestaItem']['incidencia_valor'] = $respuestaParametro['RespuestaParametro']['valor'] / 100;
+        $respuestaItem['RespuestaItem']['minimo'] = (($respuestaTipo1['RespuestaTipo']['minimo'] + $respuestaTipo2['RespuestaTipo']['minimo']) / (1 - ($respuestaParametro['RespuestaParametro']['valor'] / 100))) * $respuestaParametro['RespuestaParametro']['valor'] / 100;;
+        $respuestaItem['RespuestaItem']['incidencia_minimo'] = $respuestaParametro['RespuestaParametro']['valor'] / 100;
+        $respuestaItem['RespuestaItem']['maximo'] = (($respuestaTipo1['RespuestaTipo']['maximo'] + $respuestaTipo2['RespuestaTipo']['maximo']) / (1 - ($respuestaParametro['RespuestaParametro']['valor'] / 100))) * $respuestaParametro['RespuestaParametro']['valor'] / 100;;
+        $respuestaItem['RespuestaItem']['incidencia_maximo'] = $respuestaParametro['RespuestaParametro']['valor'] / 100;
+        $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
+        $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
+        $respuestaItem['RespuestaItem']['estado_id'] = 1;
+        $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+        $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        $respuestaTipo = $this->RespuestaTipo->find('first', array(
+            'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+            return false;
+        } else {
+            return ($this->RespuestaItem->save($respuestaItem));
+        }
+    }
 
 }
