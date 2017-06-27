@@ -142,8 +142,20 @@ class ConsultasController extends AppController
             $this->Consulta->create();
 
             $consulta['Consulta']['costo'] = 0;
+            $consulta['Consulta']['costo_minimo'] = 0;
+            $consulta['Consulta']['costo_maximo'] = 0;
+            $consulta['Consulta']['costo_inferior'] = 0;
+            $consulta['Consulta']['costo_superior'] = 0;
             $consulta['Consulta']['tarifa'] = 0;
+            $consulta['Consulta']['tarifa_minima'] = 0;
+            $consulta['Consulta']['tarifa_maxima'] = 0;
+            $consulta['Consulta']['tarifa_inferior'] = 0;
+            $consulta['Consulta']['tarifa_superior'] = 0;
             $consulta['Consulta']['subsidio'] = 0;
+            $consulta['Consulta']['subsidio_minimo'] = 0;
+            $consulta['Consulta']['subsidio_maximo'] = 0;
+            $consulta['Consulta']['subsidio_inferior'] = 0;
+            $consulta['Consulta']['subsidio_superior'] = 0;
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
             $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
 //            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
@@ -2025,7 +2037,7 @@ class ConsultasController extends AppController
             */
             /*********************************************************************************************************/
 
-
+            $incidencias = $this->incidencias($consulta['Consulta']['id']);
 
 
 
@@ -3025,6 +3037,8 @@ class ConsultasController extends AppController
         if (!$this->Consulta->exists()) {
             throw new NotFoundException(__('Invalid consulta'));
         }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
+        $consulta = $this->Consulta->find('first', $options);
 
         $this->loadModel('RespuestaParametro');
         $this->RespuestaParametro->recursive = -1;
@@ -3080,8 +3094,53 @@ class ConsultasController extends AppController
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
-            return ($this->RespuestaItem->save($respuestaItem));
+            $consulta['Consulta']['costo'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaTipo1['RespuestaTipo']['valor'] + $respuestaTipo2['RespuestaTipo']['valor'];
+            $consulta['Consulta']['costo_minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaTipo1['RespuestaTipo']['minimo'] + $respuestaTipo2['RespuestaTipo']['minimo'];
+            $consulta['Consulta']['costo_maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaTipo1['RespuestaTipo']['maximo'] + $respuestaTipo2['RespuestaTipo']['maximo'];
+            if (!$this->Consulta->save($consulta)) {
+                return false;
+            } else {
+                return ($this->RespuestaItem->save($respuestaItem));
+            }
         }
+    }
+
+    public function incidencias($id = null)
+    {
+        $this->Consulta->id = $id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = -1;
+        $respuestaItems = $this->RespuestaItem->find('all', array(
+            'conditions' => array('RespuestaItem.consulta_id' => $id, 'RespuestaItem.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        foreach ($respuestaItems as $key_item => $respuestaItem) {
+            $respuestaItem['RespuestaItem']['incidencia_valor'] = $respuestaItem['RespuestaItem']['valor'] / $consulta['Consulta']['costo'];
+            $respuestaItem['RespuestaItem']['incidencia_minimo'] = $respuestaItem['RespuestaItem']['minimo'] / $consulta['Consulta']['costo_minimo'];
+            $respuestaItem['RespuestaItem']['incidencia_maximo'] = $respuestaItem['RespuestaItem']['maximo'] / $consulta['Consulta']['costo_maximo'];
+            $this->RespuestaItem->save($respuestaItem);
+        }
+
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = -1;
+        $respuestaTipos = $this->RespuestaTipo->find('all', array(
+            'conditions' => array('RespuestaTipo.consulta_id' => $id, 'RespuestaTipo.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+        foreach ($respuestaTipos as $key_tipo => $respuestaTipo) {
+            $respuestaTipo['RespuestaTipo']['incidencia_valor'] = $respuestaTipo['RespuestaItem']['valor'] / $consulta['Consulta']['costo'];
+            $respuestaTipo['RespuestaTipo']['incidencia_minimo'] = $respuestaTipo['RespuestaItem']['minimo'] / $consulta['Consulta']['costo_minimo'];
+            $respuestaTipo['RespuestaTipo']['incidencia_maximo'] = $respuestaTipo['RespuestaItem']['maximo'] / $consulta['Consulta']['costo_maximo'];
+            $this->RespuestaTipo->save($respuestaTipo);
+        }
+
+
     }
 
 }
