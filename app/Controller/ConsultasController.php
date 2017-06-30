@@ -2314,6 +2314,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2342,6 +2347,11 @@ class ConsultasController extends AppController
         $this->RespuestaParametro->recursive = -1;
         $this->loadModel('RespuestaCoeficiente');
         $this->RespuestaCoeficiente->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -2387,6 +2397,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2417,6 +2432,11 @@ class ConsultasController extends AppController
         $this->RespuestaCoeficiente->recursive = -1;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestaParametro = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -2492,6 +2512,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2520,6 +2545,11 @@ class ConsultasController extends AppController
         $this->RespuestaParametro->recursive = -1;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -2634,6 +2664,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2662,6 +2697,11 @@ class ConsultasController extends AppController
         $this->RespuestaParametro->recursive = -1;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -2779,6 +2819,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2807,6 +2852,11 @@ class ConsultasController extends AppController
         $this->RespuestaParametro->recursive = -1;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestaParametro = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -2895,6 +2945,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -2925,6 +2980,11 @@ class ConsultasController extends AppController
         $this->RespuestaCoeficiente->recursive = -1;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
+
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
             'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
@@ -3026,6 +3086,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
 
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
+
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = -1;
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
@@ -3063,6 +3128,11 @@ class ConsultasController extends AppController
         $this->loadModel('Item');
         $this->Item->recursive = 0;
 
+        $intervaloParametro = $this->RespuestaParametro->find('first', array(
+            'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
         $respuestaParametro = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
             'recursive' => -1
@@ -3097,6 +3167,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['estado_id'] = 1;
         $respuestaItem['RespuestaItem']['user_created'] = $this->Authake->getUserId();
         $respuestaItem['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+
+        $respuestaItem['RespuestaItem']['inferior'] = $respuestaItem['RespuestaItem']['valor'] - ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['superior'] = $respuestaItem['RespuestaItem']['valor'] + ($respuestaItem['RespuestaItem']['valor'] * ($intervaloParametro['RespuestaParametro']['valor'] / 100));
+        $respuestaItem['RespuestaItem']['incidencia_inferior'] = 0;
+        $respuestaItem['RespuestaItem']['incidencia_superior'] = 0;
 
         $respuestaTipo = $this->RespuestaTipo->find('first', array(
             'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
