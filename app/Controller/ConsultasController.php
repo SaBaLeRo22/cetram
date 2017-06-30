@@ -2048,7 +2048,7 @@ class ConsultasController extends AppController
 
             $incidencias = $this->incidencias($consulta['Consulta']['id']);
 
-
+            /* #Continuar */
 
 
 
