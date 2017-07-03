@@ -73,7 +73,7 @@ class Consulta extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'localidade_id' => array(
+/*		'localidade_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -82,7 +82,7 @@ class Consulta extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		),
+		),*/
 		'modo_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),

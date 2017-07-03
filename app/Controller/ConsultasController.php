@@ -1970,12 +1970,16 @@ class ConsultasController extends AppController
             /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
             //Tipo: "Costos Variables de Estructura": 1
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
-            $respuestaItem['3']['RespuestaItem']['id'] = $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5');
+            $respuestaItem['3']['RespuestaItem']['id'] = $this->item3('3', $consulta['Consulta']['id'], '3', '4', '5', '39');
 
             //$this->item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
             /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS: */
             //Tipo: "Costos Variables de Estructura": 1
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
+            //Parametro1: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
+            //Pregunta1: "Flota total de omnibus": 9
+            //Pregunta2: "¿Posee SUBE?": 23
+            //Coeficiente1: "Repuestos y Reparaciones": 4
             $respuestaItem['4']['RespuestaItem']['id'] = $this->item4('4', $consulta['Consulta']['id'], '7', '9', '23', '4', '39');
 
             /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO: */
@@ -2001,7 +2005,7 @@ class ConsultasController extends AppController
             //Parametro1: "VACACIONES": 36
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item6($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $pregunta5_id = null)
-            $respuestaItem['6']['RespuestaItem']['id'] = $this->item6('6', $consulta['Consulta']['id'], '7', '35', '36', '24', '25', '26', '9', '23', '39');
+            $respuestaItem['6']['RespuestaItem']['id'] = $this->item6('6', $consulta['Consulta']['id'], '35', '36', '24', '25', '26', '9', '23', '39');
 
             /* 7) ITEM7: COSTO DEL CAPITAL SUBE: */
             //Tipo: "Costos Fijos de Estructura": 2
@@ -2286,7 +2290,7 @@ class ConsultasController extends AppController
         ));
 
         $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
-            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaCoeficiente.consulta_id' => $consulta_id, 'RespuestaCoeficiente.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
@@ -2337,7 +2341,7 @@ class ConsultasController extends AppController
     }
 
     /* 3) ITEM3: NEUMÁTICOS - DETERMINACIÓN DEL COSTO DE LOS NEUMÁTICO */
-    public function item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null)
+    public function item3($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2345,7 +2349,7 @@ class ConsultasController extends AppController
         }
 
         $this->loadModel('RespuestaParametro');
-        $this->RespuestaParametro->recursive = -1;
+        $this->RespuestaParametro->recursive = 0;
         $this->loadModel('RespuestaCoeficiente');
         $this->RespuestaCoeficiente->recursive = -1;
 
@@ -2356,7 +2360,7 @@ class ConsultasController extends AppController
 
         $respuestaParametro1 = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $parametro1_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
-            'recursive' => -1
+            'recursive' => 0
         ));
 
         $respuestaParametro2 = $this->RespuestaParametro->find('first', array(
@@ -2369,7 +2373,7 @@ class ConsultasController extends AppController
         $respuestaParametro['Unidade']['nombre'] = $respuestaParametro1['Unidade']['nombre'];
 
         $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
-            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaCoeficiente.consulta_id' => $consulta_id, 'RespuestaCoeficiente.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
@@ -2386,7 +2390,7 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
         $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
         $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
-        $respuestaItem['RespuestaItem']['valor'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['total'];
+        $respuestaItem['RespuestaItem']['valor'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['valor'];
         $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
         $respuestaItem['RespuestaItem']['minimo'] = $respuestaParametro['RespuestaParametro']['valor'] / $respuestacoeficiente['RespuestaCoeficiente']['minimo'];
         $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
@@ -2420,7 +2424,7 @@ class ConsultasController extends AppController
     }
 
     /* 4) ITEM4: REPARACIONES, REPUESTOS Y ACCESORIOS - DETERMINACIÓN DEL COSTO POR REPARACIONES, REPUESTOS Y ACCESORIOS */
-    public function item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
+    public function item4($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2445,7 +2449,7 @@ class ConsultasController extends AppController
         ));
 
         $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
-            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaCoeficiente.consulta_id' => $consulta_id, 'RespuestaCoeficiente.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
@@ -2535,7 +2539,7 @@ class ConsultasController extends AppController
     }
 
     /* 5) ITEM5: COSTO DEL CAPITAL INVERTIDO */
-    public function item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null)
+    public function item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2687,7 +2691,7 @@ class ConsultasController extends AppController
     }
 
     /* 6) ITEM6: COSTO DEL CAPITAL PERSONAL */
-    public function item6($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $pregunta5_id = null)
+    public function item6($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $pregunta5_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2842,7 +2846,7 @@ class ConsultasController extends AppController
     }
 
     /* 7) ITEM7: COSTO DEL CAPITAL SUBE */
-    public function item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
+    public function item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2968,7 +2972,7 @@ class ConsultasController extends AppController
     }
 
     /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
-    public function item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
+    public function item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2988,7 +2992,7 @@ class ConsultasController extends AppController
         ));
 
         $respuestacoeficiente = $this->RespuestaCoeficiente->find('first', array(
-            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
+            'conditions' => array('RespuestaCoeficiente.coeficiente_id' => $coeficiente_id, 'RespuestaCoeficiente.consulta_id' => $consulta_id, 'RespuestaCoeficiente.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
@@ -3020,7 +3024,7 @@ class ConsultasController extends AppController
         ));
 
         $cantidad_total = 0;
-        foreach ($respuestaSalarios as $key => $respuestaSalario) {
+        foreach ($respuestaSalarios as $sal => $respuestaSalario) {
             $cantidad_total = $cantidad_total + $respuestaSalario['RespuestaSalario']['cantidad'];
         }
         $empleados_vehiculos = $cantidad_total / $respuestaPregunta1['RespuestaPregunta']['valor'];
@@ -3111,7 +3115,7 @@ class ConsultasController extends AppController
 
     /* 9) ITEM9: IMPUESTOS Y TASAS: */
     //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
-    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
+    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -3200,6 +3204,9 @@ class ConsultasController extends AppController
         }
     }
 
+    /*
+     * Cálculo de Incidencias
+     * */
     public function incidencias($consulta_id = null)
     {
         $this->Consulta->id = $consulta_id;
@@ -3232,15 +3239,18 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         foreach ($respuestaTipos as $key_tipo => $respuestaTipo) {
-            $respuestaTipo['RespuestaTipo']['incidencia_valor'] = $respuestaTipo['RespuestaItem']['valor'] / $consulta['Consulta']['costo'];
-            $respuestaTipo['RespuestaTipo']['incidencia_minimo'] = $respuestaTipo['RespuestaItem']['minimo'] / $consulta['Consulta']['costo_minimo'];
-            $respuestaTipo['RespuestaTipo']['incidencia_maximo'] = $respuestaTipo['RespuestaItem']['maximo'] / $consulta['Consulta']['costo_maximo'];
-            $respuestaTipo['RespuestaTipo']['incidencia_inferior'] = $respuestaTipo['RespuestaItem']['inferior'] / $consulta['Consulta']['costo_inferior'];
-            $respuestaTipo['RespuestaTipo']['incidencia_superior'] = $respuestaTipo['RespuestaItem']['superior'] / $consulta['Consulta']['costo_superior'];
+            $respuestaTipo['RespuestaTipo']['incidencia_valor'] = $respuestaTipo['RespuestaTipo']['valor'] / $consulta['Consulta']['costo'];
+            $respuestaTipo['RespuestaTipo']['incidencia_minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] / $consulta['Consulta']['costo_minimo'];
+            $respuestaTipo['RespuestaTipo']['incidencia_maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] / $consulta['Consulta']['costo_maximo'];
+            $respuestaTipo['RespuestaTipo']['incidencia_inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] / $consulta['Consulta']['costo_inferior'];
+            $respuestaTipo['RespuestaTipo']['incidencia_superior'] = $respuestaTipo['RespuestaTipo']['superior'] / $consulta['Consulta']['costo_superior'];
             $this->RespuestaTipo->save($respuestaTipo);
         }
     }
 
+    /*
+     * Cálculo de Indicadores
+     * */
     public function indicadores($consulta_id = null)
     {
         $this->Consulta->id = $consulta_id;
@@ -3263,7 +3273,7 @@ class ConsultasController extends AppController
          * Indicador 1: FACTOR DE UTILIZACIÓN DE CHOFERES
          * */
         $indicador_1 = $this->Indicadore->find('first', array(
-            'conditions' => array('Indicadore.id' => '1', 'RespuestaItem.estado_id <>' => '2'),
+            'conditions' => array('Indicadore.id' => '1', 'Indicadore.estado_id <>' => '2'),
             'recursive' => 0
         ));
 
@@ -3281,7 +3291,7 @@ class ConsultasController extends AppController
         $respuestaIndicadore['RespuestaIndicadore']['consulta_id'] = $consulta_id;
         $respuestaIndicadore['RespuestaIndicadore']['indicadore_id'] = $indicador_1['Indicadore']['id'];
         $respuestaIndicadore['RespuestaIndicadore']['indicador'] = $indicador_1['Indicadore']['nombre'];
-        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / $respuestaPregunta_1['RespuestaPregunta']['cantidad'];
+        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / $respuestaPregunta_1['RespuestaPregunta']['valor'];
         $respuestaIndicadore['RespuestaIndicadore']['minimo'] = $indicador_1['Indicadore']['minimo'];
         $respuestaIndicadore['RespuestaIndicadore']['maximo'] = $indicador_1['Indicadore']['maximo'];
         if($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']){
