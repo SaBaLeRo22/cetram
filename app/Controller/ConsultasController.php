@@ -1874,9 +1874,6 @@ class ConsultasController extends AppController
 
         if ($this->request->is('post')) {
 
-//            debug($this->request->data);
-//            exit;
-
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
             $this->loadModel('Parametro');
@@ -1908,7 +1905,6 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
                 }
             }
-
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -1950,7 +1946,6 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The RespuestaTipo has been saved.'));
                 }
             }
-
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2048,10 +2043,18 @@ class ConsultasController extends AppController
 
             $incidencias = $this->incidencias($consulta['Consulta']['id']);
 
-            /* #Continuar */
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
 
+            /**************************************************************************************************************************************************/
+            /**************************************************************************************************************************************************/
+            /*
+                Calcular Indicadores.
+                Próxima mejora: Automatizar los cálculos para que sean de forma dinámica y no estática como se realiza actualmente.
+            */
+            /*********************************************************************************************************/
 
-
+            $indicadores = $this->indicadores($consulta['Consulta']['id']);
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2088,8 +2091,6 @@ class ConsultasController extends AppController
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5".'));
             return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
-
-        } else {
 
         }
 
@@ -3238,8 +3239,67 @@ class ConsultasController extends AppController
             $respuestaTipo['RespuestaTipo']['incidencia_superior'] = $respuestaTipo['RespuestaItem']['superior'] / $consulta['Consulta']['costo_superior'];
             $this->RespuestaTipo->save($respuestaTipo);
         }
-
-
     }
+
+    public function indicadores($consulta_id = null)
+    {
+        $this->Consulta->id = $consulta_id;
+        if (!$this->Consulta->exists()) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        $this->loadModel('Indicadore');
+        $this->Indicadore->recursive = 0;
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+        $this->loadModel('RespuestaSalario');
+        $this->RespuestaSalario->recursive = -1;
+        $this->loadModel('RespuestaIndicadore');
+        $this->RespuestaIndicadore->recursive = -1;
+
+        /*
+         * Indicador 1: FACTOR DE UTILIZACIÓN DE CHOFERES
+         * */
+        $indicador_1 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '1', 'RespuestaItem.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $respuestaPregunta_1 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '1', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaSalario_1 = $this->RespuestaSalario->find('first', array(
+            'conditions' => array('RespuestaSalario.categoria_id' => '2', 'RespuestaSalario.consulta_id' => $consulta_id, 'RespuestaSalario.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore['RespuestaIndicadore']['indicadore_id'] = $indicador_1['Indicadore']['id'];
+        $respuestaIndicadore['RespuestaIndicadore']['indicador'] = $indicador_1['Indicadore']['nombre'];
+        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / $respuestaPregunta_1['RespuestaPregunta']['cantidad'];
+        $respuestaIndicadore['RespuestaIndicadore']['minimo'] = $indicador_1['Indicadore']['minimo'];
+        $respuestaIndicadore['RespuestaIndicadore']['maximo'] = $indicador_1['Indicadore']['maximo'];
+        if($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']){
+            $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '0';
+        }else{
+            $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '1';
+        }
+        $respuestaIndicadore['RespuestaIndicadore']['unidade_id'] = $indicador_1['Unidade']['id'];
+        $respuestaIndicadore['RespuestaIndicadore']['unidad'] = $indicador_1['Unidade']['nombre'];
+        $respuestaIndicadore['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        return ($this->RespuestaIndicadore->save($respuestaIndicadore));
+    }
+
+
+
+
 
 }
