@@ -2024,7 +2024,7 @@ class ConsultasController extends AppController
             //Pregunta2: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
-            $respuestaItem['8']['RespuestaItem']['id'] = $this->item8('8', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
+            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
 
             /* 9) ITEM9: IMPUESTOS Y TASAS: */
             //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
@@ -2032,7 +2032,7 @@ class ConsultasController extends AppController
             //Tipo2: "Costos Fijos de Estructura": 2
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
-            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '33', '1', '2', '39');
+            $respuestaItem['8']['RespuestaItem']['id'] = $this->item8('8', $consulta['Consulta']['id'], '33', '1', '2', '39');
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2910,21 +2910,21 @@ class ConsultasController extends AppController
         ));
 
         $pax_eq_anio = 0;
-        $base = 1;
+        $base = $this->RespuestaPasajero->find('first', array(
+            'conditions' => array('RespuestaPasajero.base' => '1', 'RespuestaPasajero.consulta_id' => $consulta_id, 'RespuestaPasajero.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
 
         foreach ($pasajeros as $pax => $pasajero) {
-            if($pasajero['RespuestaPasajero']['base'] == '1'){
-                $base = $pasajero['RespuestaPasajero']['costo'];
-            }
             //opcione_id = 24 --> SI; opcione_id = 25 --> NO
             if ($respuestaPregunta['RespuestaPregunta']['opcione_id'] == '24') {
-                $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['mes01'] + $pasajero['RespuestaPasajero']['mes02'] + $pasajero['RespuestaPasajero']['mes03'] + $pasajero['RespuestaPasajero']['mes04'] + $pasajero['RespuestaPasajero']['mes05'] + $pasajero['RespuestaPasajero']['mes06'] + $pasajero['RespuestaPasajero']['mes07'] + $pasajero['RespuestaPasajero']['mes08'] + $pasajero['RespuestaPasajero']['mes09'] + $pasajero['RespuestaPasajero']['mes10'] + $pasajero['RespuestaPasajero']['mes11'] + $pasajero['RespuestaPasajero']['mes12']) * ($pasajero['RespuestaPasajero']['costo'] / $base));
+                $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['mes01'] + $pasajero['RespuestaPasajero']['mes02'] + $pasajero['RespuestaPasajero']['mes03'] + $pasajero['RespuestaPasajero']['mes04'] + $pasajero['RespuestaPasajero']['mes05'] + $pasajero['RespuestaPasajero']['mes06'] + $pasajero['RespuestaPasajero']['mes07'] + $pasajero['RespuestaPasajero']['mes08'] + $pasajero['RespuestaPasajero']['mes09'] + $pasajero['RespuestaPasajero']['mes10'] + $pasajero['RespuestaPasajero']['mes11'] + $pasajero['RespuestaPasajero']['mes12']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
             } else{
-                $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['semestre1'] + $pasajero['RespuestaPasajero']['semestre2']) * ($pasajero['RespuestaPasajero']['costo'] / $base));
+                $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['semestre1'] + $pasajero['RespuestaPasajero']['semestre2']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
             }
         }
 
-        $costo_sube = $pax_eq_anio * $base * ($respuestaParametro['RespuestaParametro']['valor'] / 100);
+        $costo_sube = $pax_eq_anio * $base['RespuestaPasajero']['costo'] * ($respuestaParametro['RespuestaParametro']['valor'] / 100);
 
         $this->loadModel('RespuestaItem');
         $this->RespuestaItem->recursive = -1;
@@ -2938,11 +2938,11 @@ class ConsultasController extends AppController
         $respuestaItem['RespuestaItem']['consulta_id'] = $consulta_id;
         $respuestaItem['RespuestaItem']['item_id'] = $item['Item']['id'];
         $respuestaItem['RespuestaItem']['item'] = $item['Item']['nombre'];
-        $respuestaItem['RespuestaItem']['valor'] = $costo_sube * $recorridos;
+        $respuestaItem['RespuestaItem']['valor'] = $costo_sube / $recorridos;
         $respuestaItem['RespuestaItem']['incidencia_valor'] = 0;
-        $respuestaItem['RespuestaItem']['minimo'] = $costo_sube * $recorridos;
+        $respuestaItem['RespuestaItem']['minimo'] = $costo_sube / $recorridos;
         $respuestaItem['RespuestaItem']['incidencia_minimo'] = 0;
-        $respuestaItem['RespuestaItem']['maximo'] = $costo_sube * $recorridos;
+        $respuestaItem['RespuestaItem']['maximo'] = $costo_sube / $recorridos;
         $respuestaItem['RespuestaItem']['incidencia_maximo'] = 0;
         $respuestaItem['RespuestaItem']['unidade_id'] = $item['Unidade']['id'];
         $respuestaItem['RespuestaItem']['unidad'] = $item['Unidade']['nombre'];
@@ -2972,7 +2972,7 @@ class ConsultasController extends AppController
     }
 
     /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
-    public function item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
+    public function item9($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -3115,7 +3115,7 @@ class ConsultasController extends AppController
 
     /* 9) ITEM9: IMPUESTOS Y TASAS: */
     //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
-    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null, $intervalo_id = null)
+    public function item8($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
