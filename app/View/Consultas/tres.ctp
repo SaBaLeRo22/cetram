@@ -269,7 +269,7 @@
         </div>
         <div class="form-group">
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('costo', array('type' => 'number')); ?>
+            <?= $this->Form->input('costo', array('type' => 'number', 'step' => '0.01')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('semestre1', 'Semestre 1', array('class' => 'control-label col-xs-3')); ?>
@@ -293,7 +293,7 @@
         </div>
         <div class="form-group">
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('costo', array('type' => 'number')); ?>
+            <?= $this->Form->input('costo', array('type' => 'number', 'step' => '0.01')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes01', 'Mes 01', array('class' => 'control-label col-xs-3')); ?>

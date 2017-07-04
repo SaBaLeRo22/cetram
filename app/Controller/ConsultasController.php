@@ -1994,7 +1994,7 @@ class ConsultasController extends AppController
             //$this->item5($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null)
             $respuestaItem['5']['RespuestaItem']['id'] = $this->item5('5', $consulta['Consulta']['id'], '7', '5', '22', '5', '23', '9', '39');
 
-            /* 6) ITEM6: COSTO DEL CAPITAL PERSONAL: */
+            /* 6) ITEM6: PERSONAL: */
             //Tipo: "Costos Fijos de Estructura": 2
             //Pregunta1: "Bonificación Anual ($)": 24
             //Pregunta2: "Contribuciones Patronales (%)": 25
@@ -2756,7 +2756,7 @@ class ConsultasController extends AppController
 
         foreach ($respuestaSalarios as $key => $respuestaSalario) {
             $cantidad_total = $cantidad_total + $respuestaSalario['RespuestaSalario']['cantidad'];
-            $sueldo_antiguedad = $respuestaSalario['RespuestaSalario']['salario'] + ($respuestaSalario['RespuestaSalario']['antiguedad'] * ($respuestaPregunta1['RespuestaPregunta']['valor'] / 100));
+            $sueldo_antiguedad = $respuestaSalario['RespuestaSalario']['salario'] + ($respuestaSalario['RespuestaSalario']['antiguedad'] * ($respuestaPregunta1['RespuestaPregunta']['valor']));
             $sueldo_ant_sac = $sueldo_antiguedad + ($sueldo_antiguedad * ($respuestaParametro1['RespuestaParametro']['valor'] / 100));
             $sueldo_ant_sac_vac = $sueldo_ant_sac + ($sueldo_antiguedad * ($respuestaParametro2['RespuestaParametro']['valor'] / 100));
             $contribuciones = $sueldo_ant_sac_vac * ($respuestaPregunta2['RespuestaPregunta']['valor'] / 100);
