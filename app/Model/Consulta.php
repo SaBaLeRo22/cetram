@@ -25,7 +25,7 @@ class Consulta extends AppModel {
  *
  * @var string
  */
-	public $displayField = 'tarifa';
+	public $displayField = 'costo';
 
 /**
  * Validation rules

@@ -2013,7 +2013,7 @@ class ConsultasController extends AppController
             //Pregunta1: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
-            $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '32', '23', '39');
+            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '32', '23', '39');
 
             /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
             //Tipo: "Costos Fijos de Estructura": 2
@@ -2024,7 +2024,7 @@ class ConsultasController extends AppController
             //Pregunta2: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
-            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
+            $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
 
             /* 9) ITEM9: IMPUESTOS Y TASAS: */
             //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
@@ -2063,6 +2063,7 @@ class ConsultasController extends AppController
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
 
+            $consulta = $this->Consulta->find('first', $options);
             $this->loadModel('Agrupamiento');
             $this->Agrupamiento->recursive = -1;
             $this->loadModel('Paso');
@@ -2331,8 +2332,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2414,8 +2417,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2529,8 +2534,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2681,8 +2688,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2836,8 +2845,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2846,7 +2857,7 @@ class ConsultasController extends AppController
     }
 
     /* 7) ITEM7: COSTO DEL CAPITAL SUBE */
-    public function item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null, $intervalo_id = null)
+    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2962,8 +2973,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {
@@ -2972,7 +2985,7 @@ class ConsultasController extends AppController
     }
 
     /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
-    public function item9($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
+    public function item7($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -3103,8 +3116,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
-        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
+        $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
+        $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
         if (!$this->RespuestaTipo->save($respuestaTipo)) {
             return false;
         } else {

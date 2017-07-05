@@ -6,9 +6,9 @@
     <div class="col-md-12">
         <h2><?= __('Consultas'); ?></h2>
         <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Nueva Consulta', ['controller' => 'consultas', 'action' => 'uno'], ['class' => 'btn btn-sm btn-info']); ?>
-            </div>
+        <div class="actions">
+            <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Nueva Consulta', ['controller' => 'consultas', 'action' => 'uno'], ['class' => 'btn btn-sm btn-info']); ?>
+        </div>
         </div>
 
         <div class="table-responsive">
@@ -27,14 +27,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($consultas as $consulta): ?>
+                <?php foreach ($consultas as $consulta): ?> 
                 <tr>
                     <td><?= h($consulta['Consulta']['id']); ?>&nbsp;</td>
                     <td class="display-column">
                         <?= $this->Html->link( h( $consulta['Modo']['nombre'] ), array( 'action' => 'continuar', $consulta['Consulta']['id'] ) ); ?>
                         <div class="nowrap">
                             <?php if ($consulta['Modo']['id'] == '1'): ?>
-                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver Resultado', array('action' => 'view', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                                <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver Resultado', array('action' => 'view', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <?php else: ?>
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Continuar', array('action' => 'continuar', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['id'])); ?>
@@ -49,31 +49,31 @@
                     <td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>
                 </tr>
-                <?php endforeach ?>
+                <?php endforeach ?> 
                 </tbody>
             </table>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <small class="paging-text text-muted">
-                    <?= $this->Paginator->counter('Página {:page} de {:pages}, {:count} registros en total.'); ?>
+                    <?= $this->Paginator->counter('Página {:page} de {:pages}, {:count} registros en total.'); ?> 
                 </small>
             </div>
             <div class="col-md-8 text-right">
                 <ul class="pagination">
                     <?= $this->Paginator->prev( '<i class="fa fa-angle-left"></i>',
-                    array( 'tag' => 'li', 'escape' => false ), null,
-                    array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                    <?= $this->Paginator->numbers( array(
-                    'separator'    => '',
-                    'currentTag'   => 'a',
-                    'currentClass' => 'active',
-                    'tag'          => 'li',
-                    'first'        => 1,
-                    'last'         => 1,
-                    'ellipsis'     => '<li class="disabled"><a>...</a></li>'
+                        array( 'tag' => 'li', 'escape' => false ), null,
+                        array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                    <?= $this->Paginator->numbers( array(
+                        'separator'    => '',
+                        'currentTag'   => 'a',
+                        'currentClass' => 'active',
+                        'tag'          => 'li',
+                        'first'        => 1,
+                        'last'         => 1,
+                        'ellipsis'     => '<li class="disabled"><a>...</a></li>'
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
-                    array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
-                    array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
+                        array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
+                        array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
             </div>
         </div>
     </div>

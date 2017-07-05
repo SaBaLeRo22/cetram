@@ -16,12 +16,60 @@
             <?= $this->Form->input('costo'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('costo_minimo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('costo_minimo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('costo_maximo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('costo_maximo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('costo_inferior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('costo_inferior'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('costo_superior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('costo_superior'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('tarifa', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('tarifa'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('tarifa_minima', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tarifa_minima'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('tarifa_maxima', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tarifa_maxima'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('tarifa_inferior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tarifa_inferior'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('tarifa_superior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tarifa_superior'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('subsidio', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('subsidio'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_minimo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_minimo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_maximo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_maximo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_inferior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_inferior'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_superior', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_superior'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -61,7 +109,7 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Consulta.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Consulta.costo'))); ?>                                <?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Consulta.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Consulta.tarifa'))); ?>                                <?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Unidade</h4>
             <div class="list-group">
@@ -82,6 +130,11 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Paso</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Pasos'), array('controller' => 'pasos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Paso'), array('controller' => 'pasos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
             <h4 class="text-muted">Respuesta Coeficiente</h4>
             <div class="list-group">
@@ -108,25 +161,25 @@
                 		<?= $this->Html->link(__('Listado de  Respuesta Parametros'), array('controller' => 'respuesta_parametros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Respuesta Parametro'), array('controller' => 'respuesta_parametros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Respuesta Pregunta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Respuesta Preguntas'), array('controller' => 'respuesta_preguntas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Respuesta Pregunta'), array('controller' => 'respuesta_preguntas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Respuesta Tipo</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Respuesta Tipos'), array('controller' => 'respuesta_tipos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Respuesta Tipo'), array('controller' => 'respuesta_tipos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
             <h4 class="text-muted">Respuesta Pasajero</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Respuesta Pasajeros'), array('controller' => 'respuesta_pasajeros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Respuesta Pasajero'), array('controller' => 'respuesta_pasajeros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
+            <h4 class="text-muted">Respuesta Pregunta</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Respuesta Preguntas'), array('controller' => 'respuesta_preguntas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Respuesta Pregunta'), array('controller' => 'respuesta_preguntas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
             <h4 class="text-muted">Respuesta Salario</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Respuesta Salarios'), array('controller' => 'respuesta_salarios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Respuesta Salario'), array('controller' => 'respuesta_salarios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Respuesta Tipo</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Respuesta Tipos'), array('controller' => 'respuesta_tipos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Respuesta Tipo'), array('controller' => 'respuesta_tipos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>
