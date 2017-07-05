@@ -2007,15 +2007,15 @@ class ConsultasController extends AppController
             //$this->item6($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $pregunta3_id = null, $pregunta4_id = null, $pregunta5_id = null)
             $respuestaItem['6']['RespuestaItem']['id'] = $this->item6('6', $consulta['Consulta']['id'], '35', '36', '24', '25', '26', '9', '23', '39');
 
-            /* 7) ITEM7: COSTO DEL CAPITAL SUBE: */
+            /* 9) ITEM9: COSTO DEL CAPITAL SUBE: */
             //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "ALICUOTA DE RETENCION SISTEMA S.U.B.E.": 32
             //Pregunta1: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
-            //$this->item7($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
+            //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
             $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '32', '23', '39');
 
-            /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
+            /* 7) ITEM7: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
             //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "SEGURO OBLIGATORIO PARA UN OMNIBUS": 31
             //Parametro2: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
@@ -2023,15 +2023,15 @@ class ConsultasController extends AppController
             //Pregunta1: "Flota total de omnibus": 9
             //Pregunta2: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
-            //$this->item8($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
+            //$this->item7($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
             $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
 
-            /* 9) ITEM9: IMPUESTOS Y TASAS: */
+            /* 8) ITEM8: IMPUESTOS Y TASAS: */
             //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
             //Tipo1: "Costos Variables de Estructura": 1
             //Tipo2: "Costos Fijos de Estructura": 2
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
-            //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
+            //$this->item8($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null)
             $respuestaItem['8']['RespuestaItem']['id'] = $this->item8('8', $consulta['Consulta']['id'], '33', '1', '2', '39');
 
             /**************************************************************************************************************************************************/
@@ -2856,7 +2856,7 @@ class ConsultasController extends AppController
         }
     }
 
-    /* 7) ITEM7: COSTO DEL CAPITAL SUBE */
+    /* 9) ITEM9: COSTO DEL CAPITAL SUBE */
     public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
@@ -2984,7 +2984,7 @@ class ConsultasController extends AppController
         }
     }
 
-    /* 8) ITEM8: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
+    /* 7) ITEM7: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
     public function item7($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
@@ -3128,7 +3128,7 @@ class ConsultasController extends AppController
     }
 
 
-    /* 9) ITEM9: IMPUESTOS Y TASAS: */
+    /* 8) ITEM8: IMPUESTOS Y TASAS: */
     //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
     public function item8($item_id = null, $consulta_id = null, $parametro_id = null, $tipo1_id = null, $tipo2_id = null, $intervalo_id = null)
     {
