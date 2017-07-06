@@ -70,6 +70,14 @@
             <?= $this->Form->input('subsidio_superior'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('ipk', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('ipk'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_pax', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_pax'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('unidade_id'); ?> 
         </div>

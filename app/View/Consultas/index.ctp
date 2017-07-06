@@ -34,7 +34,7 @@
                         <?= $this->Html->link( h( $consulta['Modo']['nombre'] ), array( 'action' => 'continuar', $consulta['Consulta']['id'] ) ); ?>
                         <div class="nowrap">
                             <?php if ($consulta['Modo']['id'] == '1'): ?>
-                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver Resultado', array('action' => 'view', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver Resultado', array('action' => 'resultado', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <?php else: ?>
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Continuar', array('action' => 'continuar', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['id'])); ?>

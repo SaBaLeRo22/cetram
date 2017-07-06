@@ -1114,32 +1114,6 @@ class ConsultasController extends AppController
                 }
             }
 
-            $this->loadModel('Agrupamiento');
-            $this->Agrupamiento->recursive = -1;
-            $this->loadModel('Paso');
-            $this->Paso->recursive = -1;
-            $agrupamiento = $this->Agrupamiento->find('first', array(
-                'conditions' => array('Agrupamiento.orden' => '2', 'Agrupamiento.estado_id <>' => '2'),
-                'recursive' => -1
-            ));
-            $paso = $this->Paso->find('first', array(
-                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
-                'recursive' => -1
-            ));
-            $paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }
-
-            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
-            $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
-
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 2".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
@@ -1270,34 +1244,39 @@ class ConsultasController extends AppController
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                 }
 
-                $this->loadModel('Agrupamiento');
-                $this->Agrupamiento->recursive = -1;
-                $this->loadModel('Paso');
-                $this->Paso->recursive = -1;
-                $agrupamiento = $this->Agrupamiento->find('first', array(
-                    'conditions' => array('Agrupamiento.orden' => '3', 'Agrupamiento.estado_id <>' => '2'),
-                    'recursive' => -1
-                ));
-                $paso = $this->Paso->find('first', array(
-                    'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
-                    'recursive' => -1
-                ));
-                $paso['Paso']['completo'] = 1;
-                $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->Paso->save($paso)) {
-                    $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The Paso has been saved.'));
-                }
+                if ($consulta['Consulta']['modo_id'] == '4') {
+                    $this->loadModel('Agrupamiento');
+                    $this->Agrupamiento->recursive = -1;
+                    $this->loadModel('Paso');
+                    $this->Paso->recursive = -1;
+                    $agrupamiento = $this->Agrupamiento->find('first', array(
+                        'conditions' => array('Agrupamiento.orden' => '3', 'Agrupamiento.estado_id <>' => '2'),
+                        'recursive' => -1
+                    ));
+                    $paso = $this->Paso->find('first', array(
+                        'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
+                        'recursive' => -1
+                    ));
+                    $paso['Paso']['completo'] = 1;
+                    $paso['Paso']['user_modified'] = $this->Authake->getUserId();
+                    if (!$this->Paso->save($paso)) {
+                        $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+                    } else {
+                        $this->Session->setFlash(__('The Paso has been saved.'));
+                    }
 
-                $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
-                $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
-                if (!$this->Consulta->save($consulta)) {
-                    $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-                }
+                    $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
+                    $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
+                    if (!$this->Consulta->save($consulta)) {
+                        $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+                    }
 
-                $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
-                return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
+                    $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
+                    return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
+                }
+                else{
+                    return $this->redirect(array('action' => 'editarcuatro', $this->request->data['Consulta']['consulta_id']));
+                }
 
             } elseif ($this->request->data['accion'] == '2') {
 
@@ -2098,7 +2077,7 @@ class ConsultasController extends AppController
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5".'));
-            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+            return $this->redirect(array('action' => 'resultado', $consulta['Consulta']['id']));
 
         }
 
@@ -2271,7 +2250,7 @@ class ConsultasController extends AppController
 
     /* 1) ITEM1: COMBUSTIBLE - DETERMINACIÓN DEL COSTO DE COMBUSTIBLE */
     /* 2) ITEM2: FILTROS Y LUBRICANTES - DETERMINACIÓN DEL COSTO DE FILTROS Y LUBRICANTES */
-    public function item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null, $intervalo_id = null )
+    public function item1y2($item_id = null, $consulta_id = null, $parametro_id = null, $coeficiente_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
@@ -2632,16 +2611,16 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
 
-        if($respuestaPregunta2['RespuestaPregunta']['valor'] < $factore['Factore']['antiguedad_maxima']){
-            $depreciacion = (1 - $factore['Factore']['valor_residual']/100) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor'])/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
-            $deducir = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1)/2 - ($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) + 1 ) / 2  ) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
-        } else{
-            $depreciacion = (1 - $factore['Factore']['valor_residual']/100) * ((1)/($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
-            $deducir = (1 - (1 - $factore['Factore']['valor_residual']/100)) * ( $factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2) / ($factore['Factore']['antiguedad_maxima']* ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+        if ($respuestaPregunta2['RespuestaPregunta']['valor'] < $factore['Factore']['antiguedad_maxima']) {
+            $depreciacion = (1 - $factore['Factore']['valor_residual'] / 100) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) / ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
+            $deducir = (1 - (1 - $factore['Factore']['valor_residual'] / 100)) * ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2 - ($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) * (($factore['Factore']['antiguedad_maxima'] - $respuestaPregunta2['RespuestaPregunta']['valor']) + 1) / 2) / ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
+        } else {
+            $depreciacion = (1 - $factore['Factore']['valor_residual'] / 100) * ((1) / ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2));
+            $deducir = (1 - (1 - $factore['Factore']['valor_residual'] / 100)) * ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2) / ($factore['Factore']['antiguedad_maxima'] * ($factore['Factore']['antiguedad_maxima'] + 1) / 2);
         }
 
-        $factor_rem_maq_eq = 0.04*($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
-        $factor_rem_edificios = 0.03*($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
+        $factor_rem_maq_eq = 0.04 * ($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
+        $factor_rem_edificios = 0.03 * ($respuestaParametro2['RespuestaParametro']['valor'] / 100 / 12);
 
         $dep_mensual_vehiculo = $respuestaParametro1['RespuestaParametro']['valor'] * $depreciacion / 12;
         $rem_mensual_vehiculo = $respuestaParametro1['RespuestaParametro']['valor'] * ($deducir * $respuestaParametro2['RespuestaParametro']['valor']) / 100 / 12;
@@ -2940,7 +2919,7 @@ class ConsultasController extends AppController
             //opcione_id = 24 --> SI; opcione_id = 25 --> NO
             if ($respuestaPregunta1['RespuestaPregunta']['opcione_id'] == '24') {
                 $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['mes01'] + $pasajero['RespuestaPasajero']['mes02'] + $pasajero['RespuestaPasajero']['mes03'] + $pasajero['RespuestaPasajero']['mes04'] + $pasajero['RespuestaPasajero']['mes05'] + $pasajero['RespuestaPasajero']['mes06'] + $pasajero['RespuestaPasajero']['mes07'] + $pasajero['RespuestaPasajero']['mes08'] + $pasajero['RespuestaPasajero']['mes09'] + $pasajero['RespuestaPasajero']['mes10'] + $pasajero['RespuestaPasajero']['mes11'] + $pasajero['RespuestaPasajero']['mes12']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
-            } else{
+            } else {
                 $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['semestre1'] + $pasajero['RespuestaPasajero']['semestre2']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
             }
         }
@@ -3177,7 +3156,7 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
 
-        $respuestaTipo1= $this->RespuestaTipo->find('first', array(
+        $respuestaTipo1 = $this->RespuestaTipo->find('first', array(
             'conditions' => array('RespuestaTipo.tipo_id' => $tipo1_id, 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
             'recursive' => -1
         ));
@@ -3230,6 +3209,19 @@ class ConsultasController extends AppController
             $consulta['Consulta']['costo_inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaTipo1['RespuestaTipo']['inferior'] + $respuestaTipo2['RespuestaTipo']['inferior'];
             $consulta['Consulta']['costo_maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaTipo1['RespuestaTipo']['maximo'] + $respuestaTipo2['RespuestaTipo']['maximo'];
             $consulta['Consulta']['costo_superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaTipo1['RespuestaTipo']['superior'] + $respuestaTipo2['RespuestaTipo']['superior'];
+
+            $consulta['Consulta']['tarifa'] = $consulta['Consulta']['costo'] / $consulta['Consulta']['ipk'];
+            $consulta['Consulta']['tarifa_minima'] = $consulta['Consulta']['costo_minimo'] / $consulta['Consulta']['ipk'];
+            $consulta['Consulta']['tarifa_maxima'] = $consulta['Consulta']['costo_maximo'] / $consulta['Consulta']['ipk'];
+            $consulta['Consulta']['tarifa_inferior'] = $consulta['Consulta']['costo_inferior'] / $consulta['Consulta']['ipk'];
+            $consulta['Consulta']['tarifa_superior'] = $consulta['Consulta']['costo_superior'] / $consulta['Consulta']['ipk'];
+
+            $consulta['Consulta']['subsidio'] = $consulta['Consulta']['tarifa'] - $consulta['Consulta']['subsidio_pax'];
+            $consulta['Consulta']['subsidio_minimo'] = $consulta['Consulta']['tarifa_minima'] - $consulta['Consulta']['subsidio_pax'];
+            $consulta['Consulta']['subsidio_maximo'] = $consulta['Consulta']['tarifa_maxima'] - $consulta['Consulta']['subsidio_pax'];
+            $consulta['Consulta']['subsidio_inferior'] = $consulta['Consulta']['tarifa_inferior'] - $consulta['Consulta']['subsidio_pax'];
+            $consulta['Consulta']['subsidio_superior'] = $consulta['Consulta']['tarifa_superior'] - $consulta['Consulta']['subsidio_pax'];
+
             if (!$this->Consulta->save($consulta)) {
                 return false;
             } else {
@@ -3312,7 +3304,7 @@ class ConsultasController extends AppController
         ));
 
         $respuestaPregunta_1 = $this->RespuestaPregunta->find('first', array(
-            'conditions' => array('RespuestaPregunta.pregunta_id' => '1', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '9', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
@@ -3328,9 +3320,9 @@ class ConsultasController extends AppController
         $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / $respuestaPregunta_1['RespuestaPregunta']['valor'];
         $respuestaIndicadore['RespuestaIndicadore']['minimo'] = $indicador_1['Indicadore']['minimo'];
         $respuestaIndicadore['RespuestaIndicadore']['maximo'] = $indicador_1['Indicadore']['maximo'];
-        if($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']){
+        if ($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']) {
             $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '0';
-        }else{
+        } else {
             $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '1';
         }
         $respuestaIndicadore['RespuestaIndicadore']['unidade_id'] = $indicador_1['Unidade']['id'];
@@ -3342,8 +3334,14 @@ class ConsultasController extends AppController
         return ($this->RespuestaIndicadore->save($respuestaIndicadore));
     }
 
-
-
+    public function resultado($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $this->set('consulta', $this->Consulta->find('first', $options));
+    }
 
 
 }

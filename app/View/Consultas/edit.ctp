@@ -72,6 +72,14 @@
             <?= $this->Form->input('subsidio_superior'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('ipk', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('ipk'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('subsidio_pax', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('subsidio_pax'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
@@ -109,7 +117,7 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Consulta.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Consulta.tarifa'))); ?>                                <?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Consulta.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Consulta.costo'))); ?>                                <?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Unidade</h4>
             <div class="list-group">
