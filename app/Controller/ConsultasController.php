@@ -156,6 +156,8 @@ class ConsultasController extends AppController
             $consulta['Consulta']['subsidio_maximo'] = 0;
             $consulta['Consulta']['subsidio_inferior'] = 0;
             $consulta['Consulta']['subsidio_superior'] = 0;
+            $consulta['Consulta']['ipk'] = 0;
+            $consulta['Consulta']['subsidio_pax'] = 0;
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
             $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
 //            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
@@ -2011,9 +2013,10 @@ class ConsultasController extends AppController
             //Tipo: "Costos Fijos de Estructura": 2
             //Parametro1: "ALICUOTA DE RETENCION SISTEMA S.U.B.E.": 32
             //Pregunta1: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
+            //Pregunta2: Subsidio Anual al Sistema
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
-            //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null)
-            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '32', '23', '39');
+            //$this->item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null)
+            $respuestaItem['9']['RespuestaItem']['id'] = $this->item9('9', $consulta['Consulta']['id'], '32', '23', '29', '39');
 
             /* 7) ITEM7: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
             //Tipo: "Costos Fijos de Estructura": 2
@@ -2857,12 +2860,14 @@ class ConsultasController extends AppController
     }
 
     /* 9) ITEM9: COSTO DEL CAPITAL SUBE */
-    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta_id = null, $intervalo_id = null)
+    public function item9($item_id = null, $consulta_id = null, $parametro_id = null, $pregunta1_id = null, $pregunta2_id = null, $intervalo_id = null)
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
             throw new NotFoundException(__('Invalid consulta'));
         }
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
+        $consulta = $this->Consulta->find('first', $options);
 
         $this->loadModel('RespuestaParametro');
         $this->RespuestaParametro->recursive = -1;
@@ -2879,14 +2884,19 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
 
-        $respuestaPregunta = $this->RespuestaPregunta->find('first', array(
-            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+        $respuestaPregunta1 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta1_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $respuestaPregunta2 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => $pregunta2_id, 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
         //opcione_id = 24 --> SI; opcione_id = 25 --> NO
         $tiene = null;
-        if ($respuestaPregunta['RespuestaPregunta']['opcione_id'] == '24') {
+        if ($respuestaPregunta1['RespuestaPregunta']['opcione_id'] == '24') {
             $tiene['10'] = '10';
             $tiene['11'] = '11';
             $tiene['12'] = '12';
@@ -2928,7 +2938,7 @@ class ConsultasController extends AppController
 
         foreach ($pasajeros as $pax => $pasajero) {
             //opcione_id = 24 --> SI; opcione_id = 25 --> NO
-            if ($respuestaPregunta['RespuestaPregunta']['opcione_id'] == '24') {
+            if ($respuestaPregunta1['RespuestaPregunta']['opcione_id'] == '24') {
                 $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['mes01'] + $pasajero['RespuestaPasajero']['mes02'] + $pasajero['RespuestaPasajero']['mes03'] + $pasajero['RespuestaPasajero']['mes04'] + $pasajero['RespuestaPasajero']['mes05'] + $pasajero['RespuestaPasajero']['mes06'] + $pasajero['RespuestaPasajero']['mes07'] + $pasajero['RespuestaPasajero']['mes08'] + $pasajero['RespuestaPasajero']['mes09'] + $pasajero['RespuestaPasajero']['mes10'] + $pasajero['RespuestaPasajero']['mes11'] + $pasajero['RespuestaPasajero']['mes12']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
             } else{
                 $pax_eq_anio = $pax_eq_anio + (($pasajero['RespuestaPasajero']['semestre1'] + $pasajero['RespuestaPasajero']['semestre2']) * ($pasajero['RespuestaPasajero']['costo'] / $base['RespuestaPasajero']['costo']));
@@ -2972,15 +2982,24 @@ class ConsultasController extends AppController
             'conditions' => array('RespuestaTipo.tipo_id' => $item['Item']['tipo_id'], 'RespuestaTipo.consulta_id' => $consulta_id, 'RespuestaTipo.estado_id <>' => '2'),
             'recursive' => -1
         ));
+
         $respuestaTipo['RespuestaTipo']['valor'] = $respuestaTipo['RespuestaTipo']['valor'] + $respuestaItem['RespuestaItem']['valor'];
         $respuestaTipo['RespuestaTipo']['inferior'] = $respuestaTipo['RespuestaTipo']['inferior'] + $respuestaItem['RespuestaItem']['inferior'];
         $respuestaTipo['RespuestaTipo']['maximo'] = $respuestaTipo['RespuestaTipo']['maximo'] + $respuestaItem['RespuestaItem']['maximo'];
         $respuestaTipo['RespuestaTipo']['minimo'] = $respuestaTipo['RespuestaTipo']['minimo'] + $respuestaItem['RespuestaItem']['minimo'];
         $respuestaTipo['RespuestaTipo']['superior'] = $respuestaTipo['RespuestaTipo']['superior'] + $respuestaItem['RespuestaItem']['superior'];
-        if (!$this->RespuestaTipo->save($respuestaTipo)) {
+
+        $consulta['Consulta']['ipk'] = $pax_eq_anio / $recorridos;
+        $consulta['Consulta']['subsidio_pax'] = $respuestaPregunta2['RespuestaPregunta']['valor'] / $pax_eq_anio;
+
+        if (!$this->Consulta->save($consulta)) {
             return false;
         } else {
-            return ($this->RespuestaItem->save($respuestaItem));
+            if (!$this->RespuestaTipo->save($respuestaTipo)) {
+                return false;
+            } else {
+                return ($this->RespuestaItem->save($respuestaItem));
+            }
         }
     }
 
