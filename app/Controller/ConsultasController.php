@@ -3303,11 +3303,19 @@ class ConsultasController extends AppController
             'recursive' => 0
         ));
 
+        // Flota total de coches
         $respuestaPregunta_1 = $this->RespuestaPregunta->find('first', array(
             'conditions' => array('RespuestaPregunta.pregunta_id' => '9', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
             'recursive' => -1
         ));
 
+        // Omnibus de Auxilio
+        $respuestaPregunta_2 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '30', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        // Choferes de Guarda
         $respuestaSalario_1 = $this->RespuestaSalario->find('first', array(
             'conditions' => array('RespuestaSalario.categoria_id' => '2', 'RespuestaSalario.consulta_id' => $consulta_id, 'RespuestaSalario.estado_id <>' => '2'),
             'recursive' => -1
@@ -3317,7 +3325,7 @@ class ConsultasController extends AppController
         $respuestaIndicadore['RespuestaIndicadore']['consulta_id'] = $consulta_id;
         $respuestaIndicadore['RespuestaIndicadore']['indicadore_id'] = $indicador_1['Indicadore']['id'];
         $respuestaIndicadore['RespuestaIndicadore']['indicador'] = $indicador_1['Indicadore']['nombre'];
-        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / $respuestaPregunta_1['RespuestaPregunta']['valor'];
+        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / ($respuestaPregunta_1['RespuestaPregunta']['valor'] - $respuestaPregunta_2['RespuestaPregunta']['valor']);
         $respuestaIndicadore['RespuestaIndicadore']['minimo'] = $indicador_1['Indicadore']['minimo'];
         $respuestaIndicadore['RespuestaIndicadore']['maximo'] = $indicador_1['Indicadore']['maximo'];
         if ($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']) {
