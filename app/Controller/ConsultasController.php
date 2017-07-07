@@ -3275,7 +3275,7 @@ class ConsultasController extends AppController
     }
 
     /*
-     * Cálculo de Indicadores
+     * Cálculo de Indicadores:
      * */
     public function indicadores($consulta_id = null)
     {
