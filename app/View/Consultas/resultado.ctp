@@ -4,7 +4,7 @@
  */
 ?><div class="row consultas view">
     <div class="col-md-12">
-        <h2><?= $consulta['Consulta']['costo'] ?></h2>
+        <h2>Informe de Resultados</h2>
         <hr/>
     </div>
     <div class="col-md-4">
@@ -15,81 +15,11 @@
 			<?= h($consulta['Consulta']['id']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Costo'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['costo']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Costo Minimo'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['costo_minimo']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Costo Maximo'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['costo_maximo']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Costo Inferior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['costo_inferior']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Costo Superior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['costo_superior']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Tarifa'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['tarifa']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Tarifa Minima'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['tarifa_minima']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Tarifa Maxima'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['tarifa_maxima']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Tarifa Inferior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['tarifa_inferior']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Tarifa Superior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['tarifa_superior']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Subsidio'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['subsidio']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Subsidio Minimo'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['subsidio_minimo']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Subsidio Maximo'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['subsidio_maximo']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Subsidio Inferior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['subsidio_inferior']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Subsidio Superior'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['subsidio_superior']); ?>
-			&nbsp;
-		</dd>
+				<dt><?= __('Localidade'); ?></dt>
+				<dd>
+					<?= h($consulta['Localidade']['nombre']); ?>
+					&nbsp;
+				</dd>
 		<dt><?= __('Ipk'); ?></dt>
 		<dd>
 			<?= h($consulta['Consulta']['ipk']); ?>
@@ -100,159 +30,95 @@
 			<?= h($consulta['Consulta']['subsidio_pax']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Unidade'); ?></dt>
-		<dd>
-			<?= $this->Html->link($consulta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $consulta['Unidade']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Localidade'); ?></dt>
-		<dd>
-			<?= $this->Html->link($consulta['Localidade']['nombre'], array('controller' => 'localidades', 'action' => 'view', $consulta['Localidade']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Observaciones'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['observaciones']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Modo'); ?></dt>
-		<dd>
-			<?= $this->Html->link($consulta['Modo']['nombre'], array('controller' => 'modos', 'action' => 'view', $consulta['Modo']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($consulta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $consulta['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['user_created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($consulta['Consulta']['user_modified']); ?>
-			&nbsp;
-		</dd>
-            </dl>
-            <dl class="dl-horizontal text-muted">
-                <dt>Created</dt>
-                    <dd><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
-                <dt>Modified</dt>
-                    <dd><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
-                            </dl>
-        </div>
-        <hr/>
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-
-            <div class="list-group">
-                                		<?= $this->Html->link(__('Editar Consulta'), array('action' => 'edit', $consulta['Consulta']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Consulta'), array('action' => 'delete', $consulta['Consulta']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $consulta['Consulta']['id'])); ?> 
-		<?= $this->Html->link(__('Listado de Consultas'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Consulta'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-        </div>
-    </div>
+			</dl>
+				<dl class="dl-horizontal text-muted">
+					<dt>Estado</dt>
+					<dd><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
+					<dt>Usuario</dt>
+					<dd><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
+					<dt>Creada</dt>
+					<dd><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
+					<dt>Modificada</dt>
+					<dd><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
+				</dl>
+		</div>
+		</div>
     <div class="col-md-8">
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Paso', ['controller' => 'pasos', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
-            <h3><?= __('Pasos'); ?></h3>
-            <?php if (!empty($consulta['Paso'])): ?>
+					<div class="actions">
+						<?= $this->Html->link( '<i class="fa fa-paper-plane-o fa-fw"></i> Enviar por E-Mail', ['controller' => 'consultas', 'action' => 'resultado', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?>
+					</div>
+					<h3><?= __('Resumen'); ?></h3>
             <div class="table-responsive">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    		<th><?= __('Id'); ?></th>
-		<th><?= __('Consulta Id'); ?></th>
-		<th><?= __('Agrupamiento Id'); ?></th>
-		<th><?= __('Completo'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
-		<th><?= __('Created'); ?></th>
-		<th><?= __('Modified'); ?></th>
-		<th><?= __('User Created'); ?></th>
-		<th><?= __('User Modified'); ?></th>
-                    <th class="actions"><?= __('Acciones'); ?></th>
+		<th style="background-color: #222; color: #eee; text-align: center"><?= __('Resultado'); ?></th>
+		<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Inferior'); ?>&nbsp;(<?= h($consulta['Unidade']['nombre']); ?>)&nbsp;</th>
+		<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Minimo'); ?>&nbsp;(<?= h($consulta['Unidade']['nombre']); ?>)&nbsp;</th>
+		<th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Estimado'); ?>&nbsp;(<?= h($consulta['Unidade']['nombre']); ?>)&nbsp;</th>
+		<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Maximo'); ?>&nbsp;(<?= h($consulta['Unidade']['nombre']); ?>)&nbsp;</th>
+		<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Superior'); ?>&nbsp;(<?= h($consulta['Unidade']['nombre']); ?>)&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
-                	<?php foreach ($consulta['Paso'] as $paso): ?>
+
 		<tr>
-			<td><?= $paso['id']; ?></td>
-			<td><?= $paso['consulta_id']; ?></td>
-			<td><?= $paso['agrupamiento_id']; ?></td>
-			<td><?= $paso['completo']; ?></td>
-			<td><?= $paso['estado_id']; ?></td>
-			<td><?= $paso['created']; ?></td>
-			<td><?= $paso['modified']; ?></td>
-			<td><?= $paso['user_created']; ?></td>
-			<td><?= $paso['user_modified']; ?></td>
-			<td class="actions">
-				<?= $this->Html->link(__('Ver'), array('controller' => 'pasos', 'action' => 'view', $paso['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Html->link(__('Editar'), array('controller' => 'pasos', 'action' => 'edit', $paso['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'pasos', 'action' => 'delete', $paso['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $paso['id'])); ?>
-			</td>
+			<td><strong>Costo&nbsp;</strong></td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['costo_inferior']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['costo_minimo']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['costo']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['costo_maximo']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['costo_superior']); ?>&nbsp;</td>
 		</tr>
-	<?php endforeach; ?>
+
+		<tr>
+			<td><strong>Tarifa&nbsp;</strong></td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['tarifa_inferior']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['tarifa_minima']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['tarifa']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['tarifa_maxima']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['tarifa_superior']); ?>&nbsp;</td>
+		</tr>
+
+		<tr>
+			<td><strong>Subsidio&nbsp;</strong></td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['subsidio_inferior']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['subsidio_minimo']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['subsidio_maximo']); ?>&nbsp;</td>
+			<td style="text-align: center"><?= h($consulta['Consulta']['subsidio_superior']); ?>&nbsp;</td>
+		</tr>
+
                 </tbody>
             </table>
             </div>
-            <?php endif; ?>
+
 
         </div>
+	</div>
         <hr/>
+	<div class="col-md-12">
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Coeficiente', ['controller' => 'respuesta_coeficientes', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
-            <h3><?= __('Respuesta Coeficientes'); ?></h3>
+            <h3><?= __('Coeficientes'); ?></h3>
             <?php if (!empty($consulta['RespuestaCoeficiente'])): ?>
             <div class="table-responsive">
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    		<th><?= __('Id'); ?></th>
-		<th><?= __('Consulta Id'); ?></th>
-		<th><?= __('Coeficiente Id'); ?></th>
 		<th><?= __('Coeficiente'); ?></th>
 		<th><?= __('Valor'); ?></th>
 		<th><?= __('Minimo'); ?></th>
 		<th><?= __('Maximo'); ?></th>
-		<th><?= __('Unidade Id'); ?></th>
-		<th><?= __('Unidad'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
-		<th><?= __('Created'); ?></th>
-		<th><?= __('Modified'); ?></th>
-		<th><?= __('User Created'); ?></th>
-		<th><?= __('User Modified'); ?></th>
-                    <th class="actions"><?= __('Acciones'); ?></th>
                 </tr>
                 </thead>
                 <tbody>
                 	<?php foreach ($consulta['RespuestaCoeficiente'] as $respuestaCoeficiente): ?>
 		<tr>
-			<td><?= $respuestaCoeficiente['id']; ?></td>
-			<td><?= $respuestaCoeficiente['consulta_id']; ?></td>
-			<td><?= $respuestaCoeficiente['coeficiente_id']; ?></td>
 			<td><?= $respuestaCoeficiente['coeficiente']; ?></td>
 			<td><?= $respuestaCoeficiente['valor']; ?></td>
 			<td><?= $respuestaCoeficiente['minimo']; ?></td>
 			<td><?= $respuestaCoeficiente['maximo']; ?></td>
-			<td><?= $respuestaCoeficiente['unidade_id']; ?></td>
-			<td><?= $respuestaCoeficiente['unidad']; ?></td>
-			<td><?= $respuestaCoeficiente['estado_id']; ?></td>
-			<td><?= $respuestaCoeficiente['created']; ?></td>
-			<td><?= $respuestaCoeficiente['modified']; ?></td>
-			<td><?= $respuestaCoeficiente['user_created']; ?></td>
-			<td><?= $respuestaCoeficiente['user_modified']; ?></td>
-			<td class="actions">
-				<?= $this->Html->link(__('Ver'), array('controller' => 'respuesta_coeficientes', 'action' => 'view', $respuestaCoeficiente['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Html->link(__('Editar'), array('controller' => 'respuesta_coeficientes', 'action' => 'edit', $respuestaCoeficiente['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'respuesta_coeficientes', 'action' => 'delete', $respuestaCoeficiente['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $respuestaCoeficiente['id'])); ?>
-			</td>
 		</tr>
 	<?php endforeach; ?>
                 </tbody>
@@ -263,9 +129,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Indicadore', ['controller' => 'respuesta_indicadores', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Indicadores'); ?></h3>
             <?php if (!empty($consulta['RespuestaIndicadore'])): ?>
             <div class="table-responsive">
@@ -323,9 +186,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Item', ['controller' => 'respuesta_items', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Items'); ?></h3>
             <?php if (!empty($consulta['RespuestaItem'])): ?>
             <div class="table-responsive">
@@ -395,9 +255,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Multiplicadore', ['controller' => 'respuesta_multiplicadores', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Multiplicadores'); ?></h3>
             <?php if (!empty($consulta['RespuestaMultiplicadore'])): ?>
             <div class="table-responsive">
@@ -445,9 +302,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Parametro', ['controller' => 'respuesta_parametros', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Parametros'); ?></h3>
             <?php if (!empty($consulta['RespuestaParametro'])): ?>
             <div class="table-responsive">
@@ -499,9 +353,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Pasajero', ['controller' => 'respuesta_pasajeros', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Pasajeros'); ?></h3>
             <?php if (!empty($consulta['RespuestaPasajero'])): ?>
             <div class="table-responsive">
@@ -579,9 +430,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Pregunta', ['controller' => 'respuesta_preguntas', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Preguntas'); ?></h3>
             <?php if (!empty($consulta['RespuestaPregunta'])): ?>
             <div class="table-responsive">
@@ -643,9 +491,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Salario', ['controller' => 'respuesta_salarios', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Salarios'); ?></h3>
             <?php if (!empty($consulta['RespuestaSalario'])): ?>
             <div class="table-responsive">
@@ -705,9 +550,6 @@
         </div>
         <hr/>
                 <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Respuesta Tipo', ['controller' => 'respuesta_tipos', 'action' => 'add', 'consulta_id' => $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
-            </div>
             <h3><?= __('Respuesta Tipos'); ?></h3>
             <?php if (!empty($consulta['RespuestaTipo'])): ?>
             <div class="table-responsive">
