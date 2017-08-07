@@ -3347,8 +3347,22 @@ class ConsultasController extends AppController
         if (!$this->Consulta->exists($id)) {
             throw new NotFoundException(__('Invalid consulta'));
         }
+
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
-        $this->set('consulta', $this->Consulta->find('first', $options));
+        $consulta = $this->Consulta->find('first', $options);
+
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+        $sube = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '23', 'RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $incidencias_estimado_item['items'] = "'" . "Item1" . "', ";
+        $incidencias_estimado_item['incidencias'] = number_format(1.5, 2, ".", "");
+
+
+        $this->set(compact('consulta', 'sube', 'incidencias_estimado_item'));
     }
 
 
