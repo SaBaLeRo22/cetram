@@ -705,7 +705,7 @@ Gráficos
 						text: 'Incidencias'
 					},
 					subtitle: {
-						text: 'Items'
+						text: 'Estimado'
 					},
 					xAxis: [{
 						categories: [" . $incidencias_estimado_item['items'] . "],
@@ -728,48 +728,59 @@ Gráficos
 					tooltip: {
 						shared: true
 					},
-					legend: {
-						layout: 'vertical',
-						align: 'left',
-						x: 75,
-						verticalAlign: 'top',
-						y: 0,
-						floating: true,
-						backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+					plotOptions: {
+						column: {
+							dataLabels: {
+								enabled: true
+							}
+						}
 					},
 					series: [{
-						name: 'Abiertos',
+						name: 'Incidencia',
 						type: 'column',
 						data: [" . $incidencias_estimado_item['incidencias'] . "],
 						tooltip: {
-							valueSuffix: ' tickets'
+							valueSuffix: ' %'
 						}
-
 					},
 						{
-							name: 'Cerrados',
-							type: 'column',
-							data: [" . $incidencias_estimado_item['incidencias'] . "],
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false,
+							type: 'pie',
+							name: 'Incidencia',
+							data: [{
+								name: 'Costos Variables de Estructura',
+								y: 13,
+								color: Highcharts.getOptions().colors[2]
+							}, {
+								name: 'Costos Fijos de Estructura',
+								y: 23,
+								color: Highcharts.getOptions().colors[3],
+								sliced: true,
+								selected: true
+							}, {
+								name: 'Impuestos',
+								y: 19,
+								color: Highcharts.getOptions().colors[4]
+							}],
 							tooltip: {
-								valueSuffix: ' tickets'
+								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+							},
+							center: [900, 0],
+							size: 100,
+							showInLegend: true,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.percentage:.1f} %</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
 							}
-						},
-						{
-							name: 'Promedio Abiertos',
-							type: 'spline',
-							data: [" . $incidencias_estimado_item['incidencias'] . "],
-							tooltip: {
-								valueSuffix: ' tickets'
-							}
-						},
-						{
-							name: 'Promedio Cerrados',
-							type: 'spline',
-							data: [" . $incidencias_estimado_item['incidencias'] . "],
-							tooltip: {
-								valueSuffix: ' tickets'
-							}
-						}]
+						}
+					]
 				});
 			});
 
