@@ -50,7 +50,7 @@
         '/plugins/DataTables-1.10.7/media/css/jquery.dataTables.min',
         '/plugins/DataTables-1.10.7/media/css/jquery.dataTables_themeroller',
         '/plugins/DataTables-1.10.7/extensions/TableTools/css/dataTables.tableTools',
-        
+        'highcharts'
         
     ] ); ?> 
     <?= $this->fetch( 'css' ); ?>
@@ -90,7 +90,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="<?= $this->Html->url('/js/jquery-1.11.1.min.js') ?>"><\/script>')</script>
 
-<?= $this->Html->script( ['bootstrap.min', 'plugins', 'highcharts', 'exporting', 'dark-unica'] ); ?>
+<?= $this->Html->script( ['bootstrap.min', 'plugins', 'highcharts', 'exporting', 'dark-unica', 'data', 'drilldown'] ); ?>
 
 <?= $this->Html->script( [
     '/plugins/selectize.js/dist/js/standalone/selectize.min',
