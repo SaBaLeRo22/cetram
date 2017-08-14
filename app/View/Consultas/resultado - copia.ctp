@@ -479,12 +479,20 @@ Gráficos
 
 <script type='text/javascript' charset='utf-8'>
 
+
 	/**
+	 * (c) 2010-2017 Torstein Honsi
+	 *
+	 * License: www.highcharts.com/license
+	 *
 	 * Dark theme for Highcharts JS
 	 * @author Torstein Honsi
 	 */
 
-// Load the fonts
+	'use strict';
+	/* global document */
+	// Load the fonts
+	import Highcharts from '../parts/Globals.js';
 	Highcharts.createElement('link', {
 		href: 'https://fonts.googleapis.com/css?family=Unica+One',
 		rel: 'stylesheet',
@@ -492,8 +500,8 @@ Gráficos
 	}, null, document.getElementsByTagName('head')[0]);
 
 	Highcharts.theme = {
-		colors: ["#2b908f", "#90ee7e", "#f45b5b", "#7798BF", "#aaeeee", "#ff0066", "#eeaaee",
-			"#55BF3B", "#DF5353", "#7798BF", "#aaeeee"],
+		colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066', '#eeaaee',
+			'#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
 		chart: {
 			backgroundColor: {
 				linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
@@ -503,7 +511,7 @@ Gráficos
 				]
 			},
 			style: {
-				fontFamily: "'Unica One', sans-serif"
+				fontFamily: '\'Unica One\', sans-serif'
 			},
 			plotBorderColor: '#606063'
 		},
@@ -693,133 +701,241 @@ Gráficos
 	// Apply the theme
 	Highcharts.setOptions(Highcharts.theme);
 
+
+
+
 	<?=
 			$script = "
-			$(function () {
-				$('#estimado').highcharts({
-					chart: {
-						zoomType: 'xy'
-					},
-					title: {
-						text: 'Incidencias'
-					},
-					subtitle: {
-						text: 'Estimado'
-					},
-					xAxis: [{
-						categories: [],
-						crosshair: true
-					}],
-					yAxis: [{ // Primary yAxis
-						labels: {
-							format: '{value}',
-							style: {
-								color: Highcharts.getOptions().colors[1]
-							}
-						},
-						title: {
-							text: 'Incidencia (%)',
-							style: {
-								color: Highcharts.getOptions().colors[1]
-							}
-						}
+
+			jQuery.noConflict();
+	var example = 'column-drilldown',
+			theme = 'dark-unica';
+	(function($){ // encapsulate jQuery
+
+// Create the chart
+		Highcharts.chart('estimado', {
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Incidencias'
+			},
+			subtitle: {
+				text: 'Estimado'
+			},
+			xAxis: {
+				type: 'category'
+			},
+			yAxis: {
+				title: {
+					text: 'Incidencia'
+				}
+
+			},
+			legend: {
+				enabled: false
+			},
+			plotOptions: {
+				series: {
+					borderWidth: 0,
+					dataLabels: {
+						enabled: true,
+						format: '{point.y:.1f}%'
+					}
+				}
+			},
+
+			tooltip: {
+				headerFormat: '<span style=font-size:11px>{series.name}</span><br>',
+				pointFormat: '<span style=color:{point.color}>{point.name}</span>: <b>{point.y:.2f}%</b> del total<br/>'
+			},
+
+
+			series: [{
+				name: 'Tipo',
+				colorByPoint: true,
+				data: [{
+					name: 'Costos Variables de Estructura',
+					y: 56.33,
+					drilldown: 'Costos Variables de Estructura'
+				}, {
+					name: 'Costos Fijos de Estructura',
+					y: 24.03,
+					drilldown: 'Costos Fijos de Estructura'
+				}, {
+					name: 'Impuestos',
+					y: 10.38,
+					drilldown: 'Impuestos'
+				}]
+			},
+				{
+					plotBackgroundColor: null,
+					plotBorderWidth: null,
+					plotShadow: false,
+					type: 'pie',
+					name: 'Incidencia',
+					data: [{
+						name: 'Costos Variables de Estructura',
+						y: 13,
+						color: Highcharts.getOptions().colors[2]
+					}, {
+						name: 'Costos Fijos de Estructura',
+						y: 23,
+						color: Highcharts.getOptions().colors[3],
+						sliced: true,
+						selected: true
+					}, {
+						name: 'Impuestos',
+						y: 19,
+						color: Highcharts.getOptions().colors[4]
 					}],
 					tooltip: {
-						shared: true
+						pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
 					},
-					plotOptions: {
-						column: {
-							dataLabels: {
-								enabled: true
-							}
+					center: [900, 0],
+					size: 100,
+					showInLegend: true,
+					allowPointSelect: true,
+					cursor: 'pointer',
+					dataLabels: {
+						enabled: true,
+						format: '<b>{point.percentage:.1f} %</b>',
+						style: {
+							color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 						}
-					},
-					series: [{
-						name: 'Incidencia',
-						type: 'column',
-						showInLegend: false,
-						data: [{
-							name: 'Combustible',
-							y: 56.33,
-							color: Highcharts.getOptions().colors[2]
-						}, {
-							name: 'Filtros y Lubricantes',
-							y: 24.03,
-							color: Highcharts.getOptions().colors[2]
-						}, {
-							name: 'Neumaticos ',
-							y: 10.38,
-							color: Highcharts.getOptions().colors[2]
-						},{
-							name: 'Reparaciones, Repuestos y Accesorios',
-							y: 56.33,
-							color: Highcharts.getOptions().colors[2]
-						}, {
-							name: 'Costo del Capital Invertido',
-							y: 24.03,
-							color: Highcharts.getOptions().colors[3]
-						}, {
-							name: 'Personal',
-							y: 10.38,
-							color: Highcharts.getOptions().colors[3]
-						},{
-							name: 'SUBE',
-							y: 56.33,
-							color: Highcharts.getOptions().colors[3]
-						}, {
-							name: 'Gastos Generales y Seguro',
-							y: 24.03,
-							color: Highcharts.getOptions().colors[3]
-						}, {
-							name: 'Impuestos y Tasas',
-							y: 10.38,
-							color: Highcharts.getOptions().colors[4]
-						}],
-						tooltip: {
-							valueSuffix: ' %'
-						}
-					},
-						{
-							plotBackgroundColor: null,
-							plotBorderWidth: null,
-							plotShadow: false,
-							type: 'pie',
-							name: 'Incidencia',
-							data: [{
-								name: 'Costos Variables de Estructura',
-								y: 13,
-								color: Highcharts.getOptions().colors[2]
-							}, {
-								name: 'Costos Fijos de Estructura',
-								y: 23,
-								color: Highcharts.getOptions().colors[3]
-							}, {
-								name: 'Impuestos',
-								y: 19,
-								color: Highcharts.getOptions().colors[4],
-								sliced: true,
-								selected: true
-							}],
-							tooltip: {
-								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-							},
-							center: [950, -40],
-							size: 50,
-							showInLegend: true,
-							allowPointSelect: true,
-							cursor: 'pointer',
-							dataLabels: {
-								enabled: true,
-								format: '<b>{point.percentage:.1f} %</b>',
-								style: {
-									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-								}
-							}
-						}
+					}
+				}],
+			drilldown: {
+				series: [{
+					name: 'Costos Variables de Estructura',
+					id: 'Costos Variables de Estructura',
+					data: [
+						[
+							'v11.0',
+							24.13
+						],
+						[
+							'v8.0',
+							17.2
+						],
+						[
+							'v9.0',
+							8.11
+						],
+						[
+							'v10.0',
+							5.33
+						],
+						[
+							'v6.0',
+							1.06
+						],
+						[
+							'v7.0',
+							0.5
+						]
 					]
-				});
-			});
-
+				}, {
+					name: 'Costos Fijos de Estructura',
+					id: 'Costos Fijos de Estructura',
+					data: [
+						[
+							'v40.0',
+							5
+						],
+						[
+							'v41.0',
+							4.32
+						],
+						[
+							'v42.0',
+							3.68
+						],
+						[
+							'v39.0',
+							2.96
+						],
+						[
+							'v36.0',
+							2.53
+						],
+						[
+							'v43.0',
+							1.45
+						],
+						[
+							'v31.0',
+							1.24
+						],
+						[
+							'v35.0',
+							0.85
+						],
+						[
+							'v38.0',
+							0.6
+						],
+						[
+							'v32.0',
+							0.55
+						],
+						[
+							'v37.0',
+							0.38
+						],
+						[
+							'v33.0',
+							0.19
+						],
+						[
+							'v34.0',
+							0.14
+						],
+						[
+							'v30.0',
+							0.14
+						]
+					]
+				}, {
+					name: 'Impuestos',
+					id: 'Impuestos',
+					data: [
+						[
+							'v35',
+							2.76
+						],
+						[
+							'v36',
+							2.32
+						],
+						[
+							'v37',
+							2.31
+						],
+						[
+							'v34',
+							1.27
+						],
+						[
+							'v38',
+							1.02
+						],
+						[
+							'v31',
+							0.33
+						],
+						[
+							'v33',
+							0.22
+						],
+						[
+							'v32',
+							0.15
+						]
+					]
+				}]
+			}
+		});				})(jQuery);
 	";
 
 	$this->Html->scriptBlock($script, array('inline' => false));

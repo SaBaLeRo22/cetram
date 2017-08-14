@@ -44,7 +44,7 @@
     'app-styles',
     'custom-styles',
     '/plugins/selectize.js/dist/css/selectize.bootstrap3',
-    'highcharts'
+    // 'highcharts'
 
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
@@ -95,7 +95,7 @@
 'highcharts',
 'exporting',
 'data',
-'drilldown',
+// 'drilldown',
 'dark-unica'
 ] ); ?>
 
