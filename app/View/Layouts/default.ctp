@@ -35,26 +35,21 @@
     <title>CETRAM- UTN Santa Fe</title>
     <link rel="shortcut icon" href="http://extranet.frsf.utn.edu.ar/favicon.ico">
 
-
     <?= $this->fetch( 'meta' ); ?>
 
     <?= $this->Html->css( [
-        'bootstrap.min',
-        'fonts', 
-        '/plugins/font-awesome-4.7.0/css/font-awesome.min',
-        'app-styles',
-        'custom-styles',
-        '/plugins/selectize.js/dist/css/selectize.bootstrap3',
-        
-        
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables.min',
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables_themeroller',
-        '/plugins/DataTables-1.10.7/extensions/TableTools/css/dataTables.tableTools',
-        'highcharts'
-        
-    ] ); ?> 
+    'bootstrap.min',
+    'fonts',
+    '/plugins/font-awesome-4.7.0/css/font-awesome.min',
+    'app-styles',
+    'custom-styles',
+    '/plugins/selectize.js/dist/css/selectize.bootstrap3',
+    'highcharts'
+
+    ] ); ?>
     <?= $this->fetch( 'css' ); ?>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type='text/css'>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -69,7 +64,8 @@
             </button>
             <a class="navbar-brand" href="<?php echo $this->Html->url('http://extranet.frsf.utn.edu.ar/CETRAM'); ?>">
                 <h3>
-                    <?php echo $this->Html->image('cetram/cetram-50.png', array('alt' => 'CETRAM', 'style' => 'margin-top:5px')) ?>
+                    <?php echo $this->Html->image('cetram/cetram-50.png', array('alt' => 'CETRAM', 'style' =>
+                    'margin-top:5px')) ?>
                 </h3>
             </a>
         </div>
@@ -88,21 +84,24 @@
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= $this->Html->url('/js/jquery-1.11.1.min.js') ?>"><\/script>')</script>
-
-<?= $this->Html->script( ['bootstrap.min', 'plugins', 'highcharts', 'exporting', 'dark-unica', 'data', 'drilldown'] ); ?>
-
-<?= $this->Html->script( [
-    '/plugins/selectize.js/dist/js/standalone/selectize.min',
-    '/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
-] ) ?>
-
+<script>window.jQuery || document.write('<script src="<?= $this->Html->url(' / js / jquery - 1.11
+.1.min.js
+') ?>"><\/script>'
+)</script>
 
 <?= $this->Html->script( [
-//    '/plugins/DataTables-1.10.7/media/js/jquery',
-//    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables.min',
-    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables',
-    '/plugins/DataTables-1.10.7/extensions/TableTools/js/dataTables.tableTools',
+'bootstrap.min',
+'plugins',
+'highcharts',
+'exporting',
+'data',
+'drilldown',
+'dark-unica'
+] ); ?>
+
+<?= $this->Html->script( [
+'/plugins/selectize.js/dist/js/standalone/selectize.min',
+'/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
 ] ) ?>
 
 
@@ -125,14 +124,16 @@
 
     <div class="container" style="text-align: center; background-color: #ffffff;">
 
-        <hr class="style14" />
+        <hr class="style14"/>
 
         <a href="<?php echo $this->Html->url('http://www.frsf.utn.edu.ar/'); ?>">
-                <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
+            <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
         </a>
+
         <p>Herramienta para la Determinación de
-            los  Costos  de  Sistemas  de  Transporte  Público  de
-            Pasajeros  en  Ciudades  de  Tamaño  Medio.</p>
+            los Costos de Sistemas de Transporte Público de
+            Pasajeros en Ciudades de Tamaño Medio.</p>
+
         <p class="text-muted">Copyright © 2016. Todos los derechos reservados.</p>
     </div>
 </footer>
