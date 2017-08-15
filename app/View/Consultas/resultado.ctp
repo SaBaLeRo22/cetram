@@ -112,6 +112,10 @@
 
 
 			<div id="estimado" data-highcharts-chart="0"></div>
+			<hr>
+			<div id="rango" data-highcharts-chart="1"></div>
+			<hr>
+			<div id="extremo" data-highcharts-chart="2"></div>
 
 
 		</div>
@@ -691,7 +695,22 @@ Gráficos
 	};
 
 	// Apply the theme
-	Highcharts.setOptions(Highcharts.theme);
+	//Highcharts.setOptions(Highcharts.theme);
+
+	// Radialize the colors
+	Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+		return {
+			radialGradient: {
+				cx: 0.5,
+				cy: 0.3,
+				r: 0.7
+			},
+			stops: [
+				[0, color],
+				[1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+			]
+		};
+	});
 
 	<?=
 			$script = "
@@ -712,7 +731,7 @@ Gráficos
 					}],
 					yAxis: [{ // Primary yAxis
 						labels: {
-							format: '{value}',
+							format: '<b>{value:.2f}%</b>',
 							style: {
 								color: Highcharts.getOptions().colors[1]
 							}
@@ -740,43 +759,52 @@ Gráficos
 						showInLegend: false,
 						data: [{
 							name: 'Combustible',
-							y: 56.33,
+							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Filtros y Lubricantes',
-							y: 24.03,
+							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Neumaticos ',
-							y: 10.38,
+							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						},{
 							name: 'Reparaciones, Repuestos y Accesorios',
-							y: 56.33,
+							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Costo del Capital Invertido',
-							y: 24.03,
+							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Personal',
-							y: 10.38,
+							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						},{
 							name: 'SUBE',
-							y: 56.33,
+							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Gastos Generales y Seguro',
-							y: 24.03,
+							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Impuestos y Tasas',
-							y: 10.38,
+							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_valor'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[4]
 						}],
 						tooltip: {
-							valueSuffix: ' %'
+							pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
+						},
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.y:.2f}%</b>',
+							style: {
+								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+							}
 						}
 					},
 						{
@@ -787,30 +815,30 @@ Gráficos
 							name: 'Incidencia',
 							data: [{
 								name: 'Costos Variables de Estructura',
-								y: 13,
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_valor'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[2]
 							}, {
 								name: 'Costos Fijos de Estructura',
-								y: 23,
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_valor'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[3]
 							}, {
 								name: 'Impuestos',
-								y: 19,
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_valor'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[4],
 								sliced: true,
 								selected: true
 							}],
 							tooltip: {
-								pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+								pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
 							},
-							center: [950, -40],
-							size: 50,
+							center: [900, 0],
+							size: 100,
 							showInLegend: true,
 							allowPointSelect: true,
 							cursor: 'pointer',
 							dataLabels: {
 								enabled: true,
-								format: '<b>{point.percentage:.1f} %</b>',
+								format: '<b>{point.percentage:.2f} %</b>',
 								style: {
 									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
 								}
@@ -818,10 +846,289 @@ Gráficos
 						}
 					]
 				});
+
+
+
+
+
+				$('#rango').highcharts({
+					chart: {
+						zoomType: 'xy'
+					},
+					title: {
+						text: 'Incidencias'
+					},
+					subtitle: {
+						text: 'Rangos'
+					},
+					xAxis: [{
+						categories: [],
+						crosshair: true
+					}],
+					yAxis: [{ // Primary yAxis
+						labels: {
+							format: '<b>{value:.2f}%</b>',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						},
+						title: {
+							text: 'Incidencia (%)',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						}
+					}],
+					tooltip: {
+						shared: true
+					},
+					plotOptions: {
+						column: {
+							dataLabels: {
+								enabled: true
+							}
+						}
+					},
+					series: [{
+						name: 'Incidencia',
+						type: 'column',
+						showInLegend: false,
+						data: [{
+							name: 'Combustible',
+							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Filtros y Lubricantes',
+							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Neumaticos ',
+							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						},{
+							name: 'Reparaciones, Repuestos y Accesorios',
+							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Costo del Capital Invertido',
+							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Personal',
+							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						},{
+							name: 'SUBE',
+							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Gastos Generales y Seguro',
+							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Impuestos y Tasas',
+							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[4]
+						}],
+						tooltip: {
+							pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
+						},
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.y:.2f}%</b>',
+							style: {
+								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+							}
+						}
+					},
+						{
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false,
+							type: 'pie',
+							name: 'Incidencia',
+							data: [{
+								name: 'Costos Variables de Estructura',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[2]
+							}, {
+								name: 'Costos Fijos de Estructura',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[3]
+							}, {
+								name: 'Impuestos',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[4],
+								sliced: true,
+								selected: true
+							}],
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+							},
+							center: [900, 0],
+							size: 100,
+							showInLegend: true,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.percentage:.2f} %</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						}
+					]
+				});
+
+
+
+
+
+
+
+				$('#extremo').highcharts({
+					chart: {
+						zoomType: 'xy'
+					},
+					title: {
+						text: 'Incidencias'
+					},
+					subtitle: {
+						text: 'Extremos'
+					},
+					xAxis: [{
+						categories: [],
+						crosshair: true
+					}],
+					yAxis: [{ // Primary yAxis
+						labels: {
+							format: '<b>{value:.2f}%</b>',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						},
+						title: {
+							text: 'Incidencia (%)',
+							style: {
+								color: Highcharts.getOptions().colors[1]
+							}
+						}
+					}],
+					tooltip: {
+						shared: true
+					},
+					plotOptions: {
+						column: {
+							dataLabels: {
+								enabled: true
+							}
+						}
+					},
+					series: [{
+						name: 'Incidencia',
+						type: 'column',
+						showInLegend: false,
+						data: [{
+							name: 'Combustible',
+							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Filtros y Lubricantes',
+							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Neumaticos ',
+							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						},{
+							name: 'Reparaciones, Repuestos y Accesorios',
+							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[2]
+						}, {
+							name: 'Costo del Capital Invertido',
+							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Personal',
+							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						},{
+							name: 'SUBE',
+							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Gastos Generales y Seguro',
+							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[3]
+						}, {
+							name: 'Impuestos y Tasas',
+							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_valor'] * 100, 2, '.', '')).",
+							color: Highcharts.getOptions().colors[4]
+						}],
+						tooltip: {
+							pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
+						},
+						allowPointSelect: true,
+						cursor: 'pointer',
+						dataLabels: {
+							enabled: true,
+							format: '<b>{point.y:.2f}%</b>',
+							style: {
+								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+							}
+						}
+					},
+						{
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false,
+							type: 'pie',
+							name: 'Incidencia',
+							data: [{
+								name: 'Costos Variables de Estructura',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[2]
+							}, {
+								name: 'Costos Fijos de Estructura',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[3]
+							}, {
+								name: 'Impuestos',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[4],
+								sliced: true,
+								selected: true
+							}],
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+							},
+							center: [900, 0],
+							size: 100,
+							showInLegend: true,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.percentage:.2f} %</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						}
+					]
+				});
+
+
+
+
 			});
 
 	";
 
 	$this->Html->scriptBlock($script, array('inline' => false));
 	?>
+
 </script>
