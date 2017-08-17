@@ -130,15 +130,15 @@
 					<tr>
 
 						<th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Tipo'); ?></th>
-						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Inferior'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Minimo'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Minimo'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Inferior'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
 						<th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Estimado'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Maximo'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Superior'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Superior'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Maximo'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
 
 					</tr>
@@ -147,16 +147,16 @@
 					<?php foreach ($consulta['RespuestaTipo'] as $respuestaTipo): ?>
 					<tr>
 						<td><strong><?= $respuestaTipo['tipo']; ?>&nbsp;</strong></td>
-						<td style="text-align: center"><?= number_format($respuestaTipo['inferior'], 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_inferior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['minimo'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_minimo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaTipo['inferior'], 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_inferior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['valor'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_valor'] * 100, 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaTipo['maximo'], 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_maximo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['superior'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_superior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaTipo['maximo'], 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaTipo['incidencia_maximo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 					</tr>
 					<?php endforeach; ?>
 					</tbody>
@@ -176,15 +176,15 @@
 					<tr>
 
 						<th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Item'); ?></th>
-						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Inferior'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Minimo'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Minimo'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Inferior'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
 						<th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Estimado'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Maximo'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Superior'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
-						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Superior'); ?>&nbsp;<br>($)&nbsp;</th>
+						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Maximo'); ?>&nbsp;<br>($)&nbsp;</th>
 						<th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Incidencia'); ?>&nbsp;<br>(%)&nbsp;</th>
 
 					</tr>
@@ -193,16 +193,16 @@
 					<?php foreach ($consulta['RespuestaItem'] as $respuestaItem): ?>
 					<tr>
 						<td><strong><?= $respuestaItem['item']; ?>&nbsp;</strong></td>
-						<td style="text-align: center"><?= number_format($respuestaItem['inferior'], 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_inferior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['minimo'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_minimo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaItem['inferior'], 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_inferior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['valor'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_valor'] * 100, 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaItem['maximo'], 3, ',', '.'); ?>&nbsp;</td>
-						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_maximo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['superior'], 3, ',', '.'); ?>&nbsp;</td>
 						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_superior'] * 100, 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaItem['maximo'], 3, ',', '.'); ?>&nbsp;</td>
+						<td style="text-align: center"><?= number_format($respuestaItem['incidencia_maximo'] * 100, 3, ',', '.'); ?>&nbsp;</td>
 					</tr>
 					<?php endforeach; ?>
 					</tbody>
@@ -884,52 +884,57 @@ Gráficos
 					},
 					plotOptions: {
 						column: {
+							grouping: false,
+							shadow: false,
+							borderWidth: 0,
 							dataLabels: {
 								enabled: true
 							}
 						}
 					},
 					series: [{
-						name: 'Incidencia',
+						name: 'Incidencia Sup',
 						type: 'column',
 						showInLegend: false,
 						data: [{
 							name: 'Combustible',
-							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Filtros y Lubricantes',
-							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Neumaticos ',
-							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						},{
 							name: 'Reparaciones, Repuestos y Accesorios',
-							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Costo del Capital Invertido',
-							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Personal',
-							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						},{
 							name: 'SUBE',
-							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Gastos Generales y Seguro',
-							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Impuestos y Tasas',
-							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_superior'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[4]
 						}],
+
+
 						tooltip: {
 							pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
 						},
@@ -944,22 +949,115 @@ Gráficos
 						}
 					},
 						{
+							name: 'Incidencia Inf',
+							type: 'column',
+							showInLegend: false,
+							data: [{
+								name: 'Combustible',
+								y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Filtros y Lubricantes',
+								y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Neumaticos ',
+								y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							},{
+								name: 'Reparaciones, Repuestos y Accesorios',
+								y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Costo del Capital Invertido',
+								y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Personal',
+								y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							},{
+								name: 'SUBE',
+								y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Gastos Generales y Seguro',
+								y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Impuestos y Tasas',
+								y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[7]
+							}],
+							pointPadding: 0.2,
+
+							tooltip: {
+								pointFormat: '<br>{series.name}: <b>{point.y:.2f}%</b>'
+							},
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.y:.2f}%</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						},
+						{
 							plotBackgroundColor: null,
 							plotBorderWidth: null,
 							plotShadow: false,
 							type: 'pie',
-							name: 'Incidencia',
+							name: 'Incidencia Inf',
 							data: [{
-								name: 'Costos Variables de Estructura',
-								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Costos Variables de Estructura Inf',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Costos Fijos de Estructura Inf',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Impuestos Inf',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_inferior'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[7],
+								sliced: true,
+								selected: true
+							}],
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+							},
+							center: [100, 0],
+							size: 100,
+							showInLegend: true,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.percentage:.2f} %</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						},
+						{
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false,
+							type: 'pie',
+							name: 'Incidencia Sup',
+							data: [{
+								name: 'Costos Variables de Estructura Sup',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_superior'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[2]
 							}, {
-								name: 'Costos Fijos de Estructura',
-								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Costos Fijos de Estructura Sup',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_superior'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[3]
 							}, {
-								name: 'Impuestos',
-								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Impuestos Sup',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_superior'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[4],
 								sliced: true,
 								selected: true
@@ -1022,52 +1120,57 @@ Gráficos
 					},
 					plotOptions: {
 						column: {
+							grouping: false,
+							shadow: false,
+							borderWidth: 0,
 							dataLabels: {
 								enabled: true
 							}
 						}
 					},
 					series: [{
-						name: 'Incidencia',
+						name: 'Incidencia Max',
 						type: 'column',
 						showInLegend: false,
 						data: [{
 							name: 'Combustible',
-							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Filtros y Lubricantes',
-							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Neumaticos ',
-							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						},{
 							name: 'Reparaciones, Repuestos y Accesorios',
-							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[2]
 						}, {
 							name: 'Costo del Capital Invertido',
-							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Personal',
-							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						},{
 							name: 'SUBE',
-							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Gastos Generales y Seguro',
-							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[3]
 						}, {
 							name: 'Impuestos y Tasas',
-							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_valor'] * 100, 2, '.', '')).",
+							y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_maximo'] * 100, 2, '.', '')).",
 							color: Highcharts.getOptions().colors[4]
 						}],
+
+
 						tooltip: {
 							pointFormat: '{series.name}: <b>{point.y:.2f}%</b>'
 						},
@@ -1082,22 +1185,115 @@ Gráficos
 						}
 					},
 						{
+							name: 'Incidencia Min',
+							type: 'column',
+							showInLegend: false,
+							data: [{
+								name: 'Combustible',
+								y: ".(number_format($consulta['RespuestaItem'][0]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Filtros y Lubricantes',
+								y: ".(number_format($consulta['RespuestaItem'][1]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Neumaticos ',
+								y: ".(number_format($consulta['RespuestaItem'][2]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							},{
+								name: 'Reparaciones, Repuestos y Accesorios',
+								y: ".(number_format($consulta['RespuestaItem'][3]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Costo del Capital Invertido',
+								y: ".(number_format($consulta['RespuestaItem'][4]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Personal',
+								y: ".(number_format($consulta['RespuestaItem'][5]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							},{
+								name: 'SUBE',
+								y: ".(number_format($consulta['RespuestaItem'][6]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Gastos Generales y Seguro',
+								y: ".(number_format($consulta['RespuestaItem'][7]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Impuestos y Tasas',
+								y: ".(number_format($consulta['RespuestaItem'][8]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[7]
+							}],
+							pointPadding: 0.2,
+
+							tooltip: {
+								pointFormat: '<br>{series.name}: <b>{point.y:.2f}%</b>'
+							},
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.y:.2f}%</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						},
+						{
 							plotBackgroundColor: null,
 							plotBorderWidth: null,
 							plotShadow: false,
 							type: 'pie',
-							name: 'Incidencia',
+							name: 'Incidencia Min',
 							data: [{
-								name: 'Costos Variables de Estructura',
-								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Costos Variables de Estructura Min',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[5]
+							}, {
+								name: 'Costos Fijos de Estructura Min',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[6]
+							}, {
+								name: 'Impuestos Min',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_minimo'] * 100, 2, '.', '')).",
+								color: Highcharts.getOptions().colors[7],
+								sliced: true,
+								selected: true
+							}],
+							tooltip: {
+								pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+							},
+							center: [100, 0],
+							size: 100,
+							showInLegend: true,
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: {
+								enabled: true,
+								format: '<b>{point.percentage:.2f} %</b>',
+								style: {
+									color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+								}
+							}
+						},
+						{
+							plotBackgroundColor: null,
+							plotBorderWidth: null,
+							plotShadow: false,
+							type: 'pie',
+							name: 'Incidencia Max',
+							data: [{
+								name: 'Costos Variables de Estructura Max',
+								y: ".(number_format($consulta['RespuestaTipo'][0]['incidencia_maximo'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[2]
 							}, {
-								name: 'Costos Fijos de Estructura',
-								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Costos Fijos de Estructura Max',
+								y: ".(number_format($consulta['RespuestaTipo'][1]['incidencia_maximo'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[3]
 							}, {
-								name: 'Impuestos',
-								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_valor'] * 100, 2, '.', '')).",
+								name: 'Impuestos Max',
+								y: ".(number_format($consulta['RespuestaTipo'][2]['incidencia_maximo'] * 100, 2, '.', '')).",
 								color: Highcharts.getOptions().colors[4],
 								sliced: true,
 								selected: true
