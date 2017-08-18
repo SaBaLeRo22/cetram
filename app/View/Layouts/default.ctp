@@ -44,7 +44,8 @@
     'app-styles',
     'custom-styles',
     '/plugins/selectize.js/dist/css/selectize.bootstrap3',
-    // 'highcharts'
+    // 'highcharts',
+    'card'
 
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
