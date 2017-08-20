@@ -1,11 +1,11 @@
 <?php
-App::uses('Indicadore', 'Model');
+App::uses('AlertasController', 'Controller');
 
 /**
- * Indicadore Test Case
+ * AlertasController Test Case
  *
  */
-class IndicadoreTest extends CakeTestCase {
+class AlertasControllerTest extends ControllerTestCase {
 
 /**
  * Fixtures
@@ -13,6 +13,7 @@ class IndicadoreTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
+		'app.alerta',
 		'app.indicadore',
 		'app.unidade',
 		'app.estado',
@@ -48,28 +49,53 @@ class IndicadoreTest extends CakeTestCase {
 		'app.dieta',
 		'app.respuesta_tipo',
 		'app.factore',
-		'app.sectore'
+		'app.sectore',
+		'app.evento'
 	);
 
 /**
- * setUp method
+ * testIndex method
  *
  * @return void
  */
-	public function setUp() {
-		parent::setUp();
-		$this->Indicadore = ClassRegistry::init('Indicadore');
+	public function testIndex() {
+		$this->markTestIncomplete('testIndex not implemented.');
 	}
 
 /**
- * tearDown method
+ * testView method
  *
  * @return void
  */
-	public function tearDown() {
-		unset($this->Indicadore);
+	public function testView() {
+		$this->markTestIncomplete('testView not implemented.');
+	}
 
-		parent::tearDown();
+/**
+ * testAdd method
+ *
+ * @return void
+ */
+	public function testAdd() {
+		$this->markTestIncomplete('testAdd not implemented.');
+	}
+
+/**
+ * testEdit method
+ *
+ * @return void
+ */
+	public function testEdit() {
+		$this->markTestIncomplete('testEdit not implemented.');
+	}
+
+/**
+ * testDelete method
+ *
+ * @return void
+ */
+	public function testDelete() {
+		$this->markTestIncomplete('testDelete not implemented.');
 	}
 
 }

@@ -3358,11 +3358,10 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
 
-        $incidencias_estimado_item['items'] = "'" . "Item1" . "', ";
-        $incidencias_estimado_item['incidencias'] = number_format(1.5, 2, ".", "");
+        // 2.1. Indicador de infraestructura.
 
 
-        $this->set(compact('consulta', 'sube', 'incidencias_estimado_item'));
+        $this->set(compact('consulta', 'sube'));
     }
 
 

@@ -2,56 +2,26 @@
 /**
  * @var $this View
  */
-?><div class="row respuestaIndicadores form">
+?><div class="row alertas form">
     <div class="col-md-9">
-                <h2><?= __('Editar Respuesta Indicadore') ?></h2>
+                <h2><?= __('Editar Alerta') ?></h2>
                 <hr/>
 
-        <?= $this->Form->create('RespuestaIndicadore', array('class' => 'form-horizontal')); ?>
+        <?= $this->Form->create('Alerta', array('class' => 'form-horizontal')); ?>
  
-                            <div class="form-group">
-            <?= $this->Form->label('consulta_id', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('consulta_id'); ?> 
-        </div>
+                     
+        <?= $this->Form->input('id'); ?>  
                                                     <div class="form-group">
             <?= $this->Form->label('indicadore_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('indicadore_id'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('alerta_id', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('alerta_id'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('evento_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('evento_id'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('indicador', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('indicador'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('alerta', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('alerta'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('notificar', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('notificar'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('mensaje', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('mensaje'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('evento', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('evento'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('color', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('color'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('valor', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('valor'); ?> 
+            <?= $this->Form->label('nombre', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('nombre'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('menor', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -70,12 +40,12 @@
             <?= $this->Form->input('mayor'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('unidade_id'); ?> 
+            <?= $this->Form->label('notificar', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('notificar'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('unidad', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('unidad'); ?> 
+            <?= $this->Form->label('mensaje', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('mensaje'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -99,27 +69,27 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Html->link(__('Listado de Respuesta Indicadores'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Alerta.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Alerta.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Alertas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Consulta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Consultas'), array('controller' => 'consultas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Consulta'), array('controller' => 'consultas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
             <h4 class="text-muted">Indicadore</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Indicadores'), array('controller' => 'indicadores', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Indicadore'), array('controller' => 'indicadores', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Unidade</h4>
+            <h4 class="text-muted">Evento</h4>
             <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+                		<?= $this->Html->link(__('Listado de  Eventos'), array('controller' => 'eventos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Evento'), array('controller' => 'eventos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
             <h4 class="text-muted">Estado</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Respuesta Indicadore</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Respuesta Indicadores'), array('controller' => 'respuesta_indicadores', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Respuesta Indicadore'), array('controller' => 'respuesta_indicadores', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>

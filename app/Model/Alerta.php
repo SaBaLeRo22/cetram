@@ -1,23 +1,21 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * RespuestaIndicadore Model
+ * Alerta Model
  *
- * @property Consulta $Consulta
  * @property Indicadore $Indicadore
- * @property Alerta $Alerta
  * @property Evento $Evento
- * @property Unidade $Unidade
  * @property Estado $Estado
+ * @property RespuestaIndicadore $RespuestaIndicadore
  */
-class RespuestaIndicadore extends AppModel {
+class Alerta extends AppModel {
 
 /**
  * Display field
  *
  * @var string
  */
-	public $displayField = 'indicador';
+	public $displayField = 'nombre';
 
 /**
  * Validation rules
@@ -25,27 +23,7 @@ class RespuestaIndicadore extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'consulta_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'indicadore_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'alerta_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -58,6 +36,46 @@ class RespuestaIndicadore extends AppModel {
 		'evento_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'nombre' => array(
+			'notEmpty' => array(
+				'rule' => array('notEmpty'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'menor' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'mayor' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'notificar' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -105,13 +123,6 @@ class RespuestaIndicadore extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Consulta' => array(
-			'className' => 'Consulta',
-			'foreignKey' => 'consulta_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Indicadore' => array(
 			'className' => 'Indicadore',
 			'foreignKey' => 'indicadore_id',
@@ -119,23 +130,9 @@ class RespuestaIndicadore extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Alerta' => array(
-			'className' => 'Alerta',
-			'foreignKey' => 'alerta_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Evento' => array(
 			'className' => 'Evento',
 			'foreignKey' => 'evento_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
-		'Unidade' => array(
-			'className' => 'Unidade',
-			'foreignKey' => 'unidade_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -148,4 +145,26 @@ class RespuestaIndicadore extends AppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * hasMany associations
+ *
+ * @var array
+ */
+	public $hasMany = array(
+		'RespuestaIndicadore' => array(
+			'className' => 'RespuestaIndicadore',
+			'foreignKey' => 'alerta_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }

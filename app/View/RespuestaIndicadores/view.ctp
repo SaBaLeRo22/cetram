@@ -17,7 +17,7 @@
 		</dd>
 		<dt><?= __('Consulta'); ?></dt>
 		<dd>
-			<?= $this->Html->link($respuestaIndicadore['Consulta']['tarifa'], array('controller' => 'consultas', 'action' => 'view', $respuestaIndicadore['Consulta']['id'])); ?>
+			<?= $this->Html->link($respuestaIndicadore['Consulta']['costo'], array('controller' => 'consultas', 'action' => 'view', $respuestaIndicadore['Consulta']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Indicadore'); ?></dt>
@@ -25,9 +25,24 @@
 			<?= $this->Html->link($respuestaIndicadore['Indicadore']['nombre'], array('controller' => 'indicadores', 'action' => 'view', $respuestaIndicadore['Indicadore']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Alerta Id'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['alerta_id']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Evento Id'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['evento_id']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Indicador'); ?></dt>
 		<dd>
 			<?= h($respuestaIndicadore['RespuestaIndicadore']['indicador']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Alerta'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['alerta']); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Notificar'); ?></dt>
@@ -35,9 +50,29 @@
 			<?= h($respuestaIndicadore['RespuestaIndicadore']['notificar']); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Mensaje'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['mensaje']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Evento'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['evento']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Color'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['color']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Valor'); ?></dt>
 		<dd>
 			<?= h($respuestaIndicadore['RespuestaIndicadore']['valor']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Menor'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['menor']); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Minimo'); ?></dt>
@@ -48,6 +83,11 @@
 		<dt><?= __('Maximo'); ?></dt>
 		<dd>
 			<?= h($respuestaIndicadore['RespuestaIndicadore']['maximo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Mayor'); ?></dt>
+		<dd>
+			<?= h($respuestaIndicadore['RespuestaIndicadore']['mayor']); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Unidade'); ?></dt>

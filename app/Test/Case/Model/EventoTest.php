@@ -1,11 +1,11 @@
 <?php
-App::uses('RespuestaIndicadore', 'Model');
+App::uses('Evento', 'Model');
 
 /**
- * RespuestaIndicadore Test Case
+ * Evento Test Case
  *
  */
-class RespuestaIndicadoreTest extends CakeTestCase {
+class EventoTest extends CakeTestCase {
 
 /**
  * Fixtures
@@ -13,41 +13,43 @@ class RespuestaIndicadoreTest extends CakeTestCase {
  * @var array
  */
 	public $fixtures = array(
-		'app.respuesta_indicadore',
-		'app.consulta',
+		'app.evento',
+		'app.alerta',
+		'app.indicadore',
 		'app.unidade',
 		'app.estado',
 		'app.agrupamiento',
 		'app.paso',
-		'app.pregunta',
-		'app.multiplicadore',
-		'app.matrix',
-		'app.coeficiente',
-		'app.ambito',
-		'app.indicadore',
-		'app.parametro',
-		'app.tipo',
-		'app.item',
-		'app.participacione',
-		'app.intervencione',
-		'app.opcione',
-		'app.respuesta_pregunta',
-		'app.categoria',
-		'app.salario',
-		'app.convenio',
-		'app.respuesta_salario',
-		'app.viatico',
-		'app.dieta',
-		'app.factore',
+		'app.consulta',
 		'app.localidade',
 		'app.provincia',
 		'app.modo',
 		'app.respuesta_coeficiente',
+		'app.coeficiente',
+		'app.ambito',
+		'app.parametro',
+		'app.tipo',
+		'app.item',
+		'app.participacione',
+		'app.pregunta',
+		'app.multiplicadore',
+		'app.matrix',
+		'app.opcione',
+		'app.respuesta_pregunta',
+		'app.intervencione',
+		'app.respuesta_indicadore',
 		'app.respuesta_item',
 		'app.respuesta_multiplicadore',
 		'app.respuesta_parametro',
 		'app.respuesta_pasajero',
+		'app.respuesta_salario',
+		'app.convenio',
+		'app.salario',
+		'app.categoria',
+		'app.viatico',
+		'app.dieta',
 		'app.respuesta_tipo',
+		'app.factore',
 		'app.sectore'
 	);
 
@@ -58,7 +60,7 @@ class RespuestaIndicadoreTest extends CakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		$this->RespuestaIndicadore = ClassRegistry::init('RespuestaIndicadore');
+		$this->Evento = ClassRegistry::init('Evento');
 	}
 
 /**
@@ -67,7 +69,7 @@ class RespuestaIndicadoreTest extends CakeTestCase {
  * @return void
  */
 	public function tearDown() {
-		unset($this->RespuestaIndicadore);
+		unset($this->Evento);
 
 		parent::tearDown();
 	}

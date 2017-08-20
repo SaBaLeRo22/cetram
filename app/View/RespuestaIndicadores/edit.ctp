@@ -20,16 +20,44 @@
             <?= $this->Form->input('indicadore_id'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('alerta_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('alerta_id'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('evento_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('evento_id'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('indicador', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('indicador'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('alerta', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('alerta'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('notificar', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('notificar'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('mensaje', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('mensaje'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('evento', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('evento'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('color', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('color'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('valor', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('valor'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('menor', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('menor'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('minimo', null, array('class' => 'control-label col-xs-3')); ?> 
@@ -38,6 +66,10 @@
                                                     <div class="form-group">
             <?= $this->Form->label('maximo', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('maximo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('mayor', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('mayor'); ?> 
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
