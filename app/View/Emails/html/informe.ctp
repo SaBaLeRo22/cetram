@@ -36,7 +36,7 @@
                 <dt>Estado</dt>
                 <dd><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
                 <dt>Usuario</dt>
-                <dd><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
+                <dd>Usuario </dd>
                 <dt>Creada</dt>
                 <dd><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
                 <dt>Modificada</dt>
@@ -46,9 +46,6 @@
     </div>
     <div class="col-md-8">
         <div class="related">
-            <div class="actions">
-                <?= $this->Html->link(__('<i class="fa fa-paper-plane-o fa-fw"></i> Enviar por E-Mail'), array('action' => 'enviar', $consulta['Consulta']['id']), array('class' => 'btn btn-sm btn-info')); ?>
-            </div>
             <h3><?= __('Resumen'); ?></h3>
 
             <div class="table-responsive">
@@ -129,30 +126,30 @@
             <h3><?= __('Indicadores de Eficiencia'); ?></h3>
 
             <?php if ($consulta['RespuestaIndicadore']['0']['evento_id'] == '2'): ?>
-                <div class="col-md-4 card text-white bg-success mb-3">
-                    <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
-                    <div class="card-body">
-                        <h4 class="card-title"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
-                        <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
-                    </div>
+            <div class="col-md-4 card text-white bg-success mb-3">
+                <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
+                    <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
                 </div>
-                <?php elseif ($consulta['RespuestaIndicadore']['0']['evento_id'] == '4'): ?>
-                    <div class="col-md-4 card text-white bg-warning mb-3">
-                        <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
-                        <div class="card-body">
-                            <h4 class="card-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
-                            <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
-                        </div>
-                    </div>
-                 <?php else: ?>
-                    <div class="col-md-4 card text-white bg-danger mb-3">
-                        <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
-                        <div class="card-body">
-                            <h4 class="card-title"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
-                            <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
-                        </div>
-                    </div>
-                  <?php endif; ?>
+            </div>
+            <?php elseif ($consulta['RespuestaIndicadore']['0']['evento_id'] == '4'): ?>
+            <div class="col-md-4 card text-white bg-warning mb-3">
+                <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
+                    <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
+                </div>
+            </div>
+            <?php else: ?>
+            <div class="col-md-4 card text-white bg-danger mb-3">
+                <div class="card-header" style="text-align: center"><?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;</div>
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;</h4>
+                    <p class="card-text" style="font-style: italic"><?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;</p>
+                </div>
+            </div>
+            <?php endif; ?>
 
 
             <?php if ($consulta['RespuestaIndicadore']['1']['evento_id'] == '2'): ?>
@@ -207,7 +204,7 @@
             </div>
             <?php endif; ?>
 
-        <br>
+            <br>
 
             <?php if ($consulta['RespuestaIndicadore']['3']['evento_id'] == '2'): ?>
             <div class="col-md-4 card text-white bg-success mb-3">
@@ -292,8 +289,8 @@
     </div>
 </div>
 
-                                <div class="row consultas view">
-                                    <div class="col-md-12">
+<div class="row consultas view">
+    <div class="col-md-12">
         <div class="related">
             <h3><?= __('Gr&aacute;ficos de Incidencia'); ?></h3>
 
@@ -741,12 +738,12 @@
                     <?php foreach ($consulta['RespuestaIndicadore'] as $respuestaIndicadore): ?>
 
                     <?php if ($respuestaIndicadore['evento_id'] == '2'): ?>
-                        <tr class="alert alert-success" role="alert">
-                    <?php elseif ($respuestaIndicadore['evento_id'] == '4'): ?>
-                        <tr class="alert alert-warning" role="alert">
-                    <?php else: ?>
-                        <tr class="alert alert-danger" role="alert">
-                    <?php endif; ?>
+                    <tr class="alert alert-success" role="alert">
+                        <?php elseif ($respuestaIndicadore['evento_id'] == '4'): ?>
+                    <tr class="alert alert-warning" role="alert">
+                        <?php else: ?>
+                    <tr class="alert alert-danger" role="alert">
+                        <?php endif; ?>
 
                         <td><strong><?= $respuestaIndicadore['indicador']; ?>&nbsp;</strong>
                         </td>
@@ -802,17 +799,12 @@
             <p style="white-space:pre-line">            <?= h($consulta['Consulta']['observaciones']); ?></p>
         </div>
 
-        <div class="well well-sm text-center">
-            <?= $this->Html->link(__('<i class="fa fa-paper-plane-o fa-fw"></i> Enviar por E-Mail'), array('action' => 'enviar', $consulta['Consulta']['id']), array('class' => 'btn btn-success')); ?>
-            <div style="clear: both;"></div>
-        </div>
-
 
     </div>
 </div>
 
 <!--
-Gráficos
+GrÃ¡ficos
 -->
 
 <script type='text/javascript' charset='utf-8'>

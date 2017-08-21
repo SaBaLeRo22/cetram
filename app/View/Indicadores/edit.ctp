@@ -77,6 +77,11 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Alerta</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Alertas'), array('controller' => 'alertas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Alerta'), array('controller' => 'alertas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
         </div>

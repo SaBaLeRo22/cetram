@@ -86,6 +86,66 @@
         </div>
     </div>
     <div class="col-md-8">
+                <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Alerta', ['controller' => 'alertas', 'action' => 'add', 'indicadore_id' => $indicadore['Indicadore']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+            </div>
+            <h3><?= __('Alertas'); ?></h3>
+            <?php if (!empty($indicadore['Alerta'])): ?>
+            <div class="table-responsive">
+            <table class="table" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    		<th><?= __('Id'); ?></th>
+		<th><?= __('Indicadore Id'); ?></th>
+		<th><?= __('Evento Id'); ?></th>
+		<th><?= __('Nombre'); ?></th>
+		<th><?= __('Menor'); ?></th>
+		<th><?= __('Minimo'); ?></th>
+		<th><?= __('Maximo'); ?></th>
+		<th><?= __('Mayor'); ?></th>
+		<th><?= __('Notificar'); ?></th>
+		<th><?= __('Mensaje'); ?></th>
+		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Created'); ?></th>
+		<th><?= __('Modified'); ?></th>
+		<th><?= __('User Created'); ?></th>
+		<th><?= __('User Modified'); ?></th>
+                    <th class="actions"><?= __('Acciones'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                	<?php foreach ($indicadore['Alerta'] as $alerta): ?>
+		<tr>
+			<td><?= $alerta['id']; ?></td>
+			<td><?= $alerta['indicadore_id']; ?></td>
+			<td><?= $alerta['evento_id']; ?></td>
+			<td><?= $alerta['nombre']; ?></td>
+			<td><?= $alerta['menor']; ?></td>
+			<td><?= $alerta['minimo']; ?></td>
+			<td><?= $alerta['maximo']; ?></td>
+			<td><?= $alerta['mayor']; ?></td>
+			<td><?= $alerta['notificar']; ?></td>
+			<td><?= $alerta['mensaje']; ?></td>
+			<td><?= $alerta['estado_id']; ?></td>
+			<td><?= $alerta['created']; ?></td>
+			<td><?= $alerta['modified']; ?></td>
+			<td><?= $alerta['user_created']; ?></td>
+			<td><?= $alerta['user_modified']; ?></td>
+			<td class="actions">
+				<?= $this->Html->link(__('Ver'), array('controller' => 'alertas', 'action' => 'view', $alerta['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Html->link(__('Editar'), array('controller' => 'alertas', 'action' => 'edit', $alerta['id']), array('class' => 'btn btn-default btn-xs')); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'alertas', 'action' => 'delete', $alerta['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $alerta['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
+                </tbody>
+            </table>
+            </div>
+            <?php endif; ?>
+
+        </div>
+        <hr/>
           
     </div>
 </div>

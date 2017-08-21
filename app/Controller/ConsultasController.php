@@ -3288,6 +3288,8 @@ class ConsultasController extends AppController
 
         $this->loadModel('Indicadore');
         $this->Indicadore->recursive = 0;
+        $this->loadModel('Alerta');
+        $this->Alerta->recursive = 0;
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
         $this->loadModel('RespuestaSalario');
@@ -3296,10 +3298,15 @@ class ConsultasController extends AppController
         $this->RespuestaIndicadore->recursive = -1;
 
         /*
-         * Indicador 1: FACTOR DE UTILIZACIÓN DE CHOFERES
+         * Indicador 1: 2.5. Indicador de utilización de conductores.
          * */
         $indicador_1 = $this->Indicadore->find('first', array(
             'conditions' => array('Indicadore.id' => '1', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_1 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '1', 'Alerta.estado_id <>' => '2'),
             'recursive' => 0
         ));
 
@@ -3322,24 +3329,522 @@ class ConsultasController extends AppController
         ));
 
         $this->RespuestaIndicadore->create();
-        $respuestaIndicadore['RespuestaIndicadore']['consulta_id'] = $consulta_id;
-        $respuestaIndicadore['RespuestaIndicadore']['indicadore_id'] = $indicador_1['Indicadore']['id'];
-        $respuestaIndicadore['RespuestaIndicadore']['indicador'] = $indicador_1['Indicadore']['nombre'];
-        $respuestaIndicadore['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / ($respuestaPregunta_1['RespuestaPregunta']['valor'] - $respuestaPregunta_2['RespuestaPregunta']['valor']);
-        $respuestaIndicadore['RespuestaIndicadore']['minimo'] = $indicador_1['Indicadore']['minimo'];
-        $respuestaIndicadore['RespuestaIndicadore']['maximo'] = $indicador_1['Indicadore']['maximo'];
-        if ($respuestaIndicadore['RespuestaIndicadore']['valor'] >= $respuestaIndicadore['RespuestaIndicadore']['minimo'] && $respuestaIndicadore['RespuestaIndicadore']['valor'] <= $respuestaIndicadore['RespuestaIndicadore']['maximo']) {
-            $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '0';
-        } else {
-            $respuestaIndicadore['RespuestaIndicadore']['notificar'] = '1';
-        }
-        $respuestaIndicadore['RespuestaIndicadore']['unidade_id'] = $indicador_1['Unidade']['id'];
-        $respuestaIndicadore['RespuestaIndicadore']['unidad'] = $indicador_1['Unidade']['nombre'];
-        $respuestaIndicadore['RespuestaIndicadore']['estado_id'] = 1;
-        $respuestaIndicadore['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
-        $respuestaIndicadore['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+        $respuestaIndicadore_1['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_1['RespuestaIndicadore']['indicadore_id'] = $indicador_1['Indicadore']['id'];
+        $respuestaIndicadore_1['RespuestaIndicadore']['indicador'] = $indicador_1['Indicadore']['nombre'];
+        $respuestaIndicadore_1['RespuestaIndicadore']['valor'] = $respuestaSalario_1['RespuestaSalario']['cantidad'] / ($respuestaPregunta_1['RespuestaPregunta']['valor'] - $respuestaPregunta_2['RespuestaPregunta']['valor']);
 
-        return ($this->RespuestaIndicadore->save($respuestaIndicadore));
+        foreach ($alertas_1 as $alerta_1) {
+
+            if($alerta_1['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_1['RespuestaIndicadore']['valor'] <= $alerta_1['Alerta']['maximo']){
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta_id'] = $alerta_1['Alerta']['id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento_id'] = $alerta_1['Alerta']['evento_id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta'] = $alerta_1['Alerta']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['notificar'] = $alerta_1['Alerta']['notificar'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mensaje'] = $alerta_1['Alerta']['mensaje'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento'] = $alerta_1['Evento']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['color'] = $alerta_1['Evento']['color'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['menor'] = $alerta_1['Alerta']['menor'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['minimo'] = $alerta_1['Alerta']['minimo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['maximo'] = $alerta_1['Alerta']['maximo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mayor'] = $alerta_1['Alerta']['mayor'];
+                }
+
+            } else if($alerta_1['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_1['RespuestaIndicadore']['valor'] >= $alerta_1['Alerta']['minimo']){
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta_id'] = $alerta_1['Alerta']['id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento_id'] = $alerta_1['Alerta']['evento_id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta'] = $alerta_1['Alerta']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['notificar'] = $alerta_1['Alerta']['notificar'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mensaje'] = $alerta_1['Alerta']['mensaje'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento'] = $alerta_1['Evento']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['color'] = $alerta_1['Evento']['color'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['menor'] = $alerta_1['Alerta']['menor'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['minimo'] = $alerta_1['Alerta']['minimo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['maximo'] = $alerta_1['Alerta']['maximo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mayor'] = $alerta_1['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_1['RespuestaIndicadore']['valor'] <= $alerta_1['Alerta']['maximo']) && ($respuestaIndicadore_1['RespuestaIndicadore']['valor'] >= $alerta_1['Alerta']['minimo'])){
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta_id'] = $alerta_1['Alerta']['id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento_id'] = $alerta_1['Alerta']['evento_id'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['alerta'] = $alerta_1['Alerta']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['notificar'] = $alerta_1['Alerta']['notificar'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mensaje'] = $alerta_1['Alerta']['mensaje'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['evento'] = $alerta_1['Evento']['nombre'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['color'] = $alerta_1['Evento']['color'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['menor'] = $alerta_1['Alerta']['menor'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['minimo'] = $alerta_1['Alerta']['minimo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['maximo'] = $alerta_1['Alerta']['maximo'];
+                    $respuestaIndicadore_1['RespuestaIndicadore']['mayor'] = $alerta_1['Alerta']['mayor'];
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_1['RespuestaIndicadore']['unidade_id'] = $indicador_1['Unidade']['id'];
+        $respuestaIndicadore_1['RespuestaIndicadore']['unidad'] = $indicador_1['Unidade']['nombre'];
+        $respuestaIndicadore_1['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_1['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_1['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_1)) {
+            return false;
+        }
+
+        /*
+         * Indicador 2: 2.1. Indicador de infraestructura.
+         * */
+        $indicador_2 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '2', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_2 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '2', 'Alerta.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        // ¿Cuál es el porcentaje de calles pavimentadas en la red de transporte público?
+        $respuestaPregunta_3 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '2', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        // ¿Qué porcentaje de calles recorridas se encuentra en buen estado?
+        $respuestaPregunta_4 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '3', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore_2['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_2['RespuestaIndicadore']['indicadore_id'] = $indicador_2['Indicadore']['id'];
+        $respuestaIndicadore_2['RespuestaIndicadore']['indicador'] = $indicador_2['Indicadore']['nombre'];
+        $respuestaIndicadore_2['RespuestaIndicadore']['valor'] = $respuestaPregunta_3['RespuestaPregunta']['valor'] * $respuestaPregunta_4['RespuestaPregunta']['valor'];
+
+        foreach ($alertas_2 as $alerta_2) {
+
+            if($alerta_2['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_2['RespuestaIndicadore']['valor'] <= $alerta_2['Alerta']['maximo']){
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta_id'] = $alerta_2['Alerta']['id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento_id'] = $alerta_2['Alerta']['evento_id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta'] = $alerta_2['Alerta']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['notificar'] = $alerta_2['Alerta']['notificar'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mensaje'] = $alerta_2['Alerta']['mensaje'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento'] = $alerta_2['Evento']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['color'] = $alerta_2['Evento']['color'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['menor'] = $alerta_2['Alerta']['menor'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['minimo'] = $alerta_2['Alerta']['minimo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['maximo'] = $alerta_2['Alerta']['maximo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mayor'] = $alerta_2['Alerta']['mayor'];
+                }
+
+            } else if($alerta_2['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_2['RespuestaIndicadore']['valor'] >= $alerta_2['Alerta']['minimo']){
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta_id'] = $alerta_2['Alerta']['id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento_id'] = $alerta_2['Alerta']['evento_id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta'] = $alerta_2['Alerta']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['notificar'] = $alerta_2['Alerta']['notificar'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mensaje'] = $alerta_2['Alerta']['mensaje'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento'] = $alerta_2['Evento']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['color'] = $alerta_2['Evento']['color'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['menor'] = $alerta_2['Alerta']['menor'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['minimo'] = $alerta_2['Alerta']['minimo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['maximo'] = $alerta_2['Alerta']['maximo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mayor'] = $alerta_2['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_2['RespuestaIndicadore']['valor'] <= $alerta_2['Alerta']['maximo']) && ($respuestaIndicadore_2['RespuestaIndicadore']['valor'] >= $alerta_2['Alerta']['minimo'])){
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta_id'] = $alerta_2['Alerta']['id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento_id'] = $alerta_2['Alerta']['evento_id'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['alerta'] = $alerta_2['Alerta']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['notificar'] = $alerta_2['Alerta']['notificar'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mensaje'] = $alerta_2['Alerta']['mensaje'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['evento'] = $alerta_2['Evento']['nombre'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['color'] = $alerta_2['Evento']['color'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['menor'] = $alerta_2['Alerta']['menor'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['minimo'] = $alerta_2['Alerta']['minimo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['maximo'] = $alerta_2['Alerta']['maximo'];
+                    $respuestaIndicadore_2['RespuestaIndicadore']['mayor'] = $alerta_2['Alerta']['mayor'];
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_2['RespuestaIndicadore']['unidade_id'] = $indicador_2['Unidade']['id'];
+        $respuestaIndicadore_2['RespuestaIndicadore']['unidad'] = $indicador_2['Unidade']['nombre'];
+        $respuestaIndicadore_2['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_2['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_2['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_2)) {
+            return false;
+        }
+
+        /*
+         * Indicador 3: 2.2. Indicador de paradas.
+         * */
+        $indicador_3 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '3', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_3 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '3', 'Alerta.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        // ¿Qué distancia promedio existe entre paradas?
+        $respuestaPregunta_5 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '1', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore_3['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_3['RespuestaIndicadore']['indicadore_id'] = $indicador_3['Indicadore']['id'];
+        $respuestaIndicadore_3['RespuestaIndicadore']['indicador'] = $indicador_3['Indicadore']['nombre'];
+        $respuestaIndicadore_3['RespuestaIndicadore']['valor'] = $respuestaPregunta_5['RespuestaPregunta']['valor'];
+
+        foreach ($alertas_3 as $alerta_3) {
+
+            if($alerta_3['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_3['RespuestaIndicadore']['valor'] <= $alerta_3['Alerta']['maximo']){
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta_id'] = $alerta_3['Alerta']['id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento_id'] = $alerta_3['Alerta']['evento_id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta'] = $alerta_3['Alerta']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['notificar'] = $alerta_3['Alerta']['notificar'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mensaje'] = $alerta_3['Alerta']['mensaje'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento'] = $alerta_3['Evento']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['color'] = $alerta_3['Evento']['color'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['menor'] = $alerta_3['Alerta']['menor'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['minimo'] = $alerta_3['Alerta']['minimo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['maximo'] = $alerta_3['Alerta']['maximo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mayor'] = $alerta_3['Alerta']['mayor'];
+                }
+
+            } else if($alerta_3['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_3['RespuestaIndicadore']['valor'] >= $alerta_3['Alerta']['minimo']){
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta_id'] = $alerta_3['Alerta']['id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento_id'] = $alerta_3['Alerta']['evento_id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta'] = $alerta_3['Alerta']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['notificar'] = $alerta_3['Alerta']['notificar'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mensaje'] = $alerta_3['Alerta']['mensaje'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento'] = $alerta_3['Evento']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['color'] = $alerta_3['Evento']['color'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['menor'] = $alerta_3['Alerta']['menor'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['minimo'] = $alerta_3['Alerta']['minimo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['maximo'] = $alerta_3['Alerta']['maximo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mayor'] = $alerta_3['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_3['RespuestaIndicadore']['valor'] <= $alerta_3['Alerta']['maximo']) && ($respuestaIndicadore_3['RespuestaIndicadore']['valor'] >= $alerta_3['Alerta']['minimo'])){
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta_id'] = $alerta_3['Alerta']['id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento_id'] = $alerta_3['Alerta']['evento_id'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['alerta'] = $alerta_3['Alerta']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['notificar'] = $alerta_3['Alerta']['notificar'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mensaje'] = $alerta_3['Alerta']['mensaje'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['evento'] = $alerta_3['Evento']['nombre'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['color'] = $alerta_3['Evento']['color'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['menor'] = $alerta_3['Alerta']['menor'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['minimo'] = $alerta_3['Alerta']['minimo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['maximo'] = $alerta_3['Alerta']['maximo'];
+                    $respuestaIndicadore_3['RespuestaIndicadore']['mayor'] = $alerta_3['Alerta']['mayor'];
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_3['RespuestaIndicadore']['unidade_id'] = $indicador_3['Unidade']['id'];
+        $respuestaIndicadore_3['RespuestaIndicadore']['unidad'] = $indicador_3['Unidade']['nombre'];
+        $respuestaIndicadore_3['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_3['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_3['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_3)) {
+            return false;
+        }
+
+        /*
+         * Indicador 4: 2.3. Indicador de costos estructurales.
+         * */
+        $indicador_4 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '4', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_4 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '4', 'Alerta.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        // ¿Cuántas empresas prestadoras existen en la ciudad de estudio?
+        $respuestaPregunta_6 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '6', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore_4['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_4['RespuestaIndicadore']['indicadore_id'] = $indicador_4['Indicadore']['id'];
+        $respuestaIndicadore_4['RespuestaIndicadore']['indicador'] = $indicador_4['Indicadore']['nombre'];
+        $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = $respuestaPregunta_6['RespuestaPregunta']['valor'];
+
+        foreach ($alertas_4 as $alerta_4) {
+
+            if($alerta_4['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_4['RespuestaIndicadore']['valor'] <= $alerta_4['Alerta']['maximo']){
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta_id'] = $alerta_4['Alerta']['id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento_id'] = $alerta_4['Alerta']['evento_id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta'] = $alerta_4['Alerta']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['notificar'] = $alerta_4['Alerta']['notificar'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mensaje'] = $alerta_4['Alerta']['mensaje'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento'] = $alerta_4['Evento']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['color'] = $alerta_4['Evento']['color'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['menor'] = $alerta_4['Alerta']['menor'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['minimo'] = $alerta_4['Alerta']['minimo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['maximo'] = $alerta_4['Alerta']['maximo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mayor'] = $alerta_4['Alerta']['mayor'];
+                }
+
+            } else if($alerta_4['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_4['RespuestaIndicadore']['valor'] >= $alerta_4['Alerta']['minimo']){
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta_id'] = $alerta_4['Alerta']['id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento_id'] = $alerta_4['Alerta']['evento_id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta'] = $alerta_4['Alerta']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['notificar'] = $alerta_4['Alerta']['notificar'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mensaje'] = $alerta_4['Alerta']['mensaje'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento'] = $alerta_4['Evento']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['color'] = $alerta_4['Evento']['color'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['menor'] = $alerta_4['Alerta']['menor'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['minimo'] = $alerta_4['Alerta']['minimo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['maximo'] = $alerta_4['Alerta']['maximo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mayor'] = $alerta_4['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_4['RespuestaIndicadore']['valor'] <= $alerta_4['Alerta']['maximo']) && ($respuestaIndicadore_4['RespuestaIndicadore']['valor'] >= $alerta_4['Alerta']['minimo'])){
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta_id'] = $alerta_4['Alerta']['id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento_id'] = $alerta_4['Alerta']['evento_id'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['alerta'] = $alerta_4['Alerta']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['notificar'] = $alerta_4['Alerta']['notificar'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mensaje'] = $alerta_4['Alerta']['mensaje'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['evento'] = $alerta_4['Evento']['nombre'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['color'] = $alerta_4['Evento']['color'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['menor'] = $alerta_4['Alerta']['menor'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['minimo'] = $alerta_4['Alerta']['minimo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['maximo'] = $alerta_4['Alerta']['maximo'];
+                    $respuestaIndicadore_4['RespuestaIndicadore']['mayor'] = $alerta_4['Alerta']['mayor'];
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_4['RespuestaIndicadore']['unidade_id'] = $indicador_4['Unidade']['id'];
+        $respuestaIndicadore_4['RespuestaIndicadore']['unidad'] = $indicador_4['Unidade']['nombre'];
+        $respuestaIndicadore_4['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_4['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_4['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_4)) {
+            return false;
+        }
+
+        /*
+         * Indicador 5: 2.4. Indicador de mantenimiento.
+         * */
+        $indicador_5 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '5', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_5 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '5', 'Alerta.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        // ¿En qué franja etaria se encuentra en promedio la flota (en años)?
+        $respuestaPregunta_7 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '5', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore_5['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_5['RespuestaIndicadore']['indicadore_id'] = $indicador_5['Indicadore']['id'];
+        $respuestaIndicadore_5['RespuestaIndicadore']['indicador'] = $indicador_5['Indicadore']['nombre'];
+        $respuestaIndicadore_5['RespuestaIndicadore']['valor'] = (-0.0076 * pow($respuestaPregunta_7['RespuestaPregunta']['valor'] + 1, 2) + 0.0223 * ($respuestaPregunta_7['RespuestaPregunta']['valor'] + 1) + 0.9859);
+
+        foreach ($alertas_5 as $alerta_5) {
+
+            if($alerta_5['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_5['RespuestaIndicadore']['valor'] <= $alerta_5['Alerta']['maximo']){
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta_id'] = $alerta_5['Alerta']['id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento_id'] = $alerta_5['Alerta']['evento_id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta'] = $alerta_5['Alerta']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['notificar'] = $alerta_5['Alerta']['notificar'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mensaje'] = $alerta_5['Alerta']['mensaje'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento'] = $alerta_5['Evento']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['color'] = $alerta_5['Evento']['color'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['menor'] = $alerta_5['Alerta']['menor'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['minimo'] = $alerta_5['Alerta']['minimo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['maximo'] = $alerta_5['Alerta']['maximo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mayor'] = $alerta_5['Alerta']['mayor'];
+                }
+
+            } else if($alerta_5['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_4['RespuestaIndicadore']['valor'] >= $alerta_4['Alerta']['minimo']){
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta_id'] = $alerta_5['Alerta']['id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento_id'] = $alerta_5['Alerta']['evento_id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta'] = $alerta_5['Alerta']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['notificar'] = $alerta_5['Alerta']['notificar'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mensaje'] = $alerta_5['Alerta']['mensaje'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento'] = $alerta_5['Evento']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['color'] = $alerta_5['Evento']['color'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['menor'] = $alerta_5['Alerta']['menor'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['minimo'] = $alerta_5['Alerta']['minimo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['maximo'] = $alerta_5['Alerta']['maximo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mayor'] = $alerta_5['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_5['RespuestaIndicadore']['valor'] <= $alerta_5['Alerta']['maximo']) && ($respuestaIndicadore_5['RespuestaIndicadore']['valor'] >= $alerta_5['Alerta']['minimo'])){
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta_id'] = $alerta_5['Alerta']['id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento_id'] = $alerta_5['Alerta']['evento_id'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['alerta'] = $alerta_5['Alerta']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['notificar'] = $alerta_5['Alerta']['notificar'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mensaje'] = $alerta_5['Alerta']['mensaje'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['evento'] = $alerta_5['Evento']['nombre'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['color'] = $alerta_5['Evento']['color'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['menor'] = $alerta_5['Alerta']['menor'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['minimo'] = $alerta_5['Alerta']['minimo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['maximo'] = $alerta_5['Alerta']['maximo'];
+                    $respuestaIndicadore_5['RespuestaIndicadore']['mayor'] = $alerta_5['Alerta']['mayor'];
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_5['RespuestaIndicadore']['unidade_id'] = $indicador_5['Unidade']['id'];
+        $respuestaIndicadore_5['RespuestaIndicadore']['unidad'] = $indicador_5['Unidade']['nombre'];
+        $respuestaIndicadore_5['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_5['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_5['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_5)) {
+            return false;
+        }
+
+        /*
+         * Indicador 6: 2.6. Indicador de gastos generales.
+         * */
+        $indicador_6 = $this->Indicadore->find('first', array(
+            'conditions' => array('Indicadore.id' => '6', 'Indicadore.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        $alertas_6 = $this->Alerta->find('all', array(
+            'conditions' => array('Alerta.indicadore_id' => '6', 'Alerta.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
+
+        // ¿Cuántas líneas brindan servicio en la ciudad de estudio? --> $respuestaPregunta_6
+        // ¿Cuántas cabeceras de línea tiene la ciudad?
+        $respuestaPregunta_8 = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '7', 'RespuestaPregunta.consulta_id' => $consulta_id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $this->RespuestaIndicadore->create();
+        $respuestaIndicadore_6['RespuestaIndicadore']['consulta_id'] = $consulta_id;
+        $respuestaIndicadore_6['RespuestaIndicadore']['indicadore_id'] = $indicador_6['Indicadore']['id'];
+        $respuestaIndicadore_6['RespuestaIndicadore']['indicador'] = $indicador_6['Indicadore']['nombre'];
+        $respuestaIndicadore_6['RespuestaIndicadore']['valor'] = $respuestaPregunta_6['RespuestaPregunta']['valor'] / $respuestaPregunta_8['RespuestaPregunta']['valor'];
+
+        foreach ($alertas_6 as $alerta_6) {
+
+            if($alerta_6['Alerta']['menor'] == '1'){
+
+                if($respuestaIndicadore_6['RespuestaIndicadore']['valor'] <= $alerta_6['Alerta']['maximo']){
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta_id'] = $alerta_6['Alerta']['id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento_id'] = $alerta_6['Alerta']['evento_id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta'] = $alerta_6['Alerta']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['notificar'] = $alerta_6['Alerta']['notificar'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mensaje'] = $alerta_6['Alerta']['mensaje'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento'] = $alerta_6['Evento']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['color'] = $alerta_6['Evento']['color'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['menor'] = $alerta_6['Alerta']['menor'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['minimo'] = $alerta_6['Alerta']['minimo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['maximo'] = $alerta_6['Alerta']['maximo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mayor'] = $alerta_6['Alerta']['mayor'];
+                }
+
+            } else if($alerta_6['Alerta']['mayor'] == '1'){
+
+                if($respuestaIndicadore_6['RespuestaIndicadore']['valor'] >= $alerta_6['Alerta']['minimo']){
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta_id'] = $alerta_6['Alerta']['id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento_id'] = $alerta_6['Alerta']['evento_id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta'] = $alerta_6['Alerta']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['notificar'] = $alerta_6['Alerta']['notificar'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mensaje'] = $alerta_6['Alerta']['mensaje'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento'] = $alerta_6['Evento']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['color'] = $alerta_6['Evento']['color'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['menor'] = $alerta_6['Alerta']['menor'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['minimo'] = $alerta_6['Alerta']['minimo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['maximo'] = $alerta_6['Alerta']['maximo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mayor'] = $alerta_6['Alerta']['mayor'];
+                }
+
+            } else{
+
+                if(($respuestaIndicadore_6['RespuestaIndicadore']['valor'] <= $alerta_6['Alerta']['maximo']) && ($respuestaIndicadore_6['RespuestaIndicadore']['valor'] >= $alerta_6['Alerta']['minimo'])){
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta_id'] = $alerta_6['Alerta']['id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento_id'] = $alerta_6['Alerta']['evento_id'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['alerta'] = $alerta_6['Alerta']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['notificar'] = $alerta_6['Alerta']['notificar'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mensaje'] = $alerta_6['Alerta']['mensaje'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['evento'] = $alerta_6['Evento']['nombre'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['color'] = $alerta_6['Evento']['color'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['menor'] = $alerta_6['Alerta']['menor'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['minimo'] = $alerta_6['Alerta']['minimo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['maximo'] = $alerta_6['Alerta']['maximo'];
+                    $respuestaIndicadore_6['RespuestaIndicadore']['mayor'] = $alerta_6['Alerta']['mayor'];;
+                }
+
+            }
+        }
+
+        $respuestaIndicadore_6['RespuestaIndicadore']['unidade_id'] = $indicador_6['Unidade']['id'];
+        $respuestaIndicadore_6['RespuestaIndicadore']['unidad'] = $indicador_6['Unidade']['nombre'];
+        $respuestaIndicadore_6['RespuestaIndicadore']['estado_id'] = 1;
+        $respuestaIndicadore_6['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+        $respuestaIndicadore_6['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+
+        if (!$this->RespuestaIndicadore->save($respuestaIndicadore_6)) {
+            return false;
+        }
+
+        return (true);
     }
 
     public function resultado($id = null)
@@ -3358,10 +3863,52 @@ class ConsultasController extends AppController
             'recursive' => -1
         ));
 
-        // 2.1. Indicador de infraestructura.
-
-
         $this->set(compact('consulta', 'sube'));
+    }
+
+    public function enviar($id = null)
+    {
+        App::uses('CakeEmail', 'Network/Email');
+
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+        $sube = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '23', 'RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        $email = new CakeEmail();
+        $email->config('gmail');
+        $email->emailFormat('html');
+        $email->template('informe', 'cetram');
+        $email->from(array('cetram.utn.frsf@gmail.com' => 'CETRAM'));
+
+        $to['rovere.matias@gmail.com'] = 'rovere.matias@gmail.com';
+
+        $cc['linkipark.sabalero22@gmail.com'] = 'linkipark.sabalero22@gmail.com';
+
+        $email->to($to);
+
+        $email->cc($cc);
+
+        $email->viewVars(array('consulta' => $consulta, 'sube' => $sube));
+
+        $email->subject('Informe de Resultados CETRAM - ' . date("Y") . '-' . date("m") . '-' . date("d") . ' - ' . $id);
+
+        $email->send();
+
+        // $this->set(compact('consulta', 'sube'));
+
+        $this->Session->setFlash(__('El informe fue enviado correctamente.'));
+        return $this->redirect(array('controller' => 'consultas', 'action' => 'resultado', $id));
+
     }
 
 
