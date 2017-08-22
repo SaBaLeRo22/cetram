@@ -3902,11 +3902,21 @@ class ConsultasController extends AppController
 
         $email->subject('Informe de Resultados CETRAM - ' . date("Y") . '-' . date("m") . '-' . date("d") . ' - ' . $id);
 
-        $email->send();
+        $email->helpers(array('InlineCss'));
+
+
+        if(!$email->send()) {
+            $result = $email->ErrorInfo;
+        }
+        else
+        {
+            $result = "El informe fue enviado correctamente.";
+        }
+
 
         // $this->set(compact('consulta', 'sube'));
 
-        $this->Session->setFlash(__('El informe fue enviado correctamente.'));
+        $this->Session->setFlash(__($result));
         return $this->redirect(array('controller' => 'consultas', 'action' => 'resultado', $id));
 
     }
