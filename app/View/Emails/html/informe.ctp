@@ -68,7 +68,7 @@
                     <tbody>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong>Costo&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Costo&nbsp;</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['costo_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['costo_minimo'], 3, ',', '.')); ?>
@@ -82,7 +82,7 @@
                     </tr>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong>Tarifa&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Tarifa&nbsp;</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['tarifa_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['tarifa_minima'], 3, ',', '.')); ?>
@@ -96,7 +96,7 @@
                     </tr>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong>Subsidio&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Subsidio&nbsp;</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['subsidio_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['subsidio_minimo'], 3, ',', '.')); ?>
@@ -127,13 +127,13 @@
             <h3 style="font-size: 23px;margin-top: 18px;margin-bottom: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;"><?= __('Indicadores de Eficiencia'); ?></h3>
 
             <?php if ($consulta['RespuestaIndicadore']['0']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;
@@ -141,13 +141,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['0']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;
@@ -155,13 +155,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['0']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['0']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['0']['mensaje']; ?>&nbsp;
@@ -172,13 +172,13 @@
 
 
             <?php if ($consulta['RespuestaIndicadore']['1']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['1']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['1']['mensaje']; ?>&nbsp;
@@ -186,13 +186,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['1']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['1']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['1']['mensaje']; ?>&nbsp;
@@ -200,13 +200,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['1']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['1']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['1']['mensaje']; ?>&nbsp;
@@ -216,13 +216,13 @@
             <?php endif; ?>
 
             <?php if ($consulta['RespuestaIndicadore']['2']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['2']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['2']['mensaje']; ?>&nbsp;
@@ -230,13 +230,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['2']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['2']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['2']['mensaje']; ?>&nbsp;
@@ -244,13 +244,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['2']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['2']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['2']['mensaje']; ?>&nbsp;
@@ -259,14 +259,16 @@
             </div>
             <?php endif; ?>
 
+            <br>
+
             <?php if ($consulta['RespuestaIndicadore']['3']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['3']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['3']['mensaje']; ?>&nbsp;
@@ -274,13 +276,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['3']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['3']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['3']['mensaje']; ?>&nbsp;
@@ -288,13 +290,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['3']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['3']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['3']['mensaje']; ?>&nbsp;
@@ -304,13 +306,13 @@
             <?php endif; ?>
 
             <?php if ($consulta['RespuestaIndicadore']['4']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['4']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['4']['mensaje']; ?>&nbsp;
@@ -318,13 +320,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['4']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['4']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['4']['mensaje']; ?>&nbsp;
@@ -332,13 +334,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['4']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['4']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['4']['mensaje']; ?>&nbsp;
@@ -348,13 +350,13 @@
             <?php endif; ?>
 
             <?php if ($consulta['RespuestaIndicadore']['5']['evento_id'] == '2'): ?>
-            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-success mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #28a745 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['5']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f087';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['5']['mensaje']; ?>&nbsp;
@@ -362,13 +364,13 @@
                 </div>
             </div>
             <?php elseif ($consulta['RespuestaIndicadore']['5']['evento_id'] == '4'): ?>
-            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-warning mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #ffc107 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['5']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f071';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['5']['mensaje']; ?>&nbsp;
@@ -376,13 +378,13 @@
                 </div>
             </div>
             <?php else: ?>
-            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 200px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
+            <div class="col-md-4 card text-white bg-danger mb-3" style="margin-bottom: 1rem !important;color: #fff !important;background-color: #dc3545 !important;flex-flow: column wrap;position: relative;display: block;flex-direction: column;max-width: 32%;word-wrap: break-word;background-clip: border-box;border: 1px solid rgba(0, 0, 0, 0.125);border-radius: 0.25rem;margin-left: 0px;margin-right: 10px;min-height: 300px;width: 33.33333333333333%;float: left;padding-left: 15px;padding-right: 15px;box-sizing: border-box">
                 <div class="card-header" style="text-align: center;border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;padding: .75rem 1.25rem;margin-bottom: 0;background-color: rgba(0,0,0,.03);border-bottom: 1px solid rgba(0,0,0,.125);box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                     <?= $consulta['RespuestaIndicadore']['5']['indicador']; ?>&nbsp;
                 </div>
                 <div class="card-body" style="flex: 1 1 auto;padding: 1.25rem;color: #fff !important;box-sizing: border-box;word-wrap: break-word;">
                     <h4 class="card-title" style="margin-bottom: .75rem;font-size: 17px;margin-top: 9px;font-family: Roboto,Helvetica,Arial,sans-serif;font-weight: 500;line-height: 1.1;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
-                        <?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;word-wrap: break-word;content: '\f088';box-sizing: border-box;"></i>&nbsp;<?= $consulta['RespuestaIndicadore']['5']['evento']; ?>&nbsp;
                     </h4>
                     <p class="card-text" style="font-style: italic;margin-bottom: 0;box-sizing: border-box;color: #fff !important;word-wrap: break-word;">
                         <?= $consulta['RespuestaIndicadore']['5']['mensaje']; ?>&nbsp;
@@ -436,7 +438,7 @@
                     <tbody>
                     <?php foreach ($consulta['RespuestaTipo'] as $respuestaTipo): ?>
                     <tr>
-                        <td><strong><?= $respuestaTipo['tipo']; ?>&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaTipo['tipo']; ?>&nbsp;</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaTipo['minimo'], 3, ',', '.'); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaTipo['incidencia_minimo'] * 100, 3, ',', '.'); ?>
@@ -475,26 +477,26 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Item'); ?></th>
-                        <th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Minimo'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Item'); ?></th>
+                        <th style="background-color: #337ab7; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Minimo'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #337ab7; color: #eee; text-align: center"><?= __('Incidencia'); ?>
+                        <th style="background-color: #337ab7; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Incidencia'); ?>
                             &nbsp;<br>(%)&nbsp;</th>
-                        <th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Inferior'); ?>
+                        <th style="background-color: #5bc0de; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Inferior'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #5bc0de; color: #eee; text-align: center"><?= __('Incidencia'); ?>
+                        <th style="background-color: #5bc0de; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Incidencia'); ?>
                             &nbsp;<br>(%)&nbsp;</th>
-                        <th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Estimado'); ?>
+                        <th style="background-color: #5cb85c; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Estimado'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #5cb85c; color: #eee; text-align: center"><?= __('Incidencia'); ?>
+                        <th style="background-color: #5cb85c; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Incidencia'); ?>
                             &nbsp;<br>(%)&nbsp;</th>
-                        <th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Superior'); ?>
+                        <th style="background-color: #f0ad4e; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Superior'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #f0ad4e; color: #eee; text-align: center"><?= __('Incidencia'); ?>
+                        <th style="background-color: #f0ad4e; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Incidencia'); ?>
                             &nbsp;<br>(%)&nbsp;</th>
-                        <th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Maximo'); ?>
+                        <th style="background-color: #d9534f; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Maximo'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #d9534f; color: #eee; text-align: center"><?= __('Incidencia'); ?>
+                        <th style="background-color: #d9534f; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Incidencia'); ?>
                             &nbsp;<br>(%)&nbsp;</th>
 
                     </tr>
@@ -502,26 +504,26 @@
                     <tbody>
                     <?php foreach ($consulta['RespuestaItem'] as $respuestaItem): ?>
                     <tr>
-                        <td><strong><?= $respuestaItem['item']; ?>&nbsp;</strong></td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['minimo'], 3, ',', '.'); ?>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaItem['item']; ?>&nbsp;</strong></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['minimo'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['incidencia_minimo'] * 100, 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['incidencia_minimo'] * 100, 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['inferior'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['inferior'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['incidencia_inferior'] * 100, 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['incidencia_inferior'] * 100, 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['valor'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['valor'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['incidencia_valor'] * 100, 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['incidencia_valor'] * 100, 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['superior'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['superior'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['incidencia_superior'] * 100, 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['incidencia_superior'] * 100, 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['maximo'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['maximo'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaItem['incidencia_maximo'] * 100, 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaItem['incidencia_maximo'] * 100, 3, ',', '.'); ?>
                             &nbsp;</td>
                     </tr>
                     <?php endforeach; ?>
@@ -541,9 +543,9 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Pregunta'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Respuesta'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Unidad'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Pregunta'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Respuesta'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Unidad'); ?></th>
 
                     </tr>
                     </thead>
@@ -551,10 +553,10 @@
                     <?php foreach ($consulta['RespuestaPregunta'] as $respuestaPregunta): ?>
                     <tr>
 
-                        <td><strong><?= $respuestaPregunta['pregunta']; ?>&nbsp;</strong></td>
-                        <td style="text-align: center"><?= $respuestaPregunta['respuesta']; ?>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaPregunta['pregunta']; ?>&nbsp;</strong></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaPregunta['respuesta']; ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= $respuestaPregunta['unidad']; ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaPregunta['unidad']; ?>
                             &nbsp;</td>
 
                     </tr>
@@ -580,51 +582,51 @@
                 <table class="table" cellpadding="0" cellspacing="0" style="width: 100%;margin-bottom: 18px;max-width: 100%;background-color: transparent;border-collapse: collapse;border-spacing: 0;box-sizing: border-box;">
                     <thead>
                     <tr>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Tarifa'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Costo'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Tarifa'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Costo'); ?></th>
 
                         <?php if ($sube['RespuestaPregunta']['opcione_id'] == '24'): ?>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             01'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             02'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             03'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             04'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             05'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             06'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             07'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             08'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             09'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             10'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             11'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Mes<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Mes<br>
                             12'); ?>
                         </th>
                         <?php else: ?>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Semestre<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Semestre<br>
                             1'); ?>
                         </th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Semestre<br>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Semestre<br>
                             2'); ?>
                         </th>
                         <?php endif; ?>
@@ -636,47 +638,46 @@
                     <tr>
 
                         <?php if ($respuestaPasajero['base'] == '1'): ?>
-                        <td class="btn-success"><strong><?= $respuestaPasajero['tarifa']; ?>
+                        <td class="btn-success" style="color: #fff;background-color: #4ca22d;background-image: linear-gradient(to bottom,#50aa2f 0,#4a9e2c 100%);background-repeat: repeat-x;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;border-color: #4ca22d #4ca22d #52ae30;text-shadow: 0 -1px 0 #489a2b;box-sizing: border-box;display: table-cell;border-collapse: collapse;"><strong style="font-weight: 700;line-height: 1.428571429;white-space: nowrap;color: #fff;text-shadow: 0 -1px 0 #489a2b;"><?= $respuestaPasajero['tarifa']; ?>
                             &nbsp;</strong> (BASE)
                         </td>
-                        <td class="btn-success"
-                            style="text-align: center"><?= number_format($respuestaPasajero['costo'], 3, ',', '.'); ?>
+                        <td class="btn-success" style="text-align: center;color: #fff;background-color: #4ca22d;background-image: linear-gradient(to bottom,#50aa2f 0,#4a9e2c 100%);background-repeat: repeat-x;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;border-color: #4ca22d #4ca22d #52ae30;text-shadow: 0 -1px 0 #489a2b;box-sizing: border-box;display: table-cell;border-collapse: collapse;"><?= number_format($respuestaPasajero['costo'], 3, ',', '.'); ?>
                             &nbsp;</td>
                         <?php else: ?>
-                        <td><strong><?= $respuestaPasajero['tarifa']; ?>&nbsp;</strong></td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['costo'], 3, ',', '.'); ?>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaPasajero['tarifa']; ?>&nbsp;</strong></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['costo'], 3, ',', '.'); ?>
                             &nbsp;</td>
                         <?php endif; ?>
 
                         <?php if ($sube['RespuestaPregunta']['opcione_id'] == '24'): ?>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes01'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes01'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes02'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes02'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes03'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes03'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes04'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes04'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes05'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes05'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes06'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes06'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes07'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes07'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes08'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes08'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes09'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes09'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes10'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes10'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes11'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes11'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['mes12'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['mes12'], 0, ',', '.'); ?>
                             &nbsp;</td>
                         <?php else: ?>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['semestre1'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['semestre1'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaPasajero['semestre2'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaPasajero['semestre2'], 0, ',', '.'); ?>
                             &nbsp;</td>
                         <?php endif; ?>
 
@@ -698,13 +699,13 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Categoria'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Categoria'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Salario'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Salario'); ?>
                             &nbsp;<br>($)&nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Cantidad'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Cantidad'); ?>
                             &nbsp;<br>(Personas)&nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Antiguedad'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Antiguedad'); ?>
                             &nbsp;<br>(A&ntilde;os)&nbsp;</th>
 
                     </tr>
@@ -713,12 +714,12 @@
                     <?php foreach ($consulta['RespuestaSalario'] as $respuestaSalario): ?>
                     <tr>
 
-                        <td><strong><?= $respuestaSalario['categoria']; ?>&nbsp;</strong></td>
-                        <td style="text-align: center"><?= number_format($respuestaSalario['salario'], 2, ',', '.'); ?>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaSalario['categoria']; ?>&nbsp;</strong></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaSalario['salario'], 2, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaSalario['cantidad'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaSalario['cantidad'], 0, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaSalario['antiguedad'], 0, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaSalario['antiguedad'], 0, ',', '.'); ?>
                             &nbsp;</td>
 
                     </tr>
@@ -739,11 +740,11 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Parametro'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Parametro'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Valor'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Valor'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Unidad'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Unidad'); ?>
                             &nbsp;</th>
 
                     </tr>
@@ -752,10 +753,10 @@
                     <?php foreach ($consulta['RespuestaParametro'] as $respuestaParametro): ?>
                     <tr>
 
-                        <td><strong><?= $respuestaParametro['parametro']; ?>&nbsp;</strong></td>
-                        <td style="text-align: center"><?= number_format($respuestaParametro['valor'], 3, ',', '.'); ?>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaParametro['parametro']; ?>&nbsp;</strong></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaParametro['valor'], 3, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= $respuestaParametro['unidad']; ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaParametro['unidad']; ?>
                             &nbsp;</td>
 
                     </tr>
@@ -776,12 +777,12 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Coeficiente'); ?></th>
-                        <th style="background-color: #337ab7; color: #eee; text-align: center; vertical-align: middle"><?= __('Minimo'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Coeficiente'); ?></th>
+                        <th style="background-color: #337ab7; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Minimo'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #5cb85c; color: #eee; text-align: center; vertical-align: middle"><?= __('Valor'); ?>
+                        <th style="background-color: #5cb85c; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Valor'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #d9534f; color: #eee; text-align: center; vertical-align: middle"><?= __('Maximo'); ?>
+                        <th style="background-color: #d9534f; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Maximo'); ?>
                             &nbsp;</th>
 
                     </tr>
@@ -790,13 +791,13 @@
                     <?php foreach ($consulta['RespuestaCoeficiente'] as $respuestaCoeficiente): ?>
                     <tr>
 
-                        <td><strong><?= $respuestaCoeficiente['coeficiente']; ?>&nbsp;</strong>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaCoeficiente['coeficiente']; ?>&nbsp;</strong>
                         </td>
-                        <td style="text-align: center"><?= number_format($respuestaCoeficiente['minimo'], 5, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaCoeficiente['minimo'], 5, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaCoeficiente['valor'], 5, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaCoeficiente['valor'], 5, ',', '.'); ?>
                             &nbsp;</td>
-                        <td style="text-align: center"><?= number_format($respuestaCoeficiente['maximo'], 5, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaCoeficiente['maximo'], 5, ',', '.'); ?>
                             &nbsp;</td>
                     </tr>
                     <?php endforeach; ?>
@@ -816,18 +817,18 @@
                     <thead>
                     <tr>
 
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Indicador'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Alerta'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Evento'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Notificar'); ?></th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Accion'); ?></th>
-                        <th style="background-color: #5cb85c; color: #eee; text-align: center; vertical-align: middle"><?= __('Valor'); ?>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Indicador'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Alerta'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Evento'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Notificar'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Accion'); ?></th>
+                        <th style="background-color: #5cb85c; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Valor'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #337ab7; color: #eee; text-align: center; vertical-align: middle"><?= __('Minimo'); ?>
+                        <th style="background-color: #337ab7; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Minimo'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #d9534f; color: #eee; text-align: center; vertical-align: middle"><?= __('Maximo'); ?>
+                        <th style="background-color: #d9534f; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Maximo'); ?>
                             &nbsp;</th>
-                        <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Unidad'); ?></th>
+                        <th style="background-color: #222; color: #eee; text-align: center;vertical-align: middle; border-top: 0;border-bottom: 2px solid #ddd;padding: 8px;line-height: 1.428571429;white-space: nowrap;box-sizing: border-box;"><?= __('Unidad'); ?></th>
 
                     </tr>
                     </thead>
@@ -835,50 +836,50 @@
                     <?php foreach ($consulta['RespuestaIndicadore'] as $respuestaIndicadore): ?>
 
                     <?php if ($respuestaIndicadore['evento_id'] == '2'): ?>
-                    <tr class="alert alert-success" role="alert">
+                    <tr class="alert alert-success" role="alert" style="background-color: #dff0d8;border-color: #d6e9c6;color: #468847;padding: 15px;margin-bottom: 18px;border: 1px solid transparent;border-radius: 2px;box-sizing: border-box;display: table-row;vertical-align: inherit;border-collapse: collapse;box-sizing: border-box;">
                         <?php elseif ($respuestaIndicadore['evento_id'] == '4'): ?>
-                    <tr class="alert alert-warning" role="alert">
+                    <tr class="alert alert-warning" role="alert" style="background-color: #fcf8e3;border-color: #fbeed5;color: #c09853;padding: 15px;margin-bottom: 18px;border: 1px solid transparent;border-radius: 2px;box-sizing: border-box;display: table-row;vertical-align: inherit;border-collapse: collapse;box-sizing: border-box;">
                         <?php else: ?>
-                    <tr class="alert alert-danger" role="alert">
+                    <tr class="alert alert-danger" role="alert" style="background-color: #f2dede;border-color: #eed3d7;color: #b94a48;padding: 15px;margin-bottom: 18px;border: 1px solid transparent;border-radius: 2px;box-sizing: border-box;display: table-row;vertical-align: inherit;border-collapse: collapse;box-sizing: border-box;">
                         <?php endif; ?>
 
-                        <td><strong><?= $respuestaIndicadore['indicador']; ?>&nbsp;</strong>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaIndicadore['indicador']; ?>&nbsp;</strong>
                         </td>
-                        <td style="text-align: center"><?= $respuestaIndicadore['alerta']; ?>&nbsp;</td>
-                        <td style="text-align: center"><?= $respuestaIndicadore['evento']; ?>&nbsp;</td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaIndicadore['alerta']; ?>&nbsp;</td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaIndicadore['evento']; ?>&nbsp;</td>
 
                         <?php if ($respuestaIndicadore['notificar'] == '1'): ?>
-                        <td  class="alert alert-info" role="alert" style="text-align: center"><strong>SI</strong></td>
+                        <td  class="alert alert-info" role="alert" style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;background-color: #d9edf7;border-color: #bce8f1;color: #3a87ad;    margin-bottom: 18px;border: 1px solid transparent;border-radius: 2px;box-sizing: border-box;display: table-cell;    border-collapse: collapse;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;text-align: center;line-height: 1.428571429;white-space: nowrap;color: #3a87ad;border-collapse: collapse;box-sizing: border-box;">SI</strong></td>
                         <?php else: ?>
-                        <td style="text-align: center">NO</td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;">NO</td>
                         <?php endif; ?>
 
                         <?php if ($respuestaIndicadore['evento_id'] == '2'): ?>
-                        <td style="text-align: center"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><i class="fa fa-thumbs-o-up" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;box-sizing: border-box;text-align: center;white-space: nowrap;border-collapse: collapse;content: '\f087';box-sizing: border-box;"></i></td>
                         <?php elseif ($respuestaIndicadore['evento_id'] == '4'): ?>
-                        <td style="text-align: center"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><i class="fa fa-exclamation-triangle" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;box-sizing: border-box;text-align: center;white-space: nowrap;border-collapse: collapse;content: '\f087';box-sizing: border-box;"></i></td>
                         <?php else: ?>
-                        <td style="text-align: center"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><i class="fa fa-thumbs-o-down" aria-hidden="true" style="display: inline-block;font: normal normal normal 14px/1 FontAwesome;font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;box-sizing: border-box;text-align: center; white-space: nowrap;border-collapse: collapse;content: '\f071';box-sizing: border-box;"></i></td>
                         <?php endif; ?>
 
-                        <td style="text-align: center"><?= number_format($respuestaIndicadore['valor'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaIndicadore['valor'], 3, ',', '.'); ?>
                             &nbsp;</td>
 
                         <?php if ($respuestaIndicadore['menor'] == '1'): ?>
-                        <td style="text-align: center"><=</td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><=</td>
                         <?php else: ?>
-                        <td style="text-align: center"><?= number_format($respuestaIndicadore['minimo'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaIndicadore['minimo'], 3, ',', '.'); ?>
                             &nbsp;</td>
                         <?php endif; ?>
 
                         <?php if ($respuestaIndicadore['mayor'] == '1'): ?>
-                        <td style="text-align: center">>=</td>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;">>=</td>
                         <?php else: ?>
-                        <td style="text-align: center"><?= number_format($respuestaIndicadore['maximo'], 3, ',', '.'); ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaIndicadore['maximo'], 3, ',', '.'); ?>
                             &nbsp;</td>
                         <?php endif; ?>
 
-                        <td style="text-align: center"><?= $respuestaIndicadore['unidad']; ?>
+                        <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= $respuestaIndicadore['unidad']; ?>
                             &nbsp;</td>
                     </tr>
                     <?php endforeach; ?>
