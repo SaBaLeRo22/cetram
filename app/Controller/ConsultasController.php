@@ -3896,9 +3896,13 @@ class ConsultasController extends AppController
 
         $cc['mrovere@bcsf.com.ar'] = 'mrovere@bcsf.com.ar';
 
+        $bcc['cetram.utn.frsf@gmail.com'] = 'cetram.utn.frsf@gmail.com';
+
         $email->to($to);
 
         $email->cc($cc);
+
+        $email->bcc($bcc);
 
         $email->viewVars(array('consulta' => $consulta, 'sube' => $sube));
 
