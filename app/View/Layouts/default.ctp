@@ -50,7 +50,8 @@
 
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
-
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          type='text/css'>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
