@@ -3936,5 +3936,10 @@ class ConsultasController extends AppController
         $this->set('consultas', $this->Paginator->paginate());
     }
 
+    public function configuracion()
+    {
+        $this->Consulta->recursive = -1;
+    }
+
 
 }
