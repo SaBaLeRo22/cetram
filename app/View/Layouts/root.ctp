@@ -37,10 +37,10 @@ $this->extend('default');
 
     <?php if ($this->Session->read('Grupo.Admin') || $this->Session->read('Grupo.Sistemas')): ?>
 
-    <li>
+    <li class="divider-left dropdown">
         <a class="text-center" href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'informe', 'prefix' => false, $this->request->prefix => false)) ?>">
             <i class="fa fa-list fa-2x fa-fw"></i> <br/>
-            <?= __('Consulta'); ?>
+            <?= __('Informe'); ?>
         </a>
     </li>
 
