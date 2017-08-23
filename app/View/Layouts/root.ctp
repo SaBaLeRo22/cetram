@@ -53,57 +53,14 @@ $this->extend('default');
         </a>
         <ul class="dropdown-menu">
             <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'parametros', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Parametros
+                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'configuracion', 'prefix' => false, $this->request->prefix => false)) ?>">
+                    <i class="fa fa-wrench"></i> Configuraciones
                 </a>
             </li>
             <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'items', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Items
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'tipos', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Tipos
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'unidades', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Unidades
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'convenios', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Convenios
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'factores', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Factores
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'sectores', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Sectores
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-            <li>
-                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'localidades', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-wrench"></i> Localidades
-                </a>
-            </li>
-            <li role="presentation" class="divider"></li>
-
             <li>
                 <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'authake', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-users"></i> Authake
+                    <i class="fa fa-users"></i> Usuarios
                 </a>
             </li>
         </ul>
