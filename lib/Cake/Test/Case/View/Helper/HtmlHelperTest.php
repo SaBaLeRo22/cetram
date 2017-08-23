@@ -666,10 +666,10 @@ class HtmlHelperTest extends CakeTestCase {
 
 		Configure::write('Asset.filter.css', false);
 
-		$result = explode("\n", trim($this->Html->css(array('cake.generic', 'vendor.generic'))));
+		$result = explode("\n", trim($this->Html->css(array('cake.generic', 'Vendor.generic'))));
 		$expected['link']['href'] = 'preg:/.*css\/cake\.generic\.css/';
 		$this->assertTags($result[0], $expected);
-		$expected['link']['href'] = 'preg:/.*css\/vendor\.generic\.css/';
+		$expected['link']['href'] = 'preg:/.*css\/Vendor\.generic\.css/';
 		$this->assertTags($result[1], $expected);
 		$this->assertEquals(2, count($result));
 
@@ -780,10 +780,10 @@ class HtmlHelperTest extends CakeTestCase {
 
 		Configure::write('Asset.filter.css', false);
 
-		$result = explode("\n", trim($this->Html->css(array('TestPlugin.test_plugin_asset', 'TestPlugin.vendor.generic'))));
+		$result = explode("\n", trim($this->Html->css(array('TestPlugin.test_plugin_asset', 'TestPlugin.Vendor.generic'))));
 		$expected['link']['href'] = 'preg:/.*test_plugin\/css\/test_plugin_asset\.css/';
 		$this->assertTags($result[0], $expected);
-		$expected['link']['href'] = 'preg:/.*test_plugin\/css\/vendor\.generic\.css/';
+		$expected['link']['href'] = 'preg:/.*test_plugin\/css\/Vendor\.generic\.css/';
 		$this->assertTags($result[1], $expected);
 		$this->assertEquals(2, count($result));
 

@@ -8274,9 +8274,9 @@
 
 
 </head>
-<body>
+<body style="margin: 0px;font-size: 13px;font-family: 'Open Sans', Helvetica, Arial, Verdana, sans-serif;padding-top: 75px;padding-bottom: 40px;line-height: 1.428571429;color: #333;background-color: #fff;box-sizing: border-box;">
 
-<div class="container">
+<div class="container" style="max-width: 1170px;margin-right: auto;margin-left: auto;padding-left: 15px;padding-right: 15px;box-sizing: border-box;">
 
 
 	<?= $this->fetch( 'content' ); ?>
@@ -8318,17 +8318,18 @@
 </script>
 
 
-<footer class="footer pie">
+<footer class="footer pie" style="font-family: 'open sans',Helvetica,Arial,sans-serif;font-size: 13px;text-align: center;color: #333;line-height: 1.42857;margin-top: 50px;display: block;box-sizing: border-box;">
 
-	<div class="container" style="text-align: center; background-color: #ffffff;">
+	<div class="container" style="text-align: center; background-color: #ffffff;clear: both;display: table;max-width: 1170px;margin-right: auto;margin-left: auto;padding-left: 15px;padding-right: 15px;box-sizing: border-box;">
 
-		<hr class="style14"/>
+		<hr class="style14" style="border: 0;height: 1px;background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);margin-top: 18px;margin-bottom: 18px;box-sizing: content-box;"/>
 
-		<p>Herramienta para la Determinación de
+		<p style="margin: 0 0 9px;box-sizing: border-box">
+			Herramienta para la Determinación de
 			los Costos de Sistemas de Transporte Público de
 			Pasajeros en Ciudades de Tamaño Medio.</p>
 
-		<p class="text-muted">Copyright © 2016. Todos los derechos reservados.</p>
+		<p class="text-muted" style="color: #999;margin: 0 0 9px;box-sizing: border-box;">Copyright © 2016. Todos los derechos reservados.</p>
 	</div>
 </footer>
 </body>

@@ -107,7 +107,7 @@ class App {
 		'lib' => array('extends' => null, 'core' => true),
 		'view' => array('suffix' => 'View', 'extends' => null, 'core' => true),
 		'helper' => array('suffix' => 'Helper', 'extends' => 'AppHelper', 'core' => true),
-		'vendor' => array('extends' => null, 'core' => true),
+		'Vendor' => array('extends' => null, 'core' => true),
 		'shell' => array('suffix' => 'Shell', 'extends' => 'AppShell', 'core' => true),
 		'plugin' => array('extends' => null, 'core' => true)
 	);
@@ -628,7 +628,7 @@ class App {
 		}
 
 		$originalType = strtolower($type);
-		$specialPackage = in_array($originalType, array('file', 'vendor'));
+		$specialPackage = in_array($originalType, array('file', 'Vendor'));
 		if (!$specialPackage && isset(self::$legacy[$originalType . 's'])) {
 			$type = self::$legacy[$originalType . 's'];
 		}
@@ -647,7 +647,7 @@ class App {
 			return self::_loadFile($name, $plugin, $search, $file, $return);
 		}
 
-		if ($originalType === 'vendor') {
+		if ($originalType === 'Vendor') {
 			return self::_loadVendor($name, $plugin, $file, $ext);
 		}
 

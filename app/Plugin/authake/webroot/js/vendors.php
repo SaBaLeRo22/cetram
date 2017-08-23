@@ -3,7 +3,7 @@
 /**
  * Short description for file.
  *
- * This file includes js vendor-files from /vendor/ directory if they need to
+ * This file includes js Vendor-files from /Vendor/ directory if they need to
  * be accessible to the public.
  *
  * PHP versions 4 and 5

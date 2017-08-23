@@ -3892,7 +3892,9 @@ class ConsultasController extends AppController
 
         $to['rovere.matias@gmail.com'] = 'rovere.matias@gmail.com';
 
-        $cc['linkipark.sabalero22@gmail.com'] = 'linkipark.sabalero22@gmail.com';
+        $cc['linkinpark.sabalero22@gmail.com'] = 'linkinpark.sabalero22@gmail.com';
+
+        $cc['mrovere@bcsf.com.ar'] = 'mrovere@bcsf.com.ar';
 
         $email->to($to);
 
@@ -3902,8 +3904,7 @@ class ConsultasController extends AppController
 
         $email->subject('Informe de Resultados CETRAM - ' . date("Y") . '-' . date("m") . '-' . date("d") . ' - ' . $id);
 
-        $email->helpers(array('InlineCss'));
-
+        //$email->helpers(array('InlineCss'));
 
         if(!$email->send()) {
             $result = $email->ErrorInfo;
