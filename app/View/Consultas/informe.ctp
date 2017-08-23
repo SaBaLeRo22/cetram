@@ -17,11 +17,13 @@
                 <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id'); ?></th>
-                    <th><?= $this->Paginator->sort('modo_id', 'Estado'); ?></th>
+                    <th><?= $this->Paginator->sort('modo_id', 'Modo'); ?></th>
                     <th><?= $this->Paginator->sort('costo', 'Costo ($)'); ?></th>
                     <th><?= $this->Paginator->sort('tarifa', 'Tarifa ($)'); ?></th>
                     <th><?= $this->Paginator->sort('subsidio', 'Subsidio ($)'); ?></th>
                     <th><?= $this->Paginator->sort('localidade_id', 'Localidad'); ?></th>
+                    <th><?= $this->Paginator->sort('estado_id', 'Estado'); ?></th>
+                    <th><?= $this->Paginator->sort('user_created', 'Usuario'); ?></th>
                     <th><?= $this->Paginator->sort('created', 'Creada'); ?></th>
                     <th><?= $this->Paginator->sort('modified', 'Modificada'); ?></th>
                 </tr>
@@ -46,6 +48,8 @@
                     <td><?= h($consulta['Consulta']['tarifa']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
                     <td><?= $consulta['Localidade']['nombre']; ?></td>
+                    <td><?= h($consulta['Estado']['nombre']); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>
                 </tr>
