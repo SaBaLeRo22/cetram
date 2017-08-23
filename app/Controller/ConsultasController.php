@@ -3926,5 +3926,15 @@ class ConsultasController extends AppController
 
     }
 
+    public function informe()
+    {
+        $this->Consulta->recursive = 0;
+        $this->paginate = array(
+            'limit' => 10,
+            'order' => array('id' => 'desc')
+        );
+        $this->set('consultas', $this->Paginator->paginate());
+    }
+
 
 }
