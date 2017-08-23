@@ -46,7 +46,7 @@
     '/plugins/selectize.js/dist/css/selectize.bootstrap3',
     // 'highcharts',
     'card',
-    font-awesome.min
+    'font-awesome.min'
 
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
