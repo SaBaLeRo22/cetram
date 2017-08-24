@@ -132,11 +132,12 @@
             <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
         </a>
 
-        <p>Herramienta para la Determinación de
+        <p>Proyecto: Herramienta para la Determinación de
             los Costos de Sistemas de Transporte Público de
             Pasajeros en Ciudades de Tamaño Medio.</p>
+        <p class="text-muted">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Matías Rovere / Ing. Ind. Melisa Batistela / Est. Civ. Duilio Abdala</p>
+        <p class="text-muted">Copyright © 2017. Todos los derechos reservados.</p>
 
-        <p class="text-muted">Copyright © 2016. Todos los derechos reservados.</p>
     </div>
 </footer>
 </body>
