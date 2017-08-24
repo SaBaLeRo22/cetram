@@ -3890,17 +3890,19 @@ class ConsultasController extends AppController
         $email->template('informe', 'cetram');
         $email->from(array('cetram.utn.frsf@gmail.com' => 'CETRAM'));
 
-        $to['rovere.matias@gmail.com'] = 'rovere.matias@gmail.com';
-
-        $cc['linkinpark.sabalero22@gmail.com'] = 'linkinpark.sabalero22@gmail.com';
-
-        $cc['mrovere@bcsf.com.ar'] = 'mrovere@bcsf.com.ar';
+        $to[$this->Authake->getUserEmail()] = $this->Authake->getUserEmail();
 
         $bcc['cetram.utn.frsf@gmail.com'] = 'cetram.utn.frsf@gmail.com';
 
+        $bcc['rovere.matias@gmail.com'] = 'rovere.matias@gmail.com';
+
+        $bcc['melisa.batistela@gmail.com'] = 'melisa.batistela@gmail.com';
+
+        $bcc['dag-92@hotmail.com'] = 'dag-92@hotmail.com';
+
         $email->to($to);
 
-        $email->cc($cc);
+        //$email->cc($cc);
 
         $email->bcc($bcc);
 
@@ -3909,6 +3911,8 @@ class ConsultasController extends AppController
         $email->subject('Informe de Resultados CETRAM - ' . date("Y") . '-' . date("m") . '-' . date("d") . ' - ' . $id);
 
         //$email->helpers(array('InlineCss'));
+
+        $email->helpers(array('Authake.Authake'));
 
         if(!$email->send()) {
             $result = $email->ErrorInfo;
