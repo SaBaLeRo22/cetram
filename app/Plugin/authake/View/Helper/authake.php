@@ -53,6 +53,22 @@ class AuthakeHelper extends AppHelper {
     function getNombre() {
         return $this->Session->read('Authake.nombre');
     }
+
+    function getUsuario($id = null) {
+        App::import("Model", "Authake.User");
+        $model = new User();
+
+        $user = $model->find('first', array('conditions' => array('User.id' => $id)));
+        if ( $user['User']['login'] !=  NULL )
+        {
+            $loginName = $user['User']['login'];
+        }
+        else
+        {
+            $loginName = $user['User']['email'];
+        }
+        return $loginName;
+    }
    
 }
     
