@@ -8325,10 +8325,10 @@
 		<hr class="style14" style="border: 0;height: 1px;background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);margin-top: 18px;margin-bottom: 18px;box-sizing: content-box;"/>
 
 		<p style="margin: 0 0 9px;box-sizing: border-box">
-			Herramienta para la Determinación de
+			Proyecto: Herramienta para la Determinación de
 			los Costos de Sistemas de Transporte Público de
 			Pasajeros en Ciudades de Tamaño Medio.</p>
-
+		<p class="text-muted" style="color: #999;margin: 0 0 9px;box-sizing: border-box;">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Matías Rovere / Ing. Ind. Melisa Batistela / Est. Civ. Duilio Abdala</p>
 		<p class="text-muted" style="color: #999;margin: 0 0 9px;box-sizing: border-box;">Copyright © 2016. Todos los derechos reservados.</p>
 	</div>
 </footer>
