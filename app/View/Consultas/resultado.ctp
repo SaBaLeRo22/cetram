@@ -36,7 +36,7 @@
                 <dt>Estado</dt>
                 <dd><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
                 <dt>Usuario</dt>
-                <dd><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
+                <dd><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
                 <dt>Creada</dt>
                 <dd><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
                 <dt>Modificada</dt>
