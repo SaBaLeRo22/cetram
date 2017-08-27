@@ -36,7 +36,7 @@
                 <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Estado</dt>
                 <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
                 <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Usuario</dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?></dd>
+                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?></dd>
                 <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Creada</dt>
                 <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
                 <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Modificada</dt>
