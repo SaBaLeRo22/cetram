@@ -168,6 +168,7 @@ class ConsultasController extends AppController
 
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+                return $this->redirect(array('action' => 'index'));
             }
 
             $consulta['Consulta']['id'] = $this->Consulta->id;
@@ -2069,8 +2070,10 @@ class ConsultasController extends AppController
             $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             if ($this->request->data['Consulta']['localidade_id'] != '') {
                 $consulta['Consulta']['localidade_id'] = $this->request->data['Consulta']['localidade_id'];
+            } else {
+                $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
             }
-            $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
+            $consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 1; // Completa.
             if (!$this->Consulta->save($consulta)) {
                 $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
@@ -2140,7 +2143,7 @@ class ConsultasController extends AppController
         $consulta = $this->Consulta->find('first', $options);
 
         if ($consulta['Modo']['id'] == '1') {
-            return $this->redirect(array('action' => 'view', $consulta['Consulta']['id']));
+            return $this->redirect(array('action' => 'resultado', $consulta['Consulta']['id']));
         } elseif ($consulta['Modo']['id'] == '2') {
             $this->Session->setFlash(__('Por favor, continuar con el "Paso 1".'));
             return $this->redirect(array('action' => 'uno', $consulta['Consulta']['id']));
@@ -3943,6 +3946,235 @@ class ConsultasController extends AppController
     public function configuracion()
     {
         $this->Consulta->recursive = -1;
+    }
+
+    public function copiar($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        //$options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        //$consulta = $this->Consulta->find('first', $options);
+
+        $this->Consulta->create();
+
+        $nueva['Consulta']['costo'] = 0;
+        $nueva['Consulta']['costo_minimo'] = 0;
+        $nueva['Consulta']['costo_maximo'] = 0;
+        $nueva['Consulta']['costo_inferior'] = 0;
+        $nueva['Consulta']['costo_superior'] = 0;
+        $nueva['Consulta']['tarifa'] = 0;
+        $nueva['Consulta']['tarifa_minima'] = 0;
+        $nueva['Consulta']['tarifa_maxima'] = 0;
+        $nueva['Consulta']['tarifa_inferior'] = 0;
+        $nueva['Consulta']['tarifa_superior'] = 0;
+        $nueva['Consulta']['subsidio'] = 0;
+        $nueva['Consulta']['subsidio_minimo'] = 0;
+        $nueva['Consulta']['subsidio_maximo'] = 0;
+        $nueva['Consulta']['subsidio_inferior'] = 0;
+        $nueva['Consulta']['subsidio_superior'] = 0;
+        $nueva['Consulta']['ipk'] = 0;
+        $nueva['Consulta']['subsidio_pax'] = 0;
+        $nueva['Consulta']['unidade_id'] = 8; // Pesos ($)
+        $nueva['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
+        $nueva['Consulta']['modo_id'] = 6; // Nueva Consulta.
+        $nueva['Consulta']['estado_id'] = 1; // Activo
+        $nueva['Consulta']['user_created'] = $this->Authake->getUserId();
+        $nueva['Consulta']['user_modified'] = $this->Authake->getUserId();
+
+        if ($this->Consulta->save($nueva)) {
+
+            $nueva['Consulta']['id'] = $this->Consulta->id;
+
+            $this->loadModel('RespuestaCoeficiente');
+            $this->RespuestaCoeficiente->recursive = -1;
+            $coeficientes = $this->RespuestaCoeficiente->find('all', array(
+                'conditions' => array('RespuestaCoeficiente.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($coeficientes as $coeficiente) {
+                $this->RespuestaCoeficiente->create();
+                unset($coeficiente['RespuestaCoeficiente']['id']);
+                $coeficiente['RespuestaCoeficiente']['consulta_id'] = $nueva['Consulta']['id'];
+                $coeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
+                $coeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaCoeficiente->save($coeficiente)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaIndicadore');
+            $this->RespuestaIndicadore->recursive = -1;
+            $indicadores = $this->RespuestaIndicadore->find('all', array(
+                'conditions' => array('RespuestaIndicadore.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($indicadores as $indicador) {
+                $this->RespuestaIndicadore->create();
+                unset($indicador['RespuestaIndicadore']['id']);
+                $indicador['RespuestaIndicadore']['consulta_id'] = $nueva['Consulta']['id'];
+                $indicador['RespuestaIndicadore']['user_created'] = $this->Authake->getUserId();
+                $indicador['RespuestaIndicadore']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaIndicadore->save($indicador)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaIndicadore has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaItem');
+            $this->RespuestaItem->recursive = -1;
+            $items = $this->RespuestaItem->find('all', array(
+                'conditions' => array('RespuestaItem.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($items as $item) {
+                $this->RespuestaItem->create();
+                unset($item['RespuestaItem']['id']);
+                $item['RespuestaItem']['consulta_id'] = $nueva['Consulta']['id'];
+                $item['RespuestaItem']['user_created'] = $this->Authake->getUserId();
+                $item['RespuestaItem']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaItem->save($item)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaItem has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaMultiplicadore');
+            $this->RespuestaMultiplicadore->recursive = -1;
+            $multiplicadores = $this->RespuestaMultiplicadore->find('all', array(
+                'conditions' => array('RespuestaMultiplicadore.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($multiplicadores as $multiplicador) {
+                $this->RespuestaMultiplicadore->create();
+                unset($multiplicador['RespuestaMultiplicadore']['id']);
+                $multiplicador['RespuestaMultiplicadore']['consulta_id'] = $nueva['Consulta']['id'];
+                $multiplicador['RespuestaMultiplicadore']['user_created'] = $this->Authake->getUserId();
+                $multiplicador['RespuestaMultiplicadore']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaMultiplicadore->save($multiplicador)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaMultiplicadore has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaParametro');
+            $this->RespuestaParametro->recursive = -1;
+            $parametros = $this->RespuestaParametro->find('all', array(
+                'conditions' => array('RespuestaParametro.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($parametros as $parametro) {
+                $this->RespuestaParametro->create();
+                unset($parametro['RespuestaParametro']['id']);
+                $parametro['RespuestaParametro']['consulta_id'] = $nueva['Consulta']['id'];
+                $parametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
+                $parametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaParametro->save($parametro)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaPasajero');
+            $this->RespuestaPasajero->recursive = -1;
+            $pasajeros = $this->RespuestaPasajero->find('all', array(
+                'conditions' => array('RespuestaPasajero.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($pasajeros as $pasajero) {
+                $this->RespuestaPasajero->create();
+                unset($pasajero['RespuestaPasajero']['id']);
+                $pasajero['RespuestaPasajero']['consulta_id'] = $nueva['Consulta']['id'];
+                $pasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
+                $pasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaPasajero->save($pasajero)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaPasajero has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaPregunta');
+            $this->RespuestaPregunta->recursive = -1;
+            $preguntas = $this->RespuestaPregunta->find('all', array(
+                'conditions' => array('RespuestaPregunta.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($preguntas as $pregunta) {
+                $this->RespuestaPregunta->create();
+                unset($pregunta['RespuestaPregunta']['id']);
+                $pregunta['RespuestaPregunta']['consulta_id'] = $nueva['Consulta']['id'];
+                $pregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
+                $pregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaPregunta->save($pregunta)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaSalario');
+            $this->RespuestaSalario->recursive = -1;
+            $salarios = $this->RespuestaSalario->find('all', array(
+                'conditions' => array('RespuestaSalario.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($salarios as $salario) {
+                $this->RespuestaSalario->create();
+                unset($salario['RespuestaSalario']['id']);
+                $salario['RespuestaSalario']['consulta_id'] = $nueva['Consulta']['id'];
+                $salario['RespuestaSalario']['user_created'] = $this->Authake->getUserId();
+                $salario['RespuestaSalario']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaSalario->save($salario)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaSalario has been saved.'));
+                }
+            }
+
+            $this->loadModel('RespuestaTipo');
+            $this->RespuestaTipo->recursive = -1;
+            $tipos = $this->RespuestaTipo->find('all', array(
+                'conditions' => array('RespuestaTipo.consulta_id' => $id),
+                'recursive' => -1
+            ));
+            foreach ($tipos as $tipo) {
+                $this->RespuestaTipo->create();
+                unset($tipo['RespuestaTipo']['id']);
+                $tipo['RespuestaTipo']['consulta_id'] = $nueva['Consulta']['id'];
+                $tipo['RespuestaTipo']['user_created'] = $this->Authake->getUserId();
+                $tipo['RespuestaTipo']['user_modified'] = $this->Authake->getUserId();
+                if (!$this->RespuestaTipo->save($tipo)) {
+                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
+                } else {
+                    $this->Session->setFlash(__('The RespuestaTipo has been saved.'));
+                }
+            }
+
+            $this->Session->setFlash(__('La Consulta fue copiada correctamente.'));
+            return $this->redirect(array('action' => 'continuar', $nueva['Consulta']['id']));
+        }
+
+        else{
+            $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            return $this->redirect(array('action' => 'index'));
+        }
     }
 
 
