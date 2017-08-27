@@ -36,10 +36,11 @@
                         <?= $this->Html->link( h( $consulta['Modo']['nombre'] ), array( 'action' => 'continuar', $consulta['Consulta']['id'] ) ); ?>
                         <div class="nowrap">
                             <?php if ($consulta['Modo']['id'] == '1'): ?>
-                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver Resultado', array('action' => 'resultado', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'resultado', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-files-o"></i>', array('action' => 'copiar', $consulta['Consulta']['id']), array('class' => 'btn btn-success btn-xs')); ?>
                             <?php else: ?>
-                            <?= $this->Html->link( '<i class="fa fa-pencil"></i> Continuar', array('action' => 'continuar', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['id'])); ?>
+                            <?= $this->Html->link( '<i class="fa fa-pencil"></i>', array('action' => 'continuar', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i>', array('action' => 'eliminar', $consulta['Consulta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $consulta['Consulta']['id'])); ?>
                             <?php endif ?>
                             &nbsp;
                         </div>
@@ -49,7 +50,7 @@
                     <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
                     <td><?= $consulta['Localidade']['nombre']; ?></td>
                     <td><?= h($consulta['Estado']['nombre']); ?>&nbsp;</td>
-                    <td><?= h($this->Authake->getNombre($consulta['Consulta']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>
                 </tr>
