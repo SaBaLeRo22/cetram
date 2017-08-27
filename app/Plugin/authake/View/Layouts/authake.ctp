@@ -104,7 +104,7 @@
             <p>Proyecto: Herramienta para la Determinación de
                 los Costos de Sistemas de Transporte Público de
                 Pasajeros en Ciudades de Tamaño Medio.</p>
-            <p class="text-muted">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Matías Rovere / Ing. Ind. Melisa Batistela / Est. Civ. Duilio Abdala</p>
+            <p class="text-muted">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Matías Rovere / Ing. Ind. Melisa Batistela / Duilio Abdala</p>
             <p class="text-muted">Copyright © 2017. Todos los derechos reservados.</p>
         </div>
     </footer>
