@@ -49,7 +49,7 @@
                 <tr>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center"><h4 style="font-weight: bold">CATEGORIA</h4></th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center"><h4 style="font-weight: bold">CANTIDAD</h4></th>
-                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center"><h4 style="font-weight: bold">ANTIG&Uuml;EDAD<br>PROMEDIO</h4></th>
+                    <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center"><h4 style="font-weight: bold">ANTIG&Uuml;EDAD<br>PROMEDIO (A&Ntilde;os)</h4></th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center"><h4 style="font-weight: bold">SALARIO<br>($)</h4></th>
                 </tr>
                 </thead>
