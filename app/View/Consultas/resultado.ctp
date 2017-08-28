@@ -11,36 +11,40 @@
     <div class="col-md-4">
         <div class="well well-sm">
             <dl class="dl-horizontal">
-                <dt><?= __('Id'); ?></dt>
-                <dd>
+                <dt style="width: 90px;"><?= __('Id'); ?></dt>
+                <dd style="margin-left: 100px;">
                     <?= h($consulta['Consulta']['id']); ?>
                     &nbsp;
                 </dd>
-                <dt><?= __('Localidad'); ?></dt>
-                <dd>
+                <dt style="width: 90px;"><?= __('Localidad'); ?></dt>
+                <dd style="margin-left: 100px;">
                     <?= h($consulta['Localidade']['nombre']); ?>
                     &nbsp;
                 </dd>
-                <dt><?= __('Ipk'); ?></dt>
-                <dd>
+                <dt style="width: 90px;"><?= __('Ipk'); ?></dt>
+                <dd style="margin-left: 100px;">
                     <?= h($consulta['Consulta']['ipk']); ?>
                     &nbsp;
                 </dd>
-                <dt><?= __('Subsidio Pax'); ?></dt>
-                <dd>
+                <dt style="width: 90px;"><?= __('Subsidio Pax'); ?></dt>
+                <dd style="margin-left: 100px;">
                     <?= h($consulta['Consulta']['subsidio_pax']); ?>
                     &nbsp;
                 </dd>
             </dl>
             <dl class="dl-horizontal text-muted">
-                <dt>Estado</dt>
-                <dd><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
-                <dt>Usuario</dt>
-                <dd><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
-                <dt>Creada</dt>
-                <dd><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
-                <dt>Modificada</dt>
-                <dd><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
+                <dt style="width: 90px;">Estado</dt>
+                <dd style="margin-left: 100px;"><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
+                <dt style="width: 90px;">Modo</dt>
+                <dd style="margin-left: 100px;"><?= h($consulta['Modo']['nombre']); ?>&nbsp;</dd>
+                <dt style="width: 90px;">Usuario</dt>
+                <dd style="margin-left: 100px;"><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?>&nbsp;</dd>
+                <dt style="width: 90px;">E-Mail</dt>
+                <dd style="margin-left: 100px;"><?= h($this->Authake->getUser($consulta['Consulta']['user_created'])['User']['email']); ?>&nbsp;</dd>
+                <dt style="width: 90px;">Creada</dt>
+                <dd style="margin-left: 100px;"><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
+                <dt style="width: 90px;">Modificada</dt>
+                <dd style="margin-left: 100px;"><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
             </dl>
         </div>
     </div>
@@ -71,7 +75,7 @@
                     <tbody>
 
                     <tr>
-                        <td><strong>Costo&nbsp;</strong></td>
+                        <td><strong>Costo<BR>(por kilometro)</strong></td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['costo_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['costo_minimo'], 3, ',', '.')); ?>
@@ -85,7 +89,7 @@
                     </tr>
 
                     <tr>
-                        <td><strong>Tarifa&nbsp;</strong></td>
+                        <td><strong>Tarifa de Equilibrio<BR>(sin subsidios)</strong></td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['tarifa_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['tarifa_minima'], 3, ',', '.')); ?>
@@ -99,7 +103,7 @@
                     </tr>
 
                     <tr>
-                        <td><strong>Subsidio&nbsp;</strong></td>
+                        <td><strong>Tarifa de Equilibrio<BR>(con subsidios)</strong></td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['subsidio_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center"><?= h(number_format($consulta['Consulta']['subsidio_minimo'], 3, ',', '.')); ?>
