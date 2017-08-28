@@ -47,6 +47,15 @@ class AuthakeHelper extends AppHelper {
         return $loginName;
     }
 
+    function getUser($id = null) {
+        App::import("Model", "Authake.User");
+        $model = new User();
+
+        $user = $model->find('first', array('conditions' => array('User.id' => $id)));
+
+        return $user;
+    }
+
     function getUserMenu() {
 	if ( ! Configure::read('Authake.useEmailAsUsername') )
 	{
