@@ -1223,14 +1223,15 @@ class ConsultasController extends AppController
                         $pasajero['RespuestaPasajero']['base'] = '1';
                         if ($this->RespuestaPasajero->save($pasajero)) {
                             $base['RespuestaPasajero']['base'] = '0';
-                            if (!$this->RespuestaPasajero->save($pasajero)) {
+                            if (!$this->RespuestaPasajero->save($base)) {
                                 $this->Session->setFlash(__('Problemas al actualizar la Base.'));
                             }
                         } else {
                             $this->Session->setFlash(__('Problemas al actualizar la Base.'));
                         }
                     }
-                } elseif ($this->request->data['base'] != NULL) {
+                }
+/*                elseif ($this->request->data['base'] != NULL) {
                     $pasajero = $this->RespuestaPasajero->find('first', array(
                         'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
                         'recursive' => -1
@@ -1240,7 +1241,8 @@ class ConsultasController extends AppController
                         $this->Session->setFlash(__('Problemas al actualizar la Base.'));
                         return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                     }
-                } else {
+                } */
+                else {
                     $this->Session->setFlash(__('Por favor, primero seleccione una tarifa como base.'), 'default', array('type' => 'danger'));
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
                 }
