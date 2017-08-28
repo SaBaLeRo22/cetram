@@ -3607,6 +3607,17 @@ class ConsultasController extends AppController
         $respuestaIndicadore_4['RespuestaIndicadore']['consulta_id'] = $consulta_id;
         $respuestaIndicadore_4['RespuestaIndicadore']['indicadore_id'] = $indicador_4['Indicadore']['id'];
         $respuestaIndicadore_4['RespuestaIndicadore']['indicador'] = $indicador_4['Indicadore']['nombre'];
+
+/*        if($respuestaPregunta_6['RespuestaPregunta']['valor'] <= '1'){
+            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0;
+        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '1' && $respuestaPregunta_6['RespuestaPregunta']['valor'] <= '2'){
+            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0.33;
+        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '2' && $respuestaPregunta_6['RespuestaPregunta']['valor'] <= '3'){
+            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0.66;
+        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '3'){
+            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 1;
+        }*/
+
         $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = $respuestaPregunta_6['RespuestaPregunta']['valor'];
 
         foreach ($alertas_4 as $alerta_4) {
