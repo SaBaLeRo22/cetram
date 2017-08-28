@@ -72,7 +72,7 @@
                     <tbody>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Costo&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Costo<BR>(por kilometro)</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['costo_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['costo_minimo'], 3, ',', '.')); ?>
@@ -86,7 +86,7 @@
                     </tr>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Tarifa&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Tarifa de Equilibrio<BR>(sin subsidios)</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['tarifa_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['tarifa_minima'], 3, ',', '.')); ?>
@@ -100,7 +100,7 @@
                     </tr>
 
                     <tr>
-                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Subsidio&nbsp;</strong></td>
+                        <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;">Tarifa de Equilibrio<BR>(con subsidios)</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['subsidio_inferior'], 3, ',', '.')); ?>
                             &nbsp;</td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= h(number_format($consulta['Consulta']['subsidio_minimo'], 3, ',', '.')); ?>
