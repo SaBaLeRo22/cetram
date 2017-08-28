@@ -11,36 +11,40 @@
     <div class="col-md-4" style="width: 33.33333333333333%;float: left;position: relative;min-height: 1px;padding-left: 15px;padding-right: 15px;box-sizing: border-box;">
         <div class="well well-sm" style="padding: 9px;border-radius: 2px;min-height: 20px;margin-bottom: 20px;background-color: #f5f5f5;border: 1px solid #e3e3e3;box-shadow: inset 0 1px 1px rgba(0,0,0,.05);box-sizing: border-box;">
             <dl class="dl-horizontal" style="margin-bottom: 18px;box-sizing: border-box;">
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Id'); ?></dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;">
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Id'); ?></dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;">
                     <?= h($consulta['Consulta']['id']); ?>
                     &nbsp;
                 </dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Localidad'); ?></dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;">
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Localidad'); ?></dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;">
                     <?= h($consulta['Localidade']['nombre']); ?>
                     &nbsp;
                 </dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Ipk'); ?></dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;">
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Ipk'); ?></dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;">
                     <?= h($consulta['Consulta']['ipk']); ?>
                     &nbsp;
                 </dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Subsidio Pax'); ?></dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;">
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;"><?= __('Subsidio Pax'); ?></dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;">
                     <?= h($consulta['Consulta']['subsidio_pax']); ?>
                     &nbsp;
                 </dd>
             </dl>
             <dl class="dl-horizontal text-muted" style="color: #999;margin-bottom: 18px;box-sizing: border-box;">
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Estado</dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Usuario</dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?></dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Creada</dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
-                <dt style="float: left;width: 160px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Modificada</dt>
-                <dd style="margin-bottom: 5px;margin-left: 180px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Estado</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Estado']['nombre']); ?>&nbsp;</dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Modo</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Modo']['nombre']); ?>&nbsp;</dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Usuario</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?></dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">E-Mail</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($this->Authake->getUser($consulta['Consulta']['user_created'])['User']['email']); ?>&nbsp;</dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Creada</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Consulta']['created']); ?>&nbsp;</dd>
+                <dt style="float: left;width: 90px;clear: left;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-weight: 700;line-height: 1.428571429;box-sizing: border-box;color: #999;">Modificada</dt>
+                <dd style="margin-bottom: 5px;margin-left: 100px;line-height: 1.428571429;box-sizing: border-box;color: #999;"><?= h($consulta['Consulta']['modified']); ?>&nbsp;</dd>
             </dl>
         </div>
     </div>
