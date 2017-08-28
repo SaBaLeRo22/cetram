@@ -32,7 +32,7 @@
                 <thead>
                 <tr>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
-                        TARIFA
+                        TIPO DE TARIFA
                     </th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)
                     </th>
@@ -83,7 +83,7 @@
                 <tfoot>
                 <tr>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
-                        TARIFA
+                        TIPO DE TARIFA
                     </th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)
                     </th>
@@ -114,7 +114,7 @@
                 <thead>
                 <tr>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
-                        TARIFA
+                        TIPO DE TARIFA
                     </th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)
                     </th>
@@ -205,7 +205,7 @@
                 <tfoot>
                 <tr>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">
-                        TARIFA
+                        TIPO DE TARIFA
                     </th>
                     <th style="background-color:#3a87ad;color: #e6f4fb;vertical-align: middle; text-align: center">COSTO<br>($)
                     </th>
@@ -264,7 +264,7 @@
             <small>NO POSEE SUBE</small>
         </h4>
         <div class="form-group">
-            <?= $this->Form->label('tarifa', 'Tarifa', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->label('tarifa', 'Tipo de Tarifa', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
         </div>
         <div class="form-group">
@@ -288,7 +288,7 @@
         </h4>
 
         <div class="form-group">
-            <?= $this->Form->label('tarifa', 'Tarifa', array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->label('tarifa', 'Tipo de Tarifa', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
         </div>
         <div class="form-group">
