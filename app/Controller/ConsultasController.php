@@ -4019,7 +4019,7 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
                 }
             }
-
+/*
             $this->loadModel('RespuestaIndicadore');
             $this->RespuestaIndicadore->recursive = -1;
             $indicadores = $this->RespuestaIndicadore->find('all', array(
@@ -4038,8 +4038,8 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaIndicadore has been saved.'));
                 }
-            }
-
+            }*/
+/*
             $this->loadModel('RespuestaItem');
             $this->RespuestaItem->recursive = -1;
             $items = $this->RespuestaItem->find('all', array(
@@ -4058,8 +4058,8 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaItem has been saved.'));
                 }
-            }
-
+            }*/
+/*
             $this->loadModel('RespuestaMultiplicadore');
             $this->RespuestaMultiplicadore->recursive = -1;
             $multiplicadores = $this->RespuestaMultiplicadore->find('all', array(
@@ -4078,8 +4078,8 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaMultiplicadore has been saved.'));
                 }
-            }
-
+            }*/
+/*
             $this->loadModel('RespuestaParametro');
             $this->RespuestaParametro->recursive = -1;
             $parametros = $this->RespuestaParametro->find('all', array(
@@ -4098,7 +4098,7 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
                 }
-            }
+            }*/
 
             $this->loadModel('RespuestaPasajero');
             $this->RespuestaPasajero->recursive = -1;
@@ -4159,7 +4159,7 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The RespuestaSalario has been saved.'));
                 }
             }
-
+/*
             $this->loadModel('RespuestaTipo');
             $this->RespuestaTipo->recursive = -1;
             $tipos = $this->RespuestaTipo->find('all', array(
@@ -4178,7 +4178,7 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaTipo has been saved.'));
                 }
-            }
+            }*/
 
             $this->Session->setFlash(__('La Consulta fue copiada correctamente.'));
             return $this->redirect(array('action' => 'continuar', $nueva['Consulta']['id']));
