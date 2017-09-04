@@ -4,7 +4,7 @@
  */
 ?><div class="row consultas form">
     <div class="col-md-12">
-        <h1>Realizar Consulta <small>Paso 5 de 6</small></h1>
+        <h1>Editar <small>Paso 5 de 6</small></h1>
         <h4>Par&aacute;metros<small> (Pre-Cargados por Grupo CETRAM)</small></h4>
         <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>
         <?= $this->Form->input('consulta_id', array('type' => 'hidden')); ?>
@@ -13,9 +13,9 @@
 
 
         <div class="form-group">
-            <?= $this->Form->label($parametro['Parametro']['id'], $parametro['Parametro']['nombre'].' '.'('.$parametro['Unidade']['nombre'].')', array('class' => 'control-label col-xs-10')); ?>
+            <?= $this->Form->label($parametro['RespuestaParametro']['id'], $parametro['RespuestaParametro']['nombre'].' '.'('.$parametro['RespuestaParametro']['unidad'].')', array('class' => 'control-label col-xs-10')); ?>
             <div class="col-xs-2">
-                <?= $this->Form->input($parametro['Parametro']['id'], array('div'=>false, 'default'=> $parametro['Parametro']['valor'],'type' => 'number', 'step' => '0.01', 'min' => '0')); ?>
+                <?= $this->Form->input($parametro['RespuestaParametro']['id'], array('div'=>false, 'default'=> $parametro['RespuestaParametro']['valor'],'type' => 'number', 'step' => '0.01', 'min' => '0')); ?>
             </div>
         </div>
 

@@ -4,7 +4,7 @@
  */
 ?><div class="row consultas form">
     <div class="col-md-12">
-                <h1>Editar <small>Paso 1 de 5</small></h1>
+                <h1>Editar <small>Paso 1 de 6</small></h1>
 
 
         <?= $this->Form->create('Consulta', array('class' => 'form-horizontal')); ?>

@@ -18,7 +18,7 @@
         <?= $this->Form->input('base', array('type' => 'hidden', 'name' => 'base')); ?>
 
         <h1>Realizar Consulta
-            <small>Paso 3 de 5</small>
+            <small>Paso 3 de 6</small>
         </h1>
         <h4>
             PASAJEROS TRANSPORTADOS
