@@ -2175,6 +2175,11 @@ class ConsultasController extends AppController
                     $respuestaParametro['RespuestaParametro']['editado'] = '0';
                 }
 
+                $respuestaParametro['RespuestaParametro']['minimo'] = $parametro['RespuestaParametro']['minimo'];
+                $respuestaParametro['RespuestaParametro']['maximo'] = $parametro['RespuestaParametro']['maximo'];
+                $respuestaParametro['RespuestaParametro']['tipo'] = $parametro['RespuestaParametro']['tipo'];
+                $respuestaParametro['RespuestaParametro']['step'] = $parametro['RespuestaParametro']['step'];
+
                 $respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
                 $respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
                 $respuestaParametro['RespuestaParametro']['estado_id'] = 1;
