@@ -4,7 +4,7 @@
  */
 ?><div class="row respuestaParametros view">
     <div class="col-md-12">
-        <h2><?= $respuestaParametro['RespuestaParametro']['valor'] ?></h2>
+        <h2><?= $respuestaParametro['RespuestaParametro']['parametro'] ?></h2>
         <hr/>
     </div>
     <div class="col-md-4">
@@ -17,7 +17,7 @@
 		</dd>
 		<dt><?= __('Consulta'); ?></dt>
 		<dd>
-			<?= $this->Html->link($respuestaParametro['Consulta']['tarifa'], array('controller' => 'consultas', 'action' => 'view', $respuestaParametro['Consulta']['id'])); ?>
+			<?= $this->Html->link($respuestaParametro['Consulta']['costo'], array('controller' => 'consultas', 'action' => 'view', $respuestaParametro['Consulta']['id'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Parametro'); ?></dt>
@@ -43,6 +43,36 @@
 		<dt><?= __('Unidad'); ?></dt>
 		<dd>
 			<?= h($respuestaParametro['RespuestaParametro']['unidad']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Editable'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['editable']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Editado'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['editado']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Minimo'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['minimo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Maximo'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['maximo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Tipo'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['tipo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Step'); ?></dt>
+		<dd>
+			<?= h($respuestaParametro['RespuestaParametro']['step']); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('Estado'); ?></dt>

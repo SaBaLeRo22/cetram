@@ -58,6 +58,10 @@
             <?= $this->Form->input('tipo'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('step', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('step'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('ambito_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('ambito_id'); ?> 
         </div>
@@ -99,6 +103,11 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+            </div>
+            <h4 class="text-muted">Ambito</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de  Ambitos'), array('controller' => 'ambitos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
             <h4 class="text-muted">Estado</h4>
             <div class="list-group">

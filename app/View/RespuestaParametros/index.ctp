@@ -17,6 +17,12 @@
                     <th><?= $this->Paginator->sort('valor'); ?></th>
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('unidad'); ?></th>
+                    <th><?= $this->Paginator->sort('editable'); ?></th>
+                    <th><?= $this->Paginator->sort('editado'); ?></th>
+                    <th><?= $this->Paginator->sort('minimo'); ?></th>
+                    <th><?= $this->Paginator->sort('maximo'); ?></th>
+                    <th><?= $this->Paginator->sort('tipo'); ?></th>
+                    <th><?= $this->Paginator->sort('step'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -29,18 +35,24 @@
                 <?php foreach ($respuestaParametros as $respuestaParametro): ?> 
                 <tr>
                     <td><?= h($respuestaParametro['RespuestaParametro']['id']); ?>&nbsp;</td>
-                    <td><?= $respuestaParametro['Consulta']['tarifa']; ?></td><td><?= $respuestaParametro['Parametro']['nombre']; ?></td><td><?= h($respuestaParametro['RespuestaParametro']['parametro']); ?>&nbsp;</td>
-                    <td class="display-column">
-                        <?= $this->Html->link( h( $respuestaParametro['RespuestaParametro']['valor'] ),
+                    <td><?= $respuestaParametro['Consulta']['costo']; ?></td><td><?= $respuestaParametro['Parametro']['nombre']; ?></td><td class="display-column">
+                        <?= $this->Html->link( h( $respuestaParametro['RespuestaParametro']['parametro'] ),
                         array( 'action' => 'view', $respuestaParametro['RespuestaParametro']['id'] ) ); ?>                        
                         <div class="nowrap">
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $respuestaParametro['RespuestaParametro']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaParametro['RespuestaParametro']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaParametro['RespuestaParametro']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaParametro['RespuestaParametro']['valor'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaParametro['RespuestaParametro']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaParametro['RespuestaParametro']['parametro'])); ?>                 
                         </div>
                     </td> 
+                    <td><?= h($respuestaParametro['RespuestaParametro']['valor']); ?>&nbsp;</td>
                     <td><?= $respuestaParametro['Unidade']['nombre']; ?></td><td><?= h($respuestaParametro['RespuestaParametro']['unidad']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['editable']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['editado']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['minimo']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['maximo']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['tipo']); ?>&nbsp;</td>
+                    <td><?= h($respuestaParametro['RespuestaParametro']['step']); ?>&nbsp;</td>
                     <td><?= $respuestaParametro['Estado']['nombre']; ?></td><td><?= h($respuestaParametro['RespuestaParametro']['created']); ?>&nbsp;</td>
                     <td><?= h($respuestaParametro['RespuestaParametro']['modified']); ?>&nbsp;</td>
                     <td><?= h($respuestaParametro['RespuestaParametro']['user_created']); ?>&nbsp;</td>

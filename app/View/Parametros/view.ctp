@@ -45,6 +45,31 @@
 			<?= $this->Html->link($parametro['Ambito']['nombre'], array('controller' => 'ambitos', 'action' => 'view', $parametro['Ambito']['id'])); ?>
 			&nbsp;
 		</dd>
+		<dt><?= __('Editable'); ?></dt>
+		<dd>
+			<?= h($parametro['Parametro']['editable']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Minimo'); ?></dt>
+		<dd>
+			<?= h($parametro['Parametro']['minimo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Maximo'); ?></dt>
+		<dd>
+			<?= h($parametro['Parametro']['maximo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Tipo'); ?></dt>
+		<dd>
+			<?= h($parametro['Parametro']['tipo']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Step'); ?></dt>
+		<dd>
+			<?= h($parametro['Parametro']['step']); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($parametro['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $parametro['Estado']['id'])); ?>

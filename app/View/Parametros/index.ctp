@@ -17,6 +17,11 @@
                     <th><?= $this->Paginator->sort('unidade_id'); ?></th>
                     <th><?= $this->Paginator->sort('tipo_id'); ?></th>
                     <th><?= $this->Paginator->sort('ambito_id'); ?></th>
+                    <th><?= $this->Paginator->sort('editable'); ?></th>
+                    <th><?= $this->Paginator->sort('minimo'); ?></th>
+                    <th><?= $this->Paginator->sort('maximo'); ?></th>
+                    <th><?= $this->Paginator->sort('tipo'); ?></th>
+                    <th><?= $this->Paginator->sort('step'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
@@ -41,7 +46,12 @@
                     </td> 
                     <td><?= h($parametro['Parametro']['descripcion']); ?>&nbsp;</td>
                     <td><?= h($parametro['Parametro']['valor']); ?>&nbsp;</td>
-                    <td><?= $parametro['Unidade']['nombre']; ?></td><td><?= $parametro['Tipo']['nombre']; ?></td><td><?= $parametro['Ambito']['nombre']; ?></td><td><?= $parametro['Estado']['nombre']; ?></td><td><?= h($parametro['Parametro']['created']); ?>&nbsp;</td>
+                    <td><?= $parametro['Unidade']['nombre']; ?></td><td><?= $parametro['Tipo']['nombre']; ?></td><td><?= $parametro['Ambito']['nombre']; ?></td><td><?= h($parametro['Parametro']['editable']); ?>&nbsp;</td>
+                    <td><?= h($parametro['Parametro']['minimo']); ?>&nbsp;</td>
+                    <td><?= h($parametro['Parametro']['maximo']); ?>&nbsp;</td>
+                    <td><?= h($parametro['Parametro']['tipo']); ?>&nbsp;</td>
+                    <td><?= h($parametro['Parametro']['step']); ?>&nbsp;</td>
+                    <td><?= $parametro['Estado']['nombre']; ?></td><td><?= h($parametro['Parametro']['created']); ?>&nbsp;</td>
                     <td><?= h($parametro['Parametro']['modified']); ?>&nbsp;</td>
                     <td><?= h($parametro['Parametro']['user_created']); ?>&nbsp;</td>
                     <td><?= h($parametro['Parametro']['user_modified']); ?>&nbsp;</td>

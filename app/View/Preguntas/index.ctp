@@ -23,6 +23,7 @@
                     <th><?= $this->Paginator->sort('titulo'); ?></th>
                     <th><?= $this->Paginator->sort('ayuda'); ?></th>
                     <th><?= $this->Paginator->sort('tipo'); ?></th>
+                    <th><?= $this->Paginator->sort('step'); ?></th>
                     <th><?= $this->Paginator->sort('ambito_id'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
@@ -54,8 +55,8 @@
                     <td><?= $pregunta['Unidade']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['titulo']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['ayuda']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['tipo']); ?>&nbsp;</td>
-                    <td><?= h($pregunta['Ambito']['nombre']); ?>&nbsp;</td>
-                    <td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
+                    <td><?= h($pregunta['Pregunta']['step']); ?>&nbsp;</td>
+                    <td><?= $pregunta['Ambito']['nombre']; ?></td><td><?= $pregunta['Estado']['nombre']; ?></td><td><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['modified']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_created']); ?>&nbsp;</td>
                     <td><?= h($pregunta['Pregunta']['user_modified']); ?>&nbsp;</td>
@@ -113,6 +114,12 @@
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidade'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+ 
+            </div>
+            <h4 class="text-muted">Ambito</h4>
+            <div class="list-group">
+                		<?= $this->Html->link(__('Listado de Ambitos'), array('controller' => 'ambitos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
  
             </div>
             <h4 class="text-muted">Estado</h4>

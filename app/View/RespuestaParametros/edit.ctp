@@ -36,6 +36,30 @@
             <?= $this->Form->input('unidad'); ?> 
         </div>
                                                     <div class="form-group">
+            <?= $this->Form->label('editable', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('editable'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('editado', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('editado'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('minimo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('minimo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('maximo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('maximo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('tipo', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('tipo'); ?> 
+        </div>
+                                                    <div class="form-group">
+            <?= $this->Form->label('step', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->input('step'); ?> 
+        </div>
+                                                    <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
@@ -57,7 +81,7 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('RespuestaParametro.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('RespuestaParametro.valor'))); ?>                                <?= $this->Html->link(__('Listado de Respuesta Parametros'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('RespuestaParametro.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('RespuestaParametro.parametro'))); ?>                                <?= $this->Html->link(__('Listado de Respuesta Parametros'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Consulta</h4>
             <div class="list-group">

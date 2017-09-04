@@ -75,11 +75,16 @@
 			<?= h($pregunta['Pregunta']['tipo']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Ambito Id'); ?></dt>
-				<dd>
-					<?= $this->Html->link($pregunta['Ambito']['nombre'], array('controller' => 'ambitos', 'action' => 'view', $pregunta['Ambito']['id'])); ?>
-					&nbsp;
-				</dd>
+		<dt><?= __('Step'); ?></dt>
+		<dd>
+			<?= h($pregunta['Pregunta']['step']); ?>
+			&nbsp;
+		</dd>
+		<dt><?= __('Ambito'); ?></dt>
+		<dd>
+			<?= $this->Html->link($pregunta['Ambito']['nombre'], array('controller' => 'ambitos', 'action' => 'view', $pregunta['Ambito']['id'])); ?>
+			&nbsp;
+		</dd>
 		<dt><?= __('Estado'); ?></dt>
 		<dd>
 			<?= $this->Html->link($pregunta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $pregunta['Estado']['id'])); ?>
