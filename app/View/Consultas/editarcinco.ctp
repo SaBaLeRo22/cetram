@@ -15,7 +15,7 @@
         <div class="form-group">
             <?= $this->Form->label($parametro['RespuestaParametro']['id'], $parametro['RespuestaParametro']['nombre'].' '.'('.$parametro['RespuestaParametro']['unidad'].')', array('class' => 'control-label col-xs-10')); ?>
             <div class="col-xs-2">
-                <?= $this->Form->input($parametro['RespuestaParametro']['id'], array('div'=>false, 'default'=> $parametro['RespuestaParametro']['valor'],'type' => 'number', 'step' => '0.01', 'min' => '0')); ?>
+                <?= $this->Form->input($parametro['RespuestaParametro']['id'], array('div'=>false, 'default'=> $parametro['RespuestaParametro']['valor'],'type' => $parametro['RespuestaParametro']['tipo'], 'step' => $parametro['RespuestaParametro']['step'], 'min' => $parametro['RespuestaParametro']['minimo'], 'max' => $parametro['RespuestaParametro']['maximo'])); ?>
             </div>
         </div>
 
