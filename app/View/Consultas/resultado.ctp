@@ -648,6 +648,7 @@
             <div class="table-responsive">
                 <table class="table" cellpadding="0" cellspacing="0">
                     <thead>
+
                     <tr>
 
                         <th style="background-color: #222; color: #eee; text-align: center; vertical-align: middle"><?= __('Parametro'); ?>
@@ -661,7 +662,13 @@
                     </thead>
                     <tbody>
                     <?php foreach ($consulta['RespuestaParametro'] as $respuestaParametro): ?>
-                    <tr>
+
+
+                    <?php if ($respuestaParametro['editado'] == '1'): ?>
+                            <tr class="alert alert-warning" role="alert">
+                        <?php else: ?>
+                             <tr>
+                        <?php endif; ?>
 
                         <td><strong><?= $respuestaParametro['parametro']; ?>&nbsp;</strong></td>
                         <td style="text-align: center"><?= number_format($respuestaParametro['valor'], 3, ',', '.'); ?>
