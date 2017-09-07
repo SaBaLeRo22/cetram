@@ -15,7 +15,7 @@
         <div class="form-group">
             <?= $this->Form->label($parametro['Parametro']['id'], $parametro['Parametro']['nombre'].' '.'('.$parametro['Unidade']['nombre'].')', array('class' => 'control-label col-xs-10')); ?>
             <div class="col-xs-2">
-                <?= $this->Form->input($parametro['Parametro']['id'], array('div'=>false, 'default'=> $parametro['Parametro']['valor'],'type' => $parametro['Unidade']['tipo'], 'step' => $parametro['Unidade']['step'], 'min' => $parametro['Unidade']['minimo'], 'max' => $parametro['Unidade']['maximo'])); ?>
+                <?= $this->Form->input($parametro['Parametro']['id'], array('div'=>false, 'default'=> $parametro['Parametro']['valor'],'type' => $parametro['Parametro']['tipo'], 'step' => $parametro['Parametro']['step'], 'min' => $parametro['Parametro']['minimo'], 'max' => $parametro['Parametro']['maximo'])); ?>
             </div>
         </div>
 
