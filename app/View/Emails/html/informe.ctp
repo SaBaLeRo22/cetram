@@ -755,7 +755,12 @@
                     </thead>
                     <tbody>
                     <?php foreach ($consulta['RespuestaParametro'] as $respuestaParametro): ?>
+
+                    <?php if ($respuestaParametro['editado'] == '1'): ?>
+                    <tr class="alert alert-warning" role="alert" style="background-color: #fcf8e3;border-color: #fbeed5;color: #c09853;padding: 15px; margin-bottom: 18px;border: 1px solid transparent; border-radius: 2px;box-sizing: border-box;display: table-row;vertical-align: inherit; border-collapse: collapse; box-sizing: border-box;">
+                        <?php else: ?>
                     <tr>
+                        <?php endif; ?>
 
                         <td style="padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><strong style="font-weight: 700;box-sizing: border-box;line-height: 1.428571429;"><?= $respuestaParametro['parametro']; ?>&nbsp;</strong></td>
                         <td style="text-align: center;padding: 8px;line-height: 1.428571429;vertical-align: top;border-top: 1px solid #ddd;white-space: nowrap;box-sizing: border-box;"><?= number_format($respuestaParametro['valor'], 3, ',', '.'); ?>
