@@ -2175,10 +2175,10 @@ class ConsultasController extends AppController
                     $respuestaParametro['RespuestaParametro']['editado'] = '0';
                 }
 
-                $respuestaParametro['RespuestaParametro']['minimo'] = $parametro['RespuestaParametro']['minimo'];
-                $respuestaParametro['RespuestaParametro']['maximo'] = $parametro['RespuestaParametro']['maximo'];
-                $respuestaParametro['RespuestaParametro']['tipo'] = $parametro['RespuestaParametro']['tipo'];
-                $respuestaParametro['RespuestaParametro']['step'] = $parametro['RespuestaParametro']['step'];
+                $respuestaParametro['RespuestaParametro']['minimo'] = $parametro['Parametro']['minimo'];
+                $respuestaParametro['RespuestaParametro']['maximo'] = $parametro['Parametro']['maximo'];
+                $respuestaParametro['RespuestaParametro']['tipo'] = $parametro['Parametro']['tipo'];
+                $respuestaParametro['RespuestaParametro']['step'] = $parametro['Parametro']['step'];
 
                 $respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
                 $respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
@@ -2222,7 +2222,7 @@ class ConsultasController extends AppController
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 6".'));
-            return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
+            return $this->redirect(array('action' => 'seis', $this->request->data['Consulta']['consulta_id']));
         }
         $this->request->data['Consulta']['consulta_id'] = $id;
         $this->set(compact('consulta', 'parametros'));
@@ -2260,9 +2260,9 @@ class ConsultasController extends AppController
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
             foreach ($parametros as $key => $parametro) {
-                if(($parametro['Parametro']['editable'] == '1') && ($parametro['RespuestaParametro']['valor'] != $this->request->data['Consulta'][$parametro['RespuestaParametro']['id']])){
+                if(($parametro['RespuestaParametro']['editable'] == '1') && ($parametro['RespuestaParametro']['valor'] != $this->request->data['Consulta'][$parametro['RespuestaParametro']['id']])){
                     $respuestaParametro['RespuestaParametro']['id'] = $parametro['RespuestaParametro']['id'];
-                    $respuestaParametro['RespuestaParametro']['valor'] = $this->request->data['Consulta'][$parametro['Parametro']['id']];
+                    $respuestaParametro['RespuestaParametro']['valor'] = $this->request->data['Consulta'][$parametro['RespuestaParametro']['id']];
                     $respuestaParametro['RespuestaParametro']['editado'] = '1';
                     $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
                     if (!$this->RespuestaParametro->save($respuestaParametro)) {
@@ -2303,7 +2303,7 @@ class ConsultasController extends AppController
             }
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 6".'));
-            return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
+            return $this->redirect(array('action' => 'seis', $this->request->data['Consulta']['consulta_id']));
         }
         $this->request->data['Consulta']['consulta_id'] = $id;
         $this->set(compact('consulta', 'parametros'));
