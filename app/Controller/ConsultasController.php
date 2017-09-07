@@ -4283,7 +4283,7 @@ class ConsultasController extends AppController
                     $this->Session->setFlash(__('The RespuestaMultiplicadore has been saved.'));
                 }
             }*/
-/*
+
             $this->loadModel('RespuestaParametro');
             $this->RespuestaParametro->recursive = -1;
             $parametros = $this->RespuestaParametro->find('all', array(
@@ -4302,7 +4302,7 @@ class ConsultasController extends AppController
                 } else {
                     $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
                 }
-            }*/
+            }
 
             $this->loadModel('RespuestaPasajero');
             $this->RespuestaPasajero->recursive = -1;
