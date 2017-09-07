@@ -2360,7 +2360,7 @@ class ConsultasController extends AppController
             return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
         }  elseif ($consulta['Modo']['id'] == '7') {
             $this->Session->setFlash(__('Por favor, continuar con el "Paso 6".'));
-            return $this->redirect(array('action' => 'cinco', $consulta['Consulta']['id']));
+            return $this->redirect(array('action' => 'seis', $consulta['Consulta']['id']));
         } else {
             return $this->redirect(array('action' => 'index'));
         }
@@ -4195,7 +4195,7 @@ class ConsultasController extends AppController
         $nueva['Consulta']['subsidio_pax'] = 0;
         $nueva['Consulta']['unidade_id'] = 8; // Pesos ($)
         $nueva['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
-        $nueva['Consulta']['modo_id'] = 6; // Nueva Consulta.
+        $nueva['Consulta']['modo_id'] = 7; // Nueva Consulta.
         $nueva['Consulta']['estado_id'] = 1; // Activo
         $nueva['Consulta']['user_created'] = $this->Authake->getUserId();
         $nueva['Consulta']['user_modified'] = $this->Authake->getUserId();
