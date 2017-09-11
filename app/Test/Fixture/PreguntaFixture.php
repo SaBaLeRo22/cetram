@@ -56,8 +56,8 @@ class PreguntaFixture extends CakeTestFixture {
 			'ayuda' => 'Lorem ipsum dolor sit amet',
 			'ambito_id' => 1,
 			'estado_id' => 1,
-			'created' => '2017-06-01 16:45:24',
-			'modified' => '2017-06-01 16:45:24',
+			'created' => '2017-09-03 22:24:08',
+			'modified' => '2017-09-03 22:24:08',
 			'user_created' => 1,
 			'user_modified' => 1
 		),
