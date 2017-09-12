@@ -2,14 +2,19 @@
 /**
  * @var $this LocalView
  */
-?><div class="row consultas index">
+?>
+
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>
+
+<div class="row consultas index">
     <div class="col-md-12">
         <h2><?= __('Consultas'); ?></h2>
-        <div class="related">
-            <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Nueva Consulta', ['controller' => 'consultas', 'action' => 'uno'], ['class' => 'btn btn-sm btn-info']); ?>
-            </div>
-        </div>
 
         <div class="table-responsive">
             <table id="example" class="display" cellspacing="0" width="100%">
@@ -495,6 +500,7 @@
         </div>
 
 
+<!--
         <div class="table-responsive">
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -564,9 +570,16 @@
                     array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                     array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
             </div>
-        </div>
+        </div>-->
+
+
+
+
     </div>
 </div>
+
+
+
 
 <script type='text/javascript' charset='utf-8'>
 <?=
@@ -574,17 +587,86 @@
 "
 
 
+
+
+
+
+
         $(document).ready(function() {
-            $('#example').DataTable( {
-                'sWrapper': 'dataTables_wrapper form-inline',
-                'responsive': true,
-                'language': {
-                    'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
-                    'decimal': ',',
-                    'thousands': '.'
-                }
+
+
+
+
+            // Setup - add a text input to each footer cell
+            $('#example tfoot th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type=text placeholder='+title+' />' );
             } );
+
+/*            var r = $('#example tfoot th');
+            r.find('th').each(function(){
+                $(this).css('padding', 8);
+            });
+            $('#example thead').append(r);
+            $('#search_0').css('text-align', 'center');*/
+
+            // DataTable
+            var table =
+                $('#example').DataTable( {
+                    //'dom': 'Bfrtip',
+                    //'dom': 'Bfrtip',
+                    lengthChange: false,
+                    buttons: [
+                        {
+                            extend:    'copyHtml5',
+                            text:      '<i id=copiar class=fa fa-files-o ></i>',
+                            titleAttr: 'Copy'
+                        },
+                        {
+                            extend:    'excelHtml5',
+                            text:      '<i class=fa fa-file-excel-o></i>',
+                            titleAttr: 'Excel'
+                        },
+                        {
+                            extend:    'csvHtml5',
+                            text:      '<i class=fa fa-file-text-o></i>',
+                            titleAttr: 'CSV'
+                        },
+                        {
+                            extend:    'pdfHtml5',
+                            text:      '<i class=fa fa-file-pdf-o></i>',
+                            titleAttr: 'PDF'
+                        }
+                    ],
+                    //'sWrapper': 'dataTables_wrapper form-inline',
+                    //'responsive': true,
+                    'language': {
+                        //'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
+                        //'decimal': ',',
+                        //'thousands': '.'
+                    }
+            } );
+
+            table.buttons().container()
+                    .insertBefore( '#example_filter' );
+
+            // Apply the search
+            table.columns().every( function () {
+                var that = this;
+
+                $( 'input', this.footer() ).on( 'keyup change', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                                .search( this.value )
+                                .draw();
+                    }
+                } );
+            } );
+
+
+
         } );
+
 
 ";
     $this->Html->scriptBlock($script, array('inline' => false));

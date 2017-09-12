@@ -50,10 +50,15 @@
     'font-awesome.min',
 
     '/plugins/jquery-ui-1.12.1.custom/jquery-ui',
+    '/plugins/jquery-ui-1.12.1.custom/jquery-ui.structure',
+    '/plugins/jquery-ui-1.12.1.custom/jquery-ui.theme',
     //'/plugins/DataTables-1.10.16/media/css/jquery.dataTables',
     //'/plugins/TableTools-2.2.4/css/dataTables.tableTools',
     //'/plugins/TableTools-2.2.4/css/jquery.dataTables_themeroller',
     '/plugins/DataTables-1.10.16/media/css/dataTables.jqueryui',
+    //'/plugins/DataTables-1.10.16/extensions/Responsive/css/responsive.dataTables',
+    //'/plugins/DataTables-1.10.16/extensions/Responsive/css/responsive.jqueryui',
+    '/plugins/DataTables-1.10.16/extensions/Buttons/css/buttons.jqueryui',
     //'/plugins/DataTables-1.10.16/media/css/dataTables.bootstrap'
 
 
@@ -107,7 +112,7 @@
 
 <?= $this->Html->script( [
 'jquery-3.2.1',
-//'/plugins/jquery-ui-1.12.1.custom/jquery-ui',
+'/plugins/jquery-ui-1.12.1.custom/jquery-ui',
 //'/plugins/bootstrap-4.0.0-beta/dist/js/bootstrap',
 'bootstrap.min',
 'plugins',
@@ -118,6 +123,16 @@
 'dark-unica',
 '/plugins/DataTables-1.10.16/media/js/jquery.dataTables',
 '/plugins/DataTables-1.10.16/media/js/dataTables.jqueryui',
+//'/plugins/DataTables-1.10.16/extensions/Responsive/js/dataTables.responsive',
+'/plugins/DataTables-1.10.16/extensions/Responsive/js/responsive.jqueryui',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/dataTables.buttons',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.jqueryui',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.flash',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/jszip.min',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/pdfmake.min',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/vfs_fonts',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.html5',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.print',
 //'/plugins/TableTools-2.2.4/js/dataTables.tableTools',
 //'/plugins/DataTables-1.10.16/media/js/dataTables.bootstrap'
 
