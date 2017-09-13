@@ -133,6 +133,7 @@
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/vfs_fonts',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.html5',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.print',
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.colVis.min',
 //'/plugins/TableTools-2.2.4/js/dataTables.tableTools',
 //'/plugins/DataTables-1.10.16/media/js/dataTables.bootstrap'
 
