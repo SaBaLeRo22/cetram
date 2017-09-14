@@ -74,7 +74,7 @@
                 </div>
             </div>
         </header>
-        <div class="container">
+        <div class="container" style="width: 100%">
     <?php
                             if ($this->Session->check('Message.flash')):
                                 echo $this->Session->flash();

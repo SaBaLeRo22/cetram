@@ -47,9 +47,9 @@
         '/plugins/selectize.js/dist/css/selectize.bootstrap3',
         
         
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables.min',
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables_themeroller',
-        '/plugins/DataTables-1.10.7/extensions/TableTools/css/dataTables.tableTools',
+        //'/plugins/DataTables-1.10.7/media/css/jquery.dataTables.min',
+        //'/plugins/DataTables-1.10.7/media/css/jquery.dataTables_themeroller',
+        //'/plugins/DataTables-1.10.7/extensions/TableTools/css/dataTables.tableTools',
         
         
     ] ); ?> 
@@ -86,10 +86,10 @@
     <?= $this->fetch( 'content' ); ?>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= $this->Html->url('/js/jquery-1.11.1.min.js') ?>"><\/script>')</script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
+<!--<script>window.jQuery || document.write('<script src="<?= $this->Html->url('/js/jquery-1.11.1.min.js') ?>"><\/script>')</script>-->
 
-<?= $this->Html->script( ['bootstrap.min', 'plugins'] ); ?>
+<?= $this->Html->script( ['jquery-3.2.1','bootstrap.min', 'plugins'] ); ?>
 <?= $this->Html->script( [
     '/plugins/selectize.js/dist/js/standalone/selectize.min',
     '/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
@@ -99,8 +99,8 @@
 <?= $this->Html->script( [
 //    '/plugins/DataTables-1.10.7/media/js/jquery',
 //    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables.min',
-    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables',
-    '/plugins/DataTables-1.10.7/extensions/TableTools/js/dataTables.tableTools',
+//    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables',
+//    '/plugins/DataTables-1.10.7/extensions/TableTools/js/dataTables.tableTools',
 ] ) ?>
 
 

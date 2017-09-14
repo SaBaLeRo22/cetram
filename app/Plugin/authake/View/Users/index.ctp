@@ -1,6 +1,6 @@
 <?php $this->Html->addCrumb('Users', $this->Html->url( null, true )); ?>
 <div id="content">
-	<div class="container">
+	<div class="container" style="width: 100%">
 		<div class="section">
 			<div class="section-header">
 				<h3>
@@ -87,6 +87,18 @@
                                     <th>
                                         <?php echo $this->Paginator->sort('created');?>
                                     </th>
+									<th>
+										<?php echo $this->Paginator->sort('nombre');?>
+									</th>
+									<th>
+										<?php echo $this->Paginator->sort('apellido');?>
+									</th>
+									<th>
+										<?php echo $this->Paginator->sort('sector');?>
+									</th>
+									<th>
+										<?php echo $this->Paginator->sort('localidad');?>
+									</th>
                                     <th>
 
                                         <?php echo $this->Paginator->sort(__('Disabled'), 'Status');?>
@@ -141,6 +153,18 @@
 								</td>
 							<td>
 								<?php echo $this->Time->format('d/m/Y', $user['User']['created']); ?>&nbsp;
+							</td>
+							<td>
+								<?php echo $user['User']['nombre']; ?>&nbsp;
+							</td>
+							<td>
+								<?php echo $user['User']['apellido']; ?>&nbsp;
+							</td>
+							<td>
+								<?php echo $user['Sector']['nombre']; ?>&nbsp;
+							</td>
+							<td>
+								<?php echo $user['Localidad']['nombre']; ?>&nbsp;
 							</td>
 							<td>
 								<?php if ($user['User']['disable']) echo '<span class="label label-important">Disabled</span>&nbsp;';
