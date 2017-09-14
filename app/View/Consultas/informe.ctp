@@ -21,7 +21,7 @@
                 <thead>
                 <tr>
                     <th style="text-align: center;vertical-align: middle">Acci&oacute;n</th>
-                    <th style="text-align: center;vertical-align: middle">ID</th>
+                    <th style="text-align: center;vertical-align: middle">&nbsp;&nbsp;ID&nbsp;&nbsp;</th>
                     <th style="text-align: center;vertical-align: middle">Modo</th>
                     <th style="text-align: center;vertical-align: middle">Costo ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa ($)</th>
@@ -36,7 +36,7 @@
                 <tfoot>
                 <tr>
                     <th style="text-align: center;vertical-align: middle">Acci&oacute;n</th>
-                    <th style="text-align: center;vertical-align: middle">ID</th>
+                    <th style="text-align: center;vertical-align: middle">&nbsp;&nbsp;ID&nbsp;&nbsp;</th>
                     <th style="text-align: center;vertical-align: middle">Modo</th>
                     <th style="text-align: center;vertical-align: middle">Costo ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa ($)</th>
