@@ -23,6 +23,13 @@ class PreguntasController extends AppController {
  */
 	public function index() {
 		$this->Pregunta->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Pregunta.agrupamiento_id' => 'asc',
+				'Pregunta.orden' => 'asc'
+			)
+		);
 		$this->set('preguntas', $this->Paginator->paginate());
 	}
 
@@ -37,8 +44,10 @@ class PreguntasController extends AppController {
 		if (!$this->Pregunta->exists($id)) {
 			throw new NotFoundException(__('Invalid pregunta'));
 		}
+		$this->Pregunta->recursive = 2;
 		$options = array('conditions' => array('Pregunta.' . $this->Pregunta->primaryKey => $id));
-		$this->set('pregunta', $this->Pregunta->find('first', $options));
+		$pregunta = $this->Pregunta->find('first', $options);
+		$this->set('pregunta', $pregunta);
 	}
 
 /**
@@ -49,6 +58,11 @@ class PreguntasController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Pregunta->create();
+
+			$this->request->data['Pregunta']['estado_id'] = '1';
+			$this->request->data['Pregunta']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Pregunta->save($this->request->data)) {
 				$this->Session->setFlash(__('The pregunta has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -76,6 +90,9 @@ class PreguntasController extends AppController {
 			throw new NotFoundException(__('Invalid pregunta'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Pregunta->save($this->request->data)) {
 				$this->Session->setFlash(__('The pregunta has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -113,5 +130,22 @@ class PreguntasController extends AppController {
 			$this->Session->setFlash(__('The pregunta could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Pregunta->id = $id;
+		if (!$this->Pregunta->exists()) {
+			throw new NotFoundException(__('Invalid pregunta'));
+		}
+
+		$this->request->data['Pregunta']['estado_id'] = '2';
+		$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Pregunta->save($this->request->data)) {
+			$this->Session->setFlash(__('The pregunta has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+		}
 	}
 }
