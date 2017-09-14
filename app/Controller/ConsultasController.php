@@ -4177,8 +4177,17 @@ class ConsultasController extends AppController
             throw new NotFoundException(__('Invalid consulta'));
         }
 
-        //$options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
-        //$consulta = $this->Consulta->find('first', $options);
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+
+        if (!$this->Session->read('Grupo.Admin') || !$this->Session->read('Grupo.Sistemas')){
+            if($consulta['Consulta']['user_created'] != $this->Authake->getUserId()){
+                $this->Session->setFlash(__('No se permite copiar esta consulta.'));
+                return $this->redirect(array('action' => 'index'));
+            }
+        }
+
 
         $this->Consulta->create();
 
