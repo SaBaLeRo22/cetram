@@ -40,7 +40,7 @@
 			<?= h($pregunta['Pregunta']['maximo']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Multiplicadore'); ?></dt>
+		<dt><?= __('Multiplicador'); ?></dt>
 		<dd>
 			<?= $this->Html->link($pregunta['Multiplicadore']['nombre'], array('controller' => 'multiplicadores', 'action' => 'view', $pregunta['Multiplicadore']['id'])); ?>
 			&nbsp;
@@ -55,7 +55,7 @@
 			<?= h($pregunta['Pregunta']['opciones']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Unidade'); ?></dt>
+		<dt><?= __('Unidad'); ?></dt>
 		<dd>
 			<?= $this->Html->link($pregunta['Unidade']['nombre'], array('controller' => 'unidades', 'action' => 'view', $pregunta['Unidade']['id'])); ?>
 			&nbsp;
@@ -92,12 +92,12 @@
 		</dd>
 		<dt><?= __('User Created'); ?></dt>
 		<dd>
-			<?= h($pregunta['Pregunta']['user_created']); ?>
+			<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_created'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('User Modified'); ?></dt>
 		<dd>
-			<?= h($pregunta['Pregunta']['user_modified']); ?>
+			<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_modified'])); ?>
 			&nbsp;
 		</dd>
             </dl>
@@ -113,9 +113,11 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
 
             <div class="list-group">
-                                		<?= $this->Html->link(__('Editar Pregunta'), array('action' => 'edit', $pregunta['Pregunta']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Pregunta'), array('action' => 'delete', $pregunta['Pregunta']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $pregunta['Pregunta']['id'])); ?> 
-		<?= $this->Html->link(__('Listado de Preguntas'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
+                                		<?= $this->Html->link(__('Editar Pregunta'), array('action' => 'edit', $pregunta['Pregunta']['id']), array('class' => 'list-group-item')); ?>
+				<?php if ($pregunta['Pregunta']['estado_id'] != '2'): ?>
+				<?= $this->Form->postLink(__('Eliminar Pregunta'), array('action' => 'eliminar', $pregunta['Pregunta']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $pregunta['Pregunta']['id'])); ?>
+				<?php endif ?>
+				<?= $this->Html->link(__('Listado de Preguntas'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
 		<?= $this->Html->link(__('Agregar Pregunta'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
         </div>
@@ -123,7 +125,7 @@
     <div class="col-md-8">
                 <div class="related">
             <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Opcione', ['controller' => 'opciones', 'action' => 'add', 'pregunta_id' => $pregunta['Pregunta']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Opcion', ['controller' => 'opciones', 'action' => 'add', 'pregunta_id' => $pregunta['Pregunta']['id']], ['class' => 'btn btn-sm btn-info']); ?>
             </div>
             <h3><?= __('Opciones'); ?></h3>
             <?php if (!empty($pregunta['Opcione'])): ?>
@@ -132,11 +134,10 @@
                 <thead>
                 <tr>
                     		<th><?= __('Id'); ?></th>
-		<th><?= __('Pregunta Id'); ?></th>
 		<th><?= __('Opcion'); ?></th>
 		<th><?= __('Funcion'); ?></th>
-		<th><?= __('Unidade Id'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Unidad'); ?></th>
+		<th><?= __('Estado'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
 		<th><?= __('User Created'); ?></th>
@@ -148,19 +149,20 @@
                 	<?php foreach ($pregunta['Opcione'] as $opcione): ?>
 		<tr>
 			<td><?= $opcione['id']; ?></td>
-			<td><?= $opcione['pregunta_id']; ?></td>
 			<td><?= $opcione['opcion']; ?></td>
 			<td><?= $opcione['funcion']; ?></td>
-			<td><?= $opcione['unidade_id']; ?></td>
-			<td><?= $opcione['estado_id']; ?></td>
+			<td><?= $opcione['Unidade']['nombre']; ?></td>
+			<td><?= $opcione['Estado']['nombre']; ?></td>
 			<td><?= $opcione['created']; ?></td>
 			<td><?= $opcione['modified']; ?></td>
-			<td><?= $opcione['user_created']; ?></td>
-			<td><?= $opcione['user_modified']; ?></td>
+			<td><?= $this->Authake->getUsuario($opcione['user_created']); ?></td>
+			<td><?= $this->Authake->getUsuario($opcione['user_modified']); ?></td>
 			<td class="actions">
 				<?= $this->Html->link(__('Ver'), array('controller' => 'opciones', 'action' => 'view', $opcione['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'opciones', 'action' => 'edit', $opcione['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'opciones', 'action' => 'delete', $opcione['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $opcione['id'])); ?>
+				<?php if ($opcione['estado_id'] != '2'): ?>
+					<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'opciones', 'action' => 'eliminar', $opcione['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $opcione['id'])); ?>
+				<?php endif ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
