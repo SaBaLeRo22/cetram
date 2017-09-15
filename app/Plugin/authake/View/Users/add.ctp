@@ -70,7 +70,7 @@
 </div>
 
 <?php
-	$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
+	//$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
 ?>
 
 <?php $this->append('script') ?>

@@ -14,7 +14,7 @@
         echo $this->Html->meta('icon');
         $this->Html->css('/authake/css/bootstrap.min', null, array('inline' => false));
         $this->Html->css('/authake/css/custom', null, array('inline' => false));
-        $this->Html->script('Authake.jquery-latest', array('block' => 'script'));
+        //$this->Html->script('Authake.jquery-latest', array('block' => 'script'));
         $this->Html->script('Authake.custom', array('block' => 'script'));
         $this->Html->script('Authake.bootstrap.min', array('block' => 'script'));
         $this->Html->script('Authake.html5shiv', array('block' => 'script'));
