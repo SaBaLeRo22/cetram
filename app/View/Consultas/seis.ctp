@@ -71,10 +71,51 @@
         <?= $this->Form->end(); ?>
     </div>
 </div>
+<!--
 <?php $this->append('script') ?>
 <script type="text/javascript">
     $('#ConsultaProvinciaId').change(function(){
         $('#ConsultaLocalidadeId').load('../obtener_localidades/'+$('#ConsultaProvinciaId').val());
     });
 </script>
-<?php $this->end() ?>
+<?php $this->end() ?>-->
+
+<?php
+
+//AJAX for Dynamic Drop down
+
+$this->Js->get('#ConsultaProvinciaId')->event('change',
+
+$this->Js->request(array(
+
+'plugin'=>NULL,
+
+'controller'=>'localidades',
+
+'action' =>'obtener_localidades',
+
+), array(
+
+'update' =>'#ConsultaLocalidadeId',
+
+'async' => true,
+
+'method' => 'Post',
+
+'dataExpression'=>true,
+
+'data'=> $this->Js->serializeForm(array(
+
+'isForm' => true,
+
+'inline' => true
+
+))
+
+))
+
+);
+
+// END AJAX
+
+?>
