@@ -22,7 +22,7 @@ class UsersController extends AuthakeAppController {
 	var $uses = array('Authake.User', 'Authake.Rule');
 	var $components = array('Authake.Filter','Session');// var $layout = 'authake';
 	var $paginate = array('limit' => 10, 'order' => array('User.login' => 'asc'));//var $scaffold;
-	
+
 	function index($tableonly = false) {
 		$this->User->recursive = 1;
 		$filter = $this->Filter->process($this);
@@ -106,6 +106,8 @@ class UsersController extends AuthakeAppController {
 			$this->redirect(array('action'=>'index'));
 		}
 
+		$this->User->recursive = 1;
+
 		$user = $this->User->read(null, $id);// check if user allow to edit (only an admin can edit an admin)
 		$gr = Set::extract($user, 'Group.{n}.id');
 
@@ -173,10 +175,31 @@ class UsersController extends AuthakeAppController {
 
 		// show edit form
 		$this->request->data = $user;
+		//debug($this->request->data);
 		$this->request->data['User']['password'] = '';// find groups
 		$groups = $this->User->Group->find('list');
 		unset($groups[0]);// remove group 0 (everybody)
-		$this->set(compact('groups'));
+
+
+		$this->loadModel('Provincia');
+		$this->Provincia->recursive = -1;
+
+		$provincias = $this->Provincia->find('list', array(
+			'fields' => array('Provincia.id','Provincia.nombre'),
+			'conditions' => array('Provincia.nombre <>' => '', 'Provincia.estado_id' => '1'),
+			'order' => array('Provincia.nombre' => 'asc')
+		));
+
+		$this->loadModel('Sector');
+		$this->Sector->recursive = -1;
+
+		$sectors = $this->Sector->find('list', array(
+			'fields' => array('Sector.id','Sector.nombre'),
+			'conditions' => array('Sector.estado_id' => '1'),
+			'order' => array('Sector.nombre' => 'asc')
+		));
+
+		$this->set(compact('groups','user', 'provincias','sectors'));
 	}
 
 	function delete($id = null) {// check if user in admins group
@@ -205,7 +228,7 @@ class UsersController extends AuthakeAppController {
 		}
 	}
 
-	function obtener_localidades($id = null) {
+/*	function obtener_localidades($id = null) {
 		Configure::write('debug', '0');
 		$this->layout = 'ajax';
 		$this->loadModel('Localidad');
@@ -222,6 +245,30 @@ class UsersController extends AuthakeAppController {
 		}
 
 		$this->set('localidads', $localidads);
+	}*/
+
+	public function obtener_localidades($id=null) {
+
+		$id = $this->request->data['User']['provincia_id'];
+
+		$this->loadModel('Localidad');
+		$this->Localidad->recursive = -1;
+		$locs = $this->Localidad->find('all', array(
+			'recursive' => -1,
+			'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+			'conditions' => array('Localidad.provincia_id' => $id,'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
+			'order' => array('Localidad.nombre' => 'asc')));
+
+		$localidads = array();
+		foreach ($locs as $key => $localidad) {
+			$localidads[$localidad['Localidad']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
+		}
+
+		$this->set('localidads', $localidads);
+
+		$this->layout = 'ajax';
+
 	}
+
 }
 ?>

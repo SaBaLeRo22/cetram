@@ -14,7 +14,8 @@
         echo $this->Html->meta('icon');
         $this->Html->css('/authake/css/bootstrap.min', null, array('inline' => false));
         $this->Html->css('/authake/css/custom', null, array('inline' => false));
-        //$this->Html->script('Authake.jquery-latest', array('block' => 'script'));
+        //$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
+        $this->Html->script('Authake.jquery-latest', array('block' => 'script'));
         $this->Html->script('Authake.custom', array('block' => 'script'));
         $this->Html->script('Authake.bootstrap.min', array('block' => 'script'));
         $this->Html->script('Authake.html5shiv', array('block' => 'script'));
@@ -22,6 +23,11 @@
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
+    ?>
+    <!-- Js writeBuffer -->
+    <?php
+	if (class_exists('JsHelper') && method_exists($this->Js, 'writeBuffer')) echo $this->Js->writeBuffer();
+    // Writes cached scripts
     ?>
     </head>
     <body>

@@ -69,14 +69,61 @@
 	</div>
 </div>
 
-<?php
+<!--<?php
 	//$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
-?>
+?>-->
 
-<?php $this->append('script') ?>
-<script type="text/javascript">
-	$('#UserProvinciaId').change(function(){
-		$('#UserLocalidadId').load('../users/obtener_localidades/'+$('#UserProvinciaId').val());
-	});
-</script>
-<?php $this->end() ?>
+
+<!--
+<script type='text/javascript' charset='utf-8'>
+<?=
+	$script =
+		"
+			$('#UserProvinciaId').change(function(){
+				$('#UserLocalidadId').load('../users/obtener_localidades/'+$('#UserProvinciaId').val());
+			});
+		";
+	$this->Html->scriptBlock($script, array('inline' => false));
+?>
+</script>-->
+
+
+<?php
+
+//AJAX for Dynamic Drop down
+
+$this->Js->get('#UserProvinciaId')->event('change',
+
+$this->Js->request(array(
+
+'plugin'=>NULL,
+
+'controller'=>'localidades',
+
+'action' =>'obtener_localidades',
+
+), array(
+
+'update' =>'#UserLocalidadId',
+
+'async' => true,
+
+'method' => 'Post',
+
+'dataExpression'=>true,
+
+'data'=> $this->Js->serializeForm(array(
+
+'isForm' => true,
+
+'inline' => true
+
+))
+
+))
+
+);
+
+// END AJAX
+
+?>

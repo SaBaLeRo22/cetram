@@ -21,7 +21,7 @@
 App::uses('AppController', 'Controller');
 //App::uses('PagesController', 'Controller');
 class AuthakeAppController extends AppController {
-	var $helpers = array('Time', 'Authake.Htmlbis', 'Html' => array('className' => null));
+	var $helpers = array('Time', 'Authake.Htmlbis', 'Html' => array('className' => null), 'Js' => array('Jquery'));
 	function __makePassword($password1, $password2) {
 
 		if ($password1 != $password2)

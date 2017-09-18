@@ -80,11 +80,42 @@
 		</div>
 	</div>
 </div>
-<?php $this->append('script') ?>
-<script type="text/javascript">
-	$('#UserProvinciaId').change(function(){
-		alert("HOLA");
-		$('#UserLocalidadId').load('../user/obtener_localidades/'+$('#UserProvinciaId').val());
-	});
-</script>
-<?php $this->end() ?>
+<?php
+
+//AJAX for Dynamic Drop down
+
+$this->Js->get('#UserProvinciaId')->event('change',
+
+$this->Js->request(array(
+
+'plugin'=>NULL,
+
+'controller'=>'localidades',
+
+'action' =>'obtener_localidades',
+
+), array(
+
+'update' =>'#UserLocalidadId',
+
+'async' => true,
+
+'method' => 'Post',
+
+'dataExpression'=>true,
+
+'data'=> $this->Js->serializeForm(array(
+
+'isForm' => true,
+
+'inline' => true
+
+))
+
+))
+
+);
+
+// END AJAX
+
+?>

@@ -8,7 +8,7 @@
 				<h3><?php  echo sprintf(__('User %s'), "<u>{$user['User']['login']}</u>"); ?></h3>
 				<div class="section-actions">
 					<div class="btn-group">
-						<a class="btn btn-primary" href="">
+						<a class="btn btn-primary" href="<?php echo $this->Html->url(array('controller'=>'users','action'=>'edit', $user['User']['id'])); ?>">
 							Edit User
 						</a>
 						<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">
@@ -46,7 +46,38 @@
 						<tbody>
 							<tr>
 								<th class="span3">User ID</th>
-								<td>1
+								<td>
+									<?= h($user['User']['id']); ?>
+								</td>
+							</tr>
+							<tr>
+								<th class="span3">Login</th>
+								<td>
+									<?= h($user['User']['login']); ?>
+								</td>
+							</tr>
+							<tr>
+								<th class="span3">Nombre</th>
+								<td>
+									<?= h($user['User']['nombre']); ?>
+								</td>
+							</tr>
+							<tr>
+								<th class="span3">Apellido</th>
+								<td>
+									<?= h($user['User']['apellido']); ?>
+								</td>
+							</tr>
+							<tr>
+								<th class="span3">E-Mail</th>
+								<td>
+									<?= h($user['User']['email']); ?>
+								</td>
+							</tr>
+							<tr>
+								<th class="span3">Localidad</th>
+								<td>
+									<?= h($user['Localidad']['nombre']); ?>
 								</td>
 							</tr>
 							<tr>

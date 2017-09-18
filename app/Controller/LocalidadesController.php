@@ -108,4 +108,34 @@ class LocalidadesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+	public function obtener_localidades($id=null) {
+
+		//$id = $this->request->data['User']['provincia_id'];
+
+		$this->Localidade->recursive = -1;
+/*		$locs = $this->Localidade->find('all', array(
+			'recursive' => -1,
+			'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+			'conditions' => array('Localidade.provincia_id' => $id,'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
+			'order' => array('Localidade.nombre' => 'asc')));*/
+
+		$locs = $this->Localidade->find('list', array(
+			'recursive' => -1,
+			'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+			'conditions' => array('Localidade.provincia_id' => $id,'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
+			'order' => array('Localidade.nombre' => 'asc')));
+
+/*		$localidads = array();
+		foreach ($locs as $key => $localidad) {
+			$localidads[$localidad['Localidade']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
+		}
+
+		$this->set('localidads', $localidads);*/
+
+		$this->set('localidads', $locs);
+
+		$this->layout = 'ajax';
+
+	}
 }
