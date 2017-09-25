@@ -190,6 +190,21 @@ class UsersController extends AuthakeAppController {
 			'order' => array('Provincia.nombre' => 'asc')
 		));
 
+		$this->loadModel('Localidad');
+		$this->Localidad->recursive = 0;
+		$loc = $this->Localidad->find('first', array(
+			'conditions' => array('Localidad.id' => $user['User']['localidad_id'])
+		));
+		//$this->request->data['User']['provincia_id'] = $loc['Localidad']['provincia_id'];
+
+/*		$localidades = $this->Localidad->find('list', array(
+			'fields' => array('Localidad.id','Localidad.nombre'),
+			//'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+			'conditions' => array('Localidad.provincia_id' => $loc['Localidad']['provincia_id'], 'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
+			'order' => array('Localidad.nombre' => 'asc')
+		));*/
+		//$this->request->data['User']['localidad_id'] = $user['User']['localidad_id'];
+
 		$this->loadModel('Sector');
 		$this->Sector->recursive = -1;
 
@@ -199,7 +214,7 @@ class UsersController extends AuthakeAppController {
 			'order' => array('Sector.nombre' => 'asc')
 		));
 
-		$this->set(compact('groups','user', 'provincias','sectors'));
+		$this->set(compact('groups','user', 'provincias','sectors','loc'));
 	}
 
 	function delete($id = null) {// check if user in admins group
@@ -226,48 +241,6 @@ class UsersController extends AuthakeAppController {
 			$this->Session->setFlash(__('User deleted'), 'success');
 			$this->redirect(array('action'=>'index'));
 		}
-	}
-
-/*	function obtener_localidades($id = null) {
-		Configure::write('debug', '0');
-		$this->layout = 'ajax';
-		$this->loadModel('Localidad');
-		$this->Localidad->recursive = -1;
-		$locs = $this->Localidad->find('all', array(
-			'recursive' => -1,
-			'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-			'conditions' => array('Localidad.provincia_id' => $id,'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
-			'order' => array('Localidad.nombre' => 'asc')));
-
-		$localidads = array();
-		foreach ($locs as $key => $localidad) {
-			$localidads[$localidad['Localidad']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
-		}
-
-		$this->set('localidads', $localidads);
-	}*/
-
-	public function obtener_localidades($id=null) {
-
-		$id = $this->request->data['User']['provincia_id'];
-
-		$this->loadModel('Localidad');
-		$this->Localidad->recursive = -1;
-		$locs = $this->Localidad->find('all', array(
-			'recursive' => -1,
-			'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-			'conditions' => array('Localidad.provincia_id' => $id,'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
-			'order' => array('Localidad.nombre' => 'asc')));
-
-		$localidads = array();
-		foreach ($locs as $key => $localidad) {
-			$localidads[$localidad['Localidad']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
-		}
-
-		$this->set('localidads', $localidads);
-
-		$this->layout = 'ajax';
-
 	}
 
 }

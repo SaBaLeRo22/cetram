@@ -71,14 +71,6 @@
         <?= $this->Form->end(); ?>
     </div>
 </div>
-<!--
-<?php $this->append('script') ?>
-<script type="text/javascript">
-    $('#ConsultaProvinciaId').change(function(){
-        $('#ConsultaLocalidadeId').load('../obtener_localidades/'+$('#ConsultaProvinciaId').val());
-    });
-</script>
-<?php $this->end() ?>-->
 
 <?php
 

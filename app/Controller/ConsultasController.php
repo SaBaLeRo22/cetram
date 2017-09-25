@@ -783,7 +783,7 @@ class ConsultasController extends AppController
             if ($pregunta['Pregunta']['tipo'] == 'select') {
                 $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['opcione_id'];
             } else {
-                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['respuesta'];
+                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['valor'];
             }
 
         }
@@ -1183,7 +1183,7 @@ class ConsultasController extends AppController
             if ($pregunta['Pregunta']['tipo'] == 'select') {
                 $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['opcione_id'];
             } else {
-                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['respuesta'];
+                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['valor'];
             }
 
         }
@@ -1814,7 +1814,7 @@ class ConsultasController extends AppController
             if ($pregunta['Pregunta']['tipo'] == 'select') {
                 $this->request->data['Consulta']['preguntas'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['opcione_id'];
             } else {
-                $this->request->data['Consulta']['preguntas'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['respuesta'];
+                $this->request->data['Consulta']['preguntas'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['valor'];
             }
 
         }
@@ -2313,28 +2313,6 @@ class ConsultasController extends AppController
         }
         $this->request->data['Consulta']['consulta_id'] = $id;
         $this->set(compact('consulta', 'parametros'));
-    }
-
-
-
-    function obtener_localidades($id = null)
-    {
-        Configure::write('debug', '0');
-        $this->layout = 'ajax';
-        $this->loadModel('Localidade');
-        $this->Localidade->recursive = -1;
-        $locs = $this->Localidade->find('all', array(
-            'recursive' => -1,
-            'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-            'conditions' => array('Localidade.provincia_id' => $id, 'Localidade.nombre <>' => '', 'Localidade.estado_id' => '1'),
-            'order' => array('Localidade.nombre' => 'asc')));
-
-        $localidades = array();
-        foreach ($locs as $key => $localidad) {
-            $localidades[$localidad['Localidade']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
-        }
-
-        $this->set('localidades', $localidades);
     }
 
     public

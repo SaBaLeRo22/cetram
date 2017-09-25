@@ -28,19 +28,13 @@
     <?= $this->fetch( 'meta' ); ?>
 
     <?= $this->Html->css( [
-        'bootstrap.min',
-        'fonts',
-        '/plugins/font-awesome-4.2.0/css/font-awesome.min',
-        'app-styles',
-        'custom-styles',
-        '/plugins/selectize.js/dist/css/selectize.bootstrap3',
-
-
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables.min',
-        '/plugins/DataTables-1.10.7/media/css/jquery.dataTables_themeroller',
-        '/plugins/DataTables-1.10.7/extensions/TableTools/css/dataTables.tableTools',
-
-
+    'bootstrap.min',
+    'fonts',
+    '/plugins/font-awesome-4.7.0/css/font-awesome.min',
+    'app-styles',
+    'custom-styles',
+    '/plugins/selectize.js/dist/css/selectize.bootstrap3',
+    'font-awesome.min',
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
 </head>
@@ -95,23 +89,12 @@
     <?= $this->fetch( 'content' ); ?>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= $this->Html->url('/js/jquery-1.11.1.min.js') ?>"><\/script>')</script>
 
-<?= $this->Html->script( ['bootstrap.min', 'plugins'] ); ?>
+<?= $this->Html->script( ['jquery-3.2.1','bootstrap.min', 'plugins'] ); ?>
 <?= $this->Html->script( [
     '/plugins/selectize.js/dist/js/standalone/selectize.min',
     '/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
 ] ) ?>
-
-
-<?= $this->Html->script( [
-//    '/plugins/DataTables-1.10.7/media/js/jquery',
-//    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables.min',
-    '/plugins/DataTables-1.10.7/media/js/jquery.dataTables',
-    '/plugins/DataTables-1.10.7/extensions/TableTools/js/dataTables.tableTools',
-] ) ?>
-
 
 <?= $this->fetch( 'script' ); ?>
 
@@ -128,19 +111,22 @@
 <?= null //$this->element( 'sql_dump' ); ?>
 
 
-<footer class="footer">
+<footer class="footer pie">
 
     <div class="container" style="text-align: center; background-color: #ffffff;">
 
-        <hr class="style14" />
+        <hr class="style14"/>
 
         <a href="<?php echo $this->Html->url('http://www.frsf.utn.edu.ar/'); ?>">
-                <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
+            <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
         </a>
-        <p>Herramienta para la Determinación de
-            los  Costos  de  Sistemas  de  Transporte  Público  de
-            Pasajeros  en  Ciudades  de  Tamaño  Medio.</p>
-        <p class="text-muted">Copyright © 2016. Todos los derechos reservados.</p>
+
+        <p>Proyecto: Herramienta para la Determinación de
+            los Costos de Sistemas de Transporte Público de
+            Pasajeros en Ciudades de Tamaño Medio.</p>
+        <p class="text-muted">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Matías Rovere / Ing. Ind. Melisa Batistela / Duilio Abdala</p>
+        <p class="text-muted">Copyright © 2017. Todos los derechos reservados.</p>
+
     </div>
 </footer>
 </body>

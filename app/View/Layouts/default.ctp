@@ -38,33 +38,19 @@
     <?= $this->fetch( 'meta' ); ?>
 
     <?= $this->Html->css( [
-    //'/plugins/bootstrap-4.0.0-beta/dist/css/bootstrap',
     'bootstrap.min',
     'fonts',
     '/plugins/font-awesome-4.7.0/css/font-awesome.min',
     'app-styles',
     'custom-styles',
     '/plugins/selectize.js/dist/css/selectize.bootstrap3',
-    // 'highcharts',
     'card',
     'font-awesome.min',
-
     '/plugins/jquery-ui-1.12.1.custom/jquery-ui',
     '/plugins/jquery-ui-1.12.1.custom/jquery-ui.structure',
     '/plugins/jquery-ui-1.12.1.custom/jquery-ui.theme',
-    //'/plugins/DataTables-1.10.16/media/css/jquery.dataTables',
-    //'/plugins/TableTools-2.2.4/css/dataTables.tableTools',
-    //'/plugins/TableTools-2.2.4/css/jquery.dataTables_themeroller',
     '/plugins/DataTables-1.10.16/media/css/dataTables.jqueryui',
-    //'/plugins/DataTables-1.10.16/extensions/Responsive/css/responsive.dataTables',
-    //'/plugins/DataTables-1.10.16/extensions/Responsive/css/responsive.jqueryui',
-    '/plugins/DataTables-1.10.16/extensions/Buttons/css/buttons.jqueryui',
-    //'/plugins/DataTables-1.10.16/media/css/dataTables.bootstrap'
-
-
-
-
-
+    '/plugins/DataTables-1.10.16/extensions/Buttons/css/buttons.jqueryui'
     ] ); ?>
     <?= $this->fetch( 'css' ); ?>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
@@ -102,28 +88,17 @@
     <?= $this->fetch( 'content' ); ?>
 </div>
 
-<!--
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="<?= $this->Html->url(' / js / jquery - 1.11
-.1.min.js
-') ?>"><\/script>'
-)</script>
--->
-
 <?= $this->Html->script( [
 'jquery-3.2.1',
 '/plugins/jquery-ui-1.12.1.custom/jquery-ui',
-//'/plugins/bootstrap-4.0.0-beta/dist/js/bootstrap',
 'bootstrap.min',
 'plugins',
 'highcharts',
 'exporting',
 'data',
-// 'drilldown',
 'dark-unica',
 '/plugins/DataTables-1.10.16/media/js/jquery.dataTables',
 '/plugins/DataTables-1.10.16/media/js/dataTables.jqueryui',
-//'/plugins/DataTables-1.10.16/extensions/Responsive/js/dataTables.responsive',
 '/plugins/DataTables-1.10.16/extensions/Responsive/js/responsive.jqueryui',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/dataTables.buttons',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.jqueryui',
@@ -133,11 +108,7 @@
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/vfs_fonts',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.html5',
 '/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.print',
-'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.colVis.min',
-//'/plugins/TableTools-2.2.4/js/dataTables.tableTools',
-//'/plugins/DataTables-1.10.16/media/js/dataTables.bootstrap'
-
-
+'/plugins/DataTables-1.10.16/extensions/Buttons/js/buttons.colVis.min'
 ] ); ?>
 
 <?= $this->Html->script( [

@@ -27,11 +27,11 @@
 								<?php echo $this->Form->input('email', array('label'=>array('text'=>__('Email'),'class'=>'control-label'),'size'=>'100', 'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">User\'s email address. Choose a real one. Confirmation goes to this email.</span></div>'));?>
 							</div>
 						<div class="string control-group stringish" id="Provincia">
-							<?php echo $this->Form->input('provincia_id', array('type' => 'select', 'options' => $provincias, 'empty' => 'Seleccionar...', 'label'=>array('text'=>__('Provincia'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Provincia del usuario.</span></div>'));?>
+							<?php echo $this->Form->input('provincia_id', array('type' => 'select', 'options' => $provincias,'empty' => $loc['Provincia']['nombre'], 'label'=>array('text'=>__('Provincia'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Provincia del usuario.</span></div>'));?>
 						</div>
 
 						<div class="string control-group stringish" id="Localidad">
-							<?php echo $this->Form->input('localidad_id', array('type' => 'select', 'empty' => 'Seleccionar...', 'label'=>array('text'=>__('Localidad'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Localidad del usuario.</span></div>'));?>
+							<?php echo $this->Form->input('localidad_id', array('type' => 'select', 'empty' => $loc['Localidad']['nombre'], 'label'=>array('text'=>__('Localidad'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Localidad del usuario.</span></div>'));?>
 						</div>
 
 						<div class="string control-group stringish" id="Sector">

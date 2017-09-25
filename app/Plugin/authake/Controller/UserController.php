@@ -533,23 +533,25 @@ class UserController extends AuthakeAppController {
         $this->redirect('/');
     }
 
-    function obtener_localidades($id = null) {
+    public function obtener_localidades($id=null) {
+
         Configure::write('debug', '0');
         $this->layout = 'ajax';
+
         $this->loadModel('Localidad');
         $this->Localidad->recursive = -1;
         $locs = $this->Localidad->find('all', array(
             'recursive' => -1,
             'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-            'conditions' => array('Localidad.provincia_id' => $id,'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
+            'conditions' => array('Localidad.provincia_id' => $id, 'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
             'order' => array('Localidad.nombre' => 'asc')));
 
-        $localidads = array();
+        $localidades = array();
         foreach ($locs as $key => $localidad) {
-            $localidads[$localidad['Localidad']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
+            $localidades[$localidad['Localidad']['id']] = str_replace('?', 'ñ', $localidad[0]['nombre']);
         }
 
-        $this->set('localidads', $localidads);
+        $this->set('localidades', $localidades);
     }
 
     function beforeFilter() {

@@ -69,25 +69,6 @@
 	</div>
 </div>
 
-<!--<?php
-	//$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
-?>-->
-
-
-<!--
-<script type='text/javascript' charset='utf-8'>
-<?=
-	$script =
-		"
-			$('#UserProvinciaId').change(function(){
-				$('#UserLocalidadId').load('../users/obtener_localidades/'+$('#UserProvinciaId').val());
-			});
-		";
-	$this->Html->scriptBlock($script, array('inline' => false));
-?>
-</script>-->
-
-
 <?php
 
 //AJAX for Dynamic Drop down
