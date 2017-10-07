@@ -32,7 +32,7 @@
             <?= $this->Form->input('maximo'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('multiplicadore_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('multiplicadore_id', 'Multiplicador', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('multiplicadore_id'); ?> 
         </div>
                                                     <div class="form-group">
@@ -44,7 +44,7 @@
             <?= $this->Form->input('opciones'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('unidade_id', 'Unidad', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
                                                     <div class="form-group">

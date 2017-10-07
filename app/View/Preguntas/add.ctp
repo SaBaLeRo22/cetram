@@ -30,7 +30,7 @@
             <?= $this->Form->input('maximo'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('multiplicadore_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('multiplicadore_id', 'Multiplicador', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('multiplicadore_id'); ?> 
         </div>
                                                     <div class="form-group">
@@ -42,7 +42,7 @@
             <?= $this->Form->input('opciones'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('unidade_id', 'Unidad', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('unidade_id'); ?> 
         </div>
                                                     <div class="form-group">
@@ -89,7 +89,7 @@
                 		<?= $this->Html->link(__('Listado de  Agrupamientos'), array('controller' => 'agrupamientos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Agrupamiento'), array('controller' => 'agrupamientos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Unidade</h4>
+            <h4 class="text-muted">Unidad</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidad'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?>
@@ -100,7 +100,7 @@
 		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
 
-            <h4 class="text-muted">Opcione</h4>
+            <h4 class="text-muted">Opcion</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Opciones'), array('controller' => 'opciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Opcion'), array('controller' => 'opciones', 'action' => 'add'), array('class' => 'list-group-item')); ?>
