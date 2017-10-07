@@ -23,6 +23,12 @@ class ParametrosController extends AppController {
  */
 	public function index() {
 		$this->Parametro->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Parametro.nombre' => 'asc'
+			)
+		);
 		$this->set('parametros', $this->Paginator->paginate());
 	}
 
@@ -49,6 +55,11 @@ class ParametrosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Parametro->create();
+
+			$this->request->data['Parametro']['estado_id'] = '1';
+			$this->request->data['Parametro']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Parametro->save($this->request->data)) {
 				$this->Session->setFlash(__('The parametro has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -75,6 +86,9 @@ class ParametrosController extends AppController {
 			throw new NotFoundException(__('Invalid parametro'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Parametro->save($this->request->data)) {
 				$this->Session->setFlash(__('The parametro has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -111,5 +125,22 @@ class ParametrosController extends AppController {
 			$this->Session->setFlash(__('The parametro could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Parametro->id = $id;
+		if (!$this->Parametro->exists()) {
+			throw new NotFoundException(__('Invalid Parametro'));
+		}
+
+		$this->request->data['Parametro']['estado_id'] = '2';
+		$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Parametro->save($this->request->data)) {
+			$this->Session->setFlash(__('The Parametro has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+		}
 	}
 }
