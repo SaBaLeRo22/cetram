@@ -43,6 +43,7 @@ class ParametrosController extends AppController {
 		if (!$this->Parametro->exists($id)) {
 			throw new NotFoundException(__('Invalid parametro'));
 		}
+		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Parametro.' . $this->Parametro->primaryKey => $id));
 		$this->set('parametro', $this->Parametro->find('first', $options));
 	}
