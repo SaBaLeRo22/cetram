@@ -2016,14 +2016,14 @@ class ConsultasController extends AppController
 
             /* 7) ITEM7: COSTO DEL CAPITAL GTOS GRALES Y SEGURO: */
             //Tipo: "Costos Fijos de Estructura": 2
-            //Parametro1: "SEGURO OBLIGATORIO PARA UN OMNIBUS": 31
+            //Parametro1: "SEGURO OBLIGATORIO PARA UN OMNIBUS": 6
             //Parametro2: "PRECIO OMNIBUS COMPLETO 0KM SIN IVA Y NEUMÁTICOS": 7
             //Coeficiente1: "Gastos Generales": 6
             //Pregunta1: "Flota total de omnibus": 9
             //Pregunta2: "¿Posee SUBE?": 23 --> Para ver como cargaron los KMs
             //Parametro Intervalo (Radio): "INTERVALO COSTO": 39
             //$this->item7($item_id = null, $consulta_id = null, $parametro1_id = null, $parametro2_id = null, $pregunta1_id = null, $pregunta2_id = null, $coeficiente_id = null)
-            $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '31', '7', '9', '23', '6', '39');
+            $respuestaItem['7']['RespuestaItem']['id'] = $this->item7('7', $consulta['Consulta']['id'], '6', '7', '9', '23', '6', '39');
 
             /* 8) ITEM8: IMPUESTOS Y TASAS: */
             //Parametro1: "ALÍCUOTA DE IMPUESTOS MENSUALES": 33
