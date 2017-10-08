@@ -15,7 +15,7 @@
         $this->Html->css('/authake/css/bootstrap.min', null, array('inline' => false));
         $this->Html->css('/authake/css/custom', null, array('inline' => false));
         $this->Html->script('Authake.jquery-latest', array('block' => 'script'));
-        $this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
+        //$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
         $this->Html->script('Authake.custom', array('block' => 'script'));
         $this->Html->script('Authake.bootstrap.min', array('block' => 'script'));
         $this->Html->script('Authake.html5shiv', array('block' => 'script'));
