@@ -3,9 +3,15 @@
  * @var $this LocalView
  */
 ?><div class="row coeficientes index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Coeficientes'); ?></h2>
         <div class="table-responsive">
+
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
@@ -35,7 +41,7 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $coeficiente['Coeficiente']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $coeficiente['Coeficiente']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $coeficiente['Coeficiente']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $coeficiente['Coeficiente']['nombre'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $coeficiente['Coeficiente']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $coeficiente['Coeficiente']['nombre'])); ?>
                         </div>
                     </td> 
                     <td><?= h($coeficiente['Coeficiente']['descripcion']); ?>&nbsp;</td>
@@ -43,9 +49,9 @@
                     <td><?= h($coeficiente['Coeficiente']['maximo']); ?>&nbsp;</td>
                     <td><?= $coeficiente['Ambito']['nombre']; ?></td><td><?= $coeficiente['Estado']['nombre']; ?></td><td><?= h($coeficiente['Coeficiente']['created']); ?>&nbsp;</td>
                     <td><?= h($coeficiente['Coeficiente']['modified']); ?>&nbsp;</td>
-                    <td><?= h($coeficiente['Coeficiente']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($coeficiente['Coeficiente']['user_modified']); ?>&nbsp;</td>
-                     
+                    <td><?= h($this->Authake->getUsuario($coeficiente['Coeficiente']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($coeficiente['Coeficiente']['user_modified'])); ?>&nbsp;</td>
+
                 </tr>
                 <?php endforeach ?> 
                 </tbody>
@@ -72,40 +78,6 @@
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
                         array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                         array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Coeficiente'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Ambito</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Ambitos'), array('controller' => 'ambitos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Intervencione</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Intervenciones'), array('controller' => 'intervenciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Intervencione'), array('controller' => 'intervenciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Matrix</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Matrices'), array('controller' => 'matrices', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Matrix'), array('controller' => 'matrices', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
             </div>
         </div>
     </div>
