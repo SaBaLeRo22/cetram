@@ -23,6 +23,12 @@ class AgrupamientosController extends AppController {
  */
 	public function index() {
 		$this->Agrupamiento->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Agrupamiento.nombre' => 'asc'
+			)
+		);
 		$this->set('agrupamientos', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class AgrupamientosController extends AppController {
 		if (!$this->Agrupamiento->exists($id)) {
 			throw new NotFoundException(__('Invalid agrupamiento'));
 		}
+		$this->Agrupamiento->recursive = 2;
 		$options = array('conditions' => array('Agrupamiento.' . $this->Agrupamiento->primaryKey => $id));
 		$this->set('agrupamiento', $this->Agrupamiento->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class AgrupamientosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Agrupamiento->create();
+
+			$this->request->data['Agrupamiento']['estado_id'] = '1';
+			$this->request->data['Agrupamiento']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Agrupamiento->save($this->request->data)) {
 				$this->Session->setFlash(__('The agrupamiento has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class AgrupamientosController extends AppController {
 			throw new NotFoundException(__('Invalid agrupamiento'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Agrupamiento->save($this->request->data)) {
 				$this->Session->setFlash(__('The agrupamiento has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class AgrupamientosController extends AppController {
 			$this->Session->setFlash(__('The agrupamiento could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Agrupamiento->id = $id;
+		if (!$this->Agrupamiento->exists()) {
+			throw new NotFoundException(__('Invalid Agrupamiento'));
+		}
+
+		$this->request->data['Agrupamiento']['estado_id'] = '2';
+		$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Agrupamiento->save($this->request->data)) {
+			$this->Session->setFlash(__('The Agrupamiento has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Agrupamiento could not be saved. Please, try again.'));
+		}
 	}
 }
