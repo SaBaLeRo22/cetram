@@ -35,14 +35,7 @@
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
-                                                                                                                    <div class="form-group">
-            <?= $this->Form->label('user_created', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_created'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('user_modified', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_modified'); ?> 
-        </div>
+
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-save fa-fw"></i> Guardar', array('class' => 'btn btn-primary')); ?> 
         </div>
@@ -53,27 +46,23 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Coeficiente.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Coeficiente.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Coeficientes'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'eliminar', $this->Form->value('Coeficiente.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Coeficiente.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Coeficientes'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Ambito</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Ambitos'), array('controller' => 'ambitos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Ambito'), array('controller' => 'ambitos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Intervencione</h4>
+
+            <h4 class="text-muted">Intervencion</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Intervenciones'), array('controller' => 'intervenciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Intervencione'), array('controller' => 'intervenciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Intervencion'), array('controller' => 'intervenciones', 'action' => 'add'), array('class' => 'list-group-item')); ?>
             </div>
-            <h4 class="text-muted">Matrix</h4>
+            <h4 class="text-muted">Matriz</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Matrices'), array('controller' => 'matrices', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Matrix'), array('controller' => 'matrices', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Matriz'), array('controller' => 'matrices', 'action' => 'add'), array('class' => 'list-group-item')); ?>
  
             </div>
         </div>

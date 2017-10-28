@@ -47,12 +47,12 @@
 		</dd>
 		<dt><?= __('User Created'); ?></dt>
 		<dd>
-			<?= h($coeficiente['Coeficiente']['user_created']); ?>
+			<?= h($this->Authake->getUsuario($coeficiente['Coeficiente']['user_created'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('User Modified'); ?></dt>
 		<dd>
-			<?= h($coeficiente['Coeficiente']['user_modified']); ?>
+			<?= h($this->Authake->getUsuario($coeficiente['Coeficiente']['user_modified'])); ?>
 			&nbsp;
 		</dd>
             </dl>
@@ -69,7 +69,7 @@
 
             <div class="list-group">
                                 		<?= $this->Html->link(__('Editar Coeficiente'), array('action' => 'edit', $coeficiente['Coeficiente']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Coeficiente'), array('action' => 'delete', $coeficiente['Coeficiente']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $coeficiente['Coeficiente']['id'])); ?> 
+		<?= $this->Form->postLink(__('Eliminar Coeficiente'), array('action' => 'eliminar', $coeficiente['Coeficiente']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $coeficiente['Coeficiente']['id'])); ?>
 		<?= $this->Html->link(__('Listado de Coeficientes'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Coeficiente'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
@@ -78,7 +78,7 @@
     <div class="col-md-8">
                 <div class="related">
             <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Intervencione', ['controller' => 'intervenciones', 'action' => 'add', 'coeficiente_id' => $coeficiente['Coeficiente']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Intervencion', ['controller' => 'intervenciones', 'action' => 'add', 'coeficiente_id' => $coeficiente['Coeficiente']['id']], ['class' => 'btn btn-sm btn-info']); ?>
             </div>
             <h3><?= __('Intervenciones'); ?></h3>
             <?php if (!empty($coeficiente['Intervencione'])): ?>
@@ -87,9 +87,8 @@
                 <thead>
                 <tr>
                     		<th><?= __('Id'); ?></th>
-		<th><?= __('Coeficiente Id'); ?></th>
-		<th><?= __('Item Id'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Item'); ?></th>
+		<th><?= __('Estado'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
 		<th><?= __('User Created'); ?></th>
@@ -101,17 +100,18 @@
                 	<?php foreach ($coeficiente['Intervencione'] as $intervencione): ?>
 		<tr>
 			<td><?= $intervencione['id']; ?></td>
-			<td><?= $intervencione['coeficiente_id']; ?></td>
-			<td><?= $intervencione['item_id']; ?></td>
-			<td><?= $intervencione['estado_id']; ?></td>
+			<td><?= $intervencione['Item']['nombre'] ; ?></td>
+			<td><?= $intervencione['Estado']['nombre']; ?></td>
 			<td><?= $intervencione['created']; ?></td>
 			<td><?= $intervencione['modified']; ?></td>
-			<td><?= $intervencione['user_created']; ?></td>
-			<td><?= $intervencione['user_modified']; ?></td>
+
+			<td><?= $this->Authake->getUsuario($intervencione['user_created']); ?></td>
+			<td><?= $this->Authake->getUsuario($intervencione['user_modified']); ?></td>
+
 			<td class="actions">
 				<?= $this->Html->link(__('Ver'), array('controller' => 'intervenciones', 'action' => 'view', $intervencione['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'intervenciones', 'action' => 'edit', $intervencione['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'intervenciones', 'action' => 'delete', $intervencione['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $intervencione['id'])); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'intervenciones', 'action' => 'eliminar', $intervencione['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $intervencione['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -124,7 +124,7 @@
         <hr/>
                 <div class="related">
             <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Matrix', ['controller' => 'matrices', 'action' => 'add', 'coeficiente_id' => $coeficiente['Coeficiente']['id']], ['class' => 'btn btn-sm btn-info']); ?> 
+                <?= $this->Html->link( '<i class="fa fa-plus fa-fw"></i> Agregar Matriz', ['controller' => 'matrices', 'action' => 'add', 'coeficiente_id' => $coeficiente['Coeficiente']['id']], ['class' => 'btn btn-sm btn-info']); ?>
             </div>
             <h3><?= __('Matrices'); ?></h3>
             <?php if (!empty($coeficiente['Matrix'])): ?>
@@ -133,10 +133,9 @@
                 <thead>
                 <tr>
                     		<th><?= __('Id'); ?></th>
-		<th><?= __('Coeficiente Id'); ?></th>
-		<th><?= __('Multiplicadore Id'); ?></th>
+		<th><?= __('Multiplicador'); ?></th>
 		<th><?= __('Peso'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Estado'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
 		<th><?= __('User Created'); ?></th>
@@ -148,18 +147,19 @@
                 	<?php foreach ($coeficiente['Matrix'] as $matrix): ?>
 		<tr>
 			<td><?= $matrix['id']; ?></td>
-			<td><?= $matrix['coeficiente_id']; ?></td>
-			<td><?= $matrix['multiplicadore_id']; ?></td>
+			<td><?= $matrix['Multiplicadore']['nombre'] ; ?></td>
 			<td><?= $matrix['peso']; ?></td>
-			<td><?= $matrix['estado_id']; ?></td>
+			<td><?= $matrix['Estado']['nombre'] ?></td>
 			<td><?= $matrix['created']; ?></td>
 			<td><?= $matrix['modified']; ?></td>
-			<td><?= $matrix['user_created']; ?></td>
-			<td><?= $matrix['user_modified']; ?></td>
+
+			<td><?= $this->Authake->getUsuario($matrix['user_created']); ?></td>
+			<td><?= $this->Authake->getUsuario($matrix['user_modified']); ?></td>
+
 			<td class="actions">
 				<?= $this->Html->link(__('Ver'), array('controller' => 'matrices', 'action' => 'view', $matrix['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'matrices', 'action' => 'edit', $matrix['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'matrices', 'action' => 'delete', $matrix['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $matrix['id'])); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'matrices', 'action' => 'eliminar', $matrix['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $matrix['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
