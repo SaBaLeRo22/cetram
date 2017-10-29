@@ -6,7 +6,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0-beta): modal.js
+ * Bootstrap (v4.0.0-beta): bootstrap-modal.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -396,7 +396,7 @@ var Modal = function ($) {
 
     // ----------------------------------------------------------------------
     // the following methods are used to handle overflowing modals
-    // todo (fat): these should probably be refactored out of modal.js
+    // todo (fat): these should probably be refactored out of bootstrap-modal.js
     // ----------------------------------------------------------------------
 
     Modal.prototype._adjustDialog = function _adjustDialog() {
@@ -574,4 +574,4 @@ var Modal = function ($) {
 
   return Modal;
 }(jQuery);
-//# sourceMappingURL=modal.js.map
+//# sourceMappingURL=bootstrap-modal.js.map

@@ -78,10 +78,18 @@ $this->extend('default');
         <ul class="dropdown-menu">
             <li>
                 <a href="<?= $this->Html->url(array('plugin' => 'authake', 'controller' => 'user', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
-                    <i class="fa fa-users fa-power-off"></i> Perfil
+                    <i class="fa fa-users"></i> Perfil
                 </a>
             </li>
             <li role="presentation" class="divider"></li>
+
+<!--
+            <li>
+                <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-registered"></i> Acerca de</a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            -->
+
             <li>
                 <a href="<?= $this->Html->url(array('plugin' => 'authake', 'controller' => 'user', 'action' => 'logout', 'prefix' => false, $this->request->prefix => false)) ?>">
                     <i class="fa fa-fw fa-power-off"></i> Salir
