@@ -26,7 +26,7 @@ class AgrupamientosController extends AppController {
 		$this->paginate = array(
 			'limit' => '5',
 			'order' => array(
-				'Agrupamiento.nombre' => 'asc'
+				'Agrupamiento.orden' => 'asc'
 			)
 		);
 		$this->set('agrupamientos', $this->Paginator->paginate());
