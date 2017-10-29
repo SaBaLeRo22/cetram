@@ -37,12 +37,12 @@
 		</dd>
 		<dt><?= __('User Created'); ?></dt>
 		<dd>
-			<?= h($agrupamiento['Agrupamiento']['user_created']); ?>
+			<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_created'])); ?>
 			&nbsp;
 		</dd>
 		<dt><?= __('User Modified'); ?></dt>
 		<dd>
-			<?= h($agrupamiento['Agrupamiento']['user_modified']); ?>
+			<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_modified'])); ?>
 			&nbsp;
 		</dd>
             </dl>
@@ -59,7 +59,7 @@
 
             <div class="list-group">
                                 		<?= $this->Html->link(__('Editar Agrupamiento'), array('action' => 'edit', $agrupamiento['Agrupamiento']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Agrupamiento'), array('action' => 'delete', $agrupamiento['Agrupamiento']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $agrupamiento['Agrupamiento']['id'])); ?> 
+		<?= $this->Form->postLink(__('Eliminar Agrupamiento'), array('action' => 'eliminar', $agrupamiento['Agrupamiento']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $agrupamiento['Agrupamiento']['id'])); ?>
 		<?= $this->Html->link(__('Listado de Agrupamientos'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Agrupamiento'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
@@ -82,15 +82,14 @@
 		<th><?= __('Orden'); ?></th>
 		<th><?= __('Minimo'); ?></th>
 		<th><?= __('Maximo'); ?></th>
-		<th><?= __('Multiplicadore Id'); ?></th>
-		<th><?= __('Agrupamiento Id'); ?></th>
+		<th><?= __('Multiplicador'); ?></th>
 		<th><?= __('Opciones'); ?></th>
-		<th><?= __('Unidade Id'); ?></th>
+		<th><?= __('Unidad'); ?></th>
 		<th><?= __('Titulo'); ?></th>
 		<th><?= __('Ayuda'); ?></th>
 		<th><?= __('Tipo'); ?></th>
-		<th><?= __('Ambito Id'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Ambito'); ?></th>
+		<th><?= __('Estado'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
 		<th><?= __('User Created'); ?></th>
@@ -107,23 +106,24 @@
 			<td><?= $pregunta['orden']; ?></td>
 			<td><?= $pregunta['minimo']; ?></td>
 			<td><?= $pregunta['maximo']; ?></td>
-			<td><?= $pregunta['multiplicadore_id']; ?></td>
-			<td><?= $pregunta['agrupamiento_id']; ?></td>
+			<td><?= $pregunta['Multiplicadore']['nombre']; ?></td>
 			<td><?= $pregunta['opciones']; ?></td>
-			<td><?= $pregunta['unidade_id']; ?></td>
+			<td><?= $pregunta['Unidade']['nombre']; ?></td>
 			<td><?= $pregunta['titulo']; ?></td>
 			<td><?= $pregunta['ayuda']; ?></td>
 			<td><?= $pregunta['tipo']; ?></td>
-			<td><?= $pregunta['ambito_id']; ?></td>
-			<td><?= $pregunta['estado_id']; ?></td>
+			<td><?= $pregunta['Ambito']['nombre']; ?></td>
+			<td><?= $pregunta['Estado']['nombre']; ?></td>
 			<td><?= $pregunta['created']; ?></td>
 			<td><?= $pregunta['modified']; ?></td>
-			<td><?= $pregunta['user_created']; ?></td>
-			<td><?= $pregunta['user_modified']; ?></td>
+
+			<td><?= $this->Authake->getUsuario($pregunta['user_created']); ?></td>
+			<td><?= $this->Authake->getUsuario($pregunta['user_modified']); ?></td>
+
 			<td class="actions">
 				<?= $this->Html->link(__('Ver'), array('controller' => 'preguntas', 'action' => 'view', $pregunta['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'preguntas', 'action' => 'edit', $pregunta['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'preguntas', 'action' => 'delete', $pregunta['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $pregunta['id'])); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'preguntas', 'action' => 'eliminar', $pregunta['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $pregunta['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
