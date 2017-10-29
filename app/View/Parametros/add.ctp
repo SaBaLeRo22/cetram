@@ -66,7 +66,7 @@
             <div class="list-group">
                                                 <?= $this->Html->link(__('Listado de Parametros'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Unidade</h4>
+            <h4 class="text-muted">Unidad</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Unidades'), array('controller' => 'unidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Unidad'), array('controller' => 'unidades', 'action' => 'add'), array('class' => 'list-group-item')); ?>
