@@ -18,42 +18,42 @@
 
 		<div class="form-group">
 			<?= $this->Form->label('nombre', 'Nombre', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('nombre', array('size'=>'50', 'required' => 'required')); ?>
+			<?= $this->Form->input('nombre', array('size'=>'50')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('apellido', 'Apellido', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('apellido', array('size'=>'50', 'required' => 'required')); ?>
+			<?= $this->Form->input('apellido', array('size'=>'50')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('email', 'E-Mail', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('email', array('size'=>'40', 'required' => 'required')); ?>
+			<?= $this->Form->input('email', array('size'=>'40')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('password1', 'Contrase&ntilde;a', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('password1', array('type'=>'password', 'value' => '', 'size'=>'12', 'required' => 'required')); ?>
+			<?= $this->Form->input('password1', array('type'=>'password', 'value' => '', 'size'=>'12')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('password2', 'Repetir Contrase&ntilde;a', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('password2', array('type'=>'password', 'value' => '', 'size'=>'12', 'required' => 'required')); ?>
+			<?= $this->Form->input('password2', array('type'=>'password', 'value' => '', 'size'=>'12')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('provincia_id', 'Provincia', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('provincia_id', array('type' => 'select', 'empty' => 'Seleccionar...', 'required' => 'required')); ?>
+			<?= $this->Form->input('provincia_id', array('type' => 'select', 'empty' => 'Seleccionar...')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('localidad_id', 'Localidad', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('localidad_id', array('empty' => '', 'required' => 'required')); ?>
+			<?= $this->Form->input('localidad_id', array('type' => 'select', 'empty' => 'Seleccionar...')); ?>
 		</div>
 
 		<div class="form-group">
 			<?= $this->Form->label('sector_id', 'Sector', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('sector_id', array('empty' => 'Seleccionar...', 'required' => 'required')); ?>
+			<?= $this->Form->input('sector_id', array('empty' => 'Seleccionar...')); ?>
 		</div>
 
 		<div class="well well-sm text-right">
@@ -66,36 +66,8 @@
 
 <?php $this->append('script') ?>
 <script type="text/javascript">
-
-	(function ($) {
-
-		$(function () {
-
-			$('select#UserLocalidadId').selectize({
-				//create: true,
-				//createOnBlur: true,
-				dropdownParent: 'body',
-				load: function (query, callback) {
-
-					if (!query.length) return callback();
-					$.ajax({
-
-					url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query) + "/" + $('#UserProvinciaId').val(),
-
-					type: 'GET',
-
-					error: function () {
-						//alert(query);
-						callback();
-					},
-					success: function (res) {
-						//alert(query);
-						callback(res);
-					}
-				});
-		}
+	$('#UserProvinciaId').change(function(){
+		$('#UserLocalidadId').load('../user/obtener_localidades/'+$('#UserProvinciaId').val());
 	});
-	})
-	})(jQuery);
 </script>
 <?php $this->end() ?>
