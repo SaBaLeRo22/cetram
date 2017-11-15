@@ -558,23 +558,23 @@ class UserController extends AuthakeAppController {
      * @param $search
      * @return CakeResponse|null
      */
-    public function search_by_localidad($search, $prov) {
+    public function search_by_localidad($search) {
         $this->loadModel('Localidad');
-        $this->Localidad->recursive = -1;
+        $this->Localidad->recursive = 0;
         $localidades = $this->Localidad->find('all', array(
-            'recursive' => -1,
-            'order' => array('Localidad.nombre' => 'asc'),
+            'recursive' => 0,
+            'order' => array('Localidad.nombre' => 'asc', 'Localidad.codigopostal' => 'asc'),
             //'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-            'fields' => array('Localidad.id' ,'Localidad.nombre' ,'Localidad.codigopostal'),
-            'conditions' => array('Localidad.provincia_id' => $prov, 'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1', 'Localidad.nombre LIKE' => "%{$search}%"),
-            'limit' => 50
+            'fields' => array('Localidad.id' ,'Localidad.nombre' ,'Localidad.codigopostal', 'Provincia.nombre'),
+            'conditions' => array('Localidad.nombre <>' => '', 'Localidad.estado_id' => '1', 'Localidad.nombre LIKE' => "%{$search}%"),
+            'limit' => 100
         ));
 
         $result = array();
         foreach ($localidades as $localidad) {
             $result[] = array(
                 'value' => $localidad['Localidad']['id'],
-                'text' => $localidad['Localidad']['nombre']." (".$localidad['Localidad']['codigopostal'].")"
+                'text' => $localidad['Localidad']['nombre']." (CP: ".$localidad['Localidad']['codigopostal']." - Prov.: ".$localidad['Provincia']['nombre'].")"
             );
         }
 

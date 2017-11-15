@@ -4387,5 +4387,35 @@ class ConsultasController extends AppController
         }
     }
 
+    /**
+     * @param $search
+     * @return CakeResponse|null
+     */
+    public function search_by_localidad($search) {
+        $this->loadModel('Localidade');
+        $this->Localidade->recursive = 0;
+        $localidades = $this->Localidade->find('all', array(
+            'recursive' => 0,
+            'order' => array('Localidade.nombre' => 'asc', 'Localidade.codigopostal' => 'asc'),
+            //'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+            'fields' => array('Localidade.id' ,'Localidade.nombre' ,'Localidade.codigopostal', 'Provincia.nombre'),
+            'conditions' => array('Localidade.nombre <>' => '', 'Localidade.estado_id' => '1', 'Localidade.nombre LIKE' => "%{$search}%"),
+            'limit' => 100
+        ));
+
+        $result = array();
+        foreach ($localidades as $localidad) {
+            $result[] = array(
+                'value' => $localidad['Localidade']['id'],
+                'text' => $localidad['Localidade']['nombre']." (CP: ".$localidad['Localidade']['codigopostal']." - Prov.: ".$localidad['Provincia']['nombre'].")"
+            );
+        }
+
+        $this->response->type('json');
+        $this->response->body(json_encode($result));
+
+        return $this->response;
+    }
+
 
 }

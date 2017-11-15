@@ -42,11 +42,6 @@
 		</div>
 
 		<div class="form-group">
-			<?= $this->Form->label('provincia_id', 'Provincia', array('class' => 'control-label col-xs-3')); ?>
-			<?= $this->Form->input('provincia_id', array('type' => 'select', 'empty' => 'Seleccionar...', 'required' => 'required')); ?>
-		</div>
-
-		<div class="form-group">
 			<?= $this->Form->label('localidad_id', 'Localidad', array('class' => 'control-label col-xs-3')); ?>
 			<?= $this->Form->input('localidad_id', array('empty' => '', 'required' => 'required')); ?>
 		</div>
@@ -80,7 +75,7 @@
 					if (!query.length) return callback();
 					$.ajax({
 
-					url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query) + "/" + $('#UserProvinciaId').val(),
+					url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query),
 
 					type: 'GET',
 

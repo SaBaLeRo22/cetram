@@ -64,13 +64,15 @@
 
 								echo $this->Form->input('sector_id', array('type'=>'select','empty' => 'Seleccionar...', 'label'=> __('Sector') , 'value' => $user['User']['sector_id']));
 
-								echo $this->Form->input('provincia_id', array('type'=>'select','empty' => 'Seleccionar...', 'label'=> __('Provincia') , 'value' => $user['Localidad']['provincia_id']));
-								echo $this->Form->input('localidad_id', array('type'=>'select','empty' => 'Seleccionar...', 'label'=> __('Localidad') , 'value' => $user['User']['localidad_id']));
-
-
 								echo $this->Form->input('password1', array('type'=>'password', 'label'=> __('Nueva Contrase&ntilde;a') , 'value' => '', 'size'=>'12'));
 						        echo $this->Form->input('password2', array('type'=>'password',  'label'=> __('Ingresar contrase&ntilde;a nuevamente'), 'value' => '', 'size'=>'12'));
 						    	?>
+
+								<div class="form-group">
+									<?= $this->Form->label('localidad_id', 'Localidad', array('class' => 'control-label col-xs-3')); ?>
+									<?= $this->Form->input('localidad_id', array('empty' => '', 'required' => 'required')); ?>
+								</div>
+
 							</fieldset>
 								<?php echo $this->Form->end(array('div'=>false,'label'=>'Guardar','class'=>'action input-action btn btn-success'));?>
 						</div>
@@ -80,42 +82,38 @@
 		</div>
 	</div>
 </div>
-<?php
+<?php $this->append('script') ?>
+<script type="text/javascript">
 
-//AJAX for Dynamic Drop down
+	(function ($) {
 
-$this->Js->get('#UserProvinciaId')->event('change',
+		$(function () {
 
-$this->Js->request(array(
+			$('select#UserLocalidadId').selectize({
+				//create: true,
+				//createOnBlur: true,
+				dropdownParent: 'body',
+				load: function (query, callback) {
 
-'plugin'=>NULL,
+					if (!query.length) return callback();
+					$.ajax({
 
-'controller'=>'localidades',
+						url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query),
 
-'action' =>'obtener_localidades',
+						type: 'GET',
 
-), array(
-
-'update' =>'#UserLocalidadId',
-
-'async' => true,
-
-'method' => 'Post',
-
-'dataExpression'=>true,
-
-'data'=> $this->Js->serializeForm(array(
-
-'isForm' => true,
-
-'inline' => true
-
-))
-
-))
-
-);
-
-// END AJAX
-
-?>
+						error: function () {
+							//alert(query);
+							callback();
+						},
+						success: function (res) {
+							//alert(query);
+							callback(res);
+						}
+					});
+				}
+			});
+		})
+	})(jQuery);
+</script>
+<?php $this->end() ?>

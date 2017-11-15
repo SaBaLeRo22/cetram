@@ -71,3 +71,39 @@
 	});
 </script>
 <?php $this->end() ?>
+
+<?php $this->append('script') ?>
+<script type="text/javascript">
+
+	(function ($) {
+
+		$(function () {
+
+			$('select#UserLocalidadId').selectize({
+				//create: true,
+				//createOnBlur: true,
+				dropdownParent: 'body',
+				load: function (query, callback) {
+
+					if (!query.length) return callback();
+					$.ajax({
+
+						url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query) + "/" + $('#UserProvinciaId').val(),
+
+						type: 'GET',
+
+						error: function () {
+							//alert(query);
+							callback();
+						},
+						success: function (res) {
+							//alert(query);
+							callback(res);
+						}
+					});
+				}
+			});
+		})
+	})(jQuery);
+</script>
+<?php $this->end() ?>
