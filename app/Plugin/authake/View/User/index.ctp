@@ -69,8 +69,8 @@
 						    	?>
 
 								<div class="form-group">
-									<?= $this->Form->label('localidad_id', 'Localidad', array('class' => 'control-label col-xs-3')); ?>
-									<?= $this->Form->input('localidad_id', array('empty' => '', 'required' => 'required')); ?>
+									<?= $this->Form->label('localidad_id', 'Localidad ('.$user['Localidad'][nombre].' - CP: '.$user['Localidad'][codigopostal].')', array('class' => 'control-label col-xs-3')); ?>
+									<?= $this->Form->input('localidad_id', array('empty' => '')); ?>
 								</div>
 
 							</fieldset>
@@ -82,6 +82,7 @@
 		</div>
 	</div>
 </div>
+
 <?php $this->append('script') ?>
 <script type="text/javascript">
 

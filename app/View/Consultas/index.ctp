@@ -46,7 +46,7 @@
                     <td><?= $consulta['Consulta']['costo']; ?></td>
                     <td><?= h($consulta['Consulta']['tarifa']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
-                    <td><?= $consulta['Localidade']['nombre']; ?></td>
+                    <td><?= $consulta['Localidade']['nombre'].' ('.$consulta['Localidade']['codigopostal'].')'; ?></td>
                     <td><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>
                     <td><?= h($consulta['Consulta']['modified']); ?>&nbsp;</td>
                 </tr>

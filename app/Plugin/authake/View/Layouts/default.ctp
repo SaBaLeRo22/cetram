@@ -81,8 +81,8 @@
 
 <?= $this->Html->script( ['jquery-3.2.1','bootstrap.min', 'plugins'] ); ?>
 <?= $this->Html->script( [
-    '/plugins/selectize.js/dist/js/standalone/selectize.min',
-    '/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
+'/plugins/selectize.js/dist/js/standalone/selectize.min',
+'/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
 ] ) ?>
 
 <?= $this->fetch( 'script' ); ?>

@@ -31,20 +31,13 @@
 							<?php echo $this->Form->input('email', array('label'=>array('text'=>__('Email'),'class'=>'control-label'),'size'=>'40', 'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">User\'s email address. Choose a real one. Confirmation goes to this email.</span></div>'));?>
 						</div>
 
-
-
-						<div class="string control-group stringish" id="Provincia">
-							<?php echo $this->Form->input('provincia_id', array('type' => 'select', 'options' => $provincias, 'empty' => 'Seleccionar...', 'label'=>array('text'=>__('Provincia'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Provincia del usuario.</span></div>'));?>
-						</div>
-
 						<div class="string control-group stringish" id="Localidad">
-							<?php echo $this->Form->input('localidad_id', array('type' => 'select', 'empty' => 'Seleccionar...', 'label'=>array('text'=>__('Localidad'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Localidad del usuario.</span></div>'));?>
+							<?php echo $this->Form->input('localidad_id', array('empty' => '', 'required' => 'required', 'label'=>array('text'=>__('Localidad'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Localidad del usuario.</span></div>'));?>
 						</div>
 
 						<div class="string control-group stringish" id="Sector">
 							<?php echo $this->Form->input('sector_id', array('empty' => 'Seleccionar...', 'label'=>array('text'=>__('Sector'),'class'=>'control-label'),'between'=>'<div class="controls">', 'after'=>'<span class="help-inline">Sector del usuario.</span></div>'));?>
 						</div>
-
 
 						<div class="string control-group stringish" id="Group">
 							<?php echo $this->Form->input('Group', array('label'=>array('text'=>__('In groups Press \'Control\' for multi-selection'),'class'=>'control-label'),'style'=>'width: 15em;', 'between'=>'<div class="controls">', 'after'=>'</div>'));?>
@@ -69,42 +62,39 @@
 	</div>
 </div>
 
-<?php
 
-//AJAX for Dynamic Drop down
+<?php $this->append('script') ?>
+<script type="text/javascript">
 
-$this->Js->get('#UserProvinciaId')->event('change',
+	(function ($) {
 
-$this->Js->request(array(
+		$(function () {
 
-'plugin'=>NULL,
+			$('select#UserLocalidadId').selectize({
+				//create: true,
+				//createOnBlur: true,
+				dropdownParent: 'body',
+				load: function (query, callback) {
 
-'controller'=>'localidades',
+					if (!query.length) return callback();
+					$.ajax({
 
-'action' =>'obtener_localidades',
+						url: "<?= $this->Html->url(array('action' => 'search_by_localidad')) ?>/" + encodeURIComponent(query),
 
-), array(
+						type: 'GET',
 
-'update' =>'#UserLocalidadId',
-
-'async' => true,
-
-'method' => 'Post',
-
-'dataExpression'=>true,
-
-'data'=> $this->Js->serializeForm(array(
-
-'isForm' => true,
-
-'inline' => true
-
-))
-
-))
-
-);
-
-// END AJAX
-
-?>
+						error: function () {
+							//alert(query);
+							callback();
+						},
+						success: function (res) {
+							//alert(query);
+							callback(res);
+						}
+					});
+				}
+			});
+		})
+	})(jQuery);
+</script>
+<?php $this->end() ?>

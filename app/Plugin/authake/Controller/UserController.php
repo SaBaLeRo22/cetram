@@ -56,6 +56,7 @@ class UserController extends AuthakeAppController {
 //        debug($this->Authake->getUserId());
 
         if (!empty($this->request->data)) {
+
             if ($this->request->data['User']['password1'] != '') {// password changed
                 if ($this->request->data['User']['password1'] != $this->request->data['User']['password2']) {
                     $this->Session->setFlash(__('The two passwords do not match!'), 'error', array('plugin' => 'Authake'));
@@ -94,6 +95,10 @@ class UserController extends AuthakeAppController {
                 }
             }
 
+            if($this->request->data['User']['localidad_id'] != NULL){
+                $user['User']['localidad_id'] = $this->request->data['User']['localidad_id'];
+            }
+
             //Unbind HABTM relation for this save
             $this->User->unbindModel(array('hasAndBelongsToMany' => array('Group')), false);
 
@@ -115,7 +120,7 @@ class UserController extends AuthakeAppController {
                 $this->redirect(array('action' => 'messages'));
             }
         }
-
+/*
         $this->loadModel('Provincia');
         $this->Provincia->recursive = -1;
 
@@ -133,7 +138,7 @@ class UserController extends AuthakeAppController {
             'conditions' => array('Localidad.nombre <>' => '', 'Localidad.estado_id' => '1', 'Localidad.provincia_id' => $user['Localidad']['provincia_id']),
             'order' => array('Localidad.nombre' => 'asc')
         ));
-
+*/
         $this->loadModel('Sector');
         $this->Sector->recursive = -1;
 
@@ -146,7 +151,7 @@ class UserController extends AuthakeAppController {
         //debug($user);
 
         //$this->request->data = null;
-        $this->set(compact('user','provincias','sectors','localidads'));
+        $this->set(compact('user','sectors'));
     }
 
     /**

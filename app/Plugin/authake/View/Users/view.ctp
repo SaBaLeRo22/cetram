@@ -77,7 +77,7 @@
 							<tr>
 								<th class="span3">Localidad</th>
 								<td>
-									<?= h($user['Localidad']['nombre']); ?>
+									<?= h($user['Localidad']['nombre'].' - CP: '.$user['Localidad']['codigopostal']); ?>
 								</td>
 							</tr>
 							<tr>

@@ -164,7 +164,7 @@
 								<?php echo $user['Sector']['nombre']; ?>&nbsp;
 							</td>
 							<td>
-								<?php echo $user['Localidad']['nombre']; ?>&nbsp;
+								<?php echo $user['Localidad']['nombre'].' ('.$user['Localidad']['codigopostal'].')'; ?>&nbsp;
 							</td>
 							<td>
 								<?php if ($user['User']['disable']) echo '<span class="label label-important">Disabled</span>&nbsp;';

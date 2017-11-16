@@ -160,8 +160,13 @@ class UsersController extends AuthakeAppController {
 
 			// delete user-group relation if selection empty
 			unset($this->request->data['User']['login']);// never change the login
-			// save user
 
+
+			if($this->request->data['User']['localidad_id'] == NULL){
+				$this->request->data['User']['localidad_id'] = $user['User']['localidad_id'];
+			}
+
+			// save user
 			if ($this->User->save($this->request->data))
 			{
 				$this->Session->setFlash(__('The User has been saved'), 'success');
@@ -181,7 +186,7 @@ class UsersController extends AuthakeAppController {
 		unset($groups[0]);// remove group 0 (everybody)
 
 
-		$this->loadModel('Provincia');
+/*		$this->loadModel('Provincia');
 		$this->Provincia->recursive = -1;
 
 		$provincias = $this->Provincia->find('list', array(
@@ -194,7 +199,7 @@ class UsersController extends AuthakeAppController {
 		$this->Localidad->recursive = 0;
 		$loc = $this->Localidad->find('first', array(
 			'conditions' => array('Localidad.id' => $user['User']['localidad_id'])
-		));
+		));*/
 		//$this->request->data['User']['provincia_id'] = $loc['Localidad']['provincia_id'];
 
 /*		$localidades = $this->Localidad->find('list', array(
@@ -214,7 +219,7 @@ class UsersController extends AuthakeAppController {
 			'order' => array('Sector.nombre' => 'asc')
 		));
 
-		$this->set(compact('groups','user', 'provincias','sectors','loc'));
+		$this->set(compact('groups','user','sectors'));
 	}
 
 	function delete($id = null) {// check if user in admins group
@@ -262,6 +267,37 @@ class UsersController extends AuthakeAppController {
 		}
 
 		$this->set('localidades', $localidades);
+	}
+
+
+	/**
+	 * @param $search
+	 * @return CakeResponse|null
+	 */
+	public function search_by_localidad($search) {
+		$this->loadModel('Localidad');
+		$this->Localidad->recursive = 0;
+		$localidades = $this->Localidad->find('all', array(
+			'recursive' => 0,
+			'order' => array('Localidad.nombre' => 'asc', 'Localidad.codigopostal' => 'asc'),
+			//'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
+			'fields' => array('Localidad.id' ,'Localidad.nombre' ,'Localidad.codigopostal', 'Provincia.nombre'),
+			'conditions' => array('Localidad.nombre <>' => '', 'Localidad.estado_id' => '1', 'Localidad.nombre LIKE' => "%{$search}%"),
+			'limit' => 100
+		));
+
+		$result = array();
+		foreach ($localidades as $localidad) {
+			$result[] = array(
+				'value' => $localidad['Localidad']['id'],
+				'text' => $localidad['Localidad']['nombre']." (CP: ".$localidad['Localidad']['codigopostal']." - Prov.: ".$localidad['Provincia']['nombre'].")"
+			);
+		}
+
+		$this->response->type('json');
+		$this->response->body(json_encode($result));
+
+		return $this->response;
 	}
 
 }

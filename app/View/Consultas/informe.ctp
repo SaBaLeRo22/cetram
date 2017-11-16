@@ -65,7 +65,7 @@
                     <td style="text-align: center;vertical-align: middle"><?= $consulta['Consulta']['costo']; ?></td>
                     <td style="text-align: center;vertical-align: middle"><?= h($consulta['Consulta']['tarifa']); ?>&nbsp;</td>
                     <td style="text-align: center;vertical-align: middle"><?= h($consulta['Consulta']['subsidio']); ?>&nbsp;</td>
-                    <td style="vertical-align: middle"><?= $consulta['Localidade']['nombre']; ?></td>
+                    <td style="vertical-align: middle"><?= $consulta['Localidade']['nombre'].' ('.$consulta['Localidade']['codigopostal'].')'; ?></td>
                     <td style="vertical-align: middle"><?= h($consulta['Estado']['nombre']); ?>&nbsp;</td>
                     <td style="vertical-align: middle"><?= h($this->Authake->getUsuario($consulta['Consulta']['user_created'])); ?>&nbsp;</td>
                     <td style="text-align: center;vertical-align: middle"><?= h($consulta['Consulta']['created']); ?>&nbsp;</td>

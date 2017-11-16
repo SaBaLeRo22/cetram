@@ -1,29 +1,51 @@
 <?php echo $this->Html->docType('html5'); ?>
 <head>
-    <title>
-        <?php echo $title_for_layout ?>
-    </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><?= Configure::read( 'App.name' ); ?></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="">
+    <meta name="rights" content="">
+    <meta name="language" content="es-ES">
+    <meta name="title" content="CETRAM - UTN Santa Fe">
+    <title>CETRAM- UTN Santa Fe</title>
+    <link rel="shortcut icon" href="http://extranet.frsf.utn.edu.ar/favicon.ico">
+
+    <?= $this->fetch( 'meta' ); ?>
 
     <?= $this->Html->css( [
-   'custom-styles'
-   ] ); ?>
+    'custom-styles',
+    '/authake/css/bootstrap.min',
+    '/authake/css/custom',
+    '/plugins/selectize.js/dist/css/selectize.bootstrap3'
+    ] ); ?>
+    <?= $this->fetch( 'css' ); ?>
 
-    <?php
-        echo $this->Html->charset();
-        echo $this->Html->meta('icon');
-        $this->Html->css('/authake/css/bootstrap.min', null, array('inline' => false));
-        $this->Html->css('/authake/css/custom', null, array('inline' => false));
-        $this->Html->script('Authake.jquery-latest', array('block' => 'script'));
-        //$this->Html->script('Authake.jquery-3.2.1', array('block' => 'script'));
-        $this->Html->script('Authake.custom', array('block' => 'script'));
-        $this->Html->script('Authake.bootstrap.min', array('block' => 'script'));
-        $this->Html->script('Authake.html5shiv', array('block' => 'script'));
+    <?= $this->Html->script( ['jquery-3.2.1','custom', 'bootstrap.min', 'html5shiv'] ); ?>
 
-        echo $this->fetch('meta');
-        echo $this->fetch('css');
-        echo $this->fetch('script');
-    ?>
+
+    <?= $this->Html->script( [
+    '/plugins/selectize.js/dist/js/standalone/selectize.min',
+    '/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
+    ] ) ?>
+
+    <?= $this->fetch( 'script' ); ?>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(function () {
+                $('body').on("keyup", "[data-provider='nombre']", function () {
+                    $("[data-consumer='nombre']").text($(this).val())
+                });
+                $("[data-inputmask]").inputmask();
+            })
+        })(jQuery)
+    </script>
+
     <!-- Js writeBuffer -->
     <?php
 	if (class_exists('JsHelper') && method_exists($this->Js, 'writeBuffer')) echo $this->Js->writeBuffer();
