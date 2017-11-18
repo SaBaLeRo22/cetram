@@ -80,7 +80,7 @@
                     </tr>
 
                     <tr>
-                        <td style="text-align: justify; vertical-align: middle"><strong>Convenios</strong></td>
+                        <td style="text-align: justify; vertical-align: middle"><strong>Dietas</strong></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'dietas', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i>'), array('controller' => 'dietas', 'action' => 'add'), array('class' => 'btn btn-success')); ?></td>
                         <td style="text-align: justify; vertical-align: middle">Configuracion de los tipos de dietas.</td>

@@ -70,25 +70,25 @@
 			<?= h($parametro['Parametro']['step']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($parametro['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $parametro['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($parametro['Parametro']['user_created'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($parametro['Parametro']['user_modified'])); ?>
-			&nbsp;
-		</dd>
             </dl>
             <dl class="dl-horizontal text-muted">
+				<dt><?= __('Estado'); ?></dt>
+				<dd>
+					<?= $this->Html->link($parametro['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $parametro['Estado']['id'])); ?>
+					&nbsp;
+				</dd>
+				<dt><?= __('User Created'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($parametro['Parametro']['user_created'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Created</dt>
                     <dd><?= h($parametro['Parametro']['created']); ?>&nbsp;</dd>
+				<dt><?= __('User Modified'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($parametro['Parametro']['user_modified'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Modified</dt>
                     <dd><?= h($parametro['Parametro']['modified']); ?>&nbsp;</dd>
                             </dl>

@@ -30,25 +30,25 @@
 			<?= h($agrupamiento['Agrupamiento']['orden']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($agrupamiento['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $agrupamiento['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_created'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_modified'])); ?>
-			&nbsp;
-		</dd>
             </dl>
             <dl class="dl-horizontal text-muted">
+				<dt><?= __('Estado'); ?></dt>
+				<dd>
+					<?= $this->Html->link($agrupamiento['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $agrupamiento['Estado']['id'])); ?>
+					&nbsp;
+				</dd>
+				<dt><?= __('User Created'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_created'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Created</dt>
                     <dd><?= h($agrupamiento['Agrupamiento']['created']); ?>&nbsp;</dd>
+				<dt><?= __('User Modified'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($agrupamiento['Agrupamiento']['user_modified'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Modified</dt>
                     <dd><?= h($agrupamiento['Agrupamiento']['modified']); ?>&nbsp;</dd>
                             </dl>

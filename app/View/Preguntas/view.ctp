@@ -85,25 +85,25 @@
 			<?= $this->Html->link($pregunta['Ambito']['nombre'], array('controller' => 'ambitos', 'action' => 'view', $pregunta['Ambito']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($pregunta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $pregunta['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_created'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_modified'])); ?>
-			&nbsp;
-		</dd>
             </dl>
             <dl class="dl-horizontal text-muted">
+				<dt><?= __('Estado'); ?></dt>
+				<dd>
+					<?= $this->Html->link($pregunta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $pregunta['Estado']['id'])); ?>
+					&nbsp;
+				</dd>
+				<dt><?= __('User Created'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_created'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Created</dt>
                     <dd><?= h($pregunta['Pregunta']['created']); ?>&nbsp;</dd>
+				<dt><?= __('User Modified'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($pregunta['Pregunta']['user_modified'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Modified</dt>
                     <dd><?= h($pregunta['Pregunta']['modified']); ?>&nbsp;</dd>
                             </dl>
