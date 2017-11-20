@@ -83,12 +83,20 @@ $this->extend('default');
             </li>
             <li role="presentation" class="divider"></li>
 
-<!--
+            <li><?php echo $this->Html->link(__('<i class="fa fa-fw fa-life-ring"></i> Ayuda Usuario', true), '/files/Usuario.pdf', array('escape' => false, 'target' => '_blank')); ?></li>
+            <li role="presentation" class="divider"></li>
+
+            <?php if ($this->Session->read('Grupo.Admin') || $this->Session->read('Grupo.Sistemas')): ?>
+            <li><?php echo $this->Html->link(__('<i class="fa fa-fw fa-life-ring"></i> Ayuda Admin', true), '/files/Admin.pdf', array('escape' => false, 'target' => '_blank')); ?></li>
+            <li role="presentation" class="divider"></li>
+            <?php endif; ?>
+
             <li>
-                <a href="#myModal" role="button" data-toggle="modal"><i class="fa fa-registered"></i> Acerca de</a>
+                <!-- Button to trigger modal -->
+                <a data-toggle="modal" href="#myModal"><i class="fa fa-fw fa-question-circle"></i> Acerca de CETRAPP</a>
             </li>
             <li role="presentation" class="divider"></li>
-            -->
+
 
             <li>
                 <a href="<?= $this->Html->url(array('plugin' => 'authake', 'controller' => 'user', 'action' => 'logout', 'prefix' => false, $this->request->prefix => false)) ?>">
@@ -104,3 +112,39 @@ $this->extend('default');
 <?php $this->end(); ?>
 
 <?= $this->fetch('content') ?>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Acerca de CETRAPP</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="text-align: center; background-color: #ffffff;">
+
+                    <a href="<?php echo $this->Html->url('http://extranet.frsf.utn.edu.ar/CETRAM'); ?>">
+                        <?php echo $this->Html->image('cetram/cetram-50.png', array('alt' => 'CETRAM')) ?>
+                    </a>
+
+                    <a href="<?php echo $this->Html->url('http://www.frsf.utn.edu.ar/'); ?>">
+                        <?php echo $this->Html->image('cetram/utn-santafe-75.png', array('alt' => 'UTN-FRSF')) ?>
+                    </a>
+
+                    <hr class="style14"/>
+                    <br>
+                    <p>Proyecto: Herramienta para la Determinaci&oacute;n de
+                        los Costos de Sistemas de Transporte P&uacute;blico de
+                        Pasajeros en Ciudades de Tama&ntilde;o Medio.</p>
+                    <p class="text-muted">Equipo: Ing. Mec. Fernando Imaz / Ing. Civ. Juan Jaurena / Ing. Sis. Mat&iacute;as Rovere / Ing. Ind. Melisa Batistela / Duilio Abdala</p>
+                    <p class="text-muted">Copyright &copy; 2017. Todos los derechos reservados.</p>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

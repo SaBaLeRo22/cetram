@@ -113,7 +113,7 @@
 
 <?= $this->Html->script( [
 '/plugins/selectize.js/dist/js/standalone/selectize.min',
-'/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min',
+'/plugins/jquery.inputmask-3.x/dist/jquery.inputmask.bundle.min'
 ] ) ?>
 
 
@@ -137,7 +137,6 @@
 // Writes cached scripts
 ?>
 
-
 <footer class="footer pie">
 
     <div class="container" style="text-align: center; background-color: #ffffff;">
@@ -156,6 +155,8 @@
 
     </div>
 </footer>
+
+
 
 </body>
 </html>
