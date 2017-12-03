@@ -23,6 +23,12 @@ class CategoriasController extends AppController {
  */
 	public function index() {
 		$this->Categoria->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Categoria.nombre' => 'asc'
+			)
+		);
 		$this->set('categorias', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class CategoriasController extends AppController {
 		if (!$this->Categoria->exists($id)) {
 			throw new NotFoundException(__('Invalid categoria'));
 		}
+		$this->Categoria->recursive = 2;
 		$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));
 		$this->set('categoria', $this->Categoria->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class CategoriasController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Categoria->create();
+
+			$this->request->data['Categoria']['estado_id'] = '1';
+			$this->request->data['Categoria']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Categoria->save($this->request->data)) {
 				$this->Session->setFlash(__('The categoria has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class CategoriasController extends AppController {
 			throw new NotFoundException(__('Invalid categoria'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Categoria->save($this->request->data)) {
 				$this->Session->setFlash(__('The categoria has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class CategoriasController extends AppController {
 			$this->Session->setFlash(__('The categoria could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Categoria->id = $id;
+		if (!$this->Categoria->exists()) {
+			throw new NotFoundException(__('Invalid Categoria'));
+		}
+
+		$this->request->data['Categoria']['estado_id'] = '2';
+		$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Categoria->save($this->request->data)) {
+			$this->Session->setFlash(__('The Categoria has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Categoria could not be saved. Please, try again.'));
+		}
 	}
 }
