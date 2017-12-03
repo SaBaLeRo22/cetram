@@ -23,7 +23,14 @@ class AmbitosController extends AppController {
  */
 	public function index() {
 		$this->Ambito->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Ambito.nombre' => 'asc'
+			)
+		);
 		$this->set('ambitos', $this->Paginator->paginate());
+
 	}
 
 /**
@@ -37,6 +44,7 @@ class AmbitosController extends AppController {
 		if (!$this->Ambito->exists($id)) {
 			throw new NotFoundException(__('Invalid ambito'));
 		}
+		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Ambito.' . $this->Ambito->primaryKey => $id));
 		$this->set('ambito', $this->Ambito->find('first', $options));
 	}
@@ -49,6 +57,11 @@ class AmbitosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Ambito->create();
+
+			$this->request->data['Ambito']['estado_id'] = '1';
+			$this->request->data['Ambito']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Ambito->save($this->request->data)) {
 				$this->Session->setFlash(__('The ambito has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +85,9 @@ class AmbitosController extends AppController {
 			throw new NotFoundException(__('Invalid ambito'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Ambito->save($this->request->data)) {
 				$this->Session->setFlash(__('The ambito has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +121,22 @@ class AmbitosController extends AppController {
 			$this->Session->setFlash(__('The ambito could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Ambito->id = $id;
+		if (!$this->Ambito->exists()) {
+			throw new NotFoundException(__('Invalid Ambito'));
+		}
+
+		$this->request->data['Ambito']['estado_id'] = '2';
+		$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Ambito->save($this->request->data)) {
+			$this->Session->setFlash(__('The Ambito has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Ambito could not be saved. Please, try again.'));
+		}
 	}
 }
