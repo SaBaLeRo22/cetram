@@ -17,18 +17,9 @@
             <?= $this->Form->label('descripcion', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('descripcion'); ?> 
         </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('estado_id'); ?> 
-        </div>
-                                                                                                                    <div class="form-group">
-            <?= $this->Form->label('user_created', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_created'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('user_modified', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_modified'); ?> 
-        </div>
+
+
+
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-save fa-fw"></i> Guardar', array('class' => 'btn btn-primary')); ?> 
         </div>
@@ -41,32 +32,7 @@
             <div class="list-group">
                                                 <?= $this->Html->link(__('Listado de Ambitos'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Coeficiente</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Coeficientes'), array('controller' => 'coeficientes', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Coeficiente'), array('controller' => 'coeficientes', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Indicadore</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Indicadores'), array('controller' => 'indicadores', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Indicadore'), array('controller' => 'indicadores', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Parametro</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Parametros'), array('controller' => 'parametros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Parametro'), array('controller' => 'parametros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Pregunta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Preguntas'), array('controller' => 'preguntas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Pregunta'), array('controller' => 'preguntas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
+
         </div>
     </div>
 </div>
