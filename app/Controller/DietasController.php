@@ -23,6 +23,12 @@ class DietasController extends AppController {
  */
 	public function index() {
 		$this->Dieta->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Dieta.nombre' => 'asc'
+			)
+		);
 		$this->set('dietas', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class DietasController extends AppController {
 		if (!$this->Dieta->exists($id)) {
 			throw new NotFoundException(__('Invalid dieta'));
 		}
+		$this->Dieta->recursive = 2;
 		$options = array('conditions' => array('Dieta.' . $this->Dieta->primaryKey => $id));
 		$this->set('dieta', $this->Dieta->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class DietasController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Dieta->create();
+
+			$this->request->data['Dieta']['estado_id'] = '1';
+			$this->request->data['Dieta']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Dieta->save($this->request->data)) {
 				$this->Session->setFlash(__('The dieta has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class DietasController extends AppController {
 			throw new NotFoundException(__('Invalid dieta'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Dieta->save($this->request->data)) {
 				$this->Session->setFlash(__('The dieta has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class DietasController extends AppController {
 			$this->Session->setFlash(__('The dieta could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Dieta->id = $id;
+		if (!$this->Dieta->exists()) {
+			throw new NotFoundException(__('Invalid Dieta'));
+		}
+
+		$this->request->data['Dieta']['estado_id'] = '2';
+		$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Dieta->save($this->request->data)) {
+			$this->Session->setFlash(__('The Dieta has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Dieta could not be saved. Please, try again.'));
+		}
 	}
 }

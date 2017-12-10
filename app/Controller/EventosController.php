@@ -23,6 +23,12 @@ class EventosController extends AppController {
  */
 	public function index() {
 		$this->Evento->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Evento.nombre' => 'asc'
+			)
+		);
 		$this->set('eventos', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class EventosController extends AppController {
 		if (!$this->Evento->exists($id)) {
 			throw new NotFoundException(__('Invalid evento'));
 		}
+		$this->Evento->recursive = 2;
 		$options = array('conditions' => array('Evento.' . $this->Evento->primaryKey => $id));
 		$this->set('evento', $this->Evento->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class EventosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Evento->create();
+
+			$this->request->data['Evento']['estado_id'] = '1';
+			$this->request->data['Evento']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Evento->save($this->request->data)) {
 				$this->Session->setFlash(__('The evento has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -70,6 +82,9 @@ class EventosController extends AppController {
 			throw new NotFoundException(__('Invalid evento'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Evento->save($this->request->data)) {
 				$this->Session->setFlash(__('The evento has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -101,5 +116,22 @@ class EventosController extends AppController {
 			$this->Session->setFlash(__('The evento could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Evento->id = $id;
+		if (!$this->Evento->exists()) {
+			throw new NotFoundException(__('Invalid Evento'));
+		}
+
+		$this->request->data['Evento']['estado_id'] = '2';
+		$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Evento->save($this->request->data)) {
+			$this->Session->setFlash(__('The Evento has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Evento could not be saved. Please, try again.'));
+		}
 	}
 }

@@ -23,6 +23,12 @@ class IndicadoresController extends AppController {
  */
 	public function index() {
 		$this->Indicadore->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Indicadore.nombre' => 'asc'
+			)
+		);
 		$this->set('indicadores', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class IndicadoresController extends AppController {
 		if (!$this->Indicadore->exists($id)) {
 			throw new NotFoundException(__('Invalid indicadore'));
 		}
+		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Indicadore.' . $this->Indicadore->primaryKey => $id));
 		$this->set('indicadore', $this->Indicadore->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class IndicadoresController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Indicadore->create();
+
+			$this->request->data['Indicadore']['estado_id'] = '1';
+			$this->request->data['Indicadore']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Indicadore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Indicadore->save($this->request->data)) {
 				$this->Session->setFlash(__('The indicadore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class IndicadoresController extends AppController {
 			throw new NotFoundException(__('Invalid indicadore'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Indicadore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Indicadore->save($this->request->data)) {
 				$this->Session->setFlash(__('The indicadore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class IndicadoresController extends AppController {
 			$this->Session->setFlash(__('The indicadore could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Indicadore->id = $id;
+		if (!$this->Indicadore->exists()) {
+			throw new NotFoundException(__('Invalid Indicadore'));
+		}
+
+		$this->request->data['Indicadore']['estado_id'] = '2';
+		$this->request->data['Indicadore']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Indicadore->save($this->request->data)) {
+			$this->Session->setFlash(__('The Indicadore has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Indicadore could not be saved. Please, try again.'));
+		}
 	}
 }

@@ -23,6 +23,12 @@ class ItemsController extends AppController {
  */
 	public function index() {
 		$this->Item->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Item.nombre' => 'asc'
+			)
+		);
 		$this->set('items', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class ItemsController extends AppController {
 		if (!$this->Item->exists($id)) {
 			throw new NotFoundException(__('Invalid item'));
 		}
+		$this->Item->recursive = 2;
 		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
 		$this->set('item', $this->Item->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class ItemsController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Item->create();
+
+			$this->request->data['Item']['estado_id'] = '1';
+			$this->request->data['Item']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Item->save($this->request->data)) {
 				$this->Session->setFlash(__('The item has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class ItemsController extends AppController {
 			throw new NotFoundException(__('Invalid item'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Item->save($this->request->data)) {
 				$this->Session->setFlash(__('The item has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class ItemsController extends AppController {
 			$this->Session->setFlash(__('The item could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Item->id = $id;
+		if (!$this->Item->exists()) {
+			throw new NotFoundException(__('Invalid Item'));
+		}
+
+		$this->request->data['Item']['estado_id'] = '2';
+		$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Item->save($this->request->data)) {
+			$this->Session->setFlash(__('The Item has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Item could not be saved. Please, try again.'));
+		}
 	}
 }

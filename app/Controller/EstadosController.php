@@ -23,6 +23,12 @@ class EstadosController extends AppController {
  */
 	public function index() {
 		$this->Estado->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Estado.nombre' => 'asc'
+			)
+		);
 		$this->set('estados', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class EstadosController extends AppController {
 		if (!$this->Estado->exists($id)) {
 			throw new NotFoundException(__('Invalid estado'));
 		}
+		$this->Estado->recursive = 2;
 		$options = array('conditions' => array('Estado.' . $this->Estado->primaryKey => $id));
 		$this->set('estado', $this->Estado->find('first', $options));
 	}
@@ -49,6 +56,10 @@ class EstadosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Estado->create();
+
+			$this->request->data['Estado']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Estado']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Estado->save($this->request->data)) {
 				$this->Session->setFlash(__('The estado has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -70,6 +81,9 @@ class EstadosController extends AppController {
 			throw new NotFoundException(__('Invalid estado'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Estado']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Estado->save($this->request->data)) {
 				$this->Session->setFlash(__('The estado has been saved.'));
 				return $this->redirect(array('action' => 'index'));

@@ -23,6 +23,12 @@ class ConveniosController extends AppController {
  */
 	public function index() {
 		$this->Convenio->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Convenio.anio' => 'asc'
+			)
+		);
 		$this->set('convenios', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class ConveniosController extends AppController {
 		if (!$this->Convenio->exists($id)) {
 			throw new NotFoundException(__('Invalid convenio'));
 		}
+		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Convenio.' . $this->Convenio->primaryKey => $id));
 		$this->set('convenio', $this->Convenio->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class ConveniosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Convenio->create();
+
+			$this->request->data['Convenio']['estado_id'] = '1';
+			$this->request->data['Convenio']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Convenio']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Convenio->save($this->request->data)) {
 				$this->Session->setFlash(__('The convenio has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class ConveniosController extends AppController {
 			throw new NotFoundException(__('Invalid convenio'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Convenio']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Convenio->save($this->request->data)) {
 				$this->Session->setFlash(__('The convenio has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class ConveniosController extends AppController {
 			$this->Session->setFlash(__('The convenio could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Convenio->id = $id;
+		if (!$this->Convenio->exists()) {
+			throw new NotFoundException(__('Invalid Convenio'));
+		}
+
+		$this->request->data['Convenio']['estado_id'] = '2';
+		$this->request->data['Convenio']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Convenio->save($this->request->data)) {
+			$this->Session->setFlash(__('The Convenio has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Convenio could not be saved. Please, try again.'));
+		}
 	}
 }

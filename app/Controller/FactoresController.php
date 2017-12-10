@@ -23,6 +23,12 @@ class FactoresController extends AppController {
  */
 	public function index() {
 		$this->Factore->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Factore.nombre' => 'asc'
+			)
+		);
 		$this->set('factores', $this->Paginator->paginate());
 	}
 
@@ -76,6 +82,11 @@ class FactoresController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Factore->create();
+
+			$this->request->data['Factore']['estado_id'] = '1';
+			$this->request->data['Factore']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Factore->save($this->request->data)) {
 				$this->Session->setFlash(__('The factore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -99,6 +110,9 @@ class FactoresController extends AppController {
 			throw new NotFoundException(__('Invalid factore'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Factore->save($this->request->data)) {
 				$this->Session->setFlash(__('The factore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -132,5 +146,22 @@ class FactoresController extends AppController {
 			$this->Session->setFlash(__('The factore could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Factore->id = $id;
+		if (!$this->Factore->exists()) {
+			throw new NotFoundException(__('Invalid Factore'));
+		}
+
+		$this->request->data['Factore']['estado_id'] = '2';
+		$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Factore->save($this->request->data)) {
+			$this->Session->setFlash(__('The Factore has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Factore could not be saved. Please, try again.'));
+		}
 	}
 }
