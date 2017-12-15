@@ -23,6 +23,12 @@ class MatricesController extends AppController {
  */
 	public function index() {
 		$this->Matrix->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Matrix.id' => 'asc'
+			)
+		);
 		$this->set('matrices', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class MatricesController extends AppController {
 		if (!$this->Matrix->exists($id)) {
 			throw new NotFoundException(__('Invalid matrix'));
 		}
+		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Matrix.' . $this->Matrix->primaryKey => $id));
 		$this->set('matrix', $this->Matrix->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class MatricesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Matrix->create();
+
+			$this->request->data['Matrix']['estado_id'] = '1';
+			$this->request->data['Matrix']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Matrix->save($this->request->data)) {
 				$this->Session->setFlash(__('The matrix has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class MatricesController extends AppController {
 			throw new NotFoundException(__('Invalid matrix'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Matrix->save($this->request->data)) {
 				$this->Session->setFlash(__('The matrix has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class MatricesController extends AppController {
 			$this->Session->setFlash(__('The matrix could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Matrix->id = $id;
+		if (!$this->Matrix->exists()) {
+			throw new NotFoundException(__('Invalid Matrix'));
+		}
+
+		$this->request->data['Matrix']['estado_id'] = '2';
+		$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Matrix->save($this->request->data)) {
+			$this->Session->setFlash(__('The Matrix has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Matrix could not be saved. Please, try again.'));
+		}
 	}
 }

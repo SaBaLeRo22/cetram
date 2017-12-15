@@ -23,6 +23,12 @@ class OpcionesController extends AppController {
  */
 	public function index() {
 		$this->Opcione->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Opcione.nombre' => 'asc'
+			)
+		);
 		$this->set('opciones', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class OpcionesController extends AppController {
 		if (!$this->Opcione->exists($id)) {
 			throw new NotFoundException(__('Invalid opcione'));
 		}
+		$this->Opcione->recursive = 2;
 		$options = array('conditions' => array('Opcione.' . $this->Opcione->primaryKey => $id));
 		$this->set('opcione', $this->Opcione->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class OpcionesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Opcione->create();
+
+			$this->request->data['Opcione']['estado_id'] = '1';
+			$this->request->data['Opcione']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Opcione->save($this->request->data)) {
 				$this->Session->setFlash(__('The opcione has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class OpcionesController extends AppController {
 			throw new NotFoundException(__('Invalid opcione'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Opcione->save($this->request->data)) {
 				$this->Session->setFlash(__('The opcione has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class OpcionesController extends AppController {
 			$this->Session->setFlash(__('The opcione could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Opcione->id = $id;
+		if (!$this->Opcione->exists()) {
+			throw new NotFoundException(__('Invalid Opcione'));
+		}
+
+		$this->request->data['Opcione']['estado_id'] = '2';
+		$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Opcione->save($this->request->data)) {
+			$this->Session->setFlash(__('The Opcione has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Opcione could not be saved. Please, try again.'));
+		}
 	}
 }

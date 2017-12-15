@@ -23,6 +23,12 @@ class LocalidadesController extends AppController {
  */
 	public function index() {
 		$this->Localidade->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Localidade.nombre' => 'asc'
+			)
+		);
 		$this->set('localidades', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class LocalidadesController extends AppController {
 		if (!$this->Localidade->exists($id)) {
 			throw new NotFoundException(__('Invalid localidade'));
 		}
+		$this->Localidade->recursive = 2;
 		$options = array('conditions' => array('Localidade.' . $this->Localidade->primaryKey => $id));
 		$this->set('localidade', $this->Localidade->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class LocalidadesController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Localidade->create();
+
+			$this->request->data['Localidade']['estado_id'] = '1';
+			$this->request->data['Localidade']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Localidade->save($this->request->data)) {
 				$this->Session->setFlash(__('The localidade has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -73,6 +85,9 @@ class LocalidadesController extends AppController {
 			throw new NotFoundException(__('Invalid localidade'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Localidade->save($this->request->data)) {
 				$this->Session->setFlash(__('The localidade has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -107,6 +122,23 @@ class LocalidadesController extends AppController {
 			$this->Session->setFlash(__('The localidade could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Localidade->id = $id;
+		if (!$this->Localidade->exists()) {
+			throw new NotFoundException(__('Invalid Localidade'));
+		}
+
+		$this->request->data['Localidade']['estado_id'] = '2';
+		$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Localidade->save($this->request->data)) {
+			$this->Session->setFlash(__('The Localidade has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Localidade could not be saved. Please, try again.'));
+		}
 	}
 
 	public function obtener_localidades($id=null) {

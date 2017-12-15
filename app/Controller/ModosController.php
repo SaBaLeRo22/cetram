@@ -23,6 +23,12 @@ class ModosController extends AppController {
  */
 	public function index() {
 		$this->Modo->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Modo.nombre' => 'asc'
+			)
+		);
 		$this->set('modos', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class ModosController extends AppController {
 		if (!$this->Modo->exists($id)) {
 			throw new NotFoundException(__('Invalid modo'));
 		}
+		$this->Modo->recursive = 2;
 		$options = array('conditions' => array('Modo.' . $this->Modo->primaryKey => $id));
 		$this->set('modo', $this->Modo->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class ModosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Modo->create();
+
+			$this->request->data['Modo']['estado_id'] = '1';
+			$this->request->data['Modo']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Modo->save($this->request->data)) {
 				$this->Session->setFlash(__('The modo has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class ModosController extends AppController {
 			throw new NotFoundException(__('Invalid modo'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Modo->save($this->request->data)) {
 				$this->Session->setFlash(__('The modo has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class ModosController extends AppController {
 			$this->Session->setFlash(__('The modo could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Modo->id = $id;
+		if (!$this->Modo->exists()) {
+			throw new NotFoundException(__('Invalid Modo'));
+		}
+
+		$this->request->data['Modo']['estado_id'] = '2';
+		$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Modo->save($this->request->data)) {
+			$this->Session->setFlash(__('The Modo has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Modo could not be saved. Please, try again.'));
+		}
 	}
 }

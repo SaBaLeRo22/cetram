@@ -23,6 +23,12 @@ class MultiplicadoresController extends AppController {
  */
 	public function index() {
 		$this->Multiplicadore->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Multiplicadore.nombre' => 'asc'
+			)
+		);
 		$this->set('multiplicadores', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class MultiplicadoresController extends AppController {
 		if (!$this->Multiplicadore->exists($id)) {
 			throw new NotFoundException(__('Invalid multiplicadore'));
 		}
+		$this->Multiplicadore->recursive = 2;
 		$options = array('conditions' => array('Multiplicadore.' . $this->Multiplicadore->primaryKey => $id));
 		$this->set('multiplicadore', $this->Multiplicadore->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class MultiplicadoresController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Multiplicadore->create();
+
+			$this->request->data['Multiplicadore']['estado_id'] = '1';
+			$this->request->data['Multiplicadore']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Multiplicadore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Multiplicadore->save($this->request->data)) {
 				$this->Session->setFlash(__('The multiplicadore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class MultiplicadoresController extends AppController {
 			throw new NotFoundException(__('Invalid multiplicadore'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Multiplicadore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Multiplicadore->save($this->request->data)) {
 				$this->Session->setFlash(__('The multiplicadore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class MultiplicadoresController extends AppController {
 			$this->Session->setFlash(__('The multiplicadore could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Multiplicadore->id = $id;
+		if (!$this->Multiplicadore->exists()) {
+			throw new NotFoundException(__('Invalid Multiplicadore'));
+		}
+
+		$this->request->data['Multiplicadore']['estado_id'] = '2';
+		$this->request->data['Multiplicadore']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Multiplicadore->save($this->request->data)) {
+			$this->Session->setFlash(__('The Multiplicadore has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Multiplicadore could not be saved. Please, try again.'));
+		}
 	}
 }
