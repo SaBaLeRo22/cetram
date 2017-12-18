@@ -23,6 +23,12 @@ class SectoresController extends AppController {
  */
 	public function index() {
 		$this->Sectore->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Sectore.nombre' => 'asc'
+			)
+		);
 		$this->set('sectores', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class SectoresController extends AppController {
 		if (!$this->Sectore->exists($id)) {
 			throw new NotFoundException(__('Invalid sectore'));
 		}
+		$this->Sectore->recursive = 2;
 		$options = array('conditions' => array('Sectore.' . $this->Sectore->primaryKey => $id));
 		$this->set('sectore', $this->Sectore->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class SectoresController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Sectore->create();
+
+			$this->request->data['Sectore']['estado_id'] = '1';
+			$this->request->data['Sectore']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Sectore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Sectore->save($this->request->data)) {
 				$this->Session->setFlash(__('The sectore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -72,6 +84,9 @@ class SectoresController extends AppController {
 			throw new NotFoundException(__('Invalid sectore'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Sectore']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Sectore->save($this->request->data)) {
 				$this->Session->setFlash(__('The sectore has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -105,5 +120,22 @@ class SectoresController extends AppController {
 			$this->Session->setFlash(__('The sectore could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Sectore->id = $id;
+		if (!$this->Sectore->exists()) {
+			throw new NotFoundException(__('Invalid Sectore'));
+		}
+
+		$this->request->data['Sectore']['estado_id'] = '2';
+		$this->request->data['Sectore']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Sectore->save($this->request->data)) {
+			$this->Session->setFlash(__('The Sectore has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Sectore could not be saved. Please, try again.'));
+		}
 	}
 }

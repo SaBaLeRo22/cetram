@@ -23,6 +23,12 @@ class SalariosController extends AppController {
  */
 	public function index() {
 		$this->Salario->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Salario.id' => 'asc'
+			)
+		);
 		$this->set('salarios', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class SalariosController extends AppController {
 		if (!$this->Salario->exists($id)) {
 			throw new NotFoundException(__('Invalid salario'));
 		}
+		$this->Salario->recursive = 2;
 		$options = array('conditions' => array('Salario.' . $this->Salario->primaryKey => $id));
 		$this->set('salario', $this->Salario->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class SalariosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Salario->create();
+
+			$this->request->data['Salario']['estado_id'] = '1';
+			$this->request->data['Salario']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Salario->save($this->request->data)) {
 				$this->Session->setFlash(__('The salario has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class SalariosController extends AppController {
 			throw new NotFoundException(__('Invalid salario'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Salario->save($this->request->data)) {
 				$this->Session->setFlash(__('The salario has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class SalariosController extends AppController {
 			$this->Session->setFlash(__('The salario could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Salario->id = $id;
+		if (!$this->Salario->exists()) {
+			throw new NotFoundException(__('Invalid Salario'));
+		}
+
+		$this->request->data['Salario']['estado_id'] = '2';
+		$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Salario->save($this->request->data)) {
+			$this->Session->setFlash(__('The Salario has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Salario could not be saved. Please, try again.'));
+		}
 	}
 }

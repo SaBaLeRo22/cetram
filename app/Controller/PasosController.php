@@ -23,6 +23,12 @@ class PasosController extends AppController {
  */
 	public function index() {
 		$this->Paso->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Paso.id' => 'asc'
+			)
+		);
 		$this->set('pasos', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class PasosController extends AppController {
 		if (!$this->Paso->exists($id)) {
 			throw new NotFoundException(__('Invalid paso'));
 		}
+		$this->Paso->recursive = 2;
 		$options = array('conditions' => array('Paso.' . $this->Paso->primaryKey => $id));
 		$this->set('paso', $this->Paso->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class PasosController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Paso->create();
+
+			$this->request->data['Paso']['estado_id'] = '1';
+			$this->request->data['Paso']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Paso->save($this->request->data)) {
 				$this->Session->setFlash(__('The paso has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -74,6 +86,9 @@ class PasosController extends AppController {
 			throw new NotFoundException(__('Invalid paso'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Paso->save($this->request->data)) {
 				$this->Session->setFlash(__('The paso has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -109,5 +124,22 @@ class PasosController extends AppController {
 			$this->Session->setFlash(__('The paso could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Paso->id = $id;
+		if (!$this->Paso->exists()) {
+			throw new NotFoundException(__('Invalid Paso'));
+		}
+
+		$this->request->data['Paso']['estado_id'] = '2';
+		$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Paso->save($this->request->data)) {
+			$this->Session->setFlash(__('The Paso has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+		}
 	}
 }

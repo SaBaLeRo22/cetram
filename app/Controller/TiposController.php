@@ -23,6 +23,12 @@ class TiposController extends AppController {
  */
 	public function index() {
 		$this->Tipo->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Tipo.nombre' => 'asc'
+			)
+		);
 		$this->set('tipos', $this->Paginator->paginate());
 	}
 
@@ -37,6 +43,7 @@ class TiposController extends AppController {
 		if (!$this->Tipo->exists($id)) {
 			throw new NotFoundException(__('Invalid tipo'));
 		}
+		$this->Tipo->recursive = 2;
 		$options = array('conditions' => array('Tipo.' . $this->Tipo->primaryKey => $id));
 		$this->set('tipo', $this->Tipo->find('first', $options));
 	}
@@ -49,6 +56,11 @@ class TiposController extends AppController {
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Tipo->create();
+
+			$this->request->data['Tipo']['estado_id'] = '1';
+			$this->request->data['Tipo']['user_created'] = $this->Authake->getUserId();
+			$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Tipo->save($this->request->data)) {
 				$this->Session->setFlash(__('The tipo has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -73,6 +85,9 @@ class TiposController extends AppController {
 			throw new NotFoundException(__('Invalid tipo'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+
+			$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
+
 			if ($this->Tipo->save($this->request->data)) {
 				$this->Session->setFlash(__('The tipo has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -107,5 +122,22 @@ class TiposController extends AppController {
 			$this->Session->setFlash(__('The tipo could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function eliminar($id = null) {
+		$this->Tipo->id = $id;
+		if (!$this->Tipo->exists()) {
+			throw new NotFoundException(__('Invalid Tipo'));
+		}
+
+		$this->request->data['Tipo']['estado_id'] = '2';
+		$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
+
+		if ($this->Tipo->save($this->request->data)) {
+			$this->Session->setFlash(__('The Tipo has been saved.'));
+			return $this->redirect(array('action' => 'index'));
+		} else {
+			$this->Session->setFlash(__('The Tipo could not be saved. Please, try again.'));
+		}
 	}
 }
