@@ -43,7 +43,7 @@ class ConveniosController extends AppController {
 		if (!$this->Convenio->exists($id)) {
 			throw new NotFoundException(__('Invalid convenio'));
 		}
-		$this->Parametro->recursive = 2;
+		$this->Convenio->recursive = 2;
 		$options = array('conditions' => array('Convenio.' . $this->Convenio->primaryKey => $id));
 		$this->set('convenio', $this->Convenio->find('first', $options));
 	}
