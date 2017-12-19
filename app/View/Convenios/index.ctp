@@ -3,10 +3,14 @@
  * @var $this LocalView
  */
 ?><div class="row convenios index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Convenios'); ?></h2>
         <div class="table-responsive">
-
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -34,7 +38,7 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $convenio['Convenio']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $convenio['Convenio']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $convenio['Convenio']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $convenio['Convenio']['anio'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $convenio['Convenio']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $convenio['Convenio']['anio'])); ?>
                         </div>
                     </td> 
                     <td><?= h($convenio['Convenio']['inio']); ?>&nbsp;</td>
@@ -42,8 +46,8 @@
                     <td><?= h($convenio['Convenio']['observaciones']); ?>&nbsp;</td>
                     <td><?= $convenio['Estado']['nombre']; ?></td><td><?= h($convenio['Convenio']['created']); ?>&nbsp;</td>
                     <td><?= h($convenio['Convenio']['modified']); ?>&nbsp;</td>
-                    <td><?= h($convenio['Convenio']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($convenio['Convenio']['user_modified']); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($convenio['Convenio']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($convenio['Convenio']['user_modified'])); ?>&nbsp;</td>
                      
                 </tr>
                 <?php endforeach ?> 
@@ -71,34 +75,6 @@
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
                         array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                         array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Convenio'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Salario</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Salarios'), array('controller' => 'salarios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Salario'), array('controller' => 'salarios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Viatico</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Viaticos'), array('controller' => 'viaticos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Viatico'), array('controller' => 'viaticos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
             </div>
         </div>
     </div>

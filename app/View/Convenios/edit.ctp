@@ -24,21 +24,15 @@
             <?= $this->Form->input('fin'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('observaciones'); ?> 
+            <?= $this->Form->label('observaciones', null, array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->input('observaciones', array('type' => 'textarea')); ?>
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
-                                                                                                                    <div class="form-group">
-            <?= $this->Form->label('user_created', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_created'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('user_modified', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_modified'); ?> 
-        </div>
+
+
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-save fa-fw"></i> Guardar', array('class' => 'btn btn-primary')); ?> 
         </div>
@@ -49,13 +43,8 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Convenio.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Convenio.anio'))); ?>                                <?= $this->Html->link(__('Listado de Convenios'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'eliminar', $this->Form->value('Convenio.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Convenio.anio'))); ?>                                <?= $this->Html->link(__('Listado de Convenios'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
             <h4 class="text-muted">Salario</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Salarios'), array('controller' => 'salarios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
