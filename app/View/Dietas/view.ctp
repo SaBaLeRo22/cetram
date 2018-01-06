@@ -25,25 +25,27 @@
 			<?= h($dieta['Dieta']['descripcion']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($dieta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $dieta['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($dieta['Dieta']['user_created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($dieta['Dieta']['user_modified']); ?>
-			&nbsp;
-		</dd>
+
             </dl>
             <dl class="dl-horizontal text-muted">
-                <dt>Created</dt>
-                    <dd><?= h($dieta['Dieta']['created']); ?>&nbsp;</dd>
+				<dt><?= __('Estado'); ?></dt>
+				<dd>
+					<?= $this->Html->link($dieta['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $dieta['Estado']['id'])); ?>
+					&nbsp;
+				</dd>
+				<dt><?= __('User Created'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($dieta['Dieta']['user_created'])); ?>
+					&nbsp;
+				</dd>
+				<dt>Created</dt>
+				<dd><?= h($dieta['Dieta']['created']); ?>&nbsp;</dd>
+				<dt><?= __('User Modified'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($dieta['Dieta']['user_modified'])); ?>
+					&nbsp;
+				</dd>
+
                 <dt>Modified</dt>
                     <dd><?= h($dieta['Dieta']['modified']); ?>&nbsp;</dd>
                             </dl>
@@ -54,7 +56,7 @@
 
             <div class="list-group">
                                 		<?= $this->Html->link(__('Editar Dieta'), array('action' => 'edit', $dieta['Dieta']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Dieta'), array('action' => 'delete', $dieta['Dieta']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $dieta['Dieta']['id'])); ?> 
+		<?= $this->Form->postLink(__('Eliminar Dieta'), array('action' => 'eliminar', $dieta['Dieta']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $dieta['Dieta']['id'])); ?>
 		<?= $this->Html->link(__('Listado de Dietas'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Dieta'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
@@ -71,11 +73,10 @@
             <table class="table" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    		<th><?= __('Id'); ?></th>
-		<th><?= __('Convenio Id'); ?></th>
-		<th><?= __('Dieta Id'); ?></th>
+        <th><?= __('Id'); ?></th>
+		<th><?= __('Convenio'); ?></th>
 		<th><?= __('Costo'); ?></th>
-		<th><?= __('Estado Id'); ?></th>
+		<th><?= __('Estado'); ?></th>
 		<th><?= __('Created'); ?></th>
 		<th><?= __('Modified'); ?></th>
 		<th><?= __('User Created'); ?></th>
@@ -87,18 +88,17 @@
                 	<?php foreach ($dieta['Viatico'] as $viatico): ?>
 		<tr>
 			<td><?= $viatico['id']; ?></td>
-			<td><?= $viatico['convenio_id']; ?></td>
-			<td><?= $viatico['dieta_id']; ?></td>
+			<td><?= $viatico['Convenio']['anio']; ?></td>
 			<td><?= $viatico['costo']; ?></td>
-			<td><?= $viatico['estado_id']; ?></td>
+			<td><?= $viatico['Estado']['nombre']; ?></td>
 			<td><?= $viatico['created']; ?></td>
 			<td><?= $viatico['modified']; ?></td>
-			<td><?= $viatico['user_created']; ?></td>
-			<td><?= $viatico['user_modified']; ?></td>
+			<td><?= $this->Authake->getUsuario($viatico['user_created']); ?></td>
+			<td><?= $this->Authake->getUsuario($viatico['user_modified']); ?></td>
 			<td class="actions">
 				<?= $this->Html->link(__('Ver'), array('controller' => 'viaticos', 'action' => 'view', $viatico['id']), array('class' => 'btn btn-default btn-xs')); ?>
 				<?= $this->Html->link(__('Editar'), array('controller' => 'viaticos', 'action' => 'edit', $viatico['id']), array('class' => 'btn btn-default btn-xs')); ?>
-				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'viaticos', 'action' => 'delete', $viatico['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $viatico['id'])); ?>
+				<?= $this->Form->postLink(__('Eliminar'), array('controller' => 'viaticos', 'action' => 'eliminar', $viatico['id']), array('class' => 'btn btn-default btn-xs'), __('Are you sure you want to delete # %s?', $viatico['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
