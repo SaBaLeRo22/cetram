@@ -3,7 +3,7 @@
  * @var $this LocalView
  */
 ?><div class="row eventos index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Eventos'); ?></h2>
         <div class="table-responsive">
 
@@ -28,17 +28,14 @@
                         <?= $this->Html->link( h( $evento['Evento']['nombre'] ),
                         array( 'action' => 'view', $evento['Evento']['id'] ) ); ?>                        
                         <div class="nowrap">
-                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $evento['Evento']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
-                            <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $evento['Evento']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
-                            &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $evento['Evento']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $evento['Evento']['nombre'])); ?>                 
+                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $evento['Evento']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                         </div>
                     </td> 
                     <td><?= h($evento['Evento']['color']); ?>&nbsp;</td>
                     <td><?= h($evento['Evento']['created']); ?>&nbsp;</td>
                     <td><?= h($evento['Evento']['modified']); ?>&nbsp;</td>
-                    <td><?= h($evento['Evento']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($evento['Evento']['user_modified']); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($evento['Evento']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($evento['Evento']['user_modified'])); ?>&nbsp;</td>
                      
                 </tr>
                 <?php endforeach ?> 
@@ -66,28 +63,6 @@
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
                         array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                         array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Evento'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Alerta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Alertas'), array('controller' => 'alertas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Alerta'), array('controller' => 'alertas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Respuesta Indicadore</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Respuesta Indicadores'), array('controller' => 'respuesta_indicadores', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Respuesta Indicadore'), array('controller' => 'respuesta_indicadores', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
             </div>
         </div>
     </div>

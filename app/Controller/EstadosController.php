@@ -43,7 +43,7 @@ class EstadosController extends AppController {
 		if (!$this->Estado->exists($id)) {
 			throw new NotFoundException(__('Invalid estado'));
 		}
-		$this->Estado->recursive = 2;
+		$this->Estado->recursive = 0;
 		$options = array('conditions' => array('Estado.' . $this->Estado->primaryKey => $id));
 		$this->set('estado', $this->Estado->find('first', $options));
 	}

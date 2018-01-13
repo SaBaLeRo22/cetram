@@ -57,7 +57,6 @@ class EventosController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Evento->create();
 
-			$this->request->data['Evento']['estado_id'] = '1';
 			$this->request->data['Evento']['user_created'] = $this->Authake->getUserId();
 			$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
 
@@ -118,20 +117,5 @@ class EventosController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 
-	public function eliminar($id = null) {
-		$this->Evento->id = $id;
-		if (!$this->Evento->exists()) {
-			throw new NotFoundException(__('Invalid Evento'));
-		}
 
-		$this->request->data['Evento']['estado_id'] = '2';
-		$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
-
-		if ($this->Evento->save($this->request->data)) {
-			$this->Session->setFlash(__('The Evento has been saved.'));
-			return $this->redirect(array('action' => 'index'));
-		} else {
-			$this->Session->setFlash(__('The Evento could not be saved. Please, try again.'));
-		}
-	}
 }
