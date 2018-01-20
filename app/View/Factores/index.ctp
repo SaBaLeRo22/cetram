@@ -3,9 +3,14 @@
  * @var $this LocalView
  */
 ?><div class="row factores index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Factores'); ?></h2>
         <div class="table-responsive">
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
@@ -35,7 +40,7 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $factore['Factore']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $factore['Factore']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $factore['Factore']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $factore['Factore']['nombre'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $factore['Factore']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $factore['Factore']['nombre'])); ?>
                         </div>
                     </td> 
                     <td><?= h($factore['Factore']['descripcion']); ?>&nbsp;</td>
@@ -44,9 +49,8 @@
                     <td><?= h($factore['Factore']['porcentaje_amortizar']); ?>&nbsp;</td>
                     <td><?= $factore['Estado']['nombre']; ?></td><td><?= h($factore['Factore']['created']); ?>&nbsp;</td>
                     <td><?= h($factore['Factore']['modified']); ?>&nbsp;</td>
-                    <td><?= h($factore['Factore']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($factore['Factore']['user_modified']); ?>&nbsp;</td>
-                     
+                    <td><?= h($this->Authake->getUsuario($factore['Factore']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($factore['Factore']['user_modified'])); ?>&nbsp;</td>
                 </tr>
                 <?php endforeach ?> 
                 </tbody>
@@ -73,22 +77,6 @@
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
                         array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                         array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Factore'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
             </div>
         </div>
     </div>

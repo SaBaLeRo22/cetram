@@ -40,25 +40,28 @@
 			<?= h($factore['Factore']['porcentaje_amortizar']); ?>
 			&nbsp;
 		</dd>
-		<dt><?= __('Estado'); ?></dt>
-		<dd>
-			<?= $this->Html->link($factore['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $factore['Estado']['id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Created'); ?></dt>
-		<dd>
-			<?= h($factore['Factore']['user_created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?= __('User Modified'); ?></dt>
-		<dd>
-			<?= h($factore['Factore']['user_modified']); ?>
-			&nbsp;
-		</dd>
+
+
+
             </dl>
             <dl class="dl-horizontal text-muted">
+				<dt><?= __('Estado'); ?></dt>
+				<dd>
+					<?= $this->Html->link($factore['Estado']['nombre'], array('controller' => 'estados', 'action' => 'view', $factore['Estado']['id'])); ?>
+					&nbsp;
+				</dd>
+				<dt><?= __('User Created'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($factore['Factore']['user_created'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Created</dt>
                     <dd><?= h($factore['Factore']['created']); ?>&nbsp;</dd>
+				<dt><?= __('User Modified'); ?></dt>
+				<dd>
+					<?= h($this->Authake->getUsuario($factore['Factore']['user_modified'])); ?>
+					&nbsp;
+				</dd>
                 <dt>Modified</dt>
                     <dd><?= h($factore['Factore']['modified']); ?>&nbsp;</dd>
                             </dl>
@@ -68,10 +71,10 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
 
             <div class="list-group">
-                                		<?= $this->Html->link(__('Editar Factore'), array('action' => 'edit', $factore['Factore']['id']), array('class' => 'list-group-item')); ?> 
-		<?= $this->Form->postLink(__('Eliminar Factore'), array('action' => 'delete', $factore['Factore']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $factore['Factore']['id'])); ?> 
+                                		<?= $this->Html->link(__('Editar Factor'), array('action' => 'edit', $factore['Factore']['id']), array('class' => 'list-group-item')); ?>
+		<?= $this->Form->postLink(__('Eliminar Factor'), array('action' => 'eliminar', $factore['Factore']['id']), array('class' => 'list-group-item'), __('Are you sure you want to delete # %s?', $factore['Factore']['id'])); ?>
 		<?= $this->Html->link(__('Listado de Factores'), array('action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Factore'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Factor'), array('action' => 'add'), array('class' => 'list-group-item')); ?>
             </div>
         </div>
     </div>
