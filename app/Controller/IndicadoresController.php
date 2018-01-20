@@ -43,7 +43,7 @@ class IndicadoresController extends AppController {
 		if (!$this->Indicadore->exists($id)) {
 			throw new NotFoundException(__('Invalid indicadore'));
 		}
-		$this->Parametro->recursive = 2;
+		$this->Indicadore->recursive = 2;
 		$options = array('conditions' => array('Indicadore.' . $this->Indicadore->primaryKey => $id));
 		$this->set('indicadore', $this->Indicadore->find('first', $options));
 	}
