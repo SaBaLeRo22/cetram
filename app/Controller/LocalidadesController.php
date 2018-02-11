@@ -26,7 +26,7 @@ class LocalidadesController extends AppController {
 		$this->paginate = array(
 			'limit' => '5',
 			'order' => array(
-				'Localidade.nombre' => 'asc'
+				'Localidade.codigopostal' => 'asc'
 			)
 		);
 		$this->set('localidades', $this->Paginator->paginate());
