@@ -25,21 +25,14 @@
         </div>
 
         <div class="form-group">
-            <?= $this->Form->label('unidade_id', null, array('class' => 'control-label col-xs-3')); ?>
+            <?= $this->Form->label('unidade_id', 'Unidad', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('unidade_id'); ?>
         </div>
                                                     <div class="form-group">
             <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('estado_id'); ?> 
         </div>
-                                                                                                                    <div class="form-group">
-            <?= $this->Form->label('user_created', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_created'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('user_modified', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_modified'); ?> 
-        </div>
+
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-save fa-fw"></i> Guardar', array('class' => 'btn btn-primary')); ?> 
         </div>
@@ -50,22 +43,18 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Item.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Item.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Items'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'eliminar', $this->Form->value('Item.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Item.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Items'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Tipo</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Tipos'), array('controller' => 'tipos', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Tipo'), array('controller' => 'tipos', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Participacione</h4>
+
+            <h4 class="text-muted">Participacion</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Participaciones'), array('controller' => 'participaciones', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Participacione'), array('controller' => 'participaciones', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Participacion'), array('controller' => 'participaciones', 'action' => 'add'), array('class' => 'list-group-item')); ?>
  
             </div>
         </div>
