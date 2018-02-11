@@ -4,7 +4,7 @@
  */
 ?><div class="row localidades form">
     <div class="col-md-9">
-                <h2><?= __('Editar Localidade') ?></h2>
+                <h2><?= __('Editar Localidad') ?></h2>
                 <hr/>
 
         <?= $this->Form->create('Localidade', array('class' => 'form-horizontal')); ?>
@@ -20,7 +20,7 @@
             <?= $this->Form->input('nombre'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('codigopostal', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('codigopostal', 'CP', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('codigopostal'); ?> 
         </div>
                                                                                                                     <div class="form-group">
@@ -37,19 +37,14 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Localidade.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Localidade.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Localidades'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'eliminar', $this->Form->value('Localidade.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Localidade.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Localidades'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
             <h4 class="text-muted">Provincia</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Provincias'), array('controller' => 'provincias', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
 		<?= $this->Html->link(__('Agregar Provincia'), array('controller' => 'provincias', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
+
         </div>
     </div>
 </div>
