@@ -4,7 +4,7 @@
  */
 ?><div class="row multiplicadores form">
     <div class="col-md-9">
-                <h2><?= __('Editar Multiplicadore') ?></h2>
+                <h2><?= __('Editar Multiplicadores') ?></h2>
                 <hr/>
 
         <?= $this->Form->create('Multiplicadore', array('class' => 'form-horizontal')); ?>
@@ -17,18 +17,7 @@
             <?= $this->Form->label('descripcion', null, array('class' => 'control-label col-xs-3')); ?> 
             <?= $this->Form->input('descripcion'); ?> 
         </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('estado_id', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('estado_id'); ?> 
-        </div>
-                                                                                                                    <div class="form-group">
-            <?= $this->Form->label('user_created', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_created'); ?> 
-        </div>
-                                                    <div class="form-group">
-            <?= $this->Form->label('user_modified', null, array('class' => 'control-label col-xs-3')); ?> 
-            <?= $this->Form->input('user_modified'); ?> 
-        </div>
+
                                         <div class="well well-sm text-right">
             <?= $this->Form->button('<i class="fa fa-save fa-fw"></i> Guardar', array('class' => 'btn btn-primary')); ?> 
         </div>
@@ -41,15 +30,11 @@
             <div class="list-group">
                                                 <?= $this->Html->link(__('Listado de Multiplicadores'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Matrix</h4>
+
+            <h4 class="text-muted">Matriz</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Matrices'), array('controller' => 'matrices', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Matrix'), array('controller' => 'matrices', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Matriz'), array('controller' => 'matrices', 'action' => 'add'), array('class' => 'list-group-item')); ?>
             </div>
             <h4 class="text-muted">Pregunta</h4>
             <div class="list-group">
