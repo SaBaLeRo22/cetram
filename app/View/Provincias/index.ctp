@@ -3,16 +3,20 @@
  * @var $this LocalView
  */
 ?><div class="row provincias index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Provincias'); ?></h2>
         <div class="table-responsive">
-
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
                     <th><?= $this->Paginator->sort('id'); ?></th>
                     <th><?= $this->Paginator->sort('nombre'); ?></th>
-                    <th><?= $this->Paginator->sort('codigo31662'); ?></th>
+                    <th><?= $this->Paginator->sort('codigo31662', 'Codigo'); ?></th>
                     <th><?= $this->Paginator->sort('created'); ?></th>
                     <th><?= $this->Paginator->sort('modified'); ?></th>
                     <th><?= $this->Paginator->sort('estado_id'); ?></th>
@@ -30,7 +34,7 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $provincia['Provincia']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $provincia['Provincia']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $provincia['Provincia']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $provincia['Provincia']['nombre'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $provincia['Provincia']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $provincia['Provincia']['nombre'])); ?>
                         </div>
                     </td> 
                     <td><?= h($provincia['Provincia']['codigo31662']); ?>&nbsp;</td>
@@ -66,26 +70,5 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Provincia'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Localidade</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Localidades'), array('controller' => 'localidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Localidade'), array('controller' => 'localidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-        </div>
-    </div>
+
 </div>

@@ -16,7 +16,7 @@
             <?= $this->Form->input('nombre'); ?> 
         </div>
                                                     <div class="form-group">
-            <?= $this->Form->label('codigo31662', null, array('class' => 'control-label col-xs-3')); ?> 
+            <?= $this->Form->label('codigo31662', 'Codigo', array('class' => 'control-label col-xs-3')); ?>
             <?= $this->Form->input('codigo31662'); ?> 
         </div>
                                                                                                                     <div class="form-group">
@@ -33,17 +33,13 @@
             <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
             
             <div class="list-group">
-                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $this->Form->value('Provincia.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Provincia.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Provincias'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
+                                                <?= $this->Form->postLink(__('Eliminar'), array('action' => 'eliminar', $this->Form->value('Provincia.id')), array('class' => 'list-group-item'), __('Se va a eliminar %s ¿Confirma la eliminación?', $this->Form->value('Provincia.nombre'))); ?>                                <?= $this->Html->link(__('Listado de Provincias'), array('action' => 'index'), array('class' => 'list-group-item')); ?>
                             </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de  Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
-            </div>
-            <h4 class="text-muted">Localidade</h4>
+
+            <h4 class="text-muted">Localidad</h4>
             <div class="list-group">
                 		<?= $this->Html->link(__('Listado de  Localidades'), array('controller' => 'localidades', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Localidade'), array('controller' => 'localidades', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
+		<?= $this->Html->link(__('Agregar Localidad'), array('controller' => 'localidades', 'action' => 'add'), array('class' => 'list-group-item')); ?>
  
             </div>
         </div>
