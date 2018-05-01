@@ -43,7 +43,7 @@ class ViaticosController extends AppController {
 		if (!$this->Viatico->exists($id)) {
 			throw new NotFoundException(__('Invalid viatico'));
 		}
-		$this->Viatico->recursive = 2;
+		$this->Viatico->recursive = 0;
 		$options = array('conditions' => array('Viatico.' . $this->Viatico->primaryKey => $id));
 		$this->set('viatico', $this->Viatico->find('first', $options));
 	}
