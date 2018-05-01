@@ -3,10 +3,14 @@
  * @var $this LocalView
  */
 ?><div class="row viaticos index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Viaticos'); ?></h2>
         <div class="table-responsive">
-
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -33,14 +37,13 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $viatico['Viatico']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $viatico['Viatico']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $viatico['Viatico']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $viatico['Viatico']['costo'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $viatico['Viatico']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $viatico['Viatico']['costo'])); ?>
                         </div>
                     </td> 
                     <td><?= $viatico['Estado']['nombre']; ?></td><td><?= h($viatico['Viatico']['created']); ?>&nbsp;</td>
                     <td><?= h($viatico['Viatico']['modified']); ?>&nbsp;</td>
-                    <td><?= h($viatico['Viatico']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($viatico['Viatico']['user_modified']); ?>&nbsp;</td>
-                     
+                    <td><?= h($this->Authake->getUsuario($viatico['Viatico']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($viatico['Viatico']['user_modified'])); ?>&nbsp;</td>
                 </tr>
                 <?php endforeach ?> 
                 </tbody>
@@ -70,32 +73,5 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Viatico'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Convenio</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Convenios'), array('controller' => 'convenios', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Convenio'), array('controller' => 'convenios', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Dieta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Dietas'), array('controller' => 'dietas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Dieta'), array('controller' => 'dietas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-        </div>
-    </div>
+
 </div>
