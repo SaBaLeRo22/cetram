@@ -43,7 +43,7 @@ class UnidadesController extends AppController {
 		if (!$this->Unidade->exists($id)) {
 			throw new NotFoundException(__('Invalid unidade'));
 		}
-		$this->Unidade->recursive = 2;
+		$this->Unidade->recursive = 0;
 		$options = array('conditions' => array('Unidade.' . $this->Unidade->primaryKey => $id));
 		$this->set('unidade', $this->Unidade->find('first', $options));
 	}
