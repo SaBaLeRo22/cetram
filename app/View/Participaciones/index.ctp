@@ -3,10 +3,14 @@
  * @var $this LocalView
  */
 ?><div class="row participaciones index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Participaciones'); ?></h2>
         <div class="table-responsive">
-
+            <div class="related">
+                <div class="actions">
+                    <?= $this->Html->link(__('<i class="fa fa-plus fa-fw"></i> Agregar'), array('action' => 'add'), array('class' => 'btn btn-sm btn-info')); ?>
+                </div>
+            </div>
             <table class="table table-hover" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
@@ -31,14 +35,13 @@
                             <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $participacione['Participacione']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $participacione['Participacione']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
                             &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $participacione['Participacione']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $participacione['Participacione']['id'])); ?>                 
+                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'eliminar', $participacione['Participacione']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $participacione['Participacione']['id'])); ?>
                         </div>
                     </td> 
                     <td><?= $participacione['Parametro']['nombre']; ?></td><td><?= $participacione['Item']['nombre']; ?></td><td><?= $participacione['Estado']['nombre']; ?></td><td><?= h($participacione['Participacione']['created']); ?>&nbsp;</td>
                     <td><?= h($participacione['Participacione']['modified']); ?>&nbsp;</td>
-                    <td><?= h($participacione['Participacione']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($participacione['Participacione']['user_modified']); ?>&nbsp;</td>
-                     
+                    <td><?= h($this->Authake->getUsuario($participacione['Participacione']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($participacione['Participacione']['user_modified'])); ?>&nbsp;</td>
                 </tr>
                 <?php endforeach ?> 
                 </tbody>
@@ -68,32 +71,5 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Participacione'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Parametro</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Parametros'), array('controller' => 'parametros', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Parametro'), array('controller' => 'parametros', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Item</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Items'), array('controller' => 'items', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Item'), array('controller' => 'items', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-        </div>
-    </div>
+
 </div>
