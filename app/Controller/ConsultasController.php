@@ -4149,6 +4149,11 @@ class ConsultasController extends AppController
         $this->Consulta->recursive = -1;
     }
 
+    public function respuestas()
+    {
+        $this->Consulta->recursive = -1;
+    }
+
     public function copiar($id = null)
     {
         if (!$this->Consulta->exists($id)) {
