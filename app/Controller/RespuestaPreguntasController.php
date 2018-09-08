@@ -23,6 +23,12 @@ class RespuestaPreguntasController extends AppController {
  */
 	public function index() {
 		$this->RespuestaPregunta->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Consulta.id' => 'asc', 'RespuestaPregunta.id' => 'asc'
+			)
+		);
 		$this->set('respuestaPreguntas', $this->Paginator->paginate());
 	}
 
