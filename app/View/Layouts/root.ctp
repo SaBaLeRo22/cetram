@@ -59,6 +59,12 @@ $this->extend('default');
             </li>
             <li role="presentation" class="divider"></li>
             <li>
+                <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'consultas', 'action' => 'respuestas', 'prefix' => false, $this->request->prefix => false)) ?>">
+                    <i class="fa fa-wrench"></i> Respuestas
+                </a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
                 <a href="<?= $this->Html->url(array('plugin' => null, 'controller' => 'authake', 'action' => 'index', 'prefix' => false, $this->request->prefix => false)) ?>">
                     <i class="fa fa-users"></i> Usuarios
                 </a>
