@@ -4,7 +4,7 @@
  */
 ?><div class="row respuestaPreguntas view">
     <div class="col-md-12">
-        <h2><?= $respuestaPregunta['RespuestaPregunta']['valor'] ?></h2>
+        <h2><?= $respuestaPregunta['RespuestaPregunta']['pregunta'] ?></h2>
         <hr/>
     </div>
     <div class="col-md-4">
