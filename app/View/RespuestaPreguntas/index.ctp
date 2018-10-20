@@ -41,12 +41,9 @@
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPregunta['RespuestaPregunta']['valor'])); ?>                 -->
                         </div>
                     </td>
-                    <td><?= h($respuestaPregunta['RespuestaPregunta']['pregunta']); ?>&nbsp;</td>
-                    <td><?= h($respuestaPregunta['RespuestaPregunta']['respuesta']); ?>&nbsp;</td>
-                    <td><?= h($respuestaPregunta['RespuestaPregunta']['unidad']); ?>&nbsp;</td>
                     <td class="display-column">
-                        <?= $this->Html->link( h( $respuestaPregunta['RespuestaPregunta']['valor'] ),
-                        array( 'action' => 'view', $respuestaPregunta['RespuestaPregunta']['id'] ) ); ?>                        
+                        <?= $this->Html->link( h( $respuestaPregunta['RespuestaPregunta']['pregunta'] ),
+                        array( 'action' => 'view', $respuestaPregunta['RespuestaPregunta']['id'] ) ); ?>
                         <div class="nowrap">
                             <?= $this->Html->link( '<i class="fa fa-eye"></i> Ver Rta Pregunta', array('action' => 'view', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <!--<?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?> -->
@@ -54,6 +51,10 @@
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPregunta['RespuestaPregunta']['valor'])); ?>                 -->
                         </div>
                     </td>
+
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['respuesta']); ?>&nbsp;</td>
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['unidad']); ?>&nbsp;</td>
+                    <td><?= h($respuestaPregunta['RespuestaPregunta']['valor']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['funcion']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['minimo']); ?>&nbsp;</td>
                     <td><?= h($respuestaPregunta['RespuestaPregunta']['maximo']); ?>&nbsp;</td>
