@@ -45,7 +45,7 @@ class AppController extends Controller {
         'Authake.Authake'
     );
 //    var $helpers = array('Form', 'Time', 'Html', 'Session', 'Js', 'Authake.Authake');
-    var $components = array('Session', 'RequestHandler', 'Authake.Authake');
+    var $components = array('Export.Export', 'Session', 'RequestHandler', 'Authake.Authake', 'CsvView.CsvView');
     var $counter = 0;
     public $layout = 'root';
 
