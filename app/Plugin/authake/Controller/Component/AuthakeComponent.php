@@ -353,6 +353,22 @@ class AuthakeComponent extends Component {
         return Router::url($clurl + array("base" => false));
    }
 
+    function getUsuario($id = null) {
+        App::import("Model", "Authake.User");
+        $model = new User();
+
+        $user = $model->find('first', array('conditions' => array('User.id' => $id)));
+        if ( $user['User']['login'] !=  NULL )
+        {
+            $loginName = $user['User']['login'];
+        }
+        else
+        {
+            $loginName = $user['User']['email'];
+        }
+        return $loginName;
+    }
+
 }
 
 ?>
