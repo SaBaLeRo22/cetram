@@ -5,6 +5,11 @@
 ?><div class="row respuestaPreguntas index">
     <div class="col-md-12">
         <h2><?= __('Respuestas a las Preguntas'); ?></h2>
+        <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-info']); ?>
+            </div>
+        </div>
         <div class="table-responsive">
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -35,7 +40,7 @@
                         <?= $this->Html->link( h( $respuestaPregunta['Consulta']['id'] ),
                         array( 'controller' => 'consultas', 'action' => 'view', $respuestaPregunta['Consulta']['id'] ) ); ?>
                         <div class="nowrap">
-                            <?= $this->Html->link( '<i class="fa fa-eye"></i> Ver Consulta', array('action' => 'view', 'controller' => 'consultas', 'action' => 'resultado', $respuestaPregunta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', 'controller' => 'consultas', 'action' => 'resultado', $respuestaPregunta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <!--<?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?> -->
                             &nbsp;
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPregunta['RespuestaPregunta']['valor'])); ?>                 -->
@@ -45,7 +50,7 @@
                         <?= $this->Html->link( h( $respuestaPregunta['RespuestaPregunta']['pregunta'] ),
                         array( 'action' => 'view', $respuestaPregunta['RespuestaPregunta']['id'] ) ); ?>
                         <div class="nowrap">
-                            <?= $this->Html->link( '<i class="fa fa-eye"></i> Ver Rta Pregunta', array('action' => 'view', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <!--<?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?> -->
                             &nbsp;
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPregunta['RespuestaPregunta']['valor'])); ?>                 -->
