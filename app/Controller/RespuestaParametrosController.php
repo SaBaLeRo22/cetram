@@ -23,6 +23,14 @@ class RespuestaParametrosController extends AppController {
  */
 	public function index() {
 		$this->RespuestaParametro->recursive = 0;
+
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Consulta.id' => 'asc', 'RespuestaParametro.id' => 'asc'
+			)
+		);
+
 		$this->set('respuestaParametros', $this->Paginator->paginate());
 	}
 
@@ -39,6 +47,65 @@ class RespuestaParametrosController extends AppController {
 		}
 		$options = array('conditions' => array('RespuestaParametro.' . $this->RespuestaParametro->primaryKey => $id));
 		$this->set('respuestaParametro', $this->RespuestaParametro->find('first', $options));
+	}
+
+	public function csv()
+	{
+		$this->RespuestaParametro->recursive = 0;
+		$data = $this->RespuestaParametro->find('all', array(
+			'Consulta.id' => 'asc', 'RespuestaParametro.id' => 'asc'
+		));
+
+		foreach ($data as $key => $rp) {
+			if(!empty($rp['RespuestaParametro']['valor'])){$data[$key]['RespuestaParametro']['valor'] = number_format ( $rp['RespuestaParametro']['valor'], '2', ',', '.');}
+			if(!empty($rp['RespuestaParametro']['minimo'])){$data[$key]['RespuestaParametro']['minimo'] = number_format ( $rp['RespuestaParametro']['minimo'], '2', ',', '.');}
+			if(!empty($rp['RespuestaParametro']['maximo'])){$data[$key]['RespuestaParametro']['maximo'] = number_format ( $rp['RespuestaParametro']['maximo'], '2', ',', '.');}
+			if($rp['RespuestaParametro']['editado']=='1'){$data[$key]['RespuestaParametro']['editado']='SI';} else{$data[$key]['RespuestaParametro']['editado']='NO';}
+			$data[$key]['RespuestaParametro']['estado'] = $rp['Estado']['nombre'];
+			$data[$key]['RespuestaParametro']['user_created'] = $this->Authake->getUsuario($rp['RespuestaParametro']['user_created']);
+			$data[$key]['RespuestaParametro']['user_modified'] = $this->Authake->getUsuario($rp['RespuestaParametro']['user_modified']);
+		}
+
+		$_delimiter = ';';
+		$_bom = true;
+		$_null = '';
+		$_serialize = 'data';
+
+		$_extract = array(
+			'RespuestaParametro.id',
+			'RespuestaParametro.consulta_id',
+			'RespuestaParametro.parametro',
+			'RespuestaParametro.valor',
+			'RespuestaParametro.unidad',
+			'RespuestaParametro.editado',
+			'RespuestaParametro.minimo',
+			'RespuestaParametro.maximo',
+			'RespuestaParametro.estado',
+			'RespuestaParametro.created',
+			'RespuestaParametro.modified',
+			'RespuestaParametro.user_created',
+			'RespuestaParametro.user_modified'
+		);
+
+		$excludePaths = array(); // Exclude all id fields
+		//$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+		$customHeaders = array();
+		$options = array('includeClassname' => false, 'humanReadable' => true);
+		$_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+		$this->response->download('RespuestaParametros_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+		$this->viewClass = 'CsvView.Csv';
+		$this->set(compact(
+			'data',
+			'_serialize',
+			'_header',
+			'_extract',
+			'_delimiter',
+			'_bom',
+			'_null'
+		));
 	}
 
 /**
