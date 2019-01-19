@@ -44,6 +44,7 @@ Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'
  */
 CakePlugin::routes();
 //CakePlugin::routes('Authake');
+Router::parseExtensions('csv');
 
 /**
  * Load the CakePHP default routes. Only remove this if you do not want to use
