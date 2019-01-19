@@ -52,7 +52,7 @@
                         <div class="nowrap">
                             <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <!--<?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?> -->
-                            &nbsp;
+                            <!--&nbsp;-->
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPregunta['RespuestaPregunta']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPregunta['RespuestaPregunta']['valor'])); ?>                 -->
                         </div>
                     </td>
