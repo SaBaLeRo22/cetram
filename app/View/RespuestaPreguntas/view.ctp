@@ -26,7 +26,7 @@
 				</dd>
 				<dt><?= __('Consulta ID'); ?></dt>
 				<dd>
-					<?= $this->Html->link($respuestaPregunta['Consulta']['id'], array('controller' => 'consultas', 'action' => 'view', $respuestaPregunta['Consulta']['id'])); ?>
+					<?= $this->Html->link($respuestaPregunta['Consulta']['id'], array('controller' => 'consultas', 'action' => 'resultado', $respuestaPregunta['Consulta']['id'])); ?>
 					&nbsp;
 				</dd>
 				<dt><?= __('Pregunta Actual'); ?></dt>
