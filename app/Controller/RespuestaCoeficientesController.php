@@ -23,7 +23,70 @@ class RespuestaCoeficientesController extends AppController {
  */
 	public function index() {
 		$this->RespuestaCoeficiente->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Consulta.id' => 'asc', 'RespuestaCoeficiente.id' => 'asc'
+			)
+		);
 		$this->set('respuestaCoeficientes', $this->Paginator->paginate());
+	}
+
+	public function csv()
+	{
+		$this->RespuestaCoeficiente->recursive = 0;
+		$data = $this->RespuestaCoeficiente->find('all', array(
+			'Consulta.id' => 'asc', 'RespuestaCoeficiente.id' => 'asc'
+		));
+
+		foreach ($data as $key => $rp) {
+			if(!empty($rp['RespuestaCoeficiente']['valor'])){$data[$key]['RespuestaCoeficiente']['valor'] = number_format ( $rp['RespuestaCoeficiente']['valor'], '2', ',', '.');}
+			if(!empty($rp['RespuestaCoeficiente']['minimo'])){$data[$key]['RespuestaCoeficiente']['minimo'] = number_format ( $rp['RespuestaCoeficiente']['minimo'], '2', ',', '.');}
+			if(!empty($rp['RespuestaCoeficiente']['maximo'])){$data[$key]['RespuestaCoeficiente']['maximo'] = number_format ( $rp['RespuestaCoeficiente']['maximo'], '2', ',', '.');}
+			$data[$key]['RespuestaCoeficiente']['estado'] = $rp['Estado']['nombre'];
+			$data[$key]['RespuestaCoeficiente']['user_created'] = $this->Authake->getUsuario($rp['RespuestaCoeficiente']['user_created']);
+			$data[$key]['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUsuario($rp['RespuestaCoeficiente']['user_modified']);
+		}
+
+		$_delimiter = ';';
+		$_bom = true;
+		$_null = '';
+		$_serialize = 'data';
+
+		$_extract = array(
+			'RespuestaCoeficiente.id',
+			'RespuestaCoeficiente.consulta_id',
+			'RespuestaCoeficiente.coeficiente',
+			'RespuestaCoeficiente.valor',
+			'RespuestaCoeficiente.minimo',
+			'RespuestaCoeficiente.maximo',
+			'RespuestaCoeficiente.unidad',
+			'RespuestaCoeficiente.estado',
+			'RespuestaCoeficiente.created',
+			'RespuestaCoeficiente.modified',
+			'RespuestaCoeficiente.user_created',
+			'RespuestaCoeficiente.user_modified'
+		);
+
+		$excludePaths = array(); // Exclude all id fields
+		//$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+		$customHeaders = array();
+		$options = array('includeClassname' => false, 'humanReadable' => true);
+		$_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+		$this->response->download('RespuestaCoeficientes_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+		$this->viewClass = 'CsvView.Csv';
+		$this->set(compact(
+			'data',
+			'_serialize',
+			'_header',
+			'_extract',
+			'_delimiter',
+			'_bom',
+			'_null'
+		));
 	}
 
 /**
