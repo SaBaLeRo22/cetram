@@ -39,7 +39,7 @@
                         <?= $this->Html->link( h( $respuestaParametro['Consulta']['id'] ),
                         array( 'controller' => 'consultas', 'action' => 'view', $respuestaParametro['Consulta']['id'] ) ); ?>
                         <div class="nowrap">
-                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', 'controller' => 'consultas', 'action' => 'resultado', $respuestaParametro['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('controller' => 'consultas', 'action' => 'resultado', $respuestaParametro['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                             <!--<?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaParametro['RespuestaPregunta']['id']), array('class' => 'btn btn-info btn-xs')); ?> -->
                             &nbsp;
                             <!--<?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaParametro['RespuestaParametro']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaParametro['RespuestaPregunta']['valor'])); ?>                 -->
