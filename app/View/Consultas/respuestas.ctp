@@ -63,12 +63,13 @@
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'respuestatipos', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
                         <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Tipos.</td>
                     </tr>
-
+<!--
                     <tr>
                         <td style="text-align: justify; vertical-align: middle"><strong>Multiplicadores</strong></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'respuestamultiplicadores', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
                         <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Multiplicadores.</td>
                     </tr>
+-->
 
                     <tr>
                         <td style="text-align: justify; vertical-align: middle"><strong>Indicadores</strong></td>
@@ -81,12 +82,13 @@
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'respuestasalarios', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
                         <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Salarios.</td>
                     </tr>
-
+<!--
                     <tr>
                         <td style="text-align: justify; vertical-align: middle"><strong>Pasos</strong></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'pasos', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
                         <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Pasos.</td>
                     </tr>
+-->
 
                     </tbody>
                 </table>
