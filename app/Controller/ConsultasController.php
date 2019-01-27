@@ -417,13 +417,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+/*            $paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 3; // Incompleta: Pantalla "Uno" es la última pantalla completa.
@@ -922,13 +927,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+/*            $paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
@@ -1266,13 +1276,18 @@ class ConsultasController extends AppController
                         'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                         'recursive' => -1
                     ));
-                    $paso['Paso']['completo'] = 1;
+
+                    $this->Paso->id = $paso['Paso']['id'];
+                    $this->Paso->saveField('completo', 1);
+                    $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+/*                    $paso['Paso']['completo'] = 1;
                     $paso['Paso']['user_modified'] = $this->Authake->getUserId();
                     if (!$this->Paso->save($paso)) {
                         $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
                     } else {
                         $this->Session->setFlash(__('The Paso has been saved.'));
-                    }
+                    }*/
 
                     $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
                     $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
@@ -1533,13 +1548,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+/*            $paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
@@ -1748,13 +1768,18 @@ class ConsultasController extends AppController
                     'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                     'recursive' => -1
                 ));
-                $paso['Paso']['completo'] = 1;
+
+                $this->Paso->id = $paso['Paso']['id'];
+                $this->Paso->saveField('completo', 1);
+                $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+/*                $paso['Paso']['completo'] = 1;
                 $paso['Paso']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->Paso->save($paso)) {
                     $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
                 } else {
                     $this->Session->setFlash(__('The Paso has been saved.'));
-                }
+                }*/
 
                 $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
                 $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
@@ -2075,13 +2100,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+            /*$paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             if ($this->request->data['Consulta']['localidade_id'] != '') {
@@ -2213,13 +2243,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+            /*$paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 7; // Incompleta: Pantalla "Cinco" es la última pantalla completa.
@@ -2294,13 +2329,18 @@ class ConsultasController extends AppController
                 'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
                 'recursive' => -1
             ));
-            $paso['Paso']['completo'] = 1;
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
+            /*$paso['Paso']['completo'] = 1;
             $paso['Paso']['user_modified'] = $this->Authake->getUserId();
             if (!$this->Paso->save($paso)) {
                 $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
             } else {
                 $this->Session->setFlash(__('The Paso has been saved.'));
-            }
+            }*/
 
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 7; // Incompleta: Pantalla "Cinco" es la última pantalla completa.
