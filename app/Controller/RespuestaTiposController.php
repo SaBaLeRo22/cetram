@@ -23,10 +23,79 @@ class RespuestaTiposController extends AppController {
  */
 	public function index() {
 		$this->RespuestaTipo->recursive = 0;
+		$this->paginate = array(
+			'limit' => '5',
+			'order' => array(
+				'Consulta.id' => 'asc', 'RespuestaTipo.id' => 'asc'
+			)
+		);
 		$this->set('respuestaTipos', $this->Paginator->paginate());
 	}
 
-/**
+	public function csv()
+	{
+		$this->RespuestaTipo->recursive = 0;
+		$data = $this->RespuestaTipo->find('all', array(
+			'Consulta.id' => 'asc', 'RespuestaTipo.id' => 'asc'
+		));
+
+		foreach ($data as $key => $rp) {
+			if(!empty($rp['RespuestaTipo']['valor'])){$data[$key]['RespuestaTipo']['valor'] = number_format ( $rp['RespuestaTipo']['valor'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['incidencia_valor'])){$data[$key]['RespuestaTipo']['incidencia_valor'] = number_format ( $rp['RespuestaTipo']['incidencia_valor'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['minimo'])){$data[$key]['RespuestaTipo']['minimo'] = number_format ( $rp['RespuestaTipo']['minimo'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['incidencia_minimo'])){$data[$key]['RespuestaTipo']['incidencia_minimo'] = number_format ( $rp['RespuestaTipo']['incidencia_minimo'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['maximo'])){$data[$key]['RespuestaTipo']['maximo'] = number_format ( $rp['RespuestaTipo']['maximo'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['incidencia_maximo'])){$data[$key]['RespuestaTipo']['incidencia_maximo'] = number_format ( $rp['RespuestaTipo']['incidencia_maximo'], '2', ',', '.');}
+			$data[$key]['RespuestaTipo']['estado'] = $rp['Estado']['nombre'];
+			$data[$key]['RespuestaTipo']['user_created'] = $this->Authake->getUsuario($rp['RespuestaTipo']['user_created']);
+			$data[$key]['RespuestaTipo']['user_modified'] = $this->Authake->getUsuario($rp['RespuestaTipo']['user_modified']);
+		}
+
+		$_delimiter = ';';
+		$_bom = true;
+		$_null = '';
+		$_serialize = 'data';
+
+		$_extract = array(
+			'RespuestaTipo.id',
+			'RespuestaTipo.consulta_id',
+			'RespuestaTipo.tipo',
+			'RespuestaTipo.unidad',
+			'RespuestaTipo.valor',
+			'RespuestaTipo.incidencia_valor',
+			'RespuestaTipo.minimo',
+			'RespuestaTipo.incidencia_minimo',
+			'RespuestaTipo.maximo',
+			'RespuestaTipo.incidencia_maximo',
+			'RespuestaTipo.estado',
+			'RespuestaTipo.created',
+			'RespuestaTipo.modified',
+			'RespuestaTipo.user_created',
+			'RespuestaTipo.user_modified'
+		);
+
+		$excludePaths = array(); // Exclude all id fields
+		//$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+		$customHeaders = array();
+		$options = array('includeClassname' => false, 'humanReadable' => true);
+		$_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+		$this->response->download('RespuestaTipos_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+		$this->viewClass = 'CsvView.Csv';
+		$this->set(compact(
+			'data',
+			'_serialize',
+			'_header',
+			'_extract',
+			'_delimiter',
+			'_bom',
+			'_null'
+		));
+	}
+
+	/**
  * view method
  *
  * @throws NotFoundException

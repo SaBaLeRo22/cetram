@@ -94,6 +94,7 @@ class RespuestaItemsController extends AppController {
 			'_null'
 		));
 	}
+
 /**
  * view method
  *
