@@ -70,6 +70,7 @@
 					<?= h($respuestaParametro['RespuestaParametro']['maximo']); ?>
 					&nbsp;
 				</dd>
+			</dl>
 				<dl class="dl-horizontal text-muted">
 					<dt><?= __('Estado'); ?></dt>
 					<dd>

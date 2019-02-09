@@ -3,8 +3,13 @@
  * @var $this LocalView
  */
 ?><div class="row respuestaPasajeros index">
-    <div class="col-md-9">
+    <div class="col-md-12">
         <h2><?= __('Respuesta Pasajeros'); ?></h2>
+        <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-info']); ?>
+            </div>
+        </div>
         <div class="table-responsive">
 
             <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -42,18 +47,22 @@
                 <?php foreach ($respuestaPasajeros as $respuestaPasajero): ?> 
                 <tr>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['id']); ?>&nbsp;</td>
-                    <td><?= $respuestaPasajero['Consulta']['costo']; ?></td><td class="display-column">
+                    <td class="display-column">
+                        <?= $this->Html->link( h( $respuestaPasajero['Consulta']['id'] ),
+                        array( 'controller' => 'consultas', 'action' => 'resultado', $respuestaPasajero['Consulta']['id'] ) ); ?>
+                        <div class="nowrap">
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('controller' => 'consultas', 'action' => 'resultado', $respuestaPasajero['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
+                        </div>
+                    </td>
+                    <td class="display-column">
                         <?= $this->Html->link( h( $respuestaPasajero['RespuestaPasajero']['tarifa'] ),
                         array( 'action' => 'view', $respuestaPasajero['RespuestaPasajero']['id'] ) ); ?>                        
                         <div class="nowrap">
-                            <?= $this->Html->link( '<i class="fa fa-plus"></i> Ver', array('action' => 'view', $respuestaPasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
-                            <?= $this->Html->link( '<i class="fa fa-pencil"></i> Editar', array('action' => 'edit', $respuestaPasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-info btn-xs')); ?> 
-                            &nbsp;
-                            <?= $this->Form->postLink( '<i class="fa fa-trash"></i> Eliminar', array('action' => 'delete', $respuestaPasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-danger btn-xs'), __('Se va a eliminar %s ¿Está seguro de eliminar este registro?', $respuestaPasajero['RespuestaPasajero']['tarifa'])); ?>                 
+                            <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', $respuestaPasajero['RespuestaPasajero']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                         </div>
-                    </td> 
-                    <td><?= h($respuestaPasajero['RespuestaPasajero']['sube']); ?>&nbsp;</td>
-                    <td><?= h($respuestaPasajero['RespuestaPasajero']['base']); ?>&nbsp;</td>
+                    </td>
+                    <td><?php if ($respuestaPasajero['RespuestaPasajero']['sube']=='1'): ?>SI<?php else: ?>NO<?php endif; ?>&nbsp;</td>
+                    <td><?php if ($respuestaPasajero['RespuestaPasajero']['base']=='1'): ?>SI<?php else: ?>NO<?php endif; ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['costo']); ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['semestre1']); ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['semestre2']); ?>&nbsp;</td>
@@ -69,10 +78,11 @@
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['mes10']); ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['mes11']); ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['mes12']); ?>&nbsp;</td>
-                    <td><?= $respuestaPasajero['Estado']['nombre']; ?></td><td><?= h($respuestaPasajero['RespuestaPasajero']['created']); ?>&nbsp;</td>
+                    <td><?= $respuestaPasajero['Estado']['nombre']; ?></td>
+                    <td><?= h($respuestaPasajero['RespuestaPasajero']['created']); ?>&nbsp;</td>
                     <td><?= h($respuestaPasajero['RespuestaPasajero']['modified']); ?>&nbsp;</td>
-                    <td><?= h($respuestaPasajero['RespuestaPasajero']['user_created']); ?>&nbsp;</td>
-                    <td><?= h($respuestaPasajero['RespuestaPasajero']['user_modified']); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($respuestaPasajero['RespuestaPasajero']['user_created'])); ?>&nbsp;</td>
+                    <td><?= h($this->Authake->getUsuario($respuestaPasajero['RespuestaPasajero']['user_modified'])); ?>&nbsp;</td>
                      
                 </tr>
                 <?php endforeach ?> 
@@ -100,28 +110,6 @@
                     ) ); ?>                    <?= $this->Paginator->next( '<i class="fa fa-angle-right"></i>',
                         array( 'tag' => 'li', 'currentClass' => 'disabled', 'escape' => false ), null,
                         array( 'tag' => 'li', 'class' => 'disabled', 'disabledTag' => 'a', 'escape' => false ) ); ?>                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="actions">
-            <h3><i class="icon-wrench"></i> <?= __('Acciones'); ?></h3>
-            
-            <div class="list-group">
-                <?= $this->Html->link(__('Agregar Respuesta Pasajero'), array('action' => 'add'), array('class' => 'list-group-item')); ?> 
-                 
-            </div>
-            <h4 class="text-muted">Consulta</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Consultas'), array('controller' => 'consultas', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Consulta'), array('controller' => 'consultas', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
-            </div>
-            <h4 class="text-muted">Estado</h4>
-            <div class="list-group">
-                		<?= $this->Html->link(__('Listado de Estados'), array('controller' => 'estados', 'action' => 'index'), array('class' => 'list-group-item')); ?> 
-		<?= $this->Html->link(__('Agregar Estado'), array('controller' => 'estados', 'action' => 'add'), array('class' => 'list-group-item')); ?> 
- 
             </div>
         </div>
     </div>
