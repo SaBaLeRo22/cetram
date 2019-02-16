@@ -7,7 +7,7 @@
         <h2><?= __('Respuestas a las Preguntas'); ?></h2>
         <div class="related">
             <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-info']); ?>
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-success']); ?>
             </div>
         </div>
         <div class="table-responsive">

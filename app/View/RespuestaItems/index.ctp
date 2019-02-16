@@ -7,7 +7,7 @@
         <h2><?= __('Respuesta Items'); ?></h2>
         <div class="related">
             <div class="actions">
-                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-info']); ?>
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csv'], ['class' => 'btn btn-sm btn-success']); ?>
             </div>
         </div>
         <div class="table-responsive">
@@ -18,10 +18,14 @@
                     <th><?= $this->Paginator->sort('id'); ?></th>
                     <th><?= $this->Paginator->sort('consulta_id'); ?></th>
                     <th><?= $this->Paginator->sort('item'); ?></th>
-                    <th><?= $this->Paginator->sort('valor'); ?></th>
-                    <th><?= $this->Paginator->sort('incidencia_valor'); ?></th>
                     <th><?= $this->Paginator->sort('minimo'); ?></th>
                     <th><?= $this->Paginator->sort('incidencia_minimo'); ?></th>
+                    <th><?= $this->Paginator->sort('inferior'); ?></th>
+                    <th><?= $this->Paginator->sort('incidencia_inferior'); ?></th>
+                    <th><?= $this->Paginator->sort('valor'); ?></th>
+                    <th><?= $this->Paginator->sort('incidencia_valor'); ?></th>
+                    <th><?= $this->Paginator->sort('superior'); ?></th>
+                    <th><?= $this->Paginator->sort('incidencia_superior'); ?></th>
                     <th><?= $this->Paginator->sort('maximo'); ?></th>
                     <th><?= $this->Paginator->sort('incidencia_maximo'); ?></th>
                     <th><?= $this->Paginator->sort('unidad'); ?></th>
@@ -51,10 +55,14 @@
                             <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'view', $respuestaItem['RespuestaItem']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                         </div>
                     </td>
-                    <td><?= h($respuestaItem['RespuestaItem']['valor']); ?>&nbsp;</td>
-                    <td><?= h($respuestaItem['RespuestaItem']['incidencia_valor']); ?>&nbsp;</td>
                     <td><?= h($respuestaItem['RespuestaItem']['minimo']); ?>&nbsp;</td>
                     <td><?= h($respuestaItem['RespuestaItem']['incidencia_minimo']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['inferior']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['incidencia_inferior']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['valor']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['incidencia_valor']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['superior']); ?>&nbsp;</td>
+                    <td><?= h($respuestaItem['RespuestaItem']['incidencia_superior']); ?>&nbsp;</td>
                     <td><?= h($respuestaItem['RespuestaItem']['maximo']); ?>&nbsp;</td>
                     <td><?= h($respuestaItem['RespuestaItem']['incidencia_maximo']); ?>&nbsp;</td>
                     <td><?= h($respuestaItem['RespuestaItem']['unidad']); ?>&nbsp;</td>

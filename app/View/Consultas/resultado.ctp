@@ -52,6 +52,7 @@
         <div class="related">
             <div class="actions">
                 <?= $this->Html->link(__('<i class="fa fa-paper-plane-o fa-fw"></i> Enviar por E-Mail'), array('action' => 'enviar', $consulta['Consulta']['id']), array('class' => 'btn btn-sm btn-info')); ?>
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvresumen', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
             </div>
             <h3><?= __('Resumen'); ?></h3>
 
@@ -313,6 +314,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvtipos', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Tipos'); ?></h3>
             <?php if (!empty($consulta['RespuestaTipo'])): ?>
             <div class="table-responsive">
@@ -379,6 +383,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvitems', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Items'); ?></h3>
             <?php if (!empty($consulta['RespuestaItem'])): ?>
             <div class="table-responsive">
@@ -445,6 +452,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvpreguntas', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Respuesta Preguntas'); ?></h3>
             <?php if (!empty($consulta['RespuestaPregunta'])): ?>
             <div class="table-responsive">
@@ -479,6 +489,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvpasajeros', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3>
                 <?php if ($sube['RespuestaPregunta']['opcione_id'] == '24'): ?>
                 <?= __('Pasajeros: "Posee SUBE"'); ?>
@@ -602,6 +615,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvsalarios', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Respuesta Salarios'); ?></h3>
             <?php if (!empty($consulta['RespuestaSalario'])): ?>
             <div class="table-responsive">
@@ -643,6 +659,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvparametros', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Parametros'); ?></h3>
             <?php if (!empty($consulta['RespuestaParametro'])): ?>
             <div class="table-responsive">
@@ -687,6 +706,9 @@
         <hr/>
 
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvcoeficientes', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Coeficientes'); ?></h3>
             <?php if (!empty($consulta['RespuestaCoeficiente'])): ?>
             <div class="table-responsive">
@@ -726,6 +748,9 @@
         </div>
         <hr/>
         <div class="related">
+            <div class="actions">
+                <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvindicadores', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+            </div>
             <h3><?= __('Detalle Indicadores'); ?></h3>
             <?php if (!empty($consulta['RespuestaIndicadore'])): ?>
             <div class="table-responsive">
