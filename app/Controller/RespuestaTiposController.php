@@ -49,6 +49,10 @@ class RespuestaTiposController extends AppController {
 			$data[$key]['RespuestaTipo']['estado'] = $rp['Estado']['nombre'];
 			$data[$key]['RespuestaTipo']['user_created'] = $this->Authake->getUsuario($rp['RespuestaTipo']['user_created']);
 			$data[$key]['RespuestaTipo']['user_modified'] = $this->Authake->getUsuario($rp['RespuestaTipo']['user_modified']);
+			if(!empty($rp['RespuestaTipo']['superior'])){$data[$key]['RespuestaTipo']['superior'] = number_format ( $rp['RespuestaTipo']['superior'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['incidencia_superior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_superior'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['inferior'])){$data[$key]['RespuestaTipo']['inferior'] = number_format ( $rp['RespuestaItem']['inferior'], '2', ',', '.');}
+			if(!empty($rp['RespuestaTipo']['incidencia_inferior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_inferior'], '2', ',', '.');}
 		}
 
 		$_delimiter = ';';
@@ -61,10 +65,14 @@ class RespuestaTiposController extends AppController {
 			'RespuestaTipo.consulta_id',
 			'RespuestaTipo.tipo',
 			'RespuestaTipo.unidad',
-			'RespuestaTipo.valor',
-			'RespuestaTipo.incidencia_valor',
 			'RespuestaTipo.minimo',
 			'RespuestaTipo.incidencia_minimo',
+			'RespuestaTipo.inferior',
+			'RespuestaTipo.incidencia_inferior',
+			'RespuestaTipo.valor',
+			'RespuestaTipo.incidencia_valor',
+			'RespuestaTipo.superior',
+			'RespuestaTipo.incidencia_superior',
 			'RespuestaTipo.maximo',
 			'RespuestaTipo.incidencia_maximo',
 			'RespuestaTipo.estado',

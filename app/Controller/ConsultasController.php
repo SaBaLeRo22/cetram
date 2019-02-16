@@ -4463,4 +4463,547 @@ class ConsultasController extends AppController
     }
 
 
+    public function csvpreguntas($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = 0;
+        $data = $this->RespuestaPregunta->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaPregunta.id' => 'asc'
+        ));
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaPregunta.pregunta',
+            'RespuestaPregunta.respuesta',
+            'RespuestaPregunta.unidad'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaPreguntas_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvpasajeros($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaPasajero');
+        $this->RespuestaPasajero->recursive = 0;
+        $data = $this->RespuestaPasajero->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaPasajero.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaPasajero']['costo'])){$data[$key]['RespuestaPasajero']['costo'] = number_format ( $rp['RespuestaPasajero']['costo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['semestre1'])){$data[$key]['RespuestaPasajero']['semestre1'] = number_format ( $rp['RespuestaPasajero']['semestre1'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['semestre2'])){$data[$key]['RespuestaPasajero']['semestre2'] = number_format ( $rp['RespuestaPasajero']['semestre2'], '2', ',', '.');}
+
+            if(!empty($rp['RespuestaPasajero']['mes01'])){$data[$key]['RespuestaPasajero']['mes01'] = number_format ( $rp['RespuestaPasajero']['mes01'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes02'])){$data[$key]['RespuestaPasajero']['mes02'] = number_format ( $rp['RespuestaPasajero']['mes02'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes03'])){$data[$key]['RespuestaPasajero']['mes03'] = number_format ( $rp['RespuestaPasajero']['mes03'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes04'])){$data[$key]['RespuestaPasajero']['mes04'] = number_format ( $rp['RespuestaPasajero']['mes04'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes05'])){$data[$key]['RespuestaPasajero']['mes05'] = number_format ( $rp['RespuestaPasajero']['mes05'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes06'])){$data[$key]['RespuestaPasajero']['mes06'] = number_format ( $rp['RespuestaPasajero']['mes06'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes07'])){$data[$key]['RespuestaPasajero']['mes07'] = number_format ( $rp['RespuestaPasajero']['mes07'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes08'])){$data[$key]['RespuestaPasajero']['mes08'] = number_format ( $rp['RespuestaPasajero']['mes08'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes09'])){$data[$key]['RespuestaPasajero']['mes09'] = number_format ( $rp['RespuestaPasajero']['mes09'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes10'])){$data[$key]['RespuestaPasajero']['mes10'] = number_format ( $rp['RespuestaPasajero']['mes10'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes11'])){$data[$key]['RespuestaPasajero']['mes11'] = number_format ( $rp['RespuestaPasajero']['mes11'], '2', ',', '.');}
+            if(!empty($rp['RespuestaPasajero']['mes12'])){$data[$key]['RespuestaPasajero']['mes12'] = number_format ( $rp['RespuestaPasajero']['mes12'], '2', ',', '.');}
+
+            if($rp['RespuestaPasajero']['sube']=='1'){$data[$key]['RespuestaPasajero']['sube']='SI';} else{$data[$key]['RespuestaPasajero']['sube']='NO';}
+            if($rp['RespuestaPasajero']['base']=='1'){$data[$key]['RespuestaPasajero']['base']='SI';} else{$data[$key]['RespuestaPasajero']['base']='NO';}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaPasajero.tarifa',
+            'RespuestaPasajero.sube',
+            'RespuestaPasajero.base',
+            'RespuestaPasajero.costo',
+            'RespuestaPasajero.semestre1',
+            'RespuestaPasajero.semestre2',
+            'RespuestaPasajero.mes01',
+            'RespuestaPasajero.mes02',
+            'RespuestaPasajero.mes03',
+            'RespuestaPasajero.mes04',
+            'RespuestaPasajero.mes05',
+            'RespuestaPasajero.mes06',
+            'RespuestaPasajero.mes07',
+            'RespuestaPasajero.mes08',
+            'RespuestaPasajero.mes09',
+            'RespuestaPasajero.mes10',
+            'RespuestaPasajero.mes11',
+            'RespuestaPasajero.mes12'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaPasajeros_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvsalarios($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaSalario');
+        $this->RespuestaSalario->recursive = 0;
+        $data = $this->RespuestaSalario->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaSalario.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaSalario']['salario'])){$data[$key]['RespuestaSalario']['salario'] = number_format ( $rp['RespuestaSalario']['salario'], '2', ',', '.');}
+            if(!empty($rp['RespuestaSalario']['cantidad'])){$data[$key]['RespuestaSalario']['cantidad'] = number_format ( $rp['RespuestaSalario']['cantidad'], '2', ',', '.');}
+            if(!empty($rp['RespuestaSalario']['antiguedad'])){$data[$key]['RespuestaSalario']['antiguedad'] = number_format ( $rp['RespuestaSalario']['antiguedad'], '2', ',', '.');}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaSalario.categoria',
+            'RespuestaSalario.salario',
+            'RespuestaSalario.cantidad',
+            'RespuestaSalario.antiguedad'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaSalarios_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvparametros($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaParametro');
+        $this->RespuestaParametro->recursive = 0;
+        $data = $this->RespuestaParametro->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaParametro.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaParametro']['valor'])){$data[$key]['RespuestaParametro']['valor'] = number_format ( $rp['RespuestaParametro']['valor'], '2', ',', '.');}
+            if($rp['RespuestaParametro']['editado']=='1'){$data[$key]['RespuestaParametro']['editado']='SI';} else{$data[$key]['RespuestaParametro']['editado']='NO';}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaParametro.parametro',
+            'RespuestaParametro.valor',
+            'RespuestaParametro.unidad',
+            'RespuestaParametro.editado'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaParametros_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvcoeficientes($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaCoeficiente');
+        $this->RespuestaCoeficiente->recursive = 0;
+        $data = $this->RespuestaCoeficiente->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaCoeficiente.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaCoeficiente']['valor'])){$data[$key]['RespuestaCoeficiente']['valor'] = number_format ( $rp['RespuestaCoeficiente']['valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaCoeficiente']['minimo'])){$data[$key]['RespuestaCoeficiente']['minimo'] = number_format ( $rp['RespuestaCoeficiente']['minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaCoeficiente']['maximo'])){$data[$key]['RespuestaCoeficiente']['maximo'] = number_format ( $rp['RespuestaCoeficiente']['maximo'], '2', ',', '.');}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaCoeficiente.coeficiente',
+            'RespuestaCoeficiente.minimo',
+            'RespuestaCoeficiente.valor',
+            'RespuestaCoeficiente.maximo'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaCoeficientes_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvindicadores($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaIndicadore');
+        $this->RespuestaIndicadore->recursive = 0;
+        $data = $this->RespuestaIndicadore->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaIndicadore.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaIndicadore']['valor'])){$data[$key]['RespuestaIndicadore']['valor'] = number_format ( $rp['RespuestaIndicadore']['valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaIndicadore']['minimo'])){$data[$key]['RespuestaIndicadore']['minimo'] = number_format ( $rp['RespuestaIndicadore']['minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaIndicadore']['maximo'])){$data[$key]['RespuestaIndicadore']['maximo'] = number_format ( $rp['RespuestaIndicadore']['maximo'], '2', ',', '.');}
+            if($rp['RespuestaIndicadore']['notificar']=='1'){$data[$key]['RespuestaIndicadore']['notificar']='SI';} else{$data[$key]['RespuestaIndicadore']['notificar']='NO';}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaIndicadore.indicador',
+            'RespuestaIndicadore.valor',
+            'RespuestaIndicadore.alerta',
+            'RespuestaIndicadore.mensaje',
+            'RespuestaIndicadore.evento',
+            'RespuestaIndicadore.minimo',
+            'RespuestaIndicadore.maximo',
+            'RespuestaIndicadore.unidad',
+            'RespuestaIndicadore.notificar',
+            'RespuestaIndicadore.color'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaIndicadores_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvitems($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaItem');
+        $this->RespuestaItem->recursive = 0;
+        $data = $this->RespuestaItem->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaItem.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaItem']['valor'])){$data[$key]['RespuestaItem']['valor'] = number_format ( $rp['RespuestaItem']['valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['incidencia_valor'])){$data[$key]['RespuestaItem']['incidencia_valor'] = number_format ( $rp['RespuestaItem']['incidencia_valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['minimo'])){$data[$key]['RespuestaItem']['minimo'] = number_format ( $rp['RespuestaItem']['minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['incidencia_minimo'])){$data[$key]['RespuestaItem']['incidencia_minimo'] = number_format ( $rp['RespuestaItem']['incidencia_minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['maximo'])){$data[$key]['RespuestaItem']['maximo'] = number_format ( $rp['RespuestaItem']['maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['incidencia_maximo'])){$data[$key]['RespuestaItem']['incidencia_maximo'] = number_format ( $rp['RespuestaItem']['incidencia_maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['superior'])){$data[$key]['RespuestaItem']['superior'] = number_format ( $rp['RespuestaItem']['superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['incidencia_superior'])){$data[$key]['RespuestaItem']['incidencia_superior'] = number_format ( $rp['RespuestaItem']['incidencia_superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['inferior'])){$data[$key]['RespuestaItem']['inferior'] = number_format ( $rp['RespuestaItem']['inferior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaItem']['incidencia_inferior'])){$data[$key]['incidencia_inferior']['incidencia_superior'] = number_format ( $rp['RespuestaItem']['incidencia_inferior'], '2', ',', '.');}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaItem.item',
+            'RespuestaItem.unidad',
+            'RespuestaItem.minimo',
+            'RespuestaItem.incidencia_minimo',
+            'RespuestaItem.inferior',
+            'RespuestaItem.incidencia_inferior',
+            'RespuestaItem.valor',
+            'RespuestaItem.incidencia_valor',
+            'RespuestaItem.superior',
+            'RespuestaItem.incidencia_superior',
+            'RespuestaItem.maximo',
+            'RespuestaItem.incidencia_maximo'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaItems_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvtipos($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->loadModel('RespuestaTipo');
+        $this->RespuestaTipo->recursive = 0;
+        $data = $this->RespuestaTipo->find('all', array(
+            'conditions' => array('Consulta.id' => $id, 'Estado.id' => '1'),
+            'Consulta.id' => 'asc', 'RespuestaTipo.id' => 'asc'
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaTipo']['valor'])){$data[$key]['RespuestaTipo']['valor'] = number_format ( $rp['RespuestaTipo']['valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_valor'])){$data[$key]['RespuestaTipo']['incidencia_valor'] = number_format ( $rp['RespuestaTipo']['incidencia_valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['minimo'])){$data[$key]['RespuestaTipo']['minimo'] = number_format ( $rp['RespuestaTipo']['minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_minimo'])){$data[$key]['RespuestaTipo']['incidencia_minimo'] = number_format ( $rp['RespuestaTipo']['incidencia_minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['maximo'])){$data[$key]['RespuestaTipo']['maximo'] = number_format ( $rp['RespuestaTipo']['maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_maximo'])){$data[$key]['RespuestaTipo']['incidencia_maximo'] = number_format ( $rp['RespuestaTipo']['incidencia_maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['superior'])){$data[$key]['RespuestaTipo']['superior'] = number_format ( $rp['RespuestaTipo']['superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_superior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['inferior'])){$data[$key]['RespuestaTipo']['inferior'] = number_format ( $rp['RespuestaItem']['inferior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_inferior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_inferior'], '2', ',', '.');}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaTipo.tipo',
+            'RespuestaTipo.unidad',
+            'RespuestaTipo.minimo',
+            'RespuestaTipo.incidencia_minimo',
+            'RespuestaTipo.inferior',
+            'RespuestaTipo.incidencia_inferior',
+            'RespuestaTipo.valor',
+            'RespuestaTipo.incidencia_valor',
+            'RespuestaTipo.superior',
+            'RespuestaTipo.incidencia_superior',
+            'RespuestaTipo.maximo',
+            'RespuestaTipo.incidencia_maximo'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaTipos_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+    public function csvresumen($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+        $this->Consulta->recursive = 0;
+        $data = $this->Consulta->find('all', array(
+            'conditions' => array('Consulta.id' => $id)
+        ));
+
+        foreach ($data as $key => $rp) {
+            if(!empty($rp['RespuestaTipo']['valor'])){$data[$key]['RespuestaTipo']['valor'] = number_format ( $rp['RespuestaTipo']['valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_valor'])){$data[$key]['RespuestaTipo']['incidencia_valor'] = number_format ( $rp['RespuestaTipo']['incidencia_valor'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['minimo'])){$data[$key]['RespuestaTipo']['minimo'] = number_format ( $rp['RespuestaTipo']['minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_minimo'])){$data[$key]['RespuestaTipo']['incidencia_minimo'] = number_format ( $rp['RespuestaTipo']['incidencia_minimo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['maximo'])){$data[$key]['RespuestaTipo']['maximo'] = number_format ( $rp['RespuestaTipo']['maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_maximo'])){$data[$key]['RespuestaTipo']['incidencia_maximo'] = number_format ( $rp['RespuestaTipo']['incidencia_maximo'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['superior'])){$data[$key]['RespuestaTipo']['superior'] = number_format ( $rp['RespuestaTipo']['superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_superior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_superior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['inferior'])){$data[$key]['RespuestaTipo']['inferior'] = number_format ( $rp['RespuestaItem']['inferior'], '2', ',', '.');}
+            if(!empty($rp['RespuestaTipo']['incidencia_inferior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_inferior'], '2', ',', '.');}
+        }
+
+        $_delimiter = ';';
+        $_bom = true;
+        $_null = '';
+        $_serialize = 'data';
+
+        $_extract = array(
+            'RespuestaTipo.tipo',
+            'RespuestaTipo.unidad',
+            'RespuestaTipo.minimo',
+            'RespuestaTipo.incidencia_minimo',
+            'RespuestaTipo.inferior',
+            'RespuestaTipo.incidencia_inferior',
+            'RespuestaTipo.valor',
+            'RespuestaTipo.incidencia_valor',
+            'RespuestaTipo.superior',
+            'RespuestaTipo.incidencia_superior',
+            'RespuestaTipo.maximo',
+            'RespuestaTipo.incidencia_maximo'
+        );
+
+        $excludePaths = array(); // Exclude all id fields
+        //$_extract = $this->CsvView->prepareExtractFromFindResults($data, $excludePaths);
+
+        $customHeaders = array();
+        $options = array('includeClassname' => false, 'humanReadable' => true);
+        $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
+
+        $this->response->download('RespuestaTipos_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+
+        $this->viewClass = 'CsvView.Csv';
+        $this->set(compact(
+            'data',
+            '_serialize',
+            '_header',
+            '_extract',
+            '_delimiter',
+            '_bom',
+            '_null'
+        ));
+    }
+
+
+
+
+
 }
