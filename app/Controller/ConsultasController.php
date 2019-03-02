@@ -4943,42 +4943,44 @@ class ConsultasController extends AppController
         if (!$this->Consulta->exists($id)) {
             throw new NotFoundException(__('Invalid consulta'));
         }
-        $this->Consulta->recursive = 0;
-        $data = $this->Consulta->find('all', array(
+        $this->Consulta->recursive = -1;
+        $consulta = $this->Consulta->find('first', array(
             'conditions' => array('Consulta.id' => $id)
         ));
 
-        foreach ($data as $key => $rp) {
-            if(!empty($rp['RespuestaTipo']['valor'])){$data[$key]['RespuestaTipo']['valor'] = number_format ( $rp['RespuestaTipo']['valor'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['incidencia_valor'])){$data[$key]['RespuestaTipo']['incidencia_valor'] = number_format ( $rp['RespuestaTipo']['incidencia_valor'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['minimo'])){$data[$key]['RespuestaTipo']['minimo'] = number_format ( $rp['RespuestaTipo']['minimo'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['incidencia_minimo'])){$data[$key]['RespuestaTipo']['incidencia_minimo'] = number_format ( $rp['RespuestaTipo']['incidencia_minimo'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['maximo'])){$data[$key]['RespuestaTipo']['maximo'] = number_format ( $rp['RespuestaTipo']['maximo'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['incidencia_maximo'])){$data[$key]['RespuestaTipo']['incidencia_maximo'] = number_format ( $rp['RespuestaTipo']['incidencia_maximo'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['superior'])){$data[$key]['RespuestaTipo']['superior'] = number_format ( $rp['RespuestaTipo']['superior'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['incidencia_superior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_superior'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['inferior'])){$data[$key]['RespuestaTipo']['inferior'] = number_format ( $rp['RespuestaItem']['inferior'], '2', ',', '.');}
-            if(!empty($rp['RespuestaTipo']['incidencia_inferior'])){$data[$key]['RespuestaTipo']['incidencia_superior'] = number_format ( $rp['RespuestaTipo']['incidencia_inferior'], '2', ',', '.');}
-        }
+        $resumen['0']['Resumen']['Resultado'] = 'Costo (por kilometro)';
+        $resumen['0']['Resumen']['Inferior'] = number_format($consulta['Consulta']['costo_inferior'], 3, ',', '.');
+        $resumen['0']['Resumen']['Minimo'] = number_format($consulta['Consulta']['costo_minimo'], 3, ',', '.');
+        $resumen['0']['Resumen']['Estimado'] = number_format($consulta['Consulta']['costo'], 3, ',', '.');
+        $resumen['0']['Resumen']['Maximo'] = number_format($consulta['Consulta']['costo_maximo'], 3, ',', '.');
+        $resumen['0']['Resumen']['Superior'] = number_format($consulta['Consulta']['costo_superior'], 3, ',', '.');
+
+        $resumen['1']['Resumen']['Resultado'] = 'Tarifa de Equilibrio (sin subsidios)';
+        $resumen['1']['Resumen']['Inferior'] = number_format($consulta['Consulta']['tarifa_inferior'], 3, ',', '.');
+        $resumen['1']['Resumen']['Minimo'] = number_format($consulta['Consulta']['tarifa_minima'], 3, ',', '.');
+        $resumen['1']['Resumen']['Estimado'] = number_format($consulta['Consulta']['tarifa'], 3, ',', '.');
+        $resumen['1']['Resumen']['Maximo'] = number_format($consulta['Consulta']['tarifa_maxima'], 3, ',', '.');
+        $resumen['1']['Resumen']['Superior'] = number_format($consulta['Consulta']['tarifa_superior'], 3, ',', '.');
+
+        $resumen['2']['Resumen']['Resultado'] = 'Tarifa de Equilibrio (con subsidios)';
+        $resumen['2']['Resumen']['Inferior'] = number_format($consulta['Consulta']['subsidio_inferior'], 3, ',', '.');
+        $resumen['2']['Resumen']['Minimo'] = number_format($consulta['Consulta']['subsidio_minimo'], 3, ',', '.');
+        $resumen['2']['Resumen']['Estimado'] = number_format($consulta['Consulta']['subsidio'], 3, ',', '.');
+        $resumen['2']['Resumen']['Maximo'] = number_format($consulta['Consulta']['subsidio_maximo'], 3, ',', '.');
+        $resumen['2']['Resumen']['Superior'] = number_format($consulta['Consulta']['subsidio_superior'], 3, ',', '.');
 
         $_delimiter = ';';
         $_bom = true;
         $_null = '';
-        $_serialize = 'data';
+        $_serialize = 'resumen';
 
         $_extract = array(
-            'RespuestaTipo.tipo',
-            'RespuestaTipo.unidad',
-            'RespuestaTipo.minimo',
-            'RespuestaTipo.incidencia_minimo',
-            'RespuestaTipo.inferior',
-            'RespuestaTipo.incidencia_inferior',
-            'RespuestaTipo.valor',
-            'RespuestaTipo.incidencia_valor',
-            'RespuestaTipo.superior',
-            'RespuestaTipo.incidencia_superior',
-            'RespuestaTipo.maximo',
-            'RespuestaTipo.incidencia_maximo'
+            'Resumen.Resultado',
+            'Resumen.Inferior',
+            'Resumen.Minimo',
+            'Resumen.Estimado',
+            'Resumen.Maximo',
+            'Resumen.Superior'
         );
 
         $excludePaths = array(); // Exclude all id fields
@@ -4988,11 +4990,11 @@ class ConsultasController extends AppController
         $options = array('includeClassname' => false, 'humanReadable' => true);
         $_header = $this->CsvView->prepareHeaderFromExtract($_extract, $customHeaders, $options);
 
-        $this->response->download('RespuestaTipos_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
+        $this->response->download('Resumen_'.date("Ymd").'-'.date("His").'.csv'); // <= setting the file name
 
         $this->viewClass = 'CsvView.Csv';
         $this->set(compact(
-            'data',
+            'resumen',
             '_serialize',
             '_header',
             '_extract',
