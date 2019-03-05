@@ -51,8 +51,10 @@
     <div class="col-md-8">
         <div class="related">
             <div class="actions">
-                <?= $this->Html->link(__('<i class="fa fa-paper-plane-o fa-fw"></i> Enviar por E-Mail'), array('action' => 'enviar', $consulta['Consulta']['id']), array('class' => 'btn btn-sm btn-info')); ?>
+                <?= $this->Html->link(__('<i class="fa fa-paper-plane-o fa-fw"></i>'), array('action' => 'enviar', $consulta['Consulta']['id']), array('class' => 'btn btn-sm btn-info')); ?>
                 <?= $this->Html->link( '<i class="fa fa-file-excel-o fa-fw"></i>', ['action' => 'csvresumen', $consulta['Consulta']['id']], ['class' => 'btn btn-sm btn-success']); ?>
+                <?= $this->Html->link(__('<i class="fa fa-file-pdf-o fa-fw"></i>'), array('action' => 'resultado', $consulta['Consulta']['id'], 'ext' => 'pdf'), array('class' => 'btn btn-sm btn-danger')); ?>
+
             </div>
             <h3><?= __('Resumen'); ?></h3>
 
