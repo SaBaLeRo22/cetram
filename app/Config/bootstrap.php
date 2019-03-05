@@ -112,3 +112,19 @@ CakeLog::config('error', array(
 CakePlugin::loadAll();
 //CakePlugin::load('Authake');
 //CakePlugin::load('DebugKit');
+CakePlugin::load('CakePdf', array('bootstrap' => true, 'routes' => true));
+
+
+//DomPDF settings
+define('DOMPDF_ENABLE_AUTOLOAD', false);
+define('DOMPDF_ENABLE_HTML5PARSER', true);
+define('DOMPDF_ENABLE_REMOTE', true);
+
+require APP . 'Plugin' .DS. 'CakePdf' .DS. 'Vendor' . DS . 'dompdf' . DS . 'dompdf_config.inc.php';
+
+
+Configure::write('CakePdf', array(
+	'engine' => 'CakePdf.DomPdf',
+	'pageSize' => 'A4',
+	'orientation' => 'portrait'
+));
