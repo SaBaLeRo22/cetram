@@ -22,7 +22,7 @@ class ConsultasController extends AppController
      *
      * @var array
      */
-    public $components = array('Paginator', 'Session');
+    public $components = array('Paginator', 'Session', 'RequestHandler');
 
     /**
      * index method
@@ -4107,6 +4107,11 @@ class ConsultasController extends AppController
         //debug($var->isNumeric("123.11"));
         //debug($var->isNegative("matias"));
 
+        $this->pdfConfig = array(
+            'download' => true,
+            'filename' => 'ResultadoConsulta_' . $id .'.pdf'
+        );
+
         $this->set(compact('consulta', 'sube'));
     }
 
@@ -5004,6 +5009,34 @@ class ConsultasController extends AppController
         ));
     }
 
+
+    public function resultadopdf($id = null)
+    {
+        if (!$this->Consulta->exists($id)) {
+            throw new NotFoundException(__('Invalid consulta'));
+        }
+
+        $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
+        $consulta = $this->Consulta->find('first', $options);
+
+        $this->loadModel('RespuestaPregunta');
+        $this->RespuestaPregunta->recursive = -1;
+        $sube = $this->RespuestaPregunta->find('first', array(
+            'conditions' => array('RespuestaPregunta.pregunta_id' => '23', 'RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.estado_id <>' => '2'),
+            'recursive' => -1
+        ));
+
+        //$var = new Vars();
+        //debug($var->isNumeric("123.11"));
+        //debug($var->isNegative("matias"));
+
+        $this->pdfConfig = array(
+            'download' => true,
+            'filename' => 'ResultadoConsulta_' . $id .'.pdf'
+        );
+
+        $this->set(compact('consulta', 'sube'));
+    }
 
 
 
