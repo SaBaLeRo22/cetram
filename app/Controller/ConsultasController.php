@@ -4109,7 +4109,7 @@ class ConsultasController extends AppController
 
         $this->pdfConfig = array(
             'download' => true,
-            'filename' => 'ResultadoConsulta_' . $id .'.pdf'
+            'filename' => 'ResultadoConsulta_ID' . $id .'_'.date("Ymd").'-'.date("His"). '.pdf'
         );
 
         $this->set(compact('consulta', 'sube'));
