@@ -124,7 +124,24 @@ require APP . 'Plugin' .DS. 'CakePdf' .DS. 'Vendor' . DS . 'dompdf' . DS . 'domp
 
 
 Configure::write('CakePdf', array(
+	//'engine' => 'CakePdf.WkHtmlToPdf',
+	//'binary' => 'C:\\Progra~1\\wkhtmltopdf\\bin\\wkhtmltopdf.exe',
+	//'engine' => 'CakePdf.tcpdf',
 	'engine' => 'CakePdf.DomPdf',
 	'pageSize' => 'A4',
-	'orientation' => 'portrait'
+	'options' => array(
+		'print-media-type' => false,
+		'outline' => true,
+		'dpi' => 96
+	),
+	'margin' => array(
+		'bottom' => 5,
+		'left' => 5,
+		'right' => 5,
+		'top' => 5
+	),
+	'orientation' => 'landscape',
+	//'orientation' => 'portrait',
+	'download' => true,
+	'encoding' => 'UTF-8_encode'
 ));
