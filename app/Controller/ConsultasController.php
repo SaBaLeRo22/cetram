@@ -4183,7 +4183,8 @@ class ConsultasController extends AppController
     {
         $this->Consulta->recursive = 0;
         $this->paginate = array(
-            'limit' => 10,
+//            'limit' => 5,
+            'fields' => array('Consulta.*', 'Estado.nombre', 'Modo.nombre','Localidade.nombre', 'Localidade.codigopostal'),
             'order' => array('id' => 'desc')
         );
         $this->set('consultas', $this->Paginator->paginate());
