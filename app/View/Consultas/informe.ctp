@@ -17,6 +17,29 @@
         <h2><?= __('Consultas'); ?></h2>
 
         <div class="table-responsive">
+          <!--  <div>
+                Visibilidad de Columnas:
+                <a class="toggle-vis" data-column="0">Acci&oacute;n</a> -
+                <a class="toggle-vis" data-column="1">&nbsp;&nbsp;ID&nbsp;&nbsp;</a> -
+                <a class="toggle-vis" data-column="2">Modo</a> -
+                <a class="toggle-vis" data-column="3">Costo M&iacute;n. ($)</a> -
+                <a class="toggle-vis" data-column="4">Costo Inf. ($)</a> -
+                <a class="toggle-vis" data-column="5">Costo ($)</a> -
+                <a class="toggle-vis" data-column="6">Costo Sup. ($)</a> -
+                <a class="toggle-vis" data-column="7">Costo M&aacute;x. ($)</a> -
+                <a class="toggle-vis" data-column="8">Tarifa M&iacute;n. ($)</a> -
+                <a class="toggle-vis" data-column="9">Tarifa Inf. ($)</a> -
+                <a class="toggle-vis" data-column="10">Tarifa ($)</a> -
+                <a class="toggle-vis" data-column="11">Tarifa Sup. ($)</a> -
+                <a class="toggle-vis" data-column="12">Tarifa M&aacute;x. ($)</a> -
+                <a class="toggle-vis" data-column="13">Subsidio ($)</a> -
+                <a class="toggle-vis" data-column="14">Localidad</a> -
+                <a class="toggle-vis" data-column="15">Estado</a> -
+                <a class="toggle-vis" data-column="16">Usuario</a> -
+                <a class="toggle-vis" data-column="17">Creada</a> -
+                <a class="toggle-vis" data-column="18">Modificada</a>
+            </div>
+            <BR/>-->
             <table id="example" class="display" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -26,12 +49,12 @@
                     <th style="text-align: center;vertical-align: middle">Costo M&iacute;n. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Costo Inf. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Costo ($)</th>
-                    <th style="text-align: center;vertical-align: middle">Costo Sup.</th>
+                    <th style="text-align: center;vertical-align: middle">Costo Sup. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Costo M&aacute;x. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa M&iacute;n. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa Inf. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa ($)</th>
-                    <th style="text-align: center;vertical-align: middle">Tarifa Sup.</th>
+                    <th style="text-align: center;vertical-align: middle">Tarifa Sup. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Tarifa M&aacute;x. ($)</th>
                     <th style="text-align: center;vertical-align: middle">Subsidio ($)</th>
                     <th style="text-align: center;vertical-align: middle">Localidad</th>
@@ -68,7 +91,7 @@
                 <?php foreach ($consultas as $consulta): ?>
                 <tr>
                     <td style="text-align: center;vertical-align: middle">
-                        <?php if ($consulta['Modo']['id'] == '1'): ?>
+                        <?php if ($consulta['Consulta']['modo_id'] == '1'): ?>
                         <?= $this->Html->link( '<i class="fa fa-eye"></i>', array('action' => 'resultado', $consulta['Consulta']['id']), array('class' => 'btn btn-info btn-xs')); ?>
                         <?= $this->Html->link( '<i class="fa fa-files-o"></i>', array('action' => 'copiar', $consulta['Consulta']['id']), array('class' => 'btn btn-success btn-xs')); ?>
                         <?php else: ?>
@@ -129,7 +152,8 @@
                 $('#example').DataTable( {
                     //'dom': 'Bfrtip',
                     //'dom': 'Bfrtip',
-                    lengthChange: false,
+                    lengthChange: true,
+                    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, 'Todo']],
                     buttons: [
                         'copy', 'csv', 'excel', 'pdf', 'print', 'colvis'
 //                        {
@@ -157,9 +181,41 @@
                     //'responsive': true,
                     'language': {
                         //'url': '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json',
-                        //'decimal': ',',
-                        //'thousands': '.'
+                        'decimal': ',',
+                        'thousands': '.',
+                        'sProcessing':     'Procesando...',
+                        'sLengthMenu':     'Mostrar _MENU_ registros&nbsp&nbsp',
+                        'sZeroRecords':    'No se encontraron resultados',
+                        'sEmptyTable':     'Ningún dato disponible en esta tabla',
+                        'sInfo':           'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                        'sInfoEmpty':      'Mostrando registros del 0 al 0 de un total de 0 registros',
+                        'sInfoFiltered':   '(filtrado de un total de _MAX_ registros)',
+                        'sInfoPostFix':    '',
+                        'sSearch':         'Buscar:',
+                        'sUrl':            '',
+                        'sInfoThousands':  ',',
+                        'sLoadingRecords': 'Cargando...',
+                        'oPaginate': {
+                            'sFirst':    'Primero',
+                            'sLast':     'Último',
+                            'sNext':     'Siguiente',
+                            'sPrevious': 'Anterior'
+                        },
+                        'oAria': {
+                            'sSortAscending':  ': Activar para ordenar la columna de manera ascendente',
+                            'sSortDescending': ': Activar para ordenar la columna de manera descendente'
+                        }
                     }
+            } );
+
+            $('a.toggle-vis').on( 'click', function (e) {
+                e.preventDefault();
+
+                // Get the column API object
+                var column = table.column( $(this).attr('data-column') );
+
+                // Toggle the visibility
+                column.visible( ! column.visible() );
             } );
 
             table.buttons().container()
