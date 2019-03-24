@@ -35,9 +35,9 @@
                     </tr>
 
                     <tr>
-                        <td style="text-align: justify; vertical-align: middle"><strong>Parametros</strong></td>
+                        <td style="text-align: justify; vertical-align: middle"><strong>Par&aacute;metros</strong></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'respuestaparametros', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
-                        <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Parametros.</td>
+                        <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Par&aacute;metros.</td>
                     </tr>
 
                     <tr>
@@ -53,9 +53,9 @@
                     </tr>
 
                     <tr>
-                        <td style="text-align: justify; vertical-align: middle"><strong>Items</strong></td>
+                        <td style="text-align: justify; vertical-align: middle"><strong>&Iacute;tems</strong></td>
                         <td style="text-align: center; vertical-align: middle"><?= $this->Html->link(__('<i class="fa fa-list-ul fa-fw"></i>'), array('controller' => 'respuestaitems', 'action' => 'index'), array('class' => 'btn btn-info')); ?></td>
-                        <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de Items.</td>
+                        <td style="text-align: justify; vertical-align: middle">Administrar Respuestas de &Iacute;tems.</td>
                     </tr>
 
                     <tr>
