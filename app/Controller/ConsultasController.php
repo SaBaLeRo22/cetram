@@ -4142,7 +4142,9 @@ class ConsultasController extends AppController
 
         $bcc['cetram.utn.frsf@gmail.com'] = 'cetram.utn.frsf@gmail.com';
 
-        $bcc['rovere.matias@gmail.com'] = 'linkinpark.sabalero22@gmail.com';
+        $bcc['linkinpark.sabalero22@gmail.com'] = 'linkinpark.sabalero22@gmail.com';
+
+        //$bcc['rovere.matias@gmail.com'] = 'rovere.matias@gmail.com';
 
         $bcc['melisa.batistela@gmail.com'] = 'melisa.batistela@gmail.com';
 
