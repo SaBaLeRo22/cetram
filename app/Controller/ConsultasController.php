@@ -188,18 +188,17 @@ class ConsultasController extends AppController
                 'recursive' => -1,
                 'order' => array('Agrupamiento.orden' => 'asc')
             ));
+
             foreach ($agrupamientos as $agrupamiento) {
+                $paso = NULL;
+                $this->Paso->create();
                 $paso['Paso']['consulta_id'] = $consulta['Consulta']['id'];
                 $paso['Paso']['agrupamiento_id'] = $agrupamiento['Agrupamiento']['id'];
                 $paso['Paso']['completo'] = 0; // Incompleto
                 $paso['Paso']['estado_id'] = 1; // Activo
                 $paso['Paso']['user_created'] = $this->Authake->getUserId();
                 $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->Paso->save($paso)) {
-                    $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The Paso has been saved.'));
-                }
+                $this->Paso->save($paso);
             }
 
             $this->loadModel('Coeficiente');
