@@ -48,12 +48,10 @@ class EmailConfig {
 
 	public $smtp = array(
 		'transport' => 'Smtp',
-		'from' => array('ams@casinostafe.com.ar' => 'AMS'),
+		'from' => array('smtp@smtp.com.ar' => 'SMTP'),
 		'host' => '192.168.100.25',
 		'port' => 25,
 		'timeout' => 30,
-//		'username' => 'mrovere',
-//		'password' => 'TrustNo1',
 		'client' => null,
 		'log' => false,
 		//'charset' => 'utf-8',
