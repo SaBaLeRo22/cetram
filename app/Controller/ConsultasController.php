@@ -747,7 +747,35 @@ class ConsultasController extends AppController
                 $tiene['28'] = '28';
 
                 $this->RespuestaPregunta->deleteAll(array('RespuestaPregunta.consulta_id' => $consulta['Consulta']['id'], 'RespuestaPregunta.pregunta_id' => $tiene), false);
+
+                $agrupamiento2 = $this->Agrupamiento->find('first', array(
+                    'conditions' => array('Agrupamiento.orden' => '1', 'Agrupamiento.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+                $paso2 = $this->Paso->find('first', array(
+                    'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento2['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+
+                $this->Paso->id = $paso2['Paso']['id'];
+                $this->Paso->saveField('completo', 0);
+                $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
                 $this->RespuestaPasajero->deleteAll(array('RespuestaPasajero.consulta_id' => $consulta['Consulta']['id']), false);
+
+                $agrupamiento3 = $this->Agrupamiento->find('first', array(
+                    'conditions' => array('Agrupamiento.orden' => '3', 'Agrupamiento.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+                $paso3 = $this->Paso->find('first', array(
+                    'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento3['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
+                    'recursive' => -1
+                ));
+
+                $this->Paso->id = $paso3['Paso']['id'];
+                $this->Paso->saveField('completo', 0);
+                $this->Paso->saveField('user_modified', $this->Authake->getUserId());
+
             }
 
             if ($consulta['Consulta']['modo_id'] == '3') {
@@ -1176,6 +1204,23 @@ class ConsultasController extends AppController
 
                 }
             }
+
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $agrupamiento = $this->Agrupamiento->find('first', array(
+                'conditions' => array('Agrupamiento.orden' => '2', 'Agrupamiento.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+            $paso = $this->Paso->find('first', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
+                'recursive' => -1
+            ));
+
+            $this->Paso->id = $paso['Paso']['id'];
+            $this->Paso->saveField('completo', 1);
+            $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 3".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
@@ -1943,6 +1988,26 @@ class ConsultasController extends AppController
 
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
+            $pasos = $this->Paso->find('all', array(
+                'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.estado_id <>' => '2'),
+                'recursive' => 0,
+                'order' => array('Paso.agrupamiento_id' => 'asc')
+            ));
+
+            $completo = true;
+            foreach ($pasos as $key => $paso) {
+                if($paso['Paso']['completo'] == '0'){
+                    $completo = false;
+                }
+            }
+
+            if ($completo) {
+                $this->Session->setFlash(__('Por favor, complete primero todos los pasos.'));
+                return $this->redirect(array('action' => 'seis', $consulta['Consulta']['id']));
+            }
+
             $this->loadModel('Parametro');
             $this->Parametro->recursive = 0;
             $this->loadModel('RespuestaParametro');
@@ -2198,10 +2263,18 @@ class ConsultasController extends AppController
         $this->Paso->recursive = 0;
         $pasos = $this->Paso->find('all', array(
             'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.estado_id <>' => '2'),
-            'recursive' => 0
+            'recursive' => 0,
+            'order' => array('Paso.agrupamiento_id' => 'asc')
         ));
 
-        $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad', 'pasos'));
+        $completo = true;
+        foreach ($pasos as $key => $paso) {
+            if($paso['Paso']['completo'] == '0' && $paso['Paso']['agrupamiento_id'] != '7'){
+                $completo = false;
+            }
+        }
+
+        $this->set(compact('consulta', 'provincias', 'preguntas', 'localidad', 'pasos', 'completo'));
     }
 
 
@@ -4311,7 +4384,12 @@ class ConsultasController extends AppController
                 $this->Paso->create();
                 $paso['Paso']['consulta_id'] = $nueva['Consulta']['id'];
                 $paso['Paso']['agrupamiento_id'] = $agrupamiento['Agrupamiento']['id'];
-                $paso['Paso']['completo'] = 1; // Incompleto
+                if($agrupamiento['Agrupamiento']['id'] == '7'){
+                    $paso['Paso']['completo'] = 0; // Incompleto
+                }
+                else{
+                    $paso['Paso']['completo'] = 1; // Completo
+                }
                 $paso['Paso']['estado_id'] = 1; // Activo
                 $paso['Paso']['user_created'] = $this->Authake->getUserId();
                 $paso['Paso']['user_modified'] = $this->Authake->getUserId();
