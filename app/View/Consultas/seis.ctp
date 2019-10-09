@@ -15,23 +15,31 @@
 
 
         <ul>
+
+            <?php foreach ($pasos as $paso): ?>
+                <?php if ($paso['Paso']['completo'] == '0'): ?>
+                    <?php if ($paso['Paso']['agrupamiento_id'] == '7'): ?>
+                        <li>
+                            <p class="text-info"><strong>Paso <?= h($paso['Agrupamiento']['orden']); ?>&nbsp;:</strong><span class="badge badge-info" style="background-color:#17a2b8"> Actual <i class="fa fa-flag-checkered" aria-hidden="true"></i></span></p>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <p class="text-danger"><strong>Paso <?= h($paso['Agrupamiento']['orden']); ?>&nbsp;:</strong><span class="badge badge-danger" style="background-color:#dc3545"> Incompleto <i class="fa fa-thumbs-o-down" aria-hidden="true"></i></span></p>
+                        </li>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <li>
+                        <p class="text-success"><strong>Paso <?= h($paso['Agrupamiento']['orden']); ?>&nbsp;:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
+                     </li>
+                <?php endif; ?>
+            <?php endforeach ?>
+
             <li>
-                <p class="text-success"><strong>Paso 1:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
-            </li>
-            <li>
-                <p class="text-success"><strong>Paso 2:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
-            </li>
-            <li>
-                <p class="text-success"><strong>Paso 3:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
-            </li>
-            <li>
-                <p class="text-success"><strong>Paso 4:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
-            </li>
-            <li>
-                <p class="text-success"><strong>Paso 5:</strong><span class="badge badge-success" style="background-color:#468847"> Ok <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></span></p>
-            </li>
-            <li>
-                <p class="text-info">Por favor, complete los siguientes datos del <span class="label label-info">Paso 6</span> y finalice la consulta. Muchas gracias.</p>
+                <?php if ($completo): ?>
+                    <p class="text-info">Por favor, complete los siguientes datos del <span class="label label-info">Paso 6</span> y finalice la consulta. Muchas gracias.</p>
+                <?php else: ?>
+                    <p class="text-info">Por favor, regrese y complete los <span class="label label-danger">Pasos</span> pendientes. Muchas gracias.</p>
+                <?php endif; ?>
             </li>
         </ul>
         <hr>
@@ -61,7 +69,12 @@
 
         <div class="well well-sm text-right">
             <?= $this->Html->link(__('<i class="fa fa-hand-o-left"></i> Anterior'), array('controller' => 'consultas', 'action' => 'editarcinco', $consulta['Consulta']['id']), array('class' => 'btn btn-info','style' => 'float:left')); ?>
-            <?= $this->Form->button('<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Finalizar', array('class' => 'btn btn-primary','style' => 'float:right')); ?>
+
+            <?php if ($completo): ?>
+                <?= $this->Form->button('<i class="fa fa-thumbs-o-up" aria-hidden="true"></i> Finalizar', array('class' => 'btn btn-primary','style' => 'float:right')); ?>
+            <?php endif; ?>
+
+
             <div style="clear: both;"></div>
         </div>
         <?= $this->Form->end(); ?>
