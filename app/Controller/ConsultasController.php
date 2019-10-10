@@ -2227,8 +2227,6 @@ class ConsultasController extends AppController
             $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             if ($this->request->data['Consulta']['localidade_id'] != '') {
                 $consulta['Consulta']['localidade_id'] = $this->request->data['Consulta']['localidade_id'];
-            } else {
-                $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
             }
             $consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 1; // Completa.
@@ -2252,7 +2250,7 @@ class ConsultasController extends AppController
         $this->loadModel('Localidade');
         $this->Localidade->recursive = 0;
         $localidad = $this->Localidade->find('first', array(
-            'conditions' => array('Localidade.id' => $this->Authake->getLocalidadId()),
+            'conditions' => array('Localidade.id' => $consulta['Consulta']['localidade_id']),
             'recursive' => 0,
         ));
 
