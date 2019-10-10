@@ -265,19 +265,19 @@
         </h4>
         <div class="form-group">
             <?= $this->Form->label('tarifa', 'Tipo de Tarifa', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
+            <?= $this->Form->input('tarifa', array('required' => 'required','type' => 'text')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('costo', array('type' => 'number', 'step' => '0.01', 'min' => '0')); ?>
+            <?= $this->Form->input('costo', array('required' => 'required', 'type' => 'number', 'step' => '0.01', 'min' => '0.01')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('semestre1', 'Semestre 1', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('semestre1', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('semestre1', array('required' => 'required', 'type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('semestre2', 'Semestre 2', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('semestre2', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('semestre2', array('required' => 'required', 'type' => 'number', 'min' => '1')); ?>
         </div>
         <?php endif; ?>
 
@@ -289,59 +289,59 @@
 
         <div class="form-group">
             <?= $this->Form->label('tarifa', 'Tipo de Tarifa', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('tarifa', array('type' => 'text')); ?>
+            <?= $this->Form->input('tarifa', array('required' => 'required','type' => 'text')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('costo', 'Costo ($)', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('costo', array('type' => 'number', 'step' => '0.01', 'min' => '0')); ?>
+            <?= $this->Form->input('costo', array('required' => 'required','type' => 'number', 'step' => '0.01', 'min' => '0.01')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes01', 'Mes 01', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes01', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes01', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes02', 'Mes 02', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes02', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes02', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes03', 'Mes 03', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes03', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes03', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes04', 'Mes 04', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes04', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes04', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes05', 'Mes 05', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes05', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes05', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes06', 'Mes 06', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes06', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes06', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes07', 'Mes 07', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes07', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes07', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes08', 'Mes 08', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes08', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes08', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes09', 'Mes 09', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes09', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes09', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes10', 'Mes 10', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes10', array('type' => 'number')); ?>
+            <?= $this->Form->input('mes10', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes11', 'Mes 11', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes11', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes11', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <div class="form-group">
             <?= $this->Form->label('mes12', 'Mes 12', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('mes12', array('type' => 'number', 'min' => '0')); ?>
+            <?= $this->Form->input('mes12', array('required' => 'required','type' => 'number', 'min' => '1')); ?>
         </div>
         <?php endif; ?>
 
