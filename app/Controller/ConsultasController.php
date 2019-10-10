@@ -519,6 +519,10 @@ class ConsultasController extends AppController
             $this->Matrix->recursive = -1;
             $this->loadModel('RespuestaPregunta');
             $this->RespuestaPregunta->recursive = -1;
+            $this->loadModel('Agrupamiento');
+            $this->Agrupamiento->recursive = -1;
+            $this->loadModel('Paso');
+            $this->Paso->recursive = -1;
 
 
             $sube_original = $this->RespuestaPregunta->find('first', array(
@@ -749,7 +753,7 @@ class ConsultasController extends AppController
                 $this->RespuestaPregunta->deleteAll(array('RespuestaPregunta.consulta_id' => $consulta['Consulta']['id'], 'RespuestaPregunta.pregunta_id' => $tiene), false);
 
                 $agrupamiento2 = $this->Agrupamiento->find('first', array(
-                    'conditions' => array('Agrupamiento.orden' => '1', 'Agrupamiento.estado_id <>' => '2'),
+                    'conditions' => array('Agrupamiento.orden' => '2', 'Agrupamiento.estado_id <>' => '2'),
                     'recursive' => -1
                 ));
                 $paso2 = $this->Paso->find('first', array(
@@ -1281,10 +1285,12 @@ class ConsultasController extends AppController
                 'recursive' => -1,
             ));
 
-            if ($pregunta['Pregunta']['tipo'] == 'select') {
-                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['opcione_id'];
-            } else {
-                $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['valor'];
+            if($respuestaPregunta != NULL){
+                if ($pregunta['Pregunta']['tipo'] == 'select') {
+                    $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['opcione_id'];
+                } else {
+                    $this->request->data['Consulta'][$pregunta['Pregunta']['id']] = $respuestaPregunta['RespuestaPregunta']['valor'];
+                }
             }
 
         }
@@ -2295,15 +2301,15 @@ class ConsultasController extends AppController
         $this->loadModel('Parametro');
         $this->Parametro->recursive = 0;
 
-        /*
-        PARAMETROS
-        */
-        $parametros = $this->Parametro->find('all', array(
-            'conditions' => array('Parametro.editable' => '1', 'Parametro.estado_id <>' => '2'),
-            'recursive' => 0
-        ));
-
         if ($this->request->is('post')) {
+
+            /*
+                PARAMETROS
+            */
+            $parametros = $this->Parametro->find('all', array(
+                'conditions' => array('Parametro.estado_id <>' => '2'),
+                'recursive' => 0
+            ));
 
             $this->loadModel('RespuestaParametro');
             $this->RespuestaParametro->recursive = -1;
@@ -2382,6 +2388,13 @@ class ConsultasController extends AppController
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5". Por favor, continuar con el "Paso 6".'));
             return $this->redirect(array('action' => 'seis', $this->request->data['Consulta']['consulta_id']));
         }
+        /*
+            PARAMETROS EDITABLES
+        */
+        $parametros = $this->Parametro->find('all', array(
+            'conditions' => array('Parametro.editable' => '1', 'Parametro.estado_id <>' => '2'),
+            'recursive' => 0
+        ));
         $this->request->data['Consulta']['consulta_id'] = $id;
         $this->set(compact('consulta', 'parametros'));
     }
@@ -2608,6 +2621,7 @@ class ConsultasController extends AppController
         $this->loadModel('RespuestaCoeficiente');
         $this->RespuestaCoeficiente->recursive = -1;
 
+        $intervaloParametro['RespuestaParametro']['valor'] = 0;
         $intervaloParametro = $this->RespuestaParametro->find('first', array(
             'conditions' => array('RespuestaParametro.parametro_id' => $intervalo_id, 'RespuestaParametro.consulta_id' => $consulta_id, 'RespuestaParametro.estado_id <>' => '2'),
             'recursive' => -1
