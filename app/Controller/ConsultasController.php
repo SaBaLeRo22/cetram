@@ -1860,6 +1860,52 @@ class ConsultasController extends AppController
         if ($this->request->is('post')) {
 
             /*
+             * Validación
+             * */
+            $reg_valido = true;
+            $cantidad = 0;
+            $antiguedad = 0;
+            $salario = 0;
+            $blanco = false;
+
+            foreach ($this->request->data['Consulta']['categorias'] as $cga => $categ) {
+
+                if($categ['cantidad'] > 0 || $categ['antiguedad'] > 0 || $categ['salario'] > 0){
+                    if(!($categ['cantidad'] > 0 && $categ['antiguedad'] > 0 && $categ['salario'] > 0)){
+                        $reg_valido = false;
+                    }
+                }
+                $cantidad = $cantidad + $categ['cantidad'];
+                $antiguedad = $antiguedad + $categ['antiguedad'];
+                $salario = $salario + $categ['salario'];
+
+                if($categ['cantidad'] == NULL || $categ['antiguedad'] == NULL || $categ['salario'] == NULL){
+                    $blanco = true;
+                }
+
+            }
+            if (!$reg_valido) {
+                $this->Session->setFlash(__('Debe completar todos los valores de la categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($blanco) {
+                $this->Session->setFlash(__('No puede haber campos en blanco.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($cantidad == '0') {
+                $this->Session->setFlash(__('Debe completar cantidad para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($antiguedad == '0') {
+                $this->Session->setFlash(__('Debe completar antigüedad para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($salario == '0') {
+                $this->Session->setFlash(__('Debe completar salario para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+
+            /*
              * Respustas Preguntas
              * */
             $this->loadModel('Pregunta');
