@@ -1412,6 +1412,67 @@ class ConsultasController extends AppController
 
             } elseif ($this->request->data['accion'] == '2') {
 
+                /*
+                 * Validación
+                 * */
+                $tarifa = false;
+                $costo = false;
+                $cantidad = false;
+                $total = 0;
+
+                if($this->request->data['Consulta']['tarifa'] == NULL){
+                    $tarifa = true;
+                }
+                if($this->request->data['Consulta']['costo'] == NULL){
+                    $costo = true;
+                }
+
+                if ($this->request->data['Consulta']['sube'] == '1') { // SI tiene SUBE
+                    if($this->request->data['Consulta']['mes01'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes02'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes03'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes04'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes05'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes06'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes07'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes08'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes09'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes10'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes11'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['mes12'] == NULL){$cantidad = true;}
+                    $total = $this->request->data['Consulta']['mes01'] +
+                        $this->request->data['Consulta']['mes02'] +
+                        $this->request->data['Consulta']['mes03'] +
+                        $this->request->data['Consulta']['mes04'] +
+                        $this->request->data['Consulta']['mes05'] +
+                        $this->request->data['Consulta']['mes06'] +
+                        $this->request->data['Consulta']['mes07'] +
+                        $this->request->data['Consulta']['mes08'] +
+                        $this->request->data['Consulta']['mes09'] +
+                        $this->request->data['Consulta']['mes10'] +
+                        $this->request->data['Consulta']['mes11'];
+                } elseif ($this->request->data['Consulta']['sube'] == '0') { // NO tiene SUBE
+                    if($this->request->data['Consulta']['semestre1'] == NULL){$cantidad = true;}
+                    if($this->request->data['Consulta']['semestre2'] == NULL){$cantidad = true;}
+                    $total = $this->request->data['Consulta']['semestre1'] + $this->request->data['Consulta']['semestre2'];
+                }
+
+                if($tarifa || $costo || $cantidad){
+                    $this->Session->setFlash(__('Por favor, no deje campos en blanco.'), 'default', array('type' => 'danger'));
+                    return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                }
+                if($total == '0'){
+                    $this->Session->setFlash(__('El total de pasajeros no puede ser 0.'), 'default', array('type' => 'danger'));
+                    return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                }
+
+                if($this->request->data['Consulta']['costo'] == '0'){
+                    $this->Session->setFlash(__('El costo no puede ser 0.'), 'default', array('type' => 'danger'));
+                    return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
+                }
+
+
+
                 /******************************************
                  * AGREGAR TARIFA
                  ******************************************/
@@ -1536,6 +1597,53 @@ class ConsultasController extends AppController
         }
 
         if ($this->request->is('post')) {
+
+            /*
+             * Validación
+             * */
+            $reg_valido = true;
+            $cantidad = 0;
+            $antiguedad = 0;
+            $salario = 0;
+            $blanco = false;
+
+            foreach ($this->request->data['Consulta']['categorias'] as $cga => $categ) {
+
+                if($categ['cantidad'] > 0 || $categ['antiguedad'] > 0 || $categ['salario'] > 0){
+                    if(!($categ['cantidad'] > 0 && $categ['antiguedad'] > 0 && $categ['salario'] > 0)){
+                        $reg_valido = false;
+                    }
+                }
+                $cantidad = $cantidad + $categ['cantidad'];
+                $antiguedad = $antiguedad + $categ['antiguedad'];
+                $salario = $salario + $categ['salario'];
+
+                if($categ['cantidad'] == NULL || $categ['antiguedad'] == NULL || $categ['salario'] == NULL){
+                    $blanco = true;
+                }
+
+            }
+            if (!$reg_valido) {
+                $this->Session->setFlash(__('Debe completar todos los valores de la categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($blanco) {
+                $this->Session->setFlash(__('No puede haber campos en blanco.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($cantidad == '0') {
+                $this->Session->setFlash(__('Debe completar cantidad para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($antiguedad == '0') {
+                $this->Session->setFlash(__('Debe completar antigüedad para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+            if ($salario == '0') {
+                $this->Session->setFlash(__('Debe completar salario para al menos una categor&iacute;a.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+
 
             /*
              * Respustas Preguntas
