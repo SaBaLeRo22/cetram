@@ -884,10 +884,15 @@ class ConsultasController extends AppController
 
         if ($this->request->is('post')) {
 
+            $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
+
+            if($this->request->data['Consulta']['30'] >= $this->request->data['Consulta']['9']){
+                $this->Session->setFlash(__('"Flota total de omnibus" debe ser mayor a "Omnibus de auxilio".'));
+                return $this->redirect($this->referer());
+            }
+
             $this->loadModel('RespuestaPregunta');
             $this->RespuestaPregunta->recursive = -1;
-
-            $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
             $sube = $this->RespuestaPregunta->find('first', array(
                 'conditions' => array('RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.pregunta_id' => '23'),
@@ -1093,6 +1098,11 @@ class ConsultasController extends AppController
         $this->RespuestaPregunta->recursive = -1;
 
         if ($this->request->is('post')) {
+
+            if($this->request->data['Consulta']['30'] >= $this->request->data['Consulta']['9']){
+                $this->Session->setFlash(__('"Flota total de omnibus" debe ser mayor a "Omnibus de auxilio".'));
+                return $this->redirect($this->referer());
+            }
 
             $consulta = $this->Consulta->find('first', array(
                 'conditions' => array('Consulta.id' => $this->request->data['Consulta']['consulta_id']),
