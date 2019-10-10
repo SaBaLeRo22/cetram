@@ -26,7 +26,7 @@
         <div class="form-group">
             <?= $this->Form->label('Consulta.preguntas.'.$pregunta['Pregunta']['id'], $pregunta['Pregunta']['pregunta'], array('class' => 'control-label col-xs-10')); ?>
             <div class="col-xs-2">
-                <?= $this->Form->input('Consulta.preguntas.'.$pregunta['Pregunta']['id'], array('div'=>false, 'type' => $pregunta['Pregunta']['tipo'],'options' => $pregunta['Pregunta']['opciones'], 'step' => $pregunta['Pregunta']['step'], 'min' => $pregunta['Pregunta']['minimo'], 'max' => $pregunta['Pregunta']['maximo'])); ?>
+                <?= $this->Form->input('Consulta.preguntas.'.$pregunta['Pregunta']['id'], array('required' => 'required', 'default' => $pregunta['Pregunta']['minimo'], 'div'=>false, 'type' => $pregunta['Pregunta']['tipo'],'options' => $pregunta['Pregunta']['opciones'], 'step' => $pregunta['Pregunta']['step'], 'min' => $pregunta['Pregunta']['minimo'], 'max' => $pregunta['Pregunta']['maximo'])); ?>
             </div>
         </div>
 
