@@ -51,12 +51,12 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <i class="fa fa-arrow-up" aria-hidden="true"></i>
-            <strong>Ayuda: </strong> Si no se completa se utilizar&aacute; su localidad: "<?= h(str_replace('?', 'ñ', $localidad['Localidade']['nombre']).' ('.$localidad['Localidade']['codigopostal'].') - '.$localidad['Provincia']['nombre']); ?>".
+            <strong>Ayuda: </strong> Si no se completa se utilizar&aacute; la siguiente localidad: "<?= h(str_replace('?', 'ñ', $localidad['Localidade']['nombre']).' ('.$localidad['Localidade']['codigopostal'].') - '.$localidad['Provincia']['nombre']); ?>".
         </div>
 
         <div class="form-group">
             <?= $this->Form->label('localidade_id', 'Localidad', array('class' => 'control-label col-xs-3')); ?>
-            <?= $this->Form->input('localidade_id', array('empty' => '', 'required' => 'required')); ?>
+            <?= $this->Form->input('localidade_id', array('empty' => '')); ?>
         </div>
 
         <h2>
