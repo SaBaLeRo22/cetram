@@ -898,6 +898,8 @@ class ConsultasController extends AppController
                 'conditions' => array('RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.pregunta_id' => '23'),
                 'recursive' => -1
             ));
+
+            $recorrido = 0;
             //opcione_id = 24 --> SI; opcione_id = 25 --> NO
             if ($sube['RespuestaPregunta']['opcione_id'] == '25') {
                 $tiene['10'] = '10';
@@ -912,10 +914,37 @@ class ConsultasController extends AppController
                 $tiene['19'] = '19';
                 $tiene['20'] = '20';
                 $tiene['21'] = '21';
+
+                $recorrido = $this->request->data['Consulta']['27']+
+                    $this->request->data['Consulta']['28'];
+
             } else {
                 $tiene['27'] = '27';
                 $tiene['28'] = '28';
+
+                $recorrido = $this->request->data['Consulta']['10']+
+                    $this->request->data['Consulta']['11']+
+                    $this->request->data['Consulta']['12']+
+                    $this->request->data['Consulta']['13']+
+                    $this->request->data['Consulta']['14']+
+                    $this->request->data['Consulta']['15']+
+                    $this->request->data['Consulta']['16']+
+                    $this->request->data['Consulta']['17']+
+                    $this->request->data['Consulta']['18']+
+                    $this->request->data['Consulta']['19']+
+                    $this->request->data['Consulta']['20']+
+                    $this->request->data['Consulta']['21'];
+
             }
+
+            /*
+             * Validación
+             * */
+            if ($recorrido == '0') {
+                $this->Session->setFlash(__('El recorrido debe ser mayor que 0.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
+            }
+
 
             /*
             PREGUNTAS
@@ -1115,6 +1144,7 @@ class ConsultasController extends AppController
                 'conditions' => array('RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.pregunta_id' => '23'),
                 'recursive' => -1
             ));
+            $recorrido = 0;
             //opcione_id = 24 --> SI; opcione_id = 25 --> NO
             if ($sube['RespuestaPregunta']['opcione_id'] == '25') {
                 $tiene['10'] = '10';
@@ -1129,9 +1159,35 @@ class ConsultasController extends AppController
                 $tiene['19'] = '19';
                 $tiene['20'] = '20';
                 $tiene['21'] = '21';
+
+                $recorrido = $this->request->data['Consulta']['27']+
+                    $this->request->data['Consulta']['28'];
+
             } else {
                 $tiene['27'] = '27';
                 $tiene['28'] = '28';
+
+                $recorrido = $this->request->data['Consulta']['10']+
+                    $this->request->data['Consulta']['11']+
+                    $this->request->data['Consulta']['12']+
+                    $this->request->data['Consulta']['13']+
+                    $this->request->data['Consulta']['14']+
+                    $this->request->data['Consulta']['15']+
+                    $this->request->data['Consulta']['16']+
+                    $this->request->data['Consulta']['17']+
+                    $this->request->data['Consulta']['18']+
+                    $this->request->data['Consulta']['19']+
+                    $this->request->data['Consulta']['20']+
+                    $this->request->data['Consulta']['21'];
+
+            }
+
+            /*
+             * Validación
+             * */
+            if ($recorrido == '0') {
+                $this->Session->setFlash(__('El recorrido debe ser mayor que 0.'), 'default', array('type' => 'danger'));
+                return $this->redirect($this->referer());
             }
 
             /*
@@ -1406,6 +1462,22 @@ class ConsultasController extends AppController
                     return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
                 }
                 else{
+                    $this->loadModel('Agrupamiento');
+                    $this->Agrupamiento->recursive = -1;
+                    $this->loadModel('Paso');
+                    $this->Paso->recursive = -1;
+                    $agrupamiento = $this->Agrupamiento->find('first', array(
+                        'conditions' => array('Agrupamiento.orden' => '3', 'Agrupamiento.estado_id <>' => '2'),
+                        'recursive' => -1
+                    ));
+                    $paso = $this->Paso->find('first', array(
+                        'conditions' => array('Paso.consulta_id' => $consulta['Consulta']['id'], 'Paso.agrupamiento_id' => $agrupamiento['Agrupamiento']['id'], 'Paso.estado_id <>' => '2'),
+                        'recursive' => -1
+                    ));
+
+                    $this->Paso->id = $paso['Paso']['id'];
+                    $this->Paso->saveField('completo', 1);
+                    $this->Paso->saveField('user_modified', $this->Authake->getUserId());
                     $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
                     return $this->redirect(array('action' => 'editarcuatro', $this->request->data['Consulta']['consulta_id']));
                 }
