@@ -41,7 +41,7 @@ class AlertasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Alerta->exists($id)) {
-			throw new NotFoundException(__('Invalid alerta'));
+			throw new NotFoundException(__('No existe alerta asociada.'));
 		}
 		$this->Alerta->recursive = 2;
 		$options = array('conditions' => array('Alerta.' . $this->Alerta->primaryKey => $id));
@@ -62,10 +62,10 @@ class AlertasController extends AppController {
 			$this->request->data['Alerta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Alerta->save($this->request->data)) {
-				$this->Session->setFlash(__('The alerta has been saved.'));
+				$this->Session->setFlash(__('El alerta fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The alerta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El alerta no se pudo registrar.'));
 			}
 		}
 		$indicadores = $this->Alerta->Indicadore->find('list');
@@ -83,17 +83,17 @@ class AlertasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Alerta->exists($id)) {
-			throw new NotFoundException(__('Invalid alerta'));
+			throw new NotFoundException(__('No existe alerta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Alerta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Alerta->save($this->request->data)) {
-				$this->Session->setFlash(__('The alerta has been saved.'));
+				$this->Session->setFlash(__('El alerta fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The alerta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El alerta no se pudo registrar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Alerta.' . $this->Alerta->primaryKey => $id));
@@ -115,13 +115,13 @@ class AlertasController extends AppController {
 	public function delete($id = null) {
 		$this->Alerta->id = $id;
 		if (!$this->Alerta->exists()) {
-			throw new NotFoundException(__('Invalid alerta'));
+			throw new NotFoundException(__('No existe alerta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Alerta->delete()) {
-			$this->Session->setFlash(__('The alerta has been deleted.'));
+			$this->Session->setFlash(__('El alerta fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The alerta could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El alerta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -136,10 +136,10 @@ class AlertasController extends AppController {
 		$this->request->data['Alerta']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Alerta->save($this->request->data)) {
-			$this->Session->setFlash(__('The Alerta has been saved.'));
+			$this->Session->setFlash(__('El alerta fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Alerta could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El alerta no se pudo eliminar.'));
 		}
 	}
 }
