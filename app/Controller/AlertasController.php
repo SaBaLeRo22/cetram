@@ -90,10 +90,10 @@ class AlertasController extends AppController {
 			$this->request->data['Alerta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Alerta->save($this->request->data)) {
-				$this->Session->setFlash(__('El alerta fue registrado.'));
+				$this->Session->setFlash(__('El alerta fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('El alerta no se pudo registrar.'));
+				$this->Session->setFlash(__('El alerta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Alerta.' . $this->Alerta->primaryKey => $id));

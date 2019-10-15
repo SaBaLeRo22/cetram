@@ -42,7 +42,7 @@ class AmbitosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Ambito->exists($id)) {
-			throw new NotFoundException(__('Invalid ambito'));
+			throw new NotFoundException(__('No existe ambito asociado.'));
 		}
 		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Ambito.' . $this->Ambito->primaryKey => $id));
@@ -63,10 +63,10 @@ class AmbitosController extends AppController {
 			$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Ambito->save($this->request->data)) {
-				$this->Session->setFlash(__('The ambito has been saved.'));
+				$this->Session->setFlash(__('El ambito fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The ambito could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El ambito no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Ambito->Estado->find('list');
@@ -82,17 +82,17 @@ class AmbitosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Ambito->exists($id)) {
-			throw new NotFoundException(__('Invalid ambito'));
+			throw new NotFoundException(__('No existe ambito asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Ambito->save($this->request->data)) {
-				$this->Session->setFlash(__('The ambito has been saved.'));
+				$this->Session->setFlash(__('El ambito fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The ambito could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El ambito no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Ambito.' . $this->Ambito->primaryKey => $id));
@@ -112,13 +112,13 @@ class AmbitosController extends AppController {
 	public function delete($id = null) {
 		$this->Ambito->id = $id;
 		if (!$this->Ambito->exists()) {
-			throw new NotFoundException(__('Invalid ambito'));
+			throw new NotFoundException(__('No existe ambito asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Ambito->delete()) {
-			$this->Session->setFlash(__('The ambito has been deleted.'));
+			$this->Session->setFlash(__('El ambito fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The ambito could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El ambito no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -133,10 +133,10 @@ class AmbitosController extends AppController {
 		$this->request->data['Ambito']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Ambito->save($this->request->data)) {
-			$this->Session->setFlash(__('The Ambito has been saved.'));
+			$this->Session->setFlash(__('El ambito fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Ambito could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El ambito no se pudo eliminar.'));
 		}
 	}
 }

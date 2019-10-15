@@ -88,10 +88,10 @@ class AgrupamientosController extends AppController {
 			$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Agrupamiento->save($this->request->data)) {
-				$this->Session->setFlash(__('El agrupamiento fue registrado.'));
+				$this->Session->setFlash(__('El agrupamiento fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('El agrupamiento no se pudo registrar.'));
+				$this->Session->setFlash(__('El agrupamiento no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Agrupamiento.' . $this->Agrupamiento->primaryKey => $id));
