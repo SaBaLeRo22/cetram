@@ -166,14 +166,13 @@ class ConsultasController extends AppController
             $consulta['Consulta']['subsidio_pax'] = 0;
             $consulta['Consulta']['unidade_id'] = 8; // Pesos ($)
             $consulta['Consulta']['localidade_id'] = $this->Authake->getLocalidadId();
-//            $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             $consulta['Consulta']['modo_id'] = 2; // Nueva Consulta.
             $consulta['Consulta']['estado_id'] = 1; // Activo
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
 
             if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('No se pudo guardar. Inténtalo de nuevo.'));
                 return $this->redirect(array('action' => 'index'));
             }
 
@@ -244,11 +243,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                     }
@@ -269,11 +265,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                 }
@@ -328,11 +321,8 @@ class ConsultasController extends AppController
                                     $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                                    } else {
-                                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                                    }
+                                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                                 }
                                 $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
@@ -354,11 +344,8 @@ class ConsultasController extends AppController
                                 $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                                 $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                                if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                                    $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                                } else {
-                                    $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                                }
+                                $this->RespuestaPregunta->save($respuestaPregunta);
+
                                 $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                             }
                             if ($pregunta['Pregunta']['id'] == '5') {
@@ -397,17 +384,10 @@ class ConsultasController extends AppController
                 $respuestaCoeficiente['RespuestaCoeficiente']['estado_id'] = 1;
                 $respuestaCoeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
                 $respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
-                    $this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
-                }
+
+                $this->RespuestaCoeficiente->save($respuestaCoeficiente);
             }
 
-//            $this->loadModel('Agrupamiento');
-//            $this->Agrupamiento->recursive = -1;
-//            $this->loadModel('Paso');
-//            $this->Paso->recursive = -1;
             $agrupamiento = $this->Agrupamiento->find('first', array(
                 'conditions' => array('Agrupamiento.orden' => '1', 'Agrupamiento.estado_id <>' => '2'),
                 'recursive' => -1
@@ -421,38 +401,18 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-/*            $paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 3; // Incompleta: Pantalla "Uno" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 1". Por favor, continuar con el "Paso 2".'));
             return $this->redirect(array('action' => 'dos', $consulta['Consulta']['id']));
 
         }
+
         /*
-                $verificacion = $this->Consulta->find('first', array(
-                    'conditions' => array('Consulta.estado_id <>' => '2', 'Consulta.user_created' => $this->Authake->getUserId()),
-                    'recursive' => -1,
-                    'order' => array('Consulta.id' => 'desc')
-                ));
-
-                if (!empty($verificacion)) {
-                    if ($verificacion['Consulta']['modo_id'] == '2') {
-                        return $this->redirect(array('action' => 'dos', $verificacion['Consulta']['id']));
-                    }
-                }
-        */
-
+         * PASO 1
+         * */
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
         $this->loadModel('Opcione');
@@ -486,8 +446,6 @@ class ConsultasController extends AppController
         }
 
         $this->set(compact('preguntas'));
-
-
     }
 
     /**
@@ -564,11 +522,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['funcion'] = $respuesta_opcion['Opcione']['funcion'];
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                     }
                 } else {
@@ -588,11 +543,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['funcion'] = $this->request->data['Consulta'][$pregunta['Pregunta']['id']];
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                 }
             }
@@ -648,11 +600,8 @@ class ConsultasController extends AppController
                                     $respuestaPregunta['RespuestaPregunta']['funcion'] = $respuesta_opcion['Opcione']['funcion'];
                                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                                    } else {
-                                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                                    }
+                                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                                 }
                                 $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] = $coeficiente['Coeficiente']['parcial_multiplicador'][$matrix['Matrix']['multiplicadore_id']] * $respuesta_opcion['Opcione']['funcion'];
@@ -675,11 +624,8 @@ class ConsultasController extends AppController
                                 $respuestaPregunta['RespuestaPregunta']['funcion'] = $this->request->data['Consulta'][$pregunta['Pregunta']['id']];
                                 $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                                if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                                    $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                                } else {
-                                    $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                                }
+                                $this->RespuestaPregunta->save($respuestaPregunta);
+
                                 $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
                             }
                             if ($pregunta['Pregunta']['id'] == '5') {
@@ -718,11 +664,8 @@ class ConsultasController extends AppController
                 $respuestaCoeficiente['RespuestaCoeficiente']['minimo'] = $coeficiente['Coeficiente']['minimo'];
                 $respuestaCoeficiente['RespuestaCoeficiente']['maximo'] = $coeficiente['Coeficiente']['maximo'];
                 $respuestaCoeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaCoeficiente->save($respuestaCoeficiente)) {
-                    $this->Session->setFlash(__('The RespuestaCoeficiente could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
-                }
+
+                $this->RespuestaCoeficiente->save($respuestaCoeficiente);
             }
 
             $sube_nuevo = $this->RespuestaPregunta->find('first', array(
@@ -790,6 +733,10 @@ class ConsultasController extends AppController
                 return $this->redirect(array('action' => 'editardos', $consulta['Consulta']['id']));
             }
         }
+
+        /*
+         * EDITAR PASO 1
+         * */
 
         if (!$this->Consulta->exists($id)) {
             if (!$this->Consulta->exists($this->request->data['Consulta']['consulta_id'])) {
@@ -980,11 +927,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                     }
@@ -1005,11 +949,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                 }
@@ -1032,23 +973,17 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-/*            $paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 4; // Incompleta: Pantalla "Dos" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 3".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
+
+        /*
+         * PASO 2
+         * */
 
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
@@ -1232,11 +1167,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                     }
@@ -1265,11 +1197,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                 }
@@ -1295,6 +1224,10 @@ class ConsultasController extends AppController
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 2". Por favor, continuar con el "Paso 3".'));
             return $this->redirect(array('action' => 'tres', $consulta['Consulta']['id']));
         }
+
+        /*
+         * EDITAR PASO 2
+         * */
 
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = -1;
@@ -1410,17 +1343,7 @@ class ConsultasController extends AppController
                         }
                     }
                 }
-/*                elseif ($this->request->data['base'] != NULL) {
-                    $pasajero = $this->RespuestaPasajero->find('first', array(
-                        'conditions' => array('RespuestaPasajero.id' => $this->request->data['base']),
-                        'recursive' => -1
-                    ));
-                    $pasajero['RespuestaPasajero']['base'] = '1';
-                    if (!$this->RespuestaPasajero->save($pasajero)) {
-                        $this->Session->setFlash(__('Problemas al actualizar la Base.'));
-                        return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
-                    }
-                } */
+
                 else {
                     $this->Session->setFlash(__('Por favor, primero seleccione una tarifa como base.'), 'default', array('type' => 'danger'));
                     return $this->redirect(array('action' => 'tres', $this->request->data['Consulta']['consulta_id']));
@@ -1444,19 +1367,10 @@ class ConsultasController extends AppController
                     $this->Paso->saveField('completo', 1);
                     $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-/*                    $paso['Paso']['completo'] = 1;
-                    $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-                    if (!$this->Paso->save($paso)) {
-                        $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The Paso has been saved.'));
-                    }*/
-
                     $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
                     $consulta['Consulta']['modo_id'] = 5; // Incompleta: Pantalla "Tres" es la última pantalla completa.
-                    if (!$this->Consulta->save($consulta)) {
-                        $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-                    }
+
+                    $this->Consulta->save($consulta);
 
                     $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 3". Por favor, continuar con el "Paso 4".'));
                     return $this->redirect(array('action' => 'cuatro', $this->request->data['Consulta']['consulta_id']));
@@ -1620,6 +1534,10 @@ class ConsultasController extends AppController
             }
         }
 
+        /*
+         * PASO 3
+         * */
+
         $this->request->data['Consulta']['consulta_id'] = $id;
 
         $this->loadModel('RespuestaPregunta');
@@ -1761,11 +1679,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                     }
@@ -1786,11 +1701,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                 }
@@ -1812,11 +1724,8 @@ class ConsultasController extends AppController
                 $respuestaSalario['RespuestaSalario']['estado_id'] = 1;
                 $respuestaSalario['RespuestaSalario']['user_created'] = $this->Authake->getUserId();
                 $respuestaSalario['RespuestaSalario']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaSalario->save($respuestaSalario)) {
-                    $this->Session->setFlash(__('The RespuestaSalario could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaSalario has been saved.'));
-                }
+
+                $this->RespuestaSalario->save($respuestaSalario);
 
             }
 
@@ -1840,27 +1749,21 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-/*            $paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 5".'));
             return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
 
         }
 
-        $this->request->data['Consulta']['consulta_id'] = $id;
+        /*
+         * PASO 4
+         * */
 
+        $this->request->data['Consulta']['consulta_id'] = $id;
 
         $this->loadModel('Pregunta');
         $this->Pregunta->recursive = -1;
@@ -2022,11 +1925,8 @@ class ConsultasController extends AppController
                         $respuestaPregunta['RespuestaPregunta']['estado_id'] = 1;
                         $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                        if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                            $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                        } else {
-                            $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                        }
+                        $this->RespuestaPregunta->save($respuestaPregunta);
+
                         $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                     }
@@ -2049,11 +1949,8 @@ class ConsultasController extends AppController
                     $respuestaPregunta['RespuestaPregunta']['estado_id'] = 1;
                     $respuestaPregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
 
-                    if (!$this->RespuestaPregunta->save($respuestaPregunta)) {
-                        $this->Session->setFlash(__('The RespuestaPregunta could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
-                    }
+                    $this->RespuestaPregunta->save($respuestaPregunta);
+
                     $preguntasRegistradas[$pregunta['Pregunta']['id']] = $pregunta['Pregunta']['id'];
 
                 }
@@ -2077,11 +1974,8 @@ class ConsultasController extends AppController
                 $respuestaSalario['RespuestaSalario']['salario'] = $categoria['salario'];
                 $respuestaSalario['RespuestaSalario']['estado_id'] = 1;
                 $respuestaSalario['RespuestaSalario']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaSalario->save($respuestaSalario)) {
-                    $this->Session->setFlash(__('The RespuestaSalario could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaSalario has been saved.'));
-                }
+
+                $this->RespuestaSalario->save($respuestaSalario);
 
             }
 
@@ -2106,19 +2000,10 @@ class ConsultasController extends AppController
                 $this->Paso->saveField('completo', 1);
                 $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-/*                $paso['Paso']['completo'] = 1;
-                $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->Paso->save($paso)) {
-                    $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The Paso has been saved.'));
-                }*/
-
                 $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
                 $consulta['Consulta']['modo_id'] = 6; // Incompleta: Pantalla "Cuatro" es la última pantalla completa.
-                if (!$this->Consulta->save($consulta)) {
-                    $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-                }
+
+                $this->Consulta->save($consulta);
 
                 $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 4". Por favor, continuar con el "Paso 5".'));
                 return $this->redirect(array('action' => 'cinco', $this->request->data['Consulta']['consulta_id']));
@@ -2128,6 +2013,10 @@ class ConsultasController extends AppController
                 return $this->redirect(array('action' => 'editarcinco', $this->request->data['Consulta']['consulta_id']));
             }
         }
+
+        /*
+         * EDITAR PASO 4
+         * */
 
         $this->request->data['Consulta']['consulta_id'] = $id;
 
@@ -2255,32 +2144,6 @@ class ConsultasController extends AppController
             $this->loadModel('RespuestaParametro');
             $this->RespuestaParametro->recursive = -1;
 
-            /*
-            PARAMETROS
-            */
-            /*
-            $parametros = $this->Parametro->find('all', array(
-                'conditions' => array('Parametro.estado_id <>' => '2'),
-                'recursive' => 0
-            ));
-            foreach ($parametros as $key => $parametro) {
-                $this->RespuestaParametro->create();
-                $respuestaParametro['RespuestaParametro']['consulta_id'] = $consulta['Consulta']['id'];
-                $respuestaParametro['RespuestaParametro']['parametro_id'] = $parametro['Parametro']['id'];
-                $respuestaParametro['RespuestaParametro']['parametro'] = $parametro['Parametro']['nombre'];
-                $respuestaParametro['RespuestaParametro']['valor'] = $parametro['Parametro']['valor'];
-                $respuestaParametro['RespuestaParametro']['unidade_id'] = $parametro['Unidade']['id'];
-                $respuestaParametro['RespuestaParametro']['unidad'] = $parametro['Unidade']['nombre'];
-                $respuestaParametro['RespuestaParametro']['estado_id'] = 1;
-                $respuestaParametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
-                $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaParametro->save($respuestaParametro)) {
-                    $this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
-                }
-            }
-            */
 
             /**************************************************************************************************************************************************/
             /**************************************************************************************************************************************************/
@@ -2316,11 +2179,8 @@ class ConsultasController extends AppController
                 $respuestaTipo['RespuestaTipo']['estado_id'] = 1;
                 $respuestaTipo['RespuestaTipo']['user_created'] = $this->Authake->getUserId();
                 $respuestaTipo['RespuestaTipo']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaTipo->save($respuestaTipo)) {
-                    $this->Session->setFlash(__('The RespuestaTipo could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaTipo has been saved.'));
-                }
+
+                $this->RespuestaTipo->save($respuestaTipo);
             }
 
             /**************************************************************************************************************************************************/
@@ -2458,28 +2318,23 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-            /*$paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['observaciones'] = $this->request->data['Consulta']['observaciones'];
             if ($this->request->data['Consulta']['localidade_id'] != '') {
                 $consulta['Consulta']['localidade_id'] = $this->request->data['Consulta']['localidade_id'];
             }
             $consulta['Consulta']['user_modified'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 1; // Completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 6".'));
             return $this->redirect(array('action' => 'resultado', $consulta['Consulta']['id']));
 
         }
+
+        /*
+         * PASO 6
+         * */
 
         $this->loadModel('Provincia');
         $this->Provincia->recursive = -1;
@@ -2552,9 +2407,6 @@ class ConsultasController extends AppController
 
             $consulta['Consulta']['id'] = $this->request->data['Consulta']['consulta_id'];
 
-            //debug($this->request->data);
-            //exit;
-
             foreach ($parametros as $key => $parametro) {
                 $this->RespuestaParametro->create();
                 $respuestaParametro['RespuestaParametro']['consulta_id'] = $consulta['Consulta']['id'];
@@ -2580,11 +2432,8 @@ class ConsultasController extends AppController
                 $respuestaParametro['RespuestaParametro']['estado_id'] = 1;
                 $respuestaParametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
                 $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
-                if (!$this->RespuestaParametro->save($respuestaParametro)) {
-                    $this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
-                }
+
+                $this->RespuestaParametro->save($respuestaParametro);
             }
 
             /*
@@ -2607,23 +2456,18 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-            /*$paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 7; // Incompleta: Pantalla "Cinco" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5". Por favor, continuar con el "Paso 6".'));
             return $this->redirect(array('action' => 'seis', $this->request->data['Consulta']['consulta_id']));
         }
+
+        /*
+         * PASO 5
+         * */
         /*
             PARAMETROS EDITABLES
         */
@@ -2651,8 +2495,6 @@ class ConsultasController extends AppController
 
         $this->loadModel('RespuestaParametro');
         $this->RespuestaParametro->recursive = -1;
-        //$this->loadModel('Parametro');
-        //$this->Parametro->recursive = 0;
 
         /*
         PARAMETROS
@@ -2672,11 +2514,8 @@ class ConsultasController extends AppController
                     $respuestaParametro['RespuestaParametro']['valor'] = $this->request->data['Consulta'][$parametro['RespuestaParametro']['id']];
                     $respuestaParametro['RespuestaParametro']['editado'] = '1';
                     $respuestaParametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
-                    if (!$this->RespuestaParametro->save($respuestaParametro)) {
-                        $this->Session->setFlash(__('The RespuestaParametro could not be saved. Please, try again.'));
-                    } else {
-                        $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
-                    }
+
+                    $this->RespuestaParametro->save($respuestaParametro);
                 }
             }
 
@@ -2700,19 +2539,10 @@ class ConsultasController extends AppController
             $this->Paso->saveField('completo', 1);
             $this->Paso->saveField('user_modified', $this->Authake->getUserId());
 
-            /*$paso['Paso']['completo'] = 1;
-            $paso['Paso']['user_modified'] = $this->Authake->getUserId();
-            if (!$this->Paso->save($paso)) {
-                $this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
-            } else {
-                $this->Session->setFlash(__('The Paso has been saved.'));
-            }*/
-
             $consulta['Consulta']['user_created'] = $this->Authake->getUserId();
             $consulta['Consulta']['modo_id'] = 7; // Incompleta: Pantalla "Cinco" es la última pantalla completa.
-            if (!$this->Consulta->save($consulta)) {
-                $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
-            }
+
+            $this->Consulta->save($consulta);
 
             $this->Session->setFlash(__('Se complet&oacute; correctamente el "Paso 5". Por favor, continuar con el "Paso 6".'));
             return $this->redirect(array('action' => 'seis', $this->request->data['Consulta']['consulta_id']));
@@ -2763,7 +2593,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
@@ -2834,10 +2664,10 @@ class ConsultasController extends AppController
                 array('RespuestaTipo.consulta_id' => $consulta['Consulta']['id'])
             );
 
-            $this->Session->setFlash(__('The consulta has been saved.'));
+            $this->Session->setFlash(__('La consulta fue eliminada.'));
             return $this->redirect(array('action' => 'index'));
         } else {
-            $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            $this->Session->setFlash(__('La consulta no se pudo eliminar.'));
         }
 
         return $this->redirect(array('action' => 'index'));
@@ -2849,7 +2679,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -2926,7 +2756,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -3011,7 +2841,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -3128,7 +2958,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -3282,7 +3112,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -3439,7 +3269,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
         $consulta = $this->Consulta->find('first', $options);
@@ -3583,7 +3413,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $this->loadModel('RespuestaParametro');
@@ -3728,7 +3558,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
         $consulta = $this->Consulta->find('first', $options);
@@ -3833,7 +3663,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
         $consulta = $this->Consulta->find('first', $options);
@@ -3877,7 +3707,7 @@ class ConsultasController extends AppController
     {
         $this->Consulta->id = $consulta_id;
         if (!$this->Consulta->exists()) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $consulta_id));
         $consulta = $this->Consulta->find('first', $options);
@@ -4199,16 +4029,6 @@ class ConsultasController extends AppController
         $respuestaIndicadore_4['RespuestaIndicadore']['indicadore_id'] = $indicador_4['Indicadore']['id'];
         $respuestaIndicadore_4['RespuestaIndicadore']['indicador'] = $indicador_4['Indicadore']['nombre'];
 
-/*        if($respuestaPregunta_6['RespuestaPregunta']['valor'] <= '1'){
-            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0;
-        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '1' && $respuestaPregunta_6['RespuestaPregunta']['valor'] <= '2'){
-            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0.33;
-        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '2' && $respuestaPregunta_6['RespuestaPregunta']['valor'] <= '3'){
-            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 0.66;
-        } if($respuestaPregunta_6['RespuestaPregunta']['valor'] > '3'){
-            $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = 1;
-        }*/
-
         $respuestaIndicadore_4['RespuestaIndicadore']['valor'] = $respuestaPregunta_6['RespuestaPregunta']['valor'];
 
         foreach ($alertas_4 as $alerta_4) {
@@ -4457,7 +4277,7 @@ class ConsultasController extends AppController
     public function resultado($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
@@ -4469,10 +4289,6 @@ class ConsultasController extends AppController
             'conditions' => array('RespuestaPregunta.pregunta_id' => '23', 'RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.estado_id <>' => '2'),
             'recursive' => -1
         ));
-
-        //$var = new Vars();
-        //debug($var->isNumeric("123.11"));
-        //debug($var->isNegative("matias"));
 
         $this->pdfConfig = array(
             'download' => true,
@@ -4487,7 +4303,7 @@ class ConsultasController extends AppController
         App::uses('CakeEmail', 'Network/Email');
 
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
@@ -4572,7 +4388,7 @@ class ConsultasController extends AppController
     public function copiar($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
@@ -4657,10 +4473,8 @@ class ConsultasController extends AppController
                 $coeficiente['RespuestaCoeficiente']['user_created'] = $this->Authake->getUserId();
                 $coeficiente['RespuestaCoeficiente']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->RespuestaCoeficiente->save($coeficiente)) {
-                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('La consulta no se pudo copiar.'));
                     return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaCoeficiente has been saved.'));
                 }
             }
 
@@ -4677,10 +4491,8 @@ class ConsultasController extends AppController
                 $parametro['RespuestaParametro']['user_created'] = $this->Authake->getUserId();
                 $parametro['RespuestaParametro']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->RespuestaParametro->save($parametro)) {
-                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('La consulta no se pudo copiar.'));
                     return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaParametro has been saved.'));
                 }
             }
 
@@ -4697,10 +4509,8 @@ class ConsultasController extends AppController
                 $pasajero['RespuestaPasajero']['user_created'] = $this->Authake->getUserId();
                 $pasajero['RespuestaPasajero']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->RespuestaPasajero->save($pasajero)) {
-                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('La consulta no se pudo copiar.'));
                     return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaPasajero has been saved.'));
                 }
             }
 
@@ -4717,10 +4527,8 @@ class ConsultasController extends AppController
                 $pregunta['RespuestaPregunta']['user_created'] = $this->Authake->getUserId();
                 $pregunta['RespuestaPregunta']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->RespuestaPregunta->save($pregunta)) {
-                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('La consulta no se pudo copiar.'));
                     return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaPregunta has been saved.'));
                 }
             }
 
@@ -4737,10 +4545,8 @@ class ConsultasController extends AppController
                 $salario['RespuestaSalario']['user_created'] = $this->Authake->getUserId();
                 $salario['RespuestaSalario']['user_modified'] = $this->Authake->getUserId();
                 if (!$this->RespuestaSalario->save($salario)) {
-                    $this->Session->setFlash(__('The Consulta could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('La consulta no se pudo copiar.'));
                     return $this->redirect(array('action' => 'eliminar', $nueva['Consulta']['id']));
-                } else {
-                    $this->Session->setFlash(__('The RespuestaSalario has been saved.'));
                 }
             }
 
@@ -4749,7 +4555,7 @@ class ConsultasController extends AppController
         }
 
         else{
-            $this->Session->setFlash(__('The consulta could not be saved. Please, try again.'));
+            $this->Session->setFlash(__('La consulta no se pudo copiar.'));
             return $this->redirect(array('action' => 'index'));
         }
     }
@@ -5342,10 +5148,6 @@ class ConsultasController extends AppController
             'conditions' => array('RespuestaPregunta.pregunta_id' => '23', 'RespuestaPregunta.consulta_id' => $id, 'RespuestaPregunta.estado_id <>' => '2'),
             'recursive' => -1
         ));
-
-        //$var = new Vars();
-        //debug($var->isNumeric("123.11"));
-        //debug($var->isNegative("matias"));
 
         $this->pdfConfig = array(
             'download' => true,
