@@ -41,7 +41,7 @@ class AgrupamientosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Agrupamiento->exists($id)) {
-			throw new NotFoundException(__('Invalid agrupamiento'));
+			throw new NotFoundException(__('No existe agrupamiento asociado.'));
 		}
 		$this->Agrupamiento->recursive = 2;
 		$options = array('conditions' => array('Agrupamiento.' . $this->Agrupamiento->primaryKey => $id));
@@ -62,10 +62,10 @@ class AgrupamientosController extends AppController {
 			$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Agrupamiento->save($this->request->data)) {
-				$this->Session->setFlash(__('The agrupamiento has been saved.'));
+				$this->Session->setFlash(__('El agrupamiento fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The agrupamiento could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El agrupamiento no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Agrupamiento->Estado->find('list');
@@ -81,17 +81,17 @@ class AgrupamientosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Agrupamiento->exists($id)) {
-			throw new NotFoundException(__('Invalid agrupamiento'));
+			throw new NotFoundException(__('No existe agrupamiento asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Agrupamiento->save($this->request->data)) {
-				$this->Session->setFlash(__('The agrupamiento has been saved.'));
+				$this->Session->setFlash(__('El agrupamiento fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The agrupamiento could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El agrupamiento no se pudo registrar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Agrupamiento.' . $this->Agrupamiento->primaryKey => $id));
@@ -111,13 +111,13 @@ class AgrupamientosController extends AppController {
 	public function delete($id = null) {
 		$this->Agrupamiento->id = $id;
 		if (!$this->Agrupamiento->exists()) {
-			throw new NotFoundException(__('Invalid agrupamiento'));
+			throw new NotFoundException(__('No existe agrupamiento asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Agrupamiento->delete()) {
-			$this->Session->setFlash(__('The agrupamiento has been deleted.'));
+			$this->Session->setFlash(__('El agrupamiento fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The agrupamiento could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El agrupamiento no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -125,17 +125,17 @@ class AgrupamientosController extends AppController {
 	public function eliminar($id = null) {
 		$this->Agrupamiento->id = $id;
 		if (!$this->Agrupamiento->exists()) {
-			throw new NotFoundException(__('Invalid Agrupamiento'));
+			throw new NotFoundException(__('No existe agrupamiento asociado.'));
 		}
 
 		$this->request->data['Agrupamiento']['estado_id'] = '2';
 		$this->request->data['Agrupamiento']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Agrupamiento->save($this->request->data)) {
-			$this->Session->setFlash(__('The Agrupamiento has been saved.'));
+			$this->Session->setFlash(__('El agrupamiento fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Agrupamiento could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El agrupamiento no se pudo eliminar.'));
 		}
 	}
 }
