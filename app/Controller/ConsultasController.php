@@ -4594,7 +4594,7 @@ class ConsultasController extends AppController
     public function csvpreguntas($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaPregunta');
         $this->RespuestaPregunta->recursive = 0;
@@ -4639,7 +4639,7 @@ class ConsultasController extends AppController
     public function csvpasajeros($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaPasajero');
         $this->RespuestaPasajero->recursive = 0;
@@ -4721,7 +4721,7 @@ class ConsultasController extends AppController
     public function csvsalarios($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaSalario');
         $this->RespuestaSalario->recursive = 0;
@@ -4773,7 +4773,7 @@ class ConsultasController extends AppController
     public function csvparametros($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaParametro');
         $this->RespuestaParametro->recursive = 0;
@@ -4824,7 +4824,7 @@ class ConsultasController extends AppController
     public function csvcoeficientes($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaCoeficiente');
         $this->RespuestaCoeficiente->recursive = 0;
@@ -4876,7 +4876,7 @@ class ConsultasController extends AppController
     public function csvindicadores($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaIndicadore');
         $this->RespuestaIndicadore->recursive = 0;
@@ -4935,7 +4935,7 @@ class ConsultasController extends AppController
     public function csvitems($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaItem');
         $this->RespuestaItem->recursive = 0;
@@ -5002,7 +5002,7 @@ class ConsultasController extends AppController
     public function csvtipos($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->loadModel('RespuestaTipo');
         $this->RespuestaTipo->recursive = 0;
@@ -5069,7 +5069,7 @@ class ConsultasController extends AppController
     public function csvresumen($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
         $this->Consulta->recursive = -1;
         $consulta = $this->Consulta->find('first', array(
@@ -5136,7 +5136,7 @@ class ConsultasController extends AppController
     public function resultadopdf($id = null)
     {
         if (!$this->Consulta->exists($id)) {
-            throw new NotFoundException(__('Invalid consulta'));
+            throw new NotFoundException(__('No existe consulta asociada.'));
         }
 
         $options = array('conditions' => array('Consulta.' . $this->Consulta->primaryKey => $id));
