@@ -41,7 +41,7 @@ class CategoriasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Categoria->exists($id)) {
-			throw new NotFoundException(__('Invalid categoria'));
+			throw new NotFoundException(__('No existe categoria asociada.'));
 		}
 		$this->Categoria->recursive = 2;
 		$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));
@@ -62,10 +62,10 @@ class CategoriasController extends AppController {
 			$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Categoria->save($this->request->data)) {
-				$this->Session->setFlash(__('The categoria has been saved.'));
+				$this->Session->setFlash(__('La categoria fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The categoria could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La categoria no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Categoria->Estado->find('list');
@@ -88,10 +88,10 @@ class CategoriasController extends AppController {
 			$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Categoria->save($this->request->data)) {
-				$this->Session->setFlash(__('The categoria has been saved.'));
+				$this->Session->setFlash(__('La categoria fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The categoria could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La categoria no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Categoria.' . $this->Categoria->primaryKey => $id));
@@ -115,9 +115,9 @@ class CategoriasController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Categoria->delete()) {
-			$this->Session->setFlash(__('The categoria has been deleted.'));
+			$this->Session->setFlash(__('La categoria fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The categoria could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La categoria no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -132,10 +132,10 @@ class CategoriasController extends AppController {
 		$this->request->data['Categoria']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Categoria->save($this->request->data)) {
-			$this->Session->setFlash(__('The Categoria has been saved.'));
+			$this->Session->setFlash(__('La categoria fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Categoria could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La categoria no se pudo eliminar.'));
 		}
 	}
 }

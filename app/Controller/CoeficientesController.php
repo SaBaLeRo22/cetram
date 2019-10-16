@@ -41,7 +41,7 @@ class CoeficientesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Coeficiente->exists($id)) {
-			throw new NotFoundException(__('Invalid coeficiente'));
+			throw new NotFoundException(__('No existe coeficiente asociado.'));
 		}
 		$this->Coeficiente->recursive = 2;
 		$options = array('conditions' => array('Coeficiente.' . $this->Coeficiente->primaryKey => $id));
@@ -62,10 +62,10 @@ class CoeficientesController extends AppController {
 			$this->request->data['Coeficiente']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Coeficiente->save($this->request->data)) {
-				$this->Session->setFlash(__('The coeficiente has been saved.'));
+				$this->Session->setFlash(__('El coeficiente fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The coeficiente could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El coeficiente no se pudo registrar.'));
 			}
 		}
 		$ambitos = $this->Coeficiente->Ambito->find('list');
@@ -82,17 +82,17 @@ class CoeficientesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Coeficiente->exists($id)) {
-			throw new NotFoundException(__('Invalid coeficiente'));
+			throw new NotFoundException(__('No existe coeficiente asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Coeficiente']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Coeficiente->save($this->request->data)) {
-				$this->Session->setFlash(__('The coeficiente has been saved.'));
+				$this->Session->setFlash(__('El coeficiente fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The coeficiente could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El coeficiente no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Coeficiente.' . $this->Coeficiente->primaryKey => $id));
@@ -113,13 +113,13 @@ class CoeficientesController extends AppController {
 	public function delete($id = null) {
 		$this->Coeficiente->id = $id;
 		if (!$this->Coeficiente->exists()) {
-			throw new NotFoundException(__('Invalid coeficiente'));
+			throw new NotFoundException(__('No existe coeficiente asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Coeficiente->delete()) {
-			$this->Session->setFlash(__('The coeficiente has been deleted.'));
+			$this->Session->setFlash(__('El coeficiente fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The coeficiente could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El coeficiente no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -127,17 +127,17 @@ class CoeficientesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Coeficiente->id = $id;
 		if (!$this->Coeficiente->exists()) {
-			throw new NotFoundException(__('Invalid Coeficiente'));
+			throw new NotFoundException(__('No existe coeficiente asociado.'));
 		}
 
 		$this->request->data['Coeficiente']['estado_id'] = '2';
 		$this->request->data['Coeficiente']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Coeficiente->save($this->request->data)) {
-			$this->Session->setFlash(__('The Coeficiente has been saved.'));
+			$this->Session->setFlash(__('El coeficiente fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Coeficiente could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El coeficiente no se pudo eliminar.'));
 		}
 	}
 }
