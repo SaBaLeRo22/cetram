@@ -41,7 +41,7 @@ class ParametrosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Parametro->exists($id)) {
-			throw new NotFoundException(__('Invalid parametro'));
+			throw new NotFoundException(__('No existe parametro asociado.'));
 		}
 		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Parametro.' . $this->Parametro->primaryKey => $id));
@@ -62,10 +62,10 @@ class ParametrosController extends AppController {
 			$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Parametro->save($this->request->data)) {
-				$this->Session->setFlash(__('The parametro has been saved.'));
+				$this->Session->setFlash(__('El parametro fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The parametro could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El parametro no se pudo registrar.'));
 			}
 		}
 		$unidades = $this->Parametro->Unidade->find('list');
@@ -84,17 +84,17 @@ class ParametrosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Parametro->exists($id)) {
-			throw new NotFoundException(__('Invalid parametro'));
+			throw new NotFoundException(__('No existe parametro asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Parametro->save($this->request->data)) {
-				$this->Session->setFlash(__('The parametro has been saved.'));
+				$this->Session->setFlash(__('El parametro fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The parametro could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El parametro no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Parametro.' . $this->Parametro->primaryKey => $id));
@@ -117,13 +117,13 @@ class ParametrosController extends AppController {
 	public function delete($id = null) {
 		$this->Parametro->id = $id;
 		if (!$this->Parametro->exists()) {
-			throw new NotFoundException(__('Invalid parametro'));
+			throw new NotFoundException(__('No existe parametro asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Parametro->delete()) {
-			$this->Session->setFlash(__('The parametro has been deleted.'));
+			$this->Session->setFlash(__('El parametro fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The parametro could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El parametro no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -131,17 +131,17 @@ class ParametrosController extends AppController {
 	public function eliminar($id = null) {
 		$this->Parametro->id = $id;
 		if (!$this->Parametro->exists()) {
-			throw new NotFoundException(__('Invalid Parametro'));
+			throw new NotFoundException(__('No existe parametro asociado.'));
 		}
 
 		$this->request->data['Parametro']['estado_id'] = '2';
 		$this->request->data['Parametro']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Parametro->save($this->request->data)) {
-			$this->Session->setFlash(__('The Parametro has been saved.'));
+			$this->Session->setFlash(__('El paramtro fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El parametro no se pudo eliminar.'));
 		}
 	}
 }

@@ -41,7 +41,7 @@ class ParticipacionesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Participacione->exists($id)) {
-			throw new NotFoundException(__('Invalid participacione'));
+			throw new NotFoundException(__('No existe participacion asociada.'));
 		}
 		$this->Participacione->recursive = 2;
 		$options = array('conditions' => array('Participacione.' . $this->Participacione->primaryKey => $id));
@@ -62,10 +62,10 @@ class ParticipacionesController extends AppController {
 			$this->request->data['Participacione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Participacione->save($this->request->data)) {
-				$this->Session->setFlash(__('The participacione has been saved.'));
+				$this->Session->setFlash(__('La participacion fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The participacione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La participacion no se pudo registrar.'));
 			}
 		}
 		$parametros = $this->Participacione->Parametro->find('list');
@@ -83,17 +83,17 @@ class ParticipacionesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Participacione->exists($id)) {
-			throw new NotFoundException(__('Invalid participacione'));
+			throw new NotFoundException(__('No existe participacion asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Participacione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Participacione->save($this->request->data)) {
-				$this->Session->setFlash(__('The participacione has been saved.'));
+				$this->Session->setFlash(__('La participacion fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The participacione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La participacion no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Participacione.' . $this->Participacione->primaryKey => $id));
@@ -115,13 +115,13 @@ class ParticipacionesController extends AppController {
 	public function delete($id = null) {
 		$this->Participacione->id = $id;
 		if (!$this->Participacione->exists()) {
-			throw new NotFoundException(__('Invalid participacione'));
+			throw new NotFoundException(__('No existe participacion asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Participacione->delete()) {
-			$this->Session->setFlash(__('The participacione has been deleted.'));
+			$this->Session->setFlash(__('La participacion fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The participacione could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La participacion no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class ParticipacionesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Participacione->id = $id;
 		if (!$this->Participacione->exists()) {
-			throw new NotFoundException(__('Invalid Participacione'));
+			throw new NotFoundException(__('No existe participacion asociada.'));
 		}
 
 		$this->request->data['Participacione']['estado_id'] = '2';
 		$this->request->data['Participacione']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Participacione->save($this->request->data)) {
-			$this->Session->setFlash(__('The Participacione has been saved.'));
+			$this->Session->setFlash(__('La participacion fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Participacione could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La participacion no se pudo eliminar.'));
 		}
 	}
 }

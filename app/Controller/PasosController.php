@@ -41,7 +41,7 @@ class PasosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Paso->exists($id)) {
-			throw new NotFoundException(__('Invalid paso'));
+			throw new NotFoundException(__('No existe paso asociado.'));
 		}
 		$this->Paso->recursive = 2;
 		$options = array('conditions' => array('Paso.' . $this->Paso->primaryKey => $id));
@@ -62,10 +62,10 @@ class PasosController extends AppController {
 			$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Paso->save($this->request->data)) {
-				$this->Session->setFlash(__('The paso has been saved.'));
+				$this->Session->setFlash(__('El paso fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The paso could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El paso no se puede registrar.'));
 			}
 		}
 		$consultas = $this->Paso->Consultum->find('list');
@@ -83,17 +83,17 @@ class PasosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Paso->exists($id)) {
-			throw new NotFoundException(__('Invalid paso'));
+			throw new NotFoundException(__('No existe paso asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Paso->save($this->request->data)) {
-				$this->Session->setFlash(__('The paso has been saved.'));
+				$this->Session->setFlash(__('El paso fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The paso could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El paso no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Paso.' . $this->Paso->primaryKey => $id));
@@ -115,13 +115,13 @@ class PasosController extends AppController {
 	public function delete($id = null) {
 		$this->Paso->id = $id;
 		if (!$this->Paso->exists()) {
-			throw new NotFoundException(__('Invalid paso'));
+			throw new NotFoundException(__('No existe paso asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Paso->delete()) {
-			$this->Session->setFlash(__('The paso has been deleted.'));
+			$this->Session->setFlash(__('El paso fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The paso could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El paso no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class PasosController extends AppController {
 	public function eliminar($id = null) {
 		$this->Paso->id = $id;
 		if (!$this->Paso->exists()) {
-			throw new NotFoundException(__('Invalid Paso'));
+			throw new NotFoundException(__('No existe paso asociado.'));
 		}
 
 		$this->request->data['Paso']['estado_id'] = '2';
 		$this->request->data['Paso']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Paso->save($this->request->data)) {
-			$this->Session->setFlash(__('The Paso has been saved.'));
+			$this->Session->setFlash(__('El paso fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Paso could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El paso no se puede eliminar.'));
 		}
 	}
 }

@@ -42,7 +42,7 @@ class PreguntasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Pregunta->exists($id)) {
-			throw new NotFoundException(__('Invalid pregunta'));
+			throw new NotFoundException(__('No existe pregunta asociada.'));
 		}
 		$this->Pregunta->recursive = 2;
 		$options = array('conditions' => array('Pregunta.' . $this->Pregunta->primaryKey => $id));
@@ -64,10 +64,10 @@ class PreguntasController extends AppController {
 			$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Pregunta->save($this->request->data)) {
-				$this->Session->setFlash(__('The pregunta has been saved.'));
+				$this->Session->setFlash(__('La pregunta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La pregunta no se pudo registrar.'));
 			}
 		}
 		$multiplicadores = $this->Pregunta->Multiplicadore->find('list');
@@ -87,17 +87,17 @@ class PreguntasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Pregunta->exists($id)) {
-			throw new NotFoundException(__('Invalid pregunta'));
+			throw new NotFoundException(__('No existe pregunta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Pregunta->save($this->request->data)) {
-				$this->Session->setFlash(__('The pregunta has been saved.'));
+				$this->Session->setFlash(__('La pregunta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La pregunta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Pregunta.' . $this->Pregunta->primaryKey => $id));
@@ -121,13 +121,13 @@ class PreguntasController extends AppController {
 	public function delete($id = null) {
 		$this->Pregunta->id = $id;
 		if (!$this->Pregunta->exists()) {
-			throw new NotFoundException(__('Invalid pregunta'));
+			throw new NotFoundException(__('No existe pregunta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Pregunta->delete()) {
-			$this->Session->setFlash(__('The pregunta has been deleted.'));
+			$this->Session->setFlash(__('La pregunta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The pregunta could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La pregunta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -135,17 +135,17 @@ class PreguntasController extends AppController {
 	public function eliminar($id = null) {
 		$this->Pregunta->id = $id;
 		if (!$this->Pregunta->exists()) {
-			throw new NotFoundException(__('Invalid pregunta'));
+			throw new NotFoundException(__('No existe pregunta asociada.'));
 		}
 
 		$this->request->data['Pregunta']['estado_id'] = '2';
 		$this->request->data['Pregunta']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Pregunta->save($this->request->data)) {
-			$this->Session->setFlash(__('The pregunta has been saved.'));
+			$this->Session->setFlash(__('La pregunta fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The pregunta could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La pregunta no se pudo eliminar.'));
 		}
 	}
 }
