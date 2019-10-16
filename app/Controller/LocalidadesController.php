@@ -41,7 +41,7 @@ class LocalidadesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Localidade->exists($id)) {
-			throw new NotFoundException(__('Invalid localidade'));
+			throw new NotFoundException(__('No existe localidad asociada.'));
 		}
 		$this->Localidade->recursive = 2;
 		$options = array('conditions' => array('Localidade.' . $this->Localidade->primaryKey => $id));
@@ -62,10 +62,10 @@ class LocalidadesController extends AppController {
 			$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Localidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The localidade has been saved.'));
+				$this->Session->setFlash(__('La localidad fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The localidade could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La localidad no se pudo registrar.'));
 			}
 		}
 		$provincias = $this->Localidade->Provincia->find('list');
@@ -82,17 +82,17 @@ class LocalidadesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Localidade->exists($id)) {
-			throw new NotFoundException(__('Invalid localidade'));
+			throw new NotFoundException(__('No existe localidad asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Localidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The localidade has been saved.'));
+				$this->Session->setFlash(__('La localidad fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The localidade could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La localidad no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Localidade.' . $this->Localidade->primaryKey => $id));
@@ -113,13 +113,13 @@ class LocalidadesController extends AppController {
 	public function delete($id = null) {
 		$this->Localidade->id = $id;
 		if (!$this->Localidade->exists()) {
-			throw new NotFoundException(__('Invalid localidade'));
+			throw new NotFoundException(__('No existe localidad asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Localidade->delete()) {
-			$this->Session->setFlash(__('The localidade has been deleted.'));
+			$this->Session->setFlash(__('La localidad fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The localidade could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La localidad no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -127,17 +127,17 @@ class LocalidadesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Localidade->id = $id;
 		if (!$this->Localidade->exists()) {
-			throw new NotFoundException(__('Invalid Localidade'));
+			throw new NotFoundException(__('No existe localidad asociada.'));
 		}
 
 		$this->request->data['Localidade']['estado_id'] = '2';
 		$this->request->data['Localidade']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Localidade->save($this->request->data)) {
-			$this->Session->setFlash(__('The Localidade has been saved.'));
+			$this->Session->setFlash(__('La localidad fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Localidade could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La localidad no se pudo eliminar.'));
 		}
 	}
 

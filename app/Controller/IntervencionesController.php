@@ -41,7 +41,7 @@ class IntervencionesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Intervencione->exists($id)) {
-			throw new NotFoundException(__('Invalid intervencione'));
+			throw new NotFoundException(__('No existe intervencion asociada.'));
 		}
 		$this->Intervencione->recursive = 2;
 		$options = array('conditions' => array('Intervencione.' . $this->Intervencione->primaryKey => $id));
@@ -62,10 +62,10 @@ class IntervencionesController extends AppController {
 			$this->request->data['Intervencione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Intervencione->save($this->request->data)) {
-				$this->Session->setFlash(__('The intervencione has been saved.'));
+				$this->Session->setFlash(__('La intervencion fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The intervencione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La intervencion no se pudo registrar.'));
 			}
 		}
 		$coeficientes = $this->Intervencione->Coeficiente->find('list');
@@ -83,17 +83,17 @@ class IntervencionesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Intervencione->exists($id)) {
-			throw new NotFoundException(__('Invalid intervencione'));
+			throw new NotFoundException(__('No existe intervencion asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Intervencione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Intervencione->save($this->request->data)) {
-				$this->Session->setFlash(__('The intervencione has been saved.'));
+				$this->Session->setFlash(__('La intervencion fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The intervencione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La intervencion no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Intervencione.' . $this->Intervencione->primaryKey => $id));
@@ -115,13 +115,13 @@ class IntervencionesController extends AppController {
 	public function delete($id = null) {
 		$this->Intervencione->id = $id;
 		if (!$this->Intervencione->exists()) {
-			throw new NotFoundException(__('Invalid intervencione'));
+			throw new NotFoundException(__('No existe intervencion asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Intervencione->delete()) {
-			$this->Session->setFlash(__('The intervencione has been deleted.'));
+			$this->Session->setFlash(__('La intervencion fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The intervencione could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La intervencion no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class IntervencionesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Intervencione->id = $id;
 		if (!$this->Intervencione->exists()) {
-			throw new NotFoundException(__('Invalid Intervencione'));
+			throw new NotFoundException(__('No existe intervencion asociada.'));
 		}
 
 		$this->request->data['Intervencione']['estado_id'] = '2';
 		$this->request->data['Intervencione']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Intervencione->save($this->request->data)) {
-			$this->Session->setFlash(__('The Intervencione has been saved.'));
+			$this->Session->setFlash(__('La intervencion fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Intervencione could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La intervencion no se pudo eliminar.'));
 		}
 	}
 }

@@ -41,7 +41,7 @@ class ModosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Modo->exists($id)) {
-			throw new NotFoundException(__('Invalid modo'));
+			throw new NotFoundException(__('No existe modo asociado.'));
 		}
 		$this->Modo->recursive = 2;
 		$options = array('conditions' => array('Modo.' . $this->Modo->primaryKey => $id));
@@ -62,10 +62,10 @@ class ModosController extends AppController {
 			$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Modo->save($this->request->data)) {
-				$this->Session->setFlash(__('The modo has been saved.'));
+				$this->Session->setFlash(__('El modo fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The modo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El modo no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Modo->Estado->find('list');
@@ -81,17 +81,17 @@ class ModosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Modo->exists($id)) {
-			throw new NotFoundException(__('Invalid modo'));
+			throw new NotFoundException(__('No existe modo asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Modo->save($this->request->data)) {
-				$this->Session->setFlash(__('The modo has been saved.'));
+				$this->Session->setFlash(__('El modo fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The modo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El modo no se pudo registrar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Modo.' . $this->Modo->primaryKey => $id));
@@ -111,13 +111,13 @@ class ModosController extends AppController {
 	public function delete($id = null) {
 		$this->Modo->id = $id;
 		if (!$this->Modo->exists()) {
-			throw new NotFoundException(__('Invalid modo'));
+			throw new NotFoundException(__('No existe modo asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Modo->delete()) {
-			$this->Session->setFlash(__('The modo has been deleted.'));
+			$this->Session->setFlash(__('El modo fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The modo could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El modo no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -125,17 +125,17 @@ class ModosController extends AppController {
 	public function eliminar($id = null) {
 		$this->Modo->id = $id;
 		if (!$this->Modo->exists()) {
-			throw new NotFoundException(__('Invalid Modo'));
+			throw new NotFoundException(__('No existe modo asociado.'));
 		}
 
 		$this->request->data['Modo']['estado_id'] = '2';
 		$this->request->data['Modo']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Modo->save($this->request->data)) {
-			$this->Session->setFlash(__('The Modo has been saved.'));
+			$this->Session->setFlash(__('El modo fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Modo could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El modo no se pudo eliminar.'));
 		}
 	}
 }

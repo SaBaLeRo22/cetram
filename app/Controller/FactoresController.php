@@ -41,7 +41,7 @@ class FactoresController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Factore->exists($id)) {
-			throw new NotFoundException(__('Invalid factore'));
+			throw new NotFoundException(__('No existe factor asociado.'));
 		}
 		$options = array('conditions' => array('Factore.' . $this->Factore->primaryKey => $id));
 //		$this->set('factore', $this->Factore->find('first', $options));
@@ -88,10 +88,10 @@ class FactoresController extends AppController {
 			$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Factore->save($this->request->data)) {
-				$this->Session->setFlash(__('The factore has been saved.'));
+				$this->Session->setFlash(__('El factor fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The factore could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El factor no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Factore->Estado->find('list');
@@ -107,17 +107,17 @@ class FactoresController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Factore->exists($id)) {
-			throw new NotFoundException(__('Invalid factore'));
+			throw new NotFoundException(__('No existe factor asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Factore->save($this->request->data)) {
-				$this->Session->setFlash(__('The factore has been saved.'));
+				$this->Session->setFlash(__('El factor fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The factore could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El factor no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Factore.' . $this->Factore->primaryKey => $id));
@@ -137,13 +137,13 @@ class FactoresController extends AppController {
 	public function delete($id = null) {
 		$this->Factore->id = $id;
 		if (!$this->Factore->exists()) {
-			throw new NotFoundException(__('Invalid factore'));
+			throw new NotFoundException(__('No existe factor asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Factore->delete()) {
-			$this->Session->setFlash(__('The factore has been deleted.'));
+			$this->Session->setFlash(__('El factor fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The factore could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El factor no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -151,17 +151,17 @@ class FactoresController extends AppController {
 	public function eliminar($id = null) {
 		$this->Factore->id = $id;
 		if (!$this->Factore->exists()) {
-			throw new NotFoundException(__('Invalid Factore'));
+			throw new NotFoundException(__('No existe factor asociado.'));
 		}
 
 		$this->request->data['Factore']['estado_id'] = '2';
 		$this->request->data['Factore']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Factore->save($this->request->data)) {
-			$this->Session->setFlash(__('The Factore has been saved.'));
+			$this->Session->setFlash(__('El factor fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Factore could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El factor no se pudo eliminar.'));
 		}
 	}
 }

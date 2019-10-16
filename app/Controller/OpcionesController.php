@@ -41,7 +41,7 @@ class OpcionesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Opcione->exists($id)) {
-			throw new NotFoundException(__('Invalid opcione'));
+			throw new NotFoundException(__('No existe opcion asociada.'));
 		}
 		$this->Opcione->recursive = 2;
 		$options = array('conditions' => array('Opcione.' . $this->Opcione->primaryKey => $id));
@@ -62,10 +62,10 @@ class OpcionesController extends AppController {
 			$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Opcione->save($this->request->data)) {
-				$this->Session->setFlash(__('The opcione has been saved.'));
+				$this->Session->setFlash(__('La opcion fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The opcione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La opcion no se pudo registrar.'));
 			}
 		}
 		$preguntas = $this->Opcione->Pregunta->find('list');
@@ -83,17 +83,17 @@ class OpcionesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Opcione->exists($id)) {
-			throw new NotFoundException(__('Invalid opcione'));
+			throw new NotFoundException(__('No existe opcion asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Opcione->save($this->request->data)) {
-				$this->Session->setFlash(__('The opcione has been saved.'));
+				$this->Session->setFlash(__('La opcion fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The opcione could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La opcion no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Opcione.' . $this->Opcione->primaryKey => $id));
@@ -115,13 +115,13 @@ class OpcionesController extends AppController {
 	public function delete($id = null) {
 		$this->Opcione->id = $id;
 		if (!$this->Opcione->exists()) {
-			throw new NotFoundException(__('Invalid opcione'));
+			throw new NotFoundException(__('No existe opcion asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Opcione->delete()) {
-			$this->Session->setFlash(__('The opcione has been deleted.'));
+			$this->Session->setFlash(__('La opcion fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The opcione could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La opcion no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class OpcionesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Opcione->id = $id;
 		if (!$this->Opcione->exists()) {
-			throw new NotFoundException(__('Invalid Opcione'));
+			throw new NotFoundException(__('No existe opcion asociada.'));
 		}
 
 		$this->request->data['Opcione']['estado_id'] = '2';
 		$this->request->data['Opcione']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Opcione->save($this->request->data)) {
-			$this->Session->setFlash(__('The Opcione has been saved.'));
+			$this->Session->setFlash(__('La opcion fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Opcione could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La opcion no se puede eliminar.'));
 		}
 	}
 }

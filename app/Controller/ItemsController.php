@@ -41,7 +41,7 @@ class ItemsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Item->exists($id)) {
-			throw new NotFoundException(__('Invalid item'));
+			throw new NotFoundException(__('No existe item asociado.'));
 		}
 		$this->Item->recursive = 2;
 		$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
@@ -62,10 +62,10 @@ class ItemsController extends AppController {
 			$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Item->save($this->request->data)) {
-				$this->Session->setFlash(__('The item has been saved.'));
+				$this->Session->setFlash(__('El item fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El item no se pudo registrar.'));
 			}
 		}
 		$tipos = $this->Item->Tipo->find('list');
@@ -83,17 +83,17 @@ class ItemsController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Item->exists($id)) {
-			throw new NotFoundException(__('Invalid item'));
+			throw new NotFoundException(__('No existe item asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Item->save($this->request->data)) {
-				$this->Session->setFlash(__('The item has been saved.'));
+				$this->Session->setFlash(__('El item fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The item could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El item no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Item.' . $this->Item->primaryKey => $id));
@@ -115,13 +115,13 @@ class ItemsController extends AppController {
 	public function delete($id = null) {
 		$this->Item->id = $id;
 		if (!$this->Item->exists()) {
-			throw new NotFoundException(__('Invalid item'));
+			throw new NotFoundException(__('No existe item asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Item->delete()) {
-			$this->Session->setFlash(__('The item has been deleted.'));
+			$this->Session->setFlash(__('El item fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The item could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El item no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class ItemsController extends AppController {
 	public function eliminar($id = null) {
 		$this->Item->id = $id;
 		if (!$this->Item->exists()) {
-			throw new NotFoundException(__('Invalid Item'));
+			throw new NotFoundException(__('No existe item asociado.'));
 		}
 
 		$this->request->data['Item']['estado_id'] = '2';
 		$this->request->data['Item']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Item->save($this->request->data)) {
-			$this->Session->setFlash(__('The Item has been saved.'));
+			$this->Session->setFlash(__('El item fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Item could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El item no se pudo eliminar.'));
 		}
 	}
 }

@@ -41,7 +41,7 @@ class MatricesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Matrix->exists($id)) {
-			throw new NotFoundException(__('Invalid matrix'));
+			throw new NotFoundException(__('No existe matriz asociada.'));
 		}
 		$this->Parametro->recursive = 2;
 		$options = array('conditions' => array('Matrix.' . $this->Matrix->primaryKey => $id));
@@ -62,10 +62,10 @@ class MatricesController extends AppController {
 			$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Matrix->save($this->request->data)) {
-				$this->Session->setFlash(__('The matrix has been saved.'));
+				$this->Session->setFlash(__('La matriz fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The matrix could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La matriz no se pudo registrar.'));
 			}
 		}
 		$coeficientes = $this->Matrix->Coeficiente->find('list');
@@ -83,17 +83,17 @@ class MatricesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Matrix->exists($id)) {
-			throw new NotFoundException(__('Invalid matrix'));
+			throw new NotFoundException(__('No existe matriz asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Matrix->save($this->request->data)) {
-				$this->Session->setFlash(__('The matrix has been saved.'));
+				$this->Session->setFlash(__('La matriz fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The matrix could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La matriz no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Matrix.' . $this->Matrix->primaryKey => $id));
@@ -115,13 +115,13 @@ class MatricesController extends AppController {
 	public function delete($id = null) {
 		$this->Matrix->id = $id;
 		if (!$this->Matrix->exists()) {
-			throw new NotFoundException(__('Invalid matrix'));
+			throw new NotFoundException(__('No existe matriz asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Matrix->delete()) {
-			$this->Session->setFlash(__('The matrix has been deleted.'));
+			$this->Session->setFlash(__('La matriz fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The matrix could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La matriz no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -129,17 +129,17 @@ class MatricesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Matrix->id = $id;
 		if (!$this->Matrix->exists()) {
-			throw new NotFoundException(__('Invalid Matrix'));
+			throw new NotFoundException(__('No existe matriz asociada.'));
 		}
 
 		$this->request->data['Matrix']['estado_id'] = '2';
 		$this->request->data['Matrix']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Matrix->save($this->request->data)) {
-			$this->Session->setFlash(__('The Matrix has been saved.'));
+			$this->Session->setFlash(__('La matriz fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Matrix could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La matriz no se puede eliminar.'));
 		}
 	}
 }
