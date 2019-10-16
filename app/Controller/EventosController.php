@@ -41,7 +41,7 @@ class EventosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Evento->exists($id)) {
-			throw new NotFoundException(__('Invalid evento'));
+			throw new NotFoundException(__('No existe evento asociado.'));
 		}
 		$this->Evento->recursive = 2;
 		$options = array('conditions' => array('Evento.' . $this->Evento->primaryKey => $id));
@@ -61,10 +61,10 @@ class EventosController extends AppController {
 			$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Evento->save($this->request->data)) {
-				$this->Session->setFlash(__('The evento has been saved.'));
+				$this->Session->setFlash(__('El evento fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The evento could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El evento no se pudo registrar.'));
 			}
 		}
 	}
@@ -78,17 +78,17 @@ class EventosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Evento->exists($id)) {
-			throw new NotFoundException(__('Invalid evento'));
+			throw new NotFoundException(__('No existe evento asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Evento']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Evento->save($this->request->data)) {
-				$this->Session->setFlash(__('The evento has been saved.'));
+				$this->Session->setFlash(__('El evento fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The evento could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El evento no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Evento.' . $this->Evento->primaryKey => $id));
@@ -106,13 +106,13 @@ class EventosController extends AppController {
 	public function delete($id = null) {
 		$this->Evento->id = $id;
 		if (!$this->Evento->exists()) {
-			throw new NotFoundException(__('Invalid evento'));
+			throw new NotFoundException(__('No existe evento asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Evento->delete()) {
-			$this->Session->setFlash(__('The evento has been deleted.'));
+			$this->Session->setFlash(__('El evento fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The evento could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El evento no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

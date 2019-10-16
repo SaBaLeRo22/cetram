@@ -41,7 +41,7 @@ class DietasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Dieta->exists($id)) {
-			throw new NotFoundException(__('Invalid dieta'));
+			throw new NotFoundException(__('No existe dieta asociada.'));
 		}
 		$this->Dieta->recursive = 2;
 		$options = array('conditions' => array('Dieta.' . $this->Dieta->primaryKey => $id));
@@ -62,10 +62,10 @@ class DietasController extends AppController {
 			$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Dieta->save($this->request->data)) {
-				$this->Session->setFlash(__('The dieta has been saved.'));
+				$this->Session->setFlash(__('La dieta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The dieta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La dieta no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Dieta->Estado->find('list');
@@ -81,17 +81,17 @@ class DietasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Dieta->exists($id)) {
-			throw new NotFoundException(__('Invalid dieta'));
+			throw new NotFoundException(__('No existe dieta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Dieta->save($this->request->data)) {
-				$this->Session->setFlash(__('The dieta has been saved.'));
+				$this->Session->setFlash(__('La dieta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The dieta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La dieta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Dieta.' . $this->Dieta->primaryKey => $id));
@@ -115,9 +115,9 @@ class DietasController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Dieta->delete()) {
-			$this->Session->setFlash(__('The dieta has been deleted.'));
+			$this->Session->setFlash(__('La dieta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The dieta could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La dieta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -132,10 +132,10 @@ class DietasController extends AppController {
 		$this->request->data['Dieta']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Dieta->save($this->request->data)) {
-			$this->Session->setFlash(__('The Dieta has been saved.'));
+			$this->Session->setFlash(__('La dieta fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Dieta could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La dieta no se pudo eliminar.'));
 		}
 	}
 }
