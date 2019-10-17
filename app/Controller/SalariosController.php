@@ -41,7 +41,7 @@ class SalariosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Salario->exists($id)) {
-			throw new NotFoundException(__('Invalid salario'));
+			throw new NotFoundException(__('No existe salario asociado.'));
 		}
 		$this->Salario->recursive = 2;
 		$options = array('conditions' => array('Salario.' . $this->Salario->primaryKey => $id));
@@ -62,10 +62,10 @@ class SalariosController extends AppController {
 			$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Salario->save($this->request->data)) {
-				$this->Session->setFlash(__('The salario has been saved.'));
+				$this->Session->setFlash(__('El salario fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The salario could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El salario no se pudo registrar.'));
 			}
 		}
 		$convenios = $this->Salario->Convenio->find('list');
@@ -83,17 +83,17 @@ class SalariosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Salario->exists($id)) {
-			throw new NotFoundException(__('Invalid salario'));
+			throw new NotFoundException(__('No existe salario asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Salario->save($this->request->data)) {
-				$this->Session->setFlash(__('The salario has been saved.'));
+				$this->Session->setFlash(__('El salario fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The salario could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El salario no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Salario.' . $this->Salario->primaryKey => $id));
@@ -115,13 +115,13 @@ class SalariosController extends AppController {
 	public function delete($id = null) {
 		$this->Salario->id = $id;
 		if (!$this->Salario->exists()) {
-			throw new NotFoundException(__('Invalid salario'));
+			throw new NotFoundException(__('No existe salario asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Salario->delete()) {
-			$this->Session->setFlash(__('The salario has been deleted.'));
+			$this->Session->setFlash(__('El salario fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The salario could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El salario no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -136,10 +136,10 @@ class SalariosController extends AppController {
 		$this->request->data['Salario']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Salario->save($this->request->data)) {
-			$this->Session->setFlash(__('The Salario has been saved.'));
+			$this->Session->setFlash(__('El salario fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Salario could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El salario no se pudo eliminar.'));
 		}
 	}
 }

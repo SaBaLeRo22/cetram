@@ -104,7 +104,7 @@ class RespuestaPreguntasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaPregunta->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta pregunta'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaPregunta.' . $this->RespuestaPregunta->primaryKey => $id));
 		$this->set('respuestaPregunta', $this->RespuestaPregunta->find('first', $options));
@@ -119,10 +119,10 @@ class RespuestaPreguntasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaPregunta->create();
 			if ($this->RespuestaPregunta->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta pregunta has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta pregunta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaPregunta->Consultum->find('list');
@@ -141,14 +141,14 @@ class RespuestaPreguntasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaPregunta->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta pregunta'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaPregunta->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta pregunta has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta pregunta could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaPregunta.' . $this->RespuestaPregunta->primaryKey => $id));
@@ -171,13 +171,13 @@ class RespuestaPreguntasController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaPregunta->id = $id;
 		if (!$this->RespuestaPregunta->exists()) {
-			throw new NotFoundException(__('Invalid respuesta pregunta'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaPregunta->delete()) {
-			$this->Session->setFlash(__('The respuesta pregunta has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta pregunta could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

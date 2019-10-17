@@ -108,7 +108,7 @@ class RespuestaIndicadoresController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaIndicadore->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta indicadore'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaIndicadore.' . $this->RespuestaIndicadore->primaryKey => $id));
 		$this->set('respuestaIndicadore', $this->RespuestaIndicadore->find('first', $options));
@@ -123,10 +123,10 @@ class RespuestaIndicadoresController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaIndicadore->create();
 			if ($this->RespuestaIndicadore->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta indicadore has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta indicadore could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaIndicadore->Consultum->find('list');
@@ -145,14 +145,14 @@ class RespuestaIndicadoresController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaIndicadore->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta indicadore'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaIndicadore->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta indicadore has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta indicadore could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaIndicadore.' . $this->RespuestaIndicadore->primaryKey => $id));
@@ -175,13 +175,13 @@ class RespuestaIndicadoresController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaIndicadore->id = $id;
 		if (!$this->RespuestaIndicadore->exists()) {
-			throw new NotFoundException(__('Invalid respuesta indicadore'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaIndicadore->delete()) {
-			$this->Session->setFlash(__('The respuesta indicadore has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta indicadore could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

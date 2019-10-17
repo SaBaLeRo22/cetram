@@ -112,7 +112,7 @@ class RespuestaTiposController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaTipo->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta tipo'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaTipo.' . $this->RespuestaTipo->primaryKey => $id));
 		$this->set('respuestaTipo', $this->RespuestaTipo->find('first', $options));
@@ -127,10 +127,10 @@ class RespuestaTiposController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaTipo->create();
 			if ($this->RespuestaTipo->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta tipo has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta tipo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaTipo->Consultum->find('list');
@@ -149,14 +149,14 @@ class RespuestaTiposController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaTipo->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta tipo'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaTipo->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta tipo has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta tipo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaTipo.' . $this->RespuestaTipo->primaryKey => $id));
@@ -179,13 +179,13 @@ class RespuestaTiposController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaTipo->id = $id;
 		if (!$this->RespuestaTipo->exists()) {
-			throw new NotFoundException(__('Invalid respuesta tipo'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaTipo->delete()) {
-			$this->Session->setFlash(__('The respuesta tipo has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta tipo could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se puedo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

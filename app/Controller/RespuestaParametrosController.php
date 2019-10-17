@@ -43,7 +43,7 @@ class RespuestaParametrosController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaParametro->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta parametro'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaParametro.' . $this->RespuestaParametro->primaryKey => $id));
 		$this->set('respuestaParametro', $this->RespuestaParametro->find('first', $options));
@@ -117,10 +117,10 @@ class RespuestaParametrosController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaParametro->create();
 			if ($this->RespuestaParametro->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta parametro has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta parametro could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaParametro->Consultum->find('list');
@@ -139,14 +139,14 @@ class RespuestaParametrosController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaParametro->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta parametro'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaParametro->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta parametro has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta parametro could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaParametro.' . $this->RespuestaParametro->primaryKey => $id));
@@ -169,13 +169,13 @@ class RespuestaParametrosController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaParametro->id = $id;
 		if (!$this->RespuestaParametro->exists()) {
-			throw new NotFoundException(__('Invalid respuesta parametro'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaParametro->delete()) {
-			$this->Session->setFlash(__('The respuesta parametro has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta parametro could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

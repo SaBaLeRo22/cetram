@@ -131,7 +131,7 @@ class RespuestaPasajerosController extends AppController
     public function view($id = null)
     {
         if (!$this->RespuestaPasajero->exists($id)) {
-            throw new NotFoundException(__('Invalid respuesta pasajero'));
+            throw new NotFoundException(__('No existe respuesta asociada.'));
         }
         $options = array('conditions' => array('RespuestaPasajero.' . $this->RespuestaPasajero->primaryKey => $id));
         $this->set('respuestaPasajero', $this->RespuestaPasajero->find('first', $options));
@@ -147,10 +147,10 @@ class RespuestaPasajerosController extends AppController
         if ($this->request->is('post')) {
             $this->RespuestaPasajero->create();
             if ($this->RespuestaPasajero->save($this->request->data)) {
-                $this->Session->setFlash(__('The respuesta pasajero has been saved.'));
+                $this->Session->setFlash(__('La respuesta fue registrada.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The respuesta pasajero could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('La respuesta no se pudo registrar.'));
             }
         }
         $consultas = $this->RespuestaPasajero->Consultum->find('list');
@@ -168,14 +168,14 @@ class RespuestaPasajerosController extends AppController
     public function edit($id = null)
     {
         if (!$this->RespuestaPasajero->exists($id)) {
-            throw new NotFoundException(__('Invalid respuesta pasajero'));
+            throw new NotFoundException(__('No existe respuesta asociada.'));
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->RespuestaPasajero->save($this->request->data)) {
-                $this->Session->setFlash(__('The respuesta pasajero has been saved.'));
+                $this->Session->setFlash(__('La respuesta fue editada.'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The respuesta pasajero could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('La respuesta no se pudo editar.'));
             }
         } else {
             $options = array('conditions' => array('RespuestaPasajero.' . $this->RespuestaPasajero->primaryKey => $id));
@@ -197,13 +197,13 @@ class RespuestaPasajerosController extends AppController
     {
         $this->RespuestaPasajero->id = $id;
         if (!$this->RespuestaPasajero->exists()) {
-            throw new NotFoundException(__('Invalid respuesta pasajero'));
+            throw new NotFoundException(__('No existe respuesta asociada.'));
         }
         $this->request->allowMethod('post', 'delete');
         if ($this->RespuestaPasajero->delete()) {
-            $this->Session->setFlash(__('The respuesta pasajero has been deleted.'));
+            $this->Session->setFlash(__('La respuesta fue eliminada.'));
         } else {
-            $this->Session->setFlash(__('The respuesta pasajero could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
         }
         return $this->redirect(array('action' => 'index'));
     }
@@ -219,7 +219,7 @@ class RespuestaPasajerosController extends AppController
     {
         $this->RespuestaPasajero->id = $id;
         if (!$this->RespuestaPasajero->exists()) {
-            throw new NotFoundException(__('Invalid respuesta pasajero'));
+            throw new NotFoundException(__('No existe respuesta asociada.'));
         }
 
         $options = array('conditions' => array('RespuestaPasajero.' . $this->RespuestaPasajero->primaryKey => $id));

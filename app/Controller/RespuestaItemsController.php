@@ -112,7 +112,7 @@ class RespuestaItemsController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaItem->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta item'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaItem.' . $this->RespuestaItem->primaryKey => $id));
 		$this->set('respuestaItem', $this->RespuestaItem->find('first', $options));
@@ -127,10 +127,10 @@ class RespuestaItemsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaItem->create();
 			if ($this->RespuestaItem->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta item has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta item could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaItem->Consultum->find('list');
@@ -149,14 +149,14 @@ class RespuestaItemsController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaItem->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta item'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaItem->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta item has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta item could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaItem.' . $this->RespuestaItem->primaryKey => $id));
@@ -179,13 +179,13 @@ class RespuestaItemsController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaItem->id = $id;
 		if (!$this->RespuestaItem->exists()) {
-			throw new NotFoundException(__('Invalid respuesta item'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaItem->delete()) {
-			$this->Session->setFlash(__('The respuesta item has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta item could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

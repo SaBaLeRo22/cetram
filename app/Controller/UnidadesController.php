@@ -41,7 +41,7 @@ class UnidadesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Unidade->exists($id)) {
-			throw new NotFoundException(__('Invalid unidade'));
+			throw new NotFoundException(__('No existe unidad asociada.'));
 		}
 		$this->Unidade->recursive = 0;
 		$options = array('conditions' => array('Unidade.' . $this->Unidade->primaryKey => $id));
@@ -62,10 +62,10 @@ class UnidadesController extends AppController {
 			$this->request->data['Unidade']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Unidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The unidade has been saved.'));
+				$this->Session->setFlash(__('La unidad fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The unidade could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La unidad no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Unidade->Estado->find('list');
@@ -81,17 +81,17 @@ class UnidadesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Unidade->exists($id)) {
-			throw new NotFoundException(__('Invalid unidade'));
+			throw new NotFoundException(__('No existe unidad asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Unidade']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Unidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The unidade has been saved.'));
+				$this->Session->setFlash(__('La unidad fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The unidade could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La unidad no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Unidade.' . $this->Unidade->primaryKey => $id));
@@ -111,13 +111,13 @@ class UnidadesController extends AppController {
 	public function delete($id = null) {
 		$this->Unidade->id = $id;
 		if (!$this->Unidade->exists()) {
-			throw new NotFoundException(__('Invalid unidade'));
+			throw new NotFoundException(__('No existe unidad asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Unidade->delete()) {
-			$this->Session->setFlash(__('The unidade has been deleted.'));
+			$this->Session->setFlash(__('La unidad fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The unidade could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La unidad no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -125,17 +125,17 @@ class UnidadesController extends AppController {
 	public function eliminar($id = null) {
 		$this->Unidade->id = $id;
 		if (!$this->Unidade->exists()) {
-			throw new NotFoundException(__('Invalid Unidade'));
+			throw new NotFoundException(__('No existe unidad asociada.'));
 		}
 
 		$this->request->data['Unidade']['estado_id'] = '2';
 		$this->request->data['Unidade']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Unidade->save($this->request->data)) {
-			$this->Session->setFlash(__('The Unidade has been saved.'));
+			$this->Session->setFlash(__('La unidad fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Unidade could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La unidad no se pudo eliminar.'));
 		}
 	}
 }

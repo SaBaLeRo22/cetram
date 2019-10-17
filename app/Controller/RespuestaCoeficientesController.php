@@ -98,7 +98,7 @@ class RespuestaCoeficientesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->RespuestaCoeficiente->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta coeficiente'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$options = array('conditions' => array('RespuestaCoeficiente.' . $this->RespuestaCoeficiente->primaryKey => $id));
 		$this->set('respuestaCoeficiente', $this->RespuestaCoeficiente->find('first', $options));
@@ -113,10 +113,10 @@ class RespuestaCoeficientesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->RespuestaCoeficiente->create();
 			if ($this->RespuestaCoeficiente->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta coeficiente has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta coeficiente could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo registrar.'));
 			}
 		}
 		$consultas = $this->RespuestaCoeficiente->Consulta->find('list');
@@ -135,14 +135,14 @@ class RespuestaCoeficientesController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->RespuestaCoeficiente->exists($id)) {
-			throw new NotFoundException(__('Invalid respuesta coeficiente'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->RespuestaCoeficiente->save($this->request->data)) {
-				$this->Session->setFlash(__('The respuesta coeficiente has been saved.'));
+				$this->Session->setFlash(__('La respuesta fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The respuesta coeficiente could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La respuesta no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('RespuestaCoeficiente.' . $this->RespuestaCoeficiente->primaryKey => $id));
@@ -165,13 +165,13 @@ class RespuestaCoeficientesController extends AppController {
 	public function delete($id = null) {
 		$this->RespuestaCoeficiente->id = $id;
 		if (!$this->RespuestaCoeficiente->exists()) {
-			throw new NotFoundException(__('Invalid respuesta coeficiente'));
+			throw new NotFoundException(__('No existe respuesta asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->RespuestaCoeficiente->delete()) {
-			$this->Session->setFlash(__('The respuesta coeficiente has been deleted.'));
+			$this->Session->setFlash(__('La respuesta fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The respuesta coeficiente could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La respuesta no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

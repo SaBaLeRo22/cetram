@@ -41,7 +41,7 @@ class ProvinciasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Provincia->exists($id)) {
-			throw new NotFoundException(__('Invalid provincia'));
+			throw new NotFoundException(__('No existe provincia asociada.'));
 		}
 		$this->Provincia->recursive = 2;
 		$options = array('conditions' => array('Provincia.' . $this->Provincia->primaryKey => $id));
@@ -62,10 +62,10 @@ class ProvinciasController extends AppController {
 			$this->request->data['Provincia']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Provincia->save($this->request->data)) {
-				$this->Session->setFlash(__('The provincia has been saved.'));
+				$this->Session->setFlash(__('La provincia fue registrada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The provincia could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La provincia no se pudo registrar.'));
 			}
 		}
 		$estados = $this->Provincia->Estado->find('list');
@@ -81,17 +81,17 @@ class ProvinciasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Provincia->exists($id)) {
-			throw new NotFoundException(__('Invalid provincia'));
+			throw new NotFoundException(__('No existe provincia asociada.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Provincia']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Provincia->save($this->request->data)) {
-				$this->Session->setFlash(__('The provincia has been saved.'));
+				$this->Session->setFlash(__('La provincia fue editada.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The provincia could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('La provincia no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Provincia.' . $this->Provincia->primaryKey => $id));
@@ -111,13 +111,13 @@ class ProvinciasController extends AppController {
 	public function delete($id = null) {
 		$this->Provincia->id = $id;
 		if (!$this->Provincia->exists()) {
-			throw new NotFoundException(__('Invalid provincia'));
+			throw new NotFoundException(__('No existe provincia asociada.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Provincia->delete()) {
-			$this->Session->setFlash(__('The provincia has been deleted.'));
+			$this->Session->setFlash(__('La provincia fue eliminada.'));
 		} else {
-			$this->Session->setFlash(__('The provincia could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('La provincia no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -125,17 +125,17 @@ class ProvinciasController extends AppController {
 	public function eliminar($id = null) {
 		$this->Provincia->id = $id;
 		if (!$this->Provincia->exists()) {
-			throw new NotFoundException(__('Invalid Provincia'));
+			throw new NotFoundException(__('No existe provincia asociada.'));
 		}
 
 		$this->request->data['Provincia']['estado_id'] = '2';
 		$this->request->data['Provincia']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Provincia->save($this->request->data)) {
-			$this->Session->setFlash(__('The Provincia has been saved.'));
+			$this->Session->setFlash(__('La provincia fue eliminada.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Provincia could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('La provincia no se pudo eliminar.'));
 		}
 	}
 }

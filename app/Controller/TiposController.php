@@ -41,7 +41,7 @@ class TiposController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Tipo->exists($id)) {
-			throw new NotFoundException(__('Invalid tipo'));
+			throw new NotFoundException(__('No existe tipo asociado.'));
 		}
 		$this->Tipo->recursive = 2;
 		$options = array('conditions' => array('Tipo.' . $this->Tipo->primaryKey => $id));
@@ -62,10 +62,10 @@ class TiposController extends AppController {
 			$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Tipo->save($this->request->data)) {
-				$this->Session->setFlash(__('The tipo has been saved.'));
+				$this->Session->setFlash(__('El tipo fue registrado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tipo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El tipo no se pudo registrar.'));
 			}
 		}
 		$unidades = $this->Tipo->Unidade->find('list');
@@ -82,17 +82,17 @@ class TiposController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->Tipo->exists($id)) {
-			throw new NotFoundException(__('Invalid tipo'));
+			throw new NotFoundException(__('No existe tipo asociado.'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
 
 			$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
 
 			if ($this->Tipo->save($this->request->data)) {
-				$this->Session->setFlash(__('The tipo has been saved.'));
+				$this->Session->setFlash(__('El tipo fue editado.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tipo could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('El tipo no se pudo editar.'));
 			}
 		} else {
 			$options = array('conditions' => array('Tipo.' . $this->Tipo->primaryKey => $id));
@@ -113,13 +113,13 @@ class TiposController extends AppController {
 	public function delete($id = null) {
 		$this->Tipo->id = $id;
 		if (!$this->Tipo->exists()) {
-			throw new NotFoundException(__('Invalid tipo'));
+			throw new NotFoundException(__('No existe tipo asociado.'));
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Tipo->delete()) {
-			$this->Session->setFlash(__('The tipo has been deleted.'));
+			$this->Session->setFlash(__('El tipo fue eliminado.'));
 		} else {
-			$this->Session->setFlash(__('The tipo could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('El tipo no se pudo eliminar.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -127,17 +127,17 @@ class TiposController extends AppController {
 	public function eliminar($id = null) {
 		$this->Tipo->id = $id;
 		if (!$this->Tipo->exists()) {
-			throw new NotFoundException(__('Invalid Tipo'));
+			throw new NotFoundException(__('No existe tipo asociado.'));
 		}
 
 		$this->request->data['Tipo']['estado_id'] = '2';
 		$this->request->data['Tipo']['user_modified'] = $this->Authake->getUserId();
 
 		if ($this->Tipo->save($this->request->data)) {
-			$this->Session->setFlash(__('The Tipo has been saved.'));
+			$this->Session->setFlash(__('El tipo fue eliminado.'));
 			return $this->redirect(array('action' => 'index'));
 		} else {
-			$this->Session->setFlash(__('The Tipo could not be saved. Please, try again.'));
+			$this->Session->setFlash(__('El tipo no se pudo eliminar.'));
 		}
 	}
 }
