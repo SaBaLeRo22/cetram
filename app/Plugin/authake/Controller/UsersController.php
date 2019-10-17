@@ -35,7 +35,7 @@ class UsersController extends AuthakeAppController {
 
 		if (!$id)
 		{
-			$this->Session->setFlash(__('Invalid User'));
+			$this->Session->setFlash(__('Usuario invalido'));
 			$this->redirect(array('action'=>'index'));
 		}
 
@@ -56,7 +56,7 @@ class UsersController extends AuthakeAppController {
 
 			if (in_array(1, $this->request->data['Group']['Group']) and !in_array(1, $this->Authake->getGroupIds()))
 			{
-				$this->Session->setFlash(__('You cannot add a user in administrators group'), 'warning');
+				$this->Session->setFlash(__('No puede agregar un usuario al grupo de administradores'), 'warning');
 				$this->redirect(array('action'=>'index'));
 			}
 
@@ -66,12 +66,12 @@ class UsersController extends AuthakeAppController {
 
 			if ($this->User->save($this->request->data))
 			{
-				$this->Session->setFlash(__('The User has been saved'), 'success');
+				$this->Session->setFlash(__('El usuario fue registrado'), 'success');
 				$this->redirect(array('action'=>'index'));
 			}
 			else
 			{
-				$this->Session->setFlash(__('The User could not be saved. Please, try again.'), 'error');
+				$this->Session->setFlash(__('El usuario no pudo ser registrado.'), 'error');
 			}
 		}
 
@@ -102,7 +102,7 @@ class UsersController extends AuthakeAppController {
 
 		if (!$id && empty($this->request->data))
 		{
-			$this->Session->setFlash(__('Invalid User'));
+			$this->Session->setFlash(__('Usuario invalido'));
 			$this->redirect(array('action'=>'index'));
 		}
 
@@ -113,7 +113,7 @@ class UsersController extends AuthakeAppController {
 
 		if (in_array(1, $gr) and !in_array(1, $this->Authake->getGroupIds()))
 		{
-			$this->Session->setFlash(__('You cannot edit a user in administrators group'), 'warning');
+			$this->Session->setFlash(__('No puede editar un usuario del grupo de administradores'), 'warning');
 			$this->redirect(array('action'=>'index'));
 		}
 
@@ -123,7 +123,7 @@ class UsersController extends AuthakeAppController {
 
 			if ($id == 1 && $this->Authake->getUserId() != 1)
 			{
-				$this->Session->setFlash(__('Only the admin can change its profile!'), 'warning');
+				$this->Session->setFlash(__('Solo el administrador puede cambiar este perfil!'), 'warning');
 				$this->redirect(array('action'=>'index'));
 			}
 
@@ -137,7 +137,7 @@ class UsersController extends AuthakeAppController {
 
 			if (isset($this->request->data['Group']['Group']) and in_array(1, $this->request->data['Group']['Group']) and !in_array(1, $this->Authake->getGroupIds()) )
 			{
-				$this->Session->setFlash(__('You cannot add a user in administrators group'), 'warning');
+				$this->Session->setFlash(__('No puede agregar usuarios al grupo de administradores'), 'warning');
 				$this->redirect(array('action'=>'index'));
 			}
 
@@ -169,12 +169,12 @@ class UsersController extends AuthakeAppController {
 			// save user
 			if ($this->User->save($this->request->data))
 			{
-				$this->Session->setFlash(__('The User has been saved'), 'success');
+				$this->Session->setFlash(__('El usuario fue registrado'), 'success');
 				$this->redirect(array('action'=>'index'));
 			}
 			else
 			{
-				$this->Session->setFlash(__('The User could not be saved. Please, try again.'), 'error');
+				$this->Session->setFlash(__('El usuario no se pudo registrar.'), 'error');
 			}
 		}
 
@@ -184,31 +184,6 @@ class UsersController extends AuthakeAppController {
 		$this->request->data['User']['password'] = '';// find groups
 		$groups = $this->User->Group->find('list');
 		unset($groups[0]);// remove group 0 (everybody)
-
-
-/*		$this->loadModel('Provincia');
-		$this->Provincia->recursive = -1;
-
-		$provincias = $this->Provincia->find('list', array(
-			'fields' => array('Provincia.id','Provincia.nombre'),
-			'conditions' => array('Provincia.nombre <>' => '', 'Provincia.estado_id' => '1'),
-			'order' => array('Provincia.nombre' => 'asc')
-		));
-
-		$this->loadModel('Localidad');
-		$this->Localidad->recursive = 0;
-		$loc = $this->Localidad->find('first', array(
-			'conditions' => array('Localidad.id' => $user['User']['localidad_id'])
-		));*/
-		//$this->request->data['User']['provincia_id'] = $loc['Localidad']['provincia_id'];
-
-/*		$localidades = $this->Localidad->find('list', array(
-			'fields' => array('Localidad.id','Localidad.nombre'),
-			//'fields' => array('id AS id, concat(nombre," (",codigopostal,")") as nombre'),
-			'conditions' => array('Localidad.provincia_id' => $loc['Localidad']['provincia_id'], 'Localidad.nombre <>' => '', 'Localidad.estado_id' => '1'),
-			'order' => array('Localidad.nombre' => 'asc')
-		));*/
-		//$this->request->data['User']['localidad_id'] = $user['User']['localidad_id'];
 
 		$this->loadModel('Sector');
 		$this->Sector->recursive = -1;
@@ -227,7 +202,7 @@ class UsersController extends AuthakeAppController {
 
 		if (!$id || $id == 1)
 		{
-			$this->Session->setFlash(__('Invalid id for User'), 'error');
+			$this->Session->setFlash(__('Id invalido para el usuario'), 'error');
 			$this->redirect(array('action'=>'index'));
 		}
 
@@ -236,14 +211,14 @@ class UsersController extends AuthakeAppController {
 
 		if (in_array(1, $gr) and !in_array(1, $this->Authake->getGroupIds()))
 		{
-			$this->Session->setFlash(__('You cannot delete a user in administrators group'), 'warning');
+			$this->Session->setFlash(__('No puede eliminar un usuario del grupo administrador'), 'warning');
 			$this->redirect(array('action'=>'index'));
 		}
 
 
 		if ($this->User->delete($id))
 		{
-			$this->Session->setFlash(__('User deleted'), 'success');
+			$this->Session->setFlash(__('Usuario eliminado'), 'success');
 			$this->redirect(array('action'=>'index'));
 		}
 	}

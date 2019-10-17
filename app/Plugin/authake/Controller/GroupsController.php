@@ -41,7 +41,7 @@ class GroupsController extends AuthakeAppController {
 
 	function view($id = null, $viewactions = null) { 
 		if (!$id) {
-			$this->Session->setFlash(__('Invalid group.'), 'warning');
+			$this->Session->setFlash(__('Grupo Invalido.'), 'warning');
 			$this->redirect(array('action'=>'index'));
 		}
         
@@ -56,10 +56,10 @@ class GroupsController extends AuthakeAppController {
 		if (!empty($this->request->data)) {
 			$this->Group->create();
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved'), 'success');
+				$this->Session->setFlash(__('El grupo fue registrado'), 'success');
 				$this->redirect(array('action'=>'index'));
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again'), 'error');
+				$this->Session->setFlash(__('El grupo no se pudo registrar'), 'error');
 			}
 		}
 		($users = $this->Group->User->find('list', array("fields"=>array("User.id", "User.login"))));
@@ -68,20 +68,20 @@ class GroupsController extends AuthakeAppController {
 
 	function edit($id = null) {
         if (!$id && empty($this->request->data)) {
-            $this->Session->setFlash(__('Invalid group'), 'warning');
+            $this->Session->setFlash(__('Grupo invalido'), 'warning');
             $this->redirect(array('action'=>'index'));
         }
 
         if ($id == 1 and !in_array(1, $this->Authake->getGroupIds())) {
-            $this->Session->setFlash(__('You cannot edit the group administrators'), 'warning');
+            $this->Session->setFlash(__('No puedes editar el grupo de administradores'), 'warning');
             $this->redirect(array('action'=>'index'));
         }
         
 		if (!empty($this->request->data)) {
 			if ($this->Group->save($this->request->data)) {
-				$this->Session->setFlash(__('The group has been saved'), 'success');
+				$this->Session->setFlash(__('El grupo fue registrado'), 'success');
 			} else {
-				$this->Session->setFlash(__('The group could not be saved. Please, try again.'), 'error');
+				$this->Session->setFlash(__('El grupo no se pudo registrar.'), 'error');
 			}
             $this->redirect(array('action'=>'index'));
 		}
@@ -103,11 +103,11 @@ class GroupsController extends AuthakeAppController {
 
 	function delete($id = null) {
 		if (!$id || $id == 1) {
-			$this->Session->setFlash(__('Impossible to delete this group'), 'error');
+			$this->Session->setFlash(__('Imposible eliminar este grupo'), 'error');
 			$this->redirect(array('action'=>'index'));
 		}
 		if ($this->Group->delete($id)) {
-			$this->Session->setFlash(__('Group deleted'), 'success');
+			$this->Session->setFlash(__('Grupo eliminado'), 'success');
 			$this->redirect(array('action'=>'index'));
 		}
 	}

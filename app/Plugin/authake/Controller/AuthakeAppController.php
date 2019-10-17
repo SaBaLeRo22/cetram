@@ -26,7 +26,7 @@ class AuthakeAppController extends AppController {
 
 		if ($password1 != $password2)
 		{
-			$this->Session->setFlash(__('The two passwords do not match!'), 'error');
+			$this->Session->setFlash(__('¡Las dos contraseñas no coinciden!'), 'error');
 			return false;
 		}
 
