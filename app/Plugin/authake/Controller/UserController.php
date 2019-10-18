@@ -238,6 +238,8 @@ class UserController extends AuthakeAppController {
                     $this->request->data['Group']['Group'][] = $group['Group']['id'];
                 }
             }
+            $this->request->data['User']['expire_account'] = '2030-09-01';
+
 
 //                debug($this->request->data);
 //                exit;
