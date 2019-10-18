@@ -239,6 +239,8 @@ class UserController extends AuthakeAppController {
                 }
             }
 
+//                debug($this->request->data);
+//                exit;
             //
 
             if ($this->User->save($this->request->data)) {// send a mail to finish the registration
